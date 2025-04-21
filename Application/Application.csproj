@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
     <Folder Include="DTOs\" />
+    <Folder Include="Interface\IRepository\" />
+    <Folder Include="Interface\IServices\" />
+    <Folder Include="Hubs\" />
     <Folder Include="Services\" />
-    <Folder Include="UnitOfWork\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
