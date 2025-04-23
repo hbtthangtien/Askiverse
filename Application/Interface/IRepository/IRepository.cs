@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UnitOfWork
+namespace Application.Interface.IRepository
 {
-    public interface IUnitOfWork
+    public interface IRepository<T> where T : class
     {
     }
 }

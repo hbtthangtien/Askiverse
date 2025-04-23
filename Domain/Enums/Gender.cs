@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UnitOfWork
+namespace Domain.Enums
 {
-    public interface IUnitOfWork
+    public enum Gender
     {
+        Female,
+        Male,
+        Other
     }
 }

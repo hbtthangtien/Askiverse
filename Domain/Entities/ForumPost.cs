@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UnitOfWork
+namespace Domain.Entities
 {
-    public interface IUnitOfWork
+    public class ForumPost
     {
     }
 }

@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DatabaseConfig\" />
     <Folder Include="UnitOfWork\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
