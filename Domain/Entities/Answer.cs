@@ -8,5 +8,18 @@ namespace Domain.Entities
 {
     public class Answer
     {
+        public int Id { get; set; } 
+
+        public int BankQuestionId { get; set; }
+
+        public string? AnswerText { get; set; }
+
+        public bool IsCorrected { get; set; }
+
+        public string? MatchingPairKey { get; set; }
+
+        public virtual BankQuestion? BankQuestion { get; set; }
+
+
     }
 }

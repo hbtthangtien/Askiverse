@@ -8,5 +8,7 @@ namespace Domain.Entities
 {
     public class BankQuestion
     {
+        
+
     }
 }
