@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Subject
+    public class Subject : BaseEntity
     {
-        public int Id { get; set; } 
-
         public string Name { get; set; }
 
-        public ICollection<BankQuestion> BankQuestions { get; set; } = new List<BankQuestion>();
+        public ICollection<Exam> Exams { get; set; } = new List<Exam>();
     }
 }

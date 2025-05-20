@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Domain.Entities.Commons;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class PackageDuration
+    public class PackageDuration : BaseEntity
     {
-        public int Id { get; set; }
 
         public string? Name { get; set; }
 

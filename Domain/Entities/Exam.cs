@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Exams
+    public class Exam : BaseEntity
     {
-        public int Id { get; set; }
 
         public string? PremiumUserId { get; set; }
 
-        public string? SubjectId { get; set; }
+        public int? SubjectId { get; set; }
 
         public required string Title { get; set; }
 

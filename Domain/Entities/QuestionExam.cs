@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class QuestionExam
+    public class QuestionExam : BaseEntity
     {
-        public int Id { get; set; }
-
         public int ExamId { get; set; }
 
         public int BankQuestionId { get; set; }
@@ -24,6 +23,6 @@ namespace Domain.Entities
 
         public string? Content { get; set; }
 
-        public virtual Exams? Exam { get; set; }
+        public virtual Exam? Exam { get; set; }
     }
 }

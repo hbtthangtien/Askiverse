@@ -18,7 +18,9 @@ namespace Domain.Entities
 
         public virtual PremiumUser? PremiumUser { get; set; }
 
-        public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        public virtual ICollection<Notification> SentNotifications { get; set; } = new List<Notification>();
+
+        public virtual ICollection<Notification> ReceiveNotifications { get; set; } = new List<Notification>();
 
         public virtual ICollection<HistoryPurchase> HistoryPurchase { get; set; } = new List<HistoryPurchase>();
 
@@ -30,6 +32,7 @@ namespace Domain.Entities
 
         public virtual ICollection<ForumVoted> ForumVoteds { get; set; } = new List<ForumVoted>();
 
-        public virtual ICollection<PackageOfUser> PackageOfUsers { get; set; } = new List<PackageOfUser>(); 
+        public virtual ICollection<ExamAccess> ExamAccesses { get; set; } = new List<ExamAccess>();
+
     }
 }

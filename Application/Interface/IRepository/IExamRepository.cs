@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interface.IRepository
 {
-    public interface IExamRepository : IRepository<Exams>
+    public interface IExamRepository : IRepository<Exam>
     {
     }
 }

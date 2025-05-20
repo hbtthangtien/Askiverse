@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class BankQuestion
+    public class BankQuestion :BaseEntity
     {
-        public int Id {  get; set; }
-
         public int QuestionTypeId { get; set; }
 
         public int LevelId { get; set; }
@@ -29,5 +28,7 @@ namespace Domain.Entities
         public virtual PremiumUser? PremiumUser { get; set; }
 
         public virtual ICollection<Answer> Answers { get; set; } = new List<Answer>();
+
+        public virtual ICollection<QuestionExam> QuestionExams { get; set; } = new List<QuestionExam>()!;
     }
 }
