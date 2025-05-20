@@ -1,3 +1,4 @@
+using Infrastructure.DIConfig;
 using Persistence.DatabaseConfig.Config;
 
 namespace Presentation
@@ -7,7 +8,11 @@ namespace Presentation
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddDatabaseDependency(builder.Configuration);
+            builder.Services.AddRepositories();
+            builder.Services.AddIdentityConfig();
+            builder.Services.AddApplication();
+            builder.Services.AddApplicationAutoMapper();
             // Add services to the container.
             builder.Services.AddRazorPages();
 
