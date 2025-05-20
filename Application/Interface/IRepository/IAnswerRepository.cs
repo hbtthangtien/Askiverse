@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interface.IRepository
 {
-    public interface IAnswerRepositor : IRepository<Answer>
+    public interface IAnswerRepository : IRepository<Answer>
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Paginated
+namespace Application.Interface.IServices
 {
-    public class PaginatedList<T> : List<T>
+    public class Service
     {
     }
 }
