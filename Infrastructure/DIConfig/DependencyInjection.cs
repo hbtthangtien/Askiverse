@@ -1,8 +1,12 @@
 ﻿using Application.Automapper;
+using Application.Interface.IExternalService;
 using Application.Interface.IRepository;
 using Application.Interface.IServices;
 using Application.Services;
 using AutoMapper;
+using Domain.Configs;
+using Infrastructure.ExternalService;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -45,5 +49,16 @@ namespace Infrastructure.DIConfig
             services.AddScoped<ISubscriptionPackagesService, SubscriptionPackageService>();
             services.AddScoped<IUserAccessExamService, UserAccessExamService>();
         }
-    }
+
+        public static void AddOtherService(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IEmailService, EmailService>();
+        }
+
+        public static void InitialValueConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+			var emailConfig = configuration.GetSection("EmailConfig");
+			services.Configure<EmailConfig>(emailConfig);
+		}
+	}
 }
