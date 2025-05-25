@@ -9,7 +9,7 @@ namespace Application.DTOs.BasicUser
 {
 	public class CreateBasicUserDTO
 	{
-		public string UserName { get; set;}
+		public string Username { get; set;}
 
 		[StringLength(100, ErrorMessage = "Mật khẩu phải dài ít nhất 8 ký tự", MinimumLength = 8)]
 		[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$",
@@ -19,7 +19,8 @@ namespace Application.DTOs.BasicUser
 		[Compare("Password", ErrorMessage = "Mật khẩu xác nhận không khớp")]
 		public string ConfirmPassword { get; set; }
 
-		[RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
-		public string Email { get; set; }
+		//[RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
+        [RegularExpression(@"^[^@\s]+@(gmail|yahoo|outlook|hotmail)\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
+        public string Email { get; set; }
 	}
 }

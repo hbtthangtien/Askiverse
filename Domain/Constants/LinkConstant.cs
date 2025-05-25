@@ -8,12 +8,12 @@ namespace Domain.Constants
 {
 	public class LinkConstant
 	{
-		public static string baseUri = $"https://localhost:7103";
+		public static string baseUri = $"https://localhost:7027";
 
 		public static UriBuilder UriBuilder(string userId, string token, string path)
 		{
 			var builder = new UriBuilder(baseUri);
-			builder.Path = $"account/{path}";
+			builder.Path = $"basic-user/{path}";
 			builder.Query = $"userId={userId}&token={Uri.EscapeDataString(token)}";
 			return builder ;
 		}

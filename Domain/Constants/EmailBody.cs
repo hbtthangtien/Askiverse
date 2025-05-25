@@ -8,7 +8,7 @@ namespace Domain.Constants
 {
 	public class EmailBody
 	{
-		public static string CONTENT(string email, string link)
+		public static string CONFIRM_EMAIL(string email, string link)
 		{
 			var body = $@"
     <!DOCTYPE html>

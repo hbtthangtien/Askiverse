@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Presentation</title>
+    <title>@ViewData["Title"] - Askiverse</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Presentation.styles.css" asp-append-version="true" />
@@ -27,6 +27,32 @@
                         </li>
                     </ul>
                 </div>
+
+                <ul class="navbar-nav ms-auto">
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                👤 @User.Identity.Name
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <form asp-controller="BasicUser" asp-action="Logout" method="get" class="d-inline">
+                                        <button type="submit" class=" dropdown-item">Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="BasicUser" asp-action="Login">Đăng nhập</a>
+                        </li>
+                    }
+                </ul>
             </div>
         </nav>
     </header>
@@ -41,6 +67,23 @@
             &copy; 2025 - Presentation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script>
+        const dropdownTrigger = document.querySelectorAll('.nav-item.dropdown');
+        dropdownTrigger.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
+                const dropdown = new bootstrap.Dropdown(toggle);
+                dropdown.show();
+            });
+            item.addEventListener('mouseleave', () => {
+                const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
+                const dropdown = new bootstrap.Dropdown(toggle);
+                dropdown.hide();
+            })
+        })
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

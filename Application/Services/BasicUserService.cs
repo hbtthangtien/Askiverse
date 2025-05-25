@@ -33,7 +33,7 @@ namespace Application.Services
 		{
 			var entityUser = new BasicUser
 			{
-				UserName = dto.UserName,
+				UserName = dto.Username,
 				Email = dto.Email,
 				CreatedAt = DateTime.Now,
 				AccountStatus = AccountStatus.Active
@@ -63,8 +63,8 @@ namespace Application.Services
 			string token = await _unitOfWork.BasicUsers.UserManager.GenerateEmailConfirmationTokenAsync(basicUser);
 			UriBuilder uriBuilder = LinkConstant.UriBuilder(basicUser.Id, token, "confirm-email");
 			var link = uriBuilder.ToString();
-			var body = EmailBody.CONTENT(basicUser.Email!, link);
-			await _email.SendMailAsync(EmailSubject.SUBJECT, body, basicUser.Email!);
+			var body = EmailBody.CONFIRM_EMAIL(basicUser.Email!, link);
+			await _email.SendMailAsync(EmailSubject.CONFIRM_EMAIL, body, basicUser.Email!);
 		}
 	}
 }

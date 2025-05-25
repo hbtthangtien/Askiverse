@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Constants;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -172,7 +173,7 @@ namespace Persistence.DatabaseConfig
                       .WithOne()
                       .HasForeignKey<ExamAnswered>(e => e.AnswerId)
                       .OnDelete(DeleteBehavior.NoAction);
-                entity.HasOne(e => e.ExamScored)    
+                entity.HasOne(e => e.ExamScored)
                       .WithMany(e => e.ExamAnswereds)
                       .HasForeignKey(e => e.ExamScoredId);
             });
@@ -203,6 +204,13 @@ namespace Persistence.DatabaseConfig
                       .OnDelete(DeleteBehavior.NoAction);
             });
 
+
+            builder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole { Id = "1", Name = UserRole.BASIC_USER, NormalizedName = UserRole.BASIC_USER },
+                    new IdentityRole { Id = "2", Name = UserRole.PREMIUM_USER, NormalizedName = UserRole.PREMIUM_USER },
+                    new IdentityRole { Id = "3", Name = UserRole.ADMIN, NormalizedName = UserRole.ADMIN }
+                );
         }
     }
 }
