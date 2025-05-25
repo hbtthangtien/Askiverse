@@ -6,6 +6,7 @@ using Application.Services;
 using AutoMapper;
 using Domain.Configs;
 using Infrastructure.ExternalService;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -53,6 +54,12 @@ namespace Infrastructure.DIConfig
         public static void AddOtherService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IEmailService, EmailService>();
+
+            services.AddAuthentication().AddCookie().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+            {
+                options.ClientId = configuration.GetSection("GoogleKeys:ClientId").Value!;
+                options.ClientSecret = configuration.GetSection("GoogleKeys:ClientSecret").Value!;
+            });
         }
 
         public static void InitialValueConfig(this IServiceCollection services, IConfiguration configuration)

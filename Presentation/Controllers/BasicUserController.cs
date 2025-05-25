@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.BasicUser;
 using Application.Interface.IServices;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -88,12 +89,42 @@ namespace Presentation.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task StartGoogleLogin()
+        {
+            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
+                new AuthenticationProperties
+                {
+                    RedirectUri = Url.Action("HandleGoogleLoginCallback")
+                });
+        }
+
+        public async Task<IActionResult> HandleGoogleLoginCallback()
+        {
+            try
+            {
+                var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+                if (!result.Succeeded)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var principal = result.Principal;
+                await _authenticateService.ProcessGoogleUserAsync(principal);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View("Login");
+            }
+        }
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            //await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync();
             await _authenticateService.Logout();
             return RedirectToAction("Login");
         }

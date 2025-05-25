@@ -2,9 +2,14 @@
 using Application.Interface.IServices;
 using Application.UnitOfWork;
 using AutoMapper;
+using Domain.Constants;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,5 +49,35 @@ namespace Application.Services
 		{
 			await _unitOfWork.BasicUsers.SignInManager.SignOutAsync();
 		}
-	}
+
+		public async Task ProcessGoogleUserAsync(ClaimsPrincipal principal)
+		{
+            var email = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            if (string.IsNullOrEmpty(email))
+                throw new Exception("Không lấy được email từ tài khoản Google!");
+
+            var username = email.Split('@')[0];
+            var existingUser = await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(email);
+
+            if (existingUser != null)
+			{
+                await _unitOfWork.BasicUsers.SignInManager.SignInAsync(existingUser, isPersistent: false);
+				return;
+            }
+
+            var password = Guid.NewGuid().ToString();
+            var passwordHasher = new PasswordHasher<BasicUser>();
+            var hashedPassword = passwordHasher.HashPassword(null, password);
+            var newUser = new BasicUser { UserName = username, Email = email, CreatedAt = DateTime.Now, AccountStatus = Domain.Enums.AccountStatus.Active };
+            var result = await _unitOfWork.BasicUsers.UserManager.CreateAsync(newUser, hashedPassword);
+
+            if (!result.Succeeded)
+                throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Tạo tài khoản thất bại!");
+
+            await _unitOfWork.BasicUsers.UserManager.AddToRoleAsync(newUser, UserRole.BASIC_USER);
+            await _unitOfWork.CommitAsync();
+            await _unitOfWork.BasicUsers.SignInManager.SignInAsync(newUser, isPersistent: false);
+        }
+
+    }
 }
