@@ -8,6 +8,6 @@ namespace Domain.Constants
 {
 	public class EmailSubject
 	{
-		public const string SUBJECT = "CONFIRM EMAIL HERE TO LOGIN TO YOUR ACCOUNT!"
+		public const string SUBJECT = "CONFIRM EMAIL HERE TO LOGIN TO YOUR ACCOUNT!";
 	}
 }
