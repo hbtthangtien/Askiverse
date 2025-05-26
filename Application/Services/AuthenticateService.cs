@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.BasicUser;
+using Application.DTOs.ForgotPassword;
 using Application.Interface.IServices;
 using Application.UnitOfWork;
 using AutoMapper;
@@ -12,13 +13,15 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Net;
+using System.Net.Mail;
 namespace Application.Services
 {
 	public class AuthenticateService : Service, IAuthenticateService
 	{
 		private readonly IBasicUserService _basicUserService;
-		public AuthenticateService(IUnitOfWork unitOfWork, IBasicUserService basicUserService, IMapper mapper) : base(unitOfWork, mapper)
+        private static readonly Dictionary<string, string> _otpStore = new();
+        public AuthenticateService(IUnitOfWork unitOfWork, IBasicUserService basicUserService, IMapper mapper) : base(unitOfWork, mapper)
 		{
 			_basicUserService = basicUserService;
 		}
@@ -78,6 +81,58 @@ namespace Application.Services
             await _unitOfWork.CommitAsync();
             await _unitOfWork.BasicUsers.SignInManager.SignInAsync(newUser, isPersistent: false);
         }
+        public async Task ForgotPasswordAsync(ForgotPasswordRequestDTO request)
+        {
+            var user = await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                throw new Exception("Email không tồn tại!");
 
+            var otp = new Random().Next(100000, 999999).ToString();
+            _otpStore[user.Email] = otp;
+
+            // Gửi email
+            await SendEmailAsync(user.Email, "Mã OTP khôi phục mật khẩu", $"Mã OTP của bạn là: {otp}");
+        }
+
+        private async Task SendEmailAsync(string toEmail, string subject, string body)
+        {
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("hungndhe172631@fpt.edu.vn\r\n", "axgs bslj mgex dwuc"),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress("hungndhe172631@fpt.edu.vn\r\n"),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+            mailMessage.To.Add(toEmail);
+
+            await smtpClient.SendMailAsync(mailMessage);
+        }
+
+
+        public async Task ResetPasswordWithOTPAsync(VerifyOTPAndResetPasswordDTO request)
+        {
+            if (!_otpStore.ContainsKey(request.Email) || _otpStore[request.Email] != request.OTP)
+                throw new Exception("OTP không đúng hoặc đã hết hạn!");
+
+            var user = await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                throw new Exception("Người dùng không tồn tại!");
+
+            var token = await _unitOfWork.BasicUsers.UserManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _unitOfWork.BasicUsers.UserManager.ResetPasswordAsync(user, token, request.NewPassword);
+
+            if (!result.Succeeded)
+                throw new Exception("Đặt lại mật khẩu thất bại!");
+
+            _otpStore.Remove(request.Email);
+        }
+      
     }
 }

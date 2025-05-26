@@ -9,5 +9,6 @@ namespace Application.Interface.IRepository
 {
     public interface IProfileRepository : IRepository<Profile>
     {
+       
     }
 }

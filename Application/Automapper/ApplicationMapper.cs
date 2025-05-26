@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application.DTOs.Profile;
+using AutoMapper;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.Automapper
 {
-    public class ApplicationMapper : Profile
-    {
-        public ApplicationMapper()
-        {
 
-        }
+    public class MappingProfile : Profile
+    {
+
     }
 }

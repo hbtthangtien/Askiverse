@@ -1,4 +1,5 @@
-﻿using Application.Interface.IServices;
+﻿using Application.DTOs.Profile;
+using Application.Interface.IServices;
 using Application.UnitOfWork;
 using AutoMapper;
 using System;
@@ -14,5 +15,8 @@ namespace Application.Services
         public ProfileService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
         }
+
+      
     }
+
 }

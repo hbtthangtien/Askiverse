@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.BasicUser;
+using Application.DTOs.ForgotPassword;
 using Application.Interface.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -128,5 +129,50 @@ namespace Presentation.Controllers
             await _authenticateService.Logout();
             return RedirectToAction("Login");
         }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequestDTO dto)
+        {
+            try
+            {
+                await _authenticateService.ForgotPasswordAsync(dto); // ✅ controller không xử lý chi tiết
+                TempData["Email"] = dto.Email; // để truyền sang view ResetPassword
+                return RedirectToAction("ResetPassword");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(dto); // trả lại view quên mật khẩu
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            var email = TempData["Email"]?.ToString();
+            return View(new VerifyOTPAndResetPasswordDTO { Email = email });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(VerifyOTPAndResetPasswordDTO dto)
+        {
+            try
+            {
+                await _authenticateService.ResetPasswordWithOTPAsync(dto); // ✅ logic trong service
+                ViewBag.Message = "Mật khẩu đã được đặt lại thành công.";
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(dto); // trả lại view nhập lại OTP và mật khẩu
+            }
+        }
+
     }
 }

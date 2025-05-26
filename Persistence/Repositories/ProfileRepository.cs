@@ -1,5 +1,6 @@
 ﻿using Application.Interface.IRepository;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.DatabaseConfig;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,14 @@ namespace Persistence.Repositories
 {
     public class ProfileRepository : Repository<Profile>, IProfileRepository
     {
+        private readonly AskiverseContext _context;
+
         public ProfileRepository(AskiverseContext context) : base(context)
         {
+            _context = context;
         }
+
+       
+
     }
 }
