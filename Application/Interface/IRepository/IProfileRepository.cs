@@ -9,6 +9,7 @@ namespace Application.Interface.IRepository
 {
     public interface IProfileRepository : IRepository<Profile>
     {
-       
+        Task<Profile?> GetByUserIdAsync(string userId);
+        void Update(Profile profile);
     }
 }

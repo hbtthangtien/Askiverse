@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 namespace Application.Services
 {
 	public class AuthenticateService : Service, IAuthenticateService
@@ -121,6 +122,11 @@ namespace Application.Services
             if (!_otpStore.ContainsKey(request.Email) || _otpStore[request.Email] != request.OTP)
                 throw new Exception("OTP không đúng hoặc đã hết hạn!");
 
+            // Kiểm tra độ mạnh của mật khẩu mới
+            var passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$");
+            if (!passwordRegex.IsMatch(request.NewPassword))
+                throw new Exception("Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.");
+
             var user = await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(request.Email);
             if (user == null)
                 throw new Exception("Người dùng không tồn tại!");
@@ -133,6 +139,7 @@ namespace Application.Services
 
             _otpStore.Remove(request.Email);
         }
-      
+
+
     }
 }

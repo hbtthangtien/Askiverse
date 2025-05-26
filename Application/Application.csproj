@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Profile\" />
     <Folder Include="Hubs\" />
   </ItemGroup>
 

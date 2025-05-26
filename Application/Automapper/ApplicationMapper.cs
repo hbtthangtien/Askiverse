@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace Application.Automapper
 {
-
-    public class MappingProfile : Profile
+    public class ApplicationMapper : Profile
     {
+        public ApplicationMapper()
+        {
 
+        }
     }
 }

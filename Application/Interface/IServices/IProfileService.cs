@@ -9,7 +9,10 @@ namespace Application.Interface.IServices
 {
     public interface IProfileService
     {
-      
+        Task<ProfileDTO?> GetProfileByUserIdAsync(string userId);
+        Task UpdateProfileAsync(string userId, UpdateProfileDTO dto);
+        Task ChangePasswordAsync(string userId, ChangePasswordDTO dto);
     }
+
 
 }

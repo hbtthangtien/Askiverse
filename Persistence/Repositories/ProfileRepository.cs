@@ -19,7 +19,17 @@ namespace Persistence.Repositories
             _context = context;
         }
 
-       
+        public async Task<Profile?> GetByUserIdAsync(string userId)
+        {
+            return await _context.Profiles
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.UserId == userId);
+        }
+        
 
+        public void Update(Profile profile)
+        {
+            _context.Profiles.Update(profile);
+        }
     }
 }
