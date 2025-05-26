@@ -128,5 +128,12 @@ namespace Presentation.Controllers
             await _authenticateService.Logout();
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+
+        public IActionResult EmailForgotPassword()
+        {
+            return View();
+        }
     }
 }
