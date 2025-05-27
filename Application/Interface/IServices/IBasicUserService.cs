@@ -14,5 +14,7 @@ namespace Application.Interface.IServices
 		public Task CreateBasicUserAsync(CreateBasicUserDTO dto);
 		public Task ConfirmEmail(string UserId, string token);
 		public Task SendEmailConfirmAsync(BasicUser basicUser);
-	}
+        public Task SendEmailResetPasswordAsync(string email);
+        public Task ResetPassword(ResetPasswordDTORequest dto);
+    }
 }

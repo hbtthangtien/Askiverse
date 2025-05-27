@@ -135,5 +135,60 @@ namespace Presentation.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EmailForgotPassword(string email)
+        {
+            try
+            {
+                await _basicUserService.SendEmailResetPasswordAsync(email);
+                return View("ResetPasswordNotification");
+
+            }
+            catch(Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View();
+            }
+        }
+
+        [HttpGet("basic-user/reset-password")]
+         public IActionResult ResetPassword(string userId, string token)
+        {
+            try
+            {
+                return View(new ResetPasswordDTORequest { UserId = userId, Token = token});
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = ex.Message;
+                return View();
+            }
+        }
+
+        [HttpPost("basic-user/reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTORequest dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var firstError = ModelState
+                    .Where(x => x.Value!.Errors.Count > 0)
+                    .Select(x => x.Value!.Errors.First().ErrorMessage)
+                    .FirstOrDefault();
+                ViewData["ErrorMessage"] = firstError;
+                return View(dto);
+            }
+
+            try
+            {
+                await _basicUserService.ResetPassword(dto);
+                return View("ResetSuccessfulNotification");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View(dto);
+            }
+        }
     }
 }

@@ -66,5 +66,39 @@ namespace Application.Services
 			var body = EmailBody.CONFIRM_EMAIL(basicUser.Email!, link);
 			await _email.SendMailAsync(EmailSubject.CONFIRM_EMAIL, body, basicUser.Email!);
 		}
+
+		public async Task SendEmailResetPasswordAsync(string email)
+		{
+			var isExisted = await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(email);
+
+            if (isExisted == null) throw new Exception("Email không tồn tại!");
+
+            var isConfirmed = await _unitOfWork.BasicUsers.UserManager.IsEmailConfirmedAsync(isExisted);
+
+			if (!isConfirmed) throw new Exception("Bạn chưa xác nhận Email!");
+
+			string token = await _unitOfWork.BasicUsers.UserManager.GeneratePasswordResetTokenAsync(isExisted);
+
+			UriBuilder uriBuilder = LinkConstant.UriBuilder(isExisted.Id, token, "reset-password");
+
+			var link = uriBuilder.ToString();
+
+			var body = EmailBody.RESET_PASSWORD(isExisted.Email!, link);
+
+			await _email.SendMailAsync(EmailSubject.RESET_PASSWORD, body, isExisted.Email!);
+		}
+
+		public async Task ResetPassword(ResetPasswordDTORequest dto)
+		{
+			var user = await _unitOfWork.BasicUsers.UserManager.FindByIdAsync(dto.UserId!)
+				?? throw new Exception("Người dùng không tồn tại!");
+
+			var result = await _unitOfWork.BasicUsers.UserManager.ResetPasswordAsync(user, dto.Token!, dto.NewPassword!);
+
+			if (!result.Succeeded)
+			{
+				throw new Exception("Token đã được sử dụng!");
+            }
+		}
 	}
 }
