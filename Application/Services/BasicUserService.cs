@@ -29,7 +29,7 @@ namespace Application.Services
 			}
 		}
 
-		public async Task CreateBasicUserAsync(CreateBasicUserDTO dto)
+		public async Task CreateBasicUserAsync(CreateBasicUserDTO dto, string gender)
 		{
 			var entityUser = new BasicUser
 			{
@@ -53,6 +53,18 @@ namespace Application.Services
 			}
 
 			await _unitOfWork.BasicUsers.UserManager.AddToRoleAsync(entityUser, UserRole.BASIC_USER);
+
+			var profile = new Domain.Entities.Profile
+			{
+				UserId = entityUser.Id
+			};
+
+
+			if (gender == "other") profile.Gender = Gender.Other;
+			else if (gender == "male") profile.Gender = Gender.Male;
+			else if(gender == "female") profile.Gender= Gender.Female;
+
+			await _unitOfWork.Profiles.AddAsync(profile);
 
 			await _unitOfWork.CommitAsync();
 			await SendEmailConfirmAsync(entityUser);

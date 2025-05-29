@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.BasicUser;
 using Application.Interface.IServices;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
@@ -36,7 +37,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(CreateBasicUserDTO dto)
+        public async Task<IActionResult> Register(CreateBasicUserDTO dto, string gender)
         {
             if (!ModelState.IsValid)
             {
@@ -50,7 +51,7 @@ namespace Presentation.Controllers
 
             try
             {
-                await _basicUserService.CreateBasicUserAsync(dto);
+                await _basicUserService.CreateBasicUserAsync(dto, gender);
                 return View("ConfirmationNotification");
             }
             catch (Exception ex)
