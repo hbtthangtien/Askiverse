@@ -99,7 +99,6 @@ namespace Application.Services
             var otp = new Random().Next(100000, 999999).ToString();
             _otpStore[user.Email] = otp;
 
-            // Gửi email
             await SendEmailAsync(user.Email, "Mã OTP khôi phục mật khẩu", $"Mã OTP của bạn là: {otp}");
         }
 
@@ -130,7 +129,6 @@ namespace Application.Services
             if (!_otpStore.ContainsKey(request.Email) || _otpStore[request.Email] != request.OTP)
                 throw new Exception("OTP không đúng hoặc đã hết hạn!");
 
-            // Kiểm tra độ mạnh của mật khẩu mới
             var passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$");
             if (!passwordRegex.IsMatch(request.NewPassword))
                 throw new Exception("Mật khẩu phải có ít nhất 8 ký tự, bao gồm 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.");

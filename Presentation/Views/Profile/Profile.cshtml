@@ -1,24 +1,119 @@
 ﻿@model Application.DTOs.Profile.ProfileDTO
 
+<style>
+    body {
+        background: linear-gradient(180deg, #F5F5F5, #D8F8F2);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        color: #D13D76;
+        margin-top: 40px;
+        font-size: 40px;
+    }
+
+    .profile-wrapper {
+        max-width: 700px;
+        margin: 40px auto;
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        text-align: center;
+    }
+
+    .avatar-section img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid #FE9FC3;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+    }
+
+    .info-section {
+        text-align: left;
+        padding: 0 40px;
+    }
+
+        .info-section p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #121117;
+        }
+
+            .info-section p strong {
+                color: #121117;
+            }
+
+    .action-buttons {
+        margin-top: 30px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn-outline {
+        padding: 10px 24px;
+        background-color: #FE9FC3;
+        color: #000000;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-outline:hover {
+            background-color: #FE9FC3;
+        }
+
+    .btn-dark {
+        padding: 10px 24px;
+        background-color: #D13D76;
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-dark:hover {
+            background-color: #a12b5d;
+        }
+</style>
+
+
 <h2>Hồ sơ cá nhân</h2>
 
-<div class="card p-3" style="max-width: 400px;">
-    <div class="mb-3 text-center">
+<div class="profile-wrapper">
+    <div class="avatar-section">
         @if (!string.IsNullOrEmpty(Model.AvatarUrl))
         {
-            <img src="@Model.AvatarUrl" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;" />
+            <img src="@Model.AvatarUrl" alt="Avatar" />
         }
         else
         {
-            <img src="~/images/default-avatar.png" alt="Avatar mặc định" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;" />
+            <img src="~/images/default-avatar.png" alt="Avatar mặc định" />
         }
     </div>
 
-    <p><strong>Họ tên:</strong> @Model.Fullname</p>
-    <p><strong>Giới tính:</strong> @Model.Gender</p>
-    <p><strong>Ngày sinh:</strong> @Model.DateOfBirth?.ToString("dd/MM/yyyy")</p>
-    <p><strong>Giới thiệu:</strong> @Model.Bio</p>
-</div>
+    <div class="info-section">
+        <p><strong>Họ tên:</strong> @Model.Fullname</p>
+        <p><strong>Giới tính:</strong> @Model.Gender</p>
+        <p><strong>Ngày sinh:</strong> @Model.DateOfBirth?.ToString("dd/MM/yyyy")</p>
+        <p><strong>Giới thiệu:</strong> @Model.Bio</p>
+    </div>
 
-<a asp-action="Edit" class="btn btn-primary mt-3">Chỉnh sửa hồ sơ</a>
-<a asp-action="ChangePassword" class="btn btn-warning mt-2">Đổi mật khẩu</a>
+    <div class="action-buttons">
+        <a asp-action="Edit" class="btn-outline">✏️ Chỉnh sửa hồ sơ</a>
+        <a asp-action="ChangePassword" class="btn-dark">🔐 Đổi mật khẩu</a>
+    </div>
+</div>
