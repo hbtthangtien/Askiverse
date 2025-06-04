@@ -79,6 +79,14 @@ namespace Application.Services
                 throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Tạo tài khoản thất bại!");
 
             await _unitOfWork.BasicUsers.UserManager.AddToRoleAsync(newUser, UserRole.BASIC_USER);
+
+			var profile = new Domain.Entities.Profile
+			{
+				UserId = newUser.Id,
+			};
+			profile.Gender = Domain.Enums.Gender.Other;
+
+			await _unitOfWork.Profiles.AddAsync(profile);
             await _unitOfWork.CommitAsync();
             await _unitOfWork.BasicUsers.SignInManager.SignInAsync(newUser, isPersistent: false);
         }

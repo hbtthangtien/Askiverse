@@ -30,6 +30,18 @@
 			</div>
 
 			<div class="mb-3">
+				<label for="Gender" class="form-label">Giới tính</label>
+				<div class="input-group">
+					<span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+					<select class="form-select" id="Gender" name="gender" required>
+						<option value="other" selected>Khác</option>
+						<option value="male">Nam</option>
+						<option value="female">Nữ</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="mb-3">
 				<label asp-for="Password" class="form-label">Mật khẩu</label>
 				<div class="input-group">
 					<span class="input-group-text"><i class="bi bi-lock-fill"></i></span>

@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.BasicUser;
 using Application.DTOs.ForgotPassword;
 using Application.Interface.IServices;
+using Domain.Enums;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
@@ -37,7 +38,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(CreateBasicUserDTO dto)
+        public async Task<IActionResult> Register(CreateBasicUserDTO dto, string gender)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +52,7 @@ namespace Presentation.Controllers
 
             try
             {
-                await _basicUserService.CreateBasicUserAsync(dto);
+                await _basicUserService.CreateBasicUserAsync(dto, gender);
                 return View("ConfirmationNotification");
             }
             catch (Exception ex)
@@ -129,8 +130,9 @@ namespace Presentation.Controllers
             await _authenticateService.Logout();
             return RedirectToAction("Login");
         }
+
         [HttpGet]
-        public IActionResult ForgotPassword()
+        public IActionResult EmailForgotPassword()
         {
             return View();
         }
@@ -171,6 +173,61 @@ namespace Presentation.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View(dto); // trả lại view nhập lại OTP và mật khẩu
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EmailForgotPassword(string email)
+        {
+            try
+            {
+                await _basicUserService.SendEmailResetPasswordAsync(email);
+                return View("ResetPasswordNotification");
+
+            }
+            catch(Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View();
+            }
+        }
+
+        [HttpGet("basic-user/reset-password")]
+         public IActionResult ResetPassword(string userId, string token)
+        {
+            try
+            {
+                return View(new ResetPasswordDTORequest { UserId = userId, Token = token});
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = ex.Message;
+                return View();
+            }
+        }
+
+        [HttpPost("basic-user/reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTORequest dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var firstError = ModelState
+                    .Where(x => x.Value!.Errors.Count > 0)
+                    .Select(x => x.Value!.Errors.First().ErrorMessage)
+                    .FirstOrDefault();
+                ViewData["ErrorMessage"] = firstError;
+                return View(dto);
+            }
+
+            try
+            {
+                await _basicUserService.ResetPassword(dto);
+                return View("ResetSuccessfulNotification");
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+                return View(dto);
             }
         }
 
