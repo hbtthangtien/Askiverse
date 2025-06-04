@@ -191,5 +191,11 @@ namespace Presentation.Controllers
                 return View(dto);
             }
         }
+
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return View();
+        }
     }
 }
