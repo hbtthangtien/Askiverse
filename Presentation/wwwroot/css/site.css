@@ -137,4 +137,5 @@ footer {
 main {
     padding-top: 100px;
     padding-bottom: 160px; /* Chừa khoảng trống cho footer */
+    background: linear-gradient(180deg, #F5F5F5, #D8F8F2);
 }
