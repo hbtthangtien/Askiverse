@@ -1,22 +1,140 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    height:100vh;
+    max-height:100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #F5F5F5, #D8F8F2);
+    color: #121117;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: linear-gradient(90deg, #FAD3E7, #F0F8F6, #C4F0E0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 24px;
+    color: #D13D76;
+}
+
+    .logo img {
+        height: 32px;
+        margin-right: 10px;
+    }
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+    nav a:hover {
+        color: #D13D76;
+    }
+
+.auth a {
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.auth a:first-child {
+    color: #D13D76;
+    border: 1px solid #D13D76;
+}
+.auth a:last-child {
+   background-color: #D13D76;
+   color: white;
+}
+.auth a {
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+.auth a:first-child {
+        color: #D13D76;
+        border: 1px solid #D13D76;
+}
+
+.auth a:first-child:hover {
+   background-color: #D13D76;
+   color: white;
+}
+
+.auth a:last-child {
+    background-color: #D13D76;
+    color: white;
+ }
+.auth a:last-child:hover {
+    background-color: #a82859;
+    box-shadow: 0 2px 6px rgba(209, 61, 118, 0.4);
+}
+footer {
+
+    width: 100%;
+    padding: 40px 20px;
+    background: linear-gradient(90deg, #FAD3E7, #F0F8F6, #C4F0E0);
+    color: #333;
+    text-align: center;
+    font-size: 15px;
+    border-top: 1px solid #ddd;
+}
+
+    footer p {
+        margin: 4px 0;
+    }
+
+    footer a {
+        color: #D13D76;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+main {
+    padding-top: 100px;
+    padding-bottom: 160px; /* Chừa khoảng trống cho footer */
 }
