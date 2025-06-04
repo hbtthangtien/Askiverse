@@ -12,9 +12,9 @@
 
 <script src="https://kit.fontawesome.com/dd760d7b93.js" crossorigin="anonymous"></script>
 
-<div class="d-flex align-items-center justify-content-center min-vh-100" style="background: linear-gradient(135deg, #3a7bd5, #00d2ff);">
-	<div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
-		<h3 class="text-center mb-4 fw-bold">🔐 Đăng nhập</h3>
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+	<div class="card shadow-lg p-4" style="width: 100%; max-width: 450px; border-radius: 1rem;">
+		<h3 class="text-center mb-4 fw-bold" style="color: #D13D76">🔐 Đăng nhập</h3>
 		<form asp-action="Login" method="post">
 			<div class="mb-3">
 				<label for="Email" class="form-label">Tên đăng nhập</label>
@@ -38,14 +38,14 @@
 					<label class="form-check-label" for="RememberMe">Ghi nhớ</label>
 				</div>
 
-				<a asp-action="EmailForgotPassword" asp-controller="BasicUser">Quên mật khẩu</a>
+				<a asp-action="EmailForgotPassword" asp-controller="BasicUser" class="text-dark">Quên mật khẩu</a>
 			</div>
 
 			@if (ViewData["ErrorMessage"] != null)
 			{
 				<p style="color:red">@ViewData["ErrorMessage"]</p>
 			}
-			<button type="submit" class="btn btn-primary w-100 fw-bold">Đăng nhập</button>
+			<button type="submit" class="btn w-100 fw-bold text-white" style="background: #FE9FC3">Đăng nhập</button>
 		</form>
 		<p class="mt-3 text-center">
 			Chưa có tài khoản? <a class="text-warning fw-bold" asp-action="Register" asp-controller="BasicUser">Đăng ký ngay tại đây!</a>

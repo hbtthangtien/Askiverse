@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+	<div class="card shadow-lg p-5 text-center" style="max-width: 500px; width: 100%; border-radius: 1rem;">
+		@if (ViewData["Error"] != null)
+		{
+			<div class="text-danger mb-4">
+				<i class="bi bi-x-circle-fill" style="font-size: 4rem;"></i>
+			</div>
+			<h3 class="fw-bold mb-3">Xác nhận Email lỗi!</h3>
+			<p class="text-muted mb-4">@ViewData["Error"]</p>
+			<a asp-action="Register" asp-controller="BasicUser" class="btn btn-outline-danger fw-bold px-4">Quay trở lại đăng ký</a>
+		}
+		else
+		{
+			<div class="text-success mb-4">
+				<i class="bi bi-check-circle-fill" style="font-size: 4rem;"></i>
+			</div>
+			<h3 class="fw-bold mb-3" style="color: #D13D76">Xác nhận Email thành công!</h3>
+			<p class="text-dark mb-4">Email của bạn đã được xác nhận. Bạn có thể đăng nhập và bắt đầu sử dụng nền tảng</p>
+			<a asp-action="Login" asp-controller="BasicUser" class="btn btn-primary fw-bold px-4">Đăng nhập</a>
+		}
+	</div>
+</div>

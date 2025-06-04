@@ -231,5 +231,12 @@ namespace Presentation.Controllers
             }
         }
 
+
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return View();
+        }
+
     }
 }
