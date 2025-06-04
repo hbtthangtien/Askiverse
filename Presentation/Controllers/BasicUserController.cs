@@ -142,14 +142,14 @@ namespace Presentation.Controllers
         {
             try
             {
-                await _authenticateService.ForgotPasswordAsync(dto); // ✅ controller không xử lý chi tiết
-                TempData["Email"] = dto.Email; // để truyền sang view ResetPassword
+                await _authenticateService.ForgotPasswordAsync(dto); 
+                TempData["Email"] = dto.Email;
                 return RedirectToAction("ResetPassword");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(dto); // trả lại view quên mật khẩu
+                return View(dto); 
             }
         }
 
@@ -165,14 +165,14 @@ namespace Presentation.Controllers
         {
             try
             {
-                await _authenticateService.ResetPasswordWithOTPAsync(dto); // ✅ logic trong service
+                await _authenticateService.ResetPasswordWithOTPAsync(dto); 
                 ViewBag.Message = "Mật khẩu đã được đặt lại thành công.";
                 return RedirectToAction("Login");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(dto); // trả lại view nhập lại OTP và mật khẩu
+                return View(dto); 
             }
         }
 

@@ -33,7 +33,7 @@ namespace Presentation.Controllers
             if (profile == null)
                 return NotFound("Không tìm thấy thông tin hồ sơ.");
 
-            return View("Profile", profile); // view name: Profile.cshtml
+            return View("Profile", profile); 
         }
         [HttpGet("edit")]
         public async Task<IActionResult> Edit()
