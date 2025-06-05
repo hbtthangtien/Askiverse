@@ -39,7 +39,6 @@ namespace Persistence.DatabaseConfig.Config
             services.AddScoped<IHistoryPurchaseRepository,HistoryPurchaseRepository>();
             services.AddScoped<ILevelRepository,LevelRepository>();
             services.AddScoped<INotificationRepository,NotificationRepository>();
-            services.AddScoped<IPackageDurationRepository,PackageDurationRepository>();
             services.AddScoped<IPackageOfUserRepository, PackageOfUserRepository>();
             services.AddScoped<IPremiumUserRepository,PremiumUserRepository>();
             services.AddScoped<IProfileRepository,ProfileRepository>();

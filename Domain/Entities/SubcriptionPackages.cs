@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Commons;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,9 @@ namespace Domain.Entities
         public string? Name { get; set; }    
 
         public string? Description { get; set; }
+
+        public double Price { get; set; }
+
+        public Duration Duration { get; set; }
     }
 }

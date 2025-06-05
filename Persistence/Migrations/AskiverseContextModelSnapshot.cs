@@ -60,6 +60,4008 @@ namespace Persistence.Migrations
                     b.HasIndex("BankQuestionId");
 
                     b.ToTable("Answers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnswerText = "Đáp án 1 cho câu 1",
+                            BankQuestionId = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3995),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AnswerText = "Đáp án 2 cho câu 1",
+                            BankQuestionId = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3997),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AnswerText = "Đáp án 3 cho câu 1",
+                            BankQuestionId = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3998),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AnswerText = "Đáp án 4 cho câu 1",
+                            BankQuestionId = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3999),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AnswerText = "Đáp án 1 cho câu 2",
+                            BankQuestionId = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4000),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AnswerText = "Đáp án 2 cho câu 2",
+                            BankQuestionId = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4001),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AnswerText = "Đáp án 3 cho câu 2",
+                            BankQuestionId = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4002),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AnswerText = "Đáp án 4 cho câu 2",
+                            BankQuestionId = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4059),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AnswerText = "Đáp án 1 cho câu 3",
+                            BankQuestionId = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4060),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AnswerText = "Đáp án 2 cho câu 3",
+                            BankQuestionId = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4061),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AnswerText = "Đáp án 3 cho câu 3",
+                            BankQuestionId = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4062),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AnswerText = "Đáp án 4 cho câu 3",
+                            BankQuestionId = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4063),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AnswerText = "Đáp án 1 cho câu 4",
+                            BankQuestionId = 4,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4064),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AnswerText = "Đáp án 2 cho câu 4",
+                            BankQuestionId = 4,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4065),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AnswerText = "Đáp án 3 cho câu 4",
+                            BankQuestionId = 4,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4066),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AnswerText = "Đáp án 4 cho câu 4",
+                            BankQuestionId = 4,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4067),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AnswerText = "Đáp án 1 cho câu 5",
+                            BankQuestionId = 5,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4068),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AnswerText = "Đáp án 2 cho câu 5",
+                            BankQuestionId = 5,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4069),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AnswerText = "Đáp án 3 cho câu 5",
+                            BankQuestionId = 5,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4070),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AnswerText = "Đáp án 4 cho câu 5",
+                            BankQuestionId = 5,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4071),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AnswerText = "Đáp án 1 cho câu 6",
+                            BankQuestionId = 6,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4072),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AnswerText = "Đáp án 2 cho câu 6",
+                            BankQuestionId = 6,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4073),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AnswerText = "Đáp án 3 cho câu 6",
+                            BankQuestionId = 6,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4074),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AnswerText = "Đáp án 4 cho câu 6",
+                            BankQuestionId = 6,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4075),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AnswerText = "Đáp án 1 cho câu 7",
+                            BankQuestionId = 7,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4076),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            AnswerText = "Đáp án 2 cho câu 7",
+                            BankQuestionId = 7,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4077),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            AnswerText = "Đáp án 3 cho câu 7",
+                            BankQuestionId = 7,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4077),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            AnswerText = "Đáp án 4 cho câu 7",
+                            BankQuestionId = 7,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4078),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            AnswerText = "Đáp án 1 cho câu 8",
+                            BankQuestionId = 8,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4079),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            AnswerText = "Đáp án 2 cho câu 8",
+                            BankQuestionId = 8,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4080),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            AnswerText = "Đáp án 3 cho câu 8",
+                            BankQuestionId = 8,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4082),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            AnswerText = "Đáp án 4 cho câu 8",
+                            BankQuestionId = 8,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4083),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            AnswerText = "Đáp án 1 cho câu 9",
+                            BankQuestionId = 9,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4084),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            AnswerText = "Đáp án 2 cho câu 9",
+                            BankQuestionId = 9,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4085),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            AnswerText = "Đáp án 3 cho câu 9",
+                            BankQuestionId = 9,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4086),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            AnswerText = "Đáp án 4 cho câu 9",
+                            BankQuestionId = 9,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4087),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            AnswerText = "Đáp án 1 cho câu 10",
+                            BankQuestionId = 10,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4088),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            AnswerText = "Đáp án 2 cho câu 10",
+                            BankQuestionId = 10,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4089),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            AnswerText = "Đáp án 3 cho câu 10",
+                            BankQuestionId = 10,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4090),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            AnswerText = "Đáp án 4 cho câu 10",
+                            BankQuestionId = 10,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4091),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            AnswerText = "Đáp án 1 cho câu 11",
+                            BankQuestionId = 11,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4092),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            AnswerText = "Đáp án 2 cho câu 11",
+                            BankQuestionId = 11,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4093),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 43,
+                            AnswerText = "Đáp án 3 cho câu 11",
+                            BankQuestionId = 11,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4093),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 44,
+                            AnswerText = "Đáp án 4 cho câu 11",
+                            BankQuestionId = 11,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4094),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 45,
+                            AnswerText = "Đáp án 1 cho câu 12",
+                            BankQuestionId = 12,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4095),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 46,
+                            AnswerText = "Đáp án 2 cho câu 12",
+                            BankQuestionId = 12,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4096),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 47,
+                            AnswerText = "Đáp án 3 cho câu 12",
+                            BankQuestionId = 12,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4097),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 48,
+                            AnswerText = "Đáp án 4 cho câu 12",
+                            BankQuestionId = 12,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4098),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 49,
+                            AnswerText = "Đáp án 1 cho câu 13",
+                            BankQuestionId = 13,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4099),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 50,
+                            AnswerText = "Đáp án 2 cho câu 13",
+                            BankQuestionId = 13,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4100),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 51,
+                            AnswerText = "Đáp án 3 cho câu 13",
+                            BankQuestionId = 13,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4101),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 52,
+                            AnswerText = "Đáp án 4 cho câu 13",
+                            BankQuestionId = 13,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4102),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 53,
+                            AnswerText = "Đáp án 1 cho câu 14",
+                            BankQuestionId = 14,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4102),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 54,
+                            AnswerText = "Đáp án 2 cho câu 14",
+                            BankQuestionId = 14,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4103),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 55,
+                            AnswerText = "Đáp án 3 cho câu 14",
+                            BankQuestionId = 14,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4104),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 56,
+                            AnswerText = "Đáp án 4 cho câu 14",
+                            BankQuestionId = 14,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4109),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 57,
+                            AnswerText = "Đáp án 1 cho câu 15",
+                            BankQuestionId = 15,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4110),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 58,
+                            AnswerText = "Đáp án 2 cho câu 15",
+                            BankQuestionId = 15,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4111),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 59,
+                            AnswerText = "Đáp án 3 cho câu 15",
+                            BankQuestionId = 15,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4112),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 60,
+                            AnswerText = "Đáp án 4 cho câu 15",
+                            BankQuestionId = 15,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4113),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 61,
+                            AnswerText = "Đáp án 1 cho câu 16",
+                            BankQuestionId = 16,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4114),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 62,
+                            AnswerText = "Đáp án 2 cho câu 16",
+                            BankQuestionId = 16,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4115),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 63,
+                            AnswerText = "Đáp án 3 cho câu 16",
+                            BankQuestionId = 16,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4116),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 64,
+                            AnswerText = "Đáp án 4 cho câu 16",
+                            BankQuestionId = 16,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4116),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 65,
+                            AnswerText = "Đáp án 1 cho câu 17",
+                            BankQuestionId = 17,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4117),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 66,
+                            AnswerText = "Đáp án 2 cho câu 17",
+                            BankQuestionId = 17,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4118),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 67,
+                            AnswerText = "Đáp án 3 cho câu 17",
+                            BankQuestionId = 17,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4119),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 68,
+                            AnswerText = "Đáp án 4 cho câu 17",
+                            BankQuestionId = 17,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4120),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 69,
+                            AnswerText = "Đáp án 1 cho câu 18",
+                            BankQuestionId = 18,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4121),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 70,
+                            AnswerText = "Đáp án 2 cho câu 18",
+                            BankQuestionId = 18,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4122),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 71,
+                            AnswerText = "Đáp án 3 cho câu 18",
+                            BankQuestionId = 18,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4123),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 72,
+                            AnswerText = "Đáp án 4 cho câu 18",
+                            BankQuestionId = 18,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4124),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 73,
+                            AnswerText = "Đáp án 1 cho câu 19",
+                            BankQuestionId = 19,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4125),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 74,
+                            AnswerText = "Đáp án 2 cho câu 19",
+                            BankQuestionId = 19,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4126),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 75,
+                            AnswerText = "Đáp án 3 cho câu 19",
+                            BankQuestionId = 19,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4127),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 76,
+                            AnswerText = "Đáp án 4 cho câu 19",
+                            BankQuestionId = 19,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4128),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 77,
+                            AnswerText = "Đáp án 1 cho câu 20",
+                            BankQuestionId = 20,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4128),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 78,
+                            AnswerText = "Đáp án 2 cho câu 20",
+                            BankQuestionId = 20,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4129),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 79,
+                            AnswerText = "Đáp án 3 cho câu 20",
+                            BankQuestionId = 20,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4130),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 80,
+                            AnswerText = "Đáp án 4 cho câu 20",
+                            BankQuestionId = 20,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4131),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 81,
+                            AnswerText = "Đáp án 1 cho câu 21",
+                            BankQuestionId = 21,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4132),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 82,
+                            AnswerText = "Đáp án 2 cho câu 21",
+                            BankQuestionId = 21,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4134),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 83,
+                            AnswerText = "Đáp án 3 cho câu 21",
+                            BankQuestionId = 21,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4134),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 84,
+                            AnswerText = "Đáp án 4 cho câu 21",
+                            BankQuestionId = 21,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4135),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 85,
+                            AnswerText = "Đáp án 1 cho câu 22",
+                            BankQuestionId = 22,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4136),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 86,
+                            AnswerText = "Đáp án 2 cho câu 22",
+                            BankQuestionId = 22,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4137),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 87,
+                            AnswerText = "Đáp án 3 cho câu 22",
+                            BankQuestionId = 22,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4138),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 88,
+                            AnswerText = "Đáp án 4 cho câu 22",
+                            BankQuestionId = 22,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4139),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 89,
+                            AnswerText = "Đáp án 1 cho câu 23",
+                            BankQuestionId = 23,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4140),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 90,
+                            AnswerText = "Đáp án 2 cho câu 23",
+                            BankQuestionId = 23,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4141),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 91,
+                            AnswerText = "Đáp án 3 cho câu 23",
+                            BankQuestionId = 23,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4141),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 92,
+                            AnswerText = "Đáp án 4 cho câu 23",
+                            BankQuestionId = 23,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4142),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 93,
+                            AnswerText = "Đáp án 1 cho câu 24",
+                            BankQuestionId = 24,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4143),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 94,
+                            AnswerText = "Đáp án 2 cho câu 24",
+                            BankQuestionId = 24,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4144),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 95,
+                            AnswerText = "Đáp án 3 cho câu 24",
+                            BankQuestionId = 24,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4145),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 96,
+                            AnswerText = "Đáp án 4 cho câu 24",
+                            BankQuestionId = 24,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4146),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 97,
+                            AnswerText = "Đáp án 1 cho câu 25",
+                            BankQuestionId = 25,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4147),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 98,
+                            AnswerText = "Đáp án 2 cho câu 25",
+                            BankQuestionId = 25,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4147),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 99,
+                            AnswerText = "Đáp án 3 cho câu 25",
+                            BankQuestionId = 25,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4148),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 100,
+                            AnswerText = "Đáp án 4 cho câu 25",
+                            BankQuestionId = 25,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4149),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 101,
+                            AnswerText = "Đáp án 1 cho câu 26",
+                            BankQuestionId = 26,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4156),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 102,
+                            AnswerText = "Đáp án 2 cho câu 26",
+                            BankQuestionId = 26,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4157),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 103,
+                            AnswerText = "Đáp án 3 cho câu 26",
+                            BankQuestionId = 26,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4158),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 104,
+                            AnswerText = "Đáp án 4 cho câu 26",
+                            BankQuestionId = 26,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4159),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 105,
+                            AnswerText = "Đáp án 1 cho câu 27",
+                            BankQuestionId = 27,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4160),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 106,
+                            AnswerText = "Đáp án 2 cho câu 27",
+                            BankQuestionId = 27,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4161),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 107,
+                            AnswerText = "Đáp án 3 cho câu 27",
+                            BankQuestionId = 27,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4162),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 108,
+                            AnswerText = "Đáp án 4 cho câu 27",
+                            BankQuestionId = 27,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4163),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 109,
+                            AnswerText = "Đáp án 1 cho câu 28",
+                            BankQuestionId = 28,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4164),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 110,
+                            AnswerText = "Đáp án 2 cho câu 28",
+                            BankQuestionId = 28,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4165),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 111,
+                            AnswerText = "Đáp án 3 cho câu 28",
+                            BankQuestionId = 28,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4166),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 112,
+                            AnswerText = "Đáp án 4 cho câu 28",
+                            BankQuestionId = 28,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4167),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 113,
+                            AnswerText = "Đáp án 1 cho câu 29",
+                            BankQuestionId = 29,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4168),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 114,
+                            AnswerText = "Đáp án 2 cho câu 29",
+                            BankQuestionId = 29,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4169),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 115,
+                            AnswerText = "Đáp án 3 cho câu 29",
+                            BankQuestionId = 29,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4170),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 116,
+                            AnswerText = "Đáp án 4 cho câu 29",
+                            BankQuestionId = 29,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4171),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 117,
+                            AnswerText = "Đáp án 1 cho câu 30",
+                            BankQuestionId = 30,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4172),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 118,
+                            AnswerText = "Đáp án 2 cho câu 30",
+                            BankQuestionId = 30,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4172),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 119,
+                            AnswerText = "Đáp án 3 cho câu 30",
+                            BankQuestionId = 30,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4173),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 120,
+                            AnswerText = "Đáp án 4 cho câu 30",
+                            BankQuestionId = 30,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4174),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 121,
+                            AnswerText = "Đáp án 1 cho câu 31",
+                            BankQuestionId = 31,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4175),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 122,
+                            AnswerText = "Đáp án 2 cho câu 31",
+                            BankQuestionId = 31,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4176),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 123,
+                            AnswerText = "Đáp án 3 cho câu 31",
+                            BankQuestionId = 31,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4177),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 124,
+                            AnswerText = "Đáp án 4 cho câu 31",
+                            BankQuestionId = 31,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4178),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 125,
+                            AnswerText = "Đáp án 1 cho câu 32",
+                            BankQuestionId = 32,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4179),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 126,
+                            AnswerText = "Đáp án 2 cho câu 32",
+                            BankQuestionId = 32,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4180),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 127,
+                            AnswerText = "Đáp án 3 cho câu 32",
+                            BankQuestionId = 32,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4180),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 128,
+                            AnswerText = "Đáp án 4 cho câu 32",
+                            BankQuestionId = 32,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4181),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 129,
+                            AnswerText = "Đáp án 1 cho câu 33",
+                            BankQuestionId = 33,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4182),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 130,
+                            AnswerText = "Đáp án 2 cho câu 33",
+                            BankQuestionId = 33,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4183),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 131,
+                            AnswerText = "Đáp án 3 cho câu 33",
+                            BankQuestionId = 33,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4184),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 132,
+                            AnswerText = "Đáp án 4 cho câu 33",
+                            BankQuestionId = 33,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4187),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 133,
+                            AnswerText = "Đáp án 1 cho câu 34",
+                            BankQuestionId = 34,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4187),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 134,
+                            AnswerText = "Đáp án 2 cho câu 34",
+                            BankQuestionId = 34,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4188),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 135,
+                            AnswerText = "Đáp án 3 cho câu 34",
+                            BankQuestionId = 34,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4189),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 136,
+                            AnswerText = "Đáp án 4 cho câu 34",
+                            BankQuestionId = 34,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4190),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 137,
+                            AnswerText = "Đáp án 1 cho câu 35",
+                            BankQuestionId = 35,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4191),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 138,
+                            AnswerText = "Đáp án 2 cho câu 35",
+                            BankQuestionId = 35,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4192),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 139,
+                            AnswerText = "Đáp án 3 cho câu 35",
+                            BankQuestionId = 35,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4192),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 140,
+                            AnswerText = "Đáp án 4 cho câu 35",
+                            BankQuestionId = 35,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4193),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 141,
+                            AnswerText = "Đáp án 1 cho câu 36",
+                            BankQuestionId = 36,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4194),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 142,
+                            AnswerText = "Đáp án 2 cho câu 36",
+                            BankQuestionId = 36,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4195),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 143,
+                            AnswerText = "Đáp án 3 cho câu 36",
+                            BankQuestionId = 36,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4196),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 144,
+                            AnswerText = "Đáp án 4 cho câu 36",
+                            BankQuestionId = 36,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4197),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 145,
+                            AnswerText = "Đáp án 1 cho câu 37",
+                            BankQuestionId = 37,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4198),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 146,
+                            AnswerText = "Đáp án 2 cho câu 37",
+                            BankQuestionId = 37,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4199),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 147,
+                            AnswerText = "Đáp án 3 cho câu 37",
+                            BankQuestionId = 37,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4200),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 148,
+                            AnswerText = "Đáp án 4 cho câu 37",
+                            BankQuestionId = 37,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4201),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 149,
+                            AnswerText = "Đáp án 1 cho câu 38",
+                            BankQuestionId = 38,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4202),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 150,
+                            AnswerText = "Đáp án 2 cho câu 38",
+                            BankQuestionId = 38,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4203),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 151,
+                            AnswerText = "Đáp án 3 cho câu 38",
+                            BankQuestionId = 38,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4203),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 152,
+                            AnswerText = "Đáp án 4 cho câu 38",
+                            BankQuestionId = 38,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4204),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 153,
+                            AnswerText = "Đáp án 1 cho câu 39",
+                            BankQuestionId = 39,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4205),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 154,
+                            AnswerText = "Đáp án 2 cho câu 39",
+                            BankQuestionId = 39,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4206),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 155,
+                            AnswerText = "Đáp án 3 cho câu 39",
+                            BankQuestionId = 39,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4207),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 156,
+                            AnswerText = "Đáp án 4 cho câu 39",
+                            BankQuestionId = 39,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4208),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 157,
+                            AnswerText = "Đáp án 1 cho câu 40",
+                            BankQuestionId = 40,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4209),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 158,
+                            AnswerText = "Đáp án 2 cho câu 40",
+                            BankQuestionId = 40,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4210),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 159,
+                            AnswerText = "Đáp án 3 cho câu 40",
+                            BankQuestionId = 40,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4212),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 160,
+                            AnswerText = "Đáp án 4 cho câu 40",
+                            BankQuestionId = 40,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4213),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 161,
+                            AnswerText = "Đáp án 1 cho câu 41",
+                            BankQuestionId = 41,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4214),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 162,
+                            AnswerText = "Đáp án 2 cho câu 41",
+                            BankQuestionId = 41,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4215),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 163,
+                            AnswerText = "Đáp án 3 cho câu 41",
+                            BankQuestionId = 41,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4215),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 164,
+                            AnswerText = "Đáp án 4 cho câu 41",
+                            BankQuestionId = 41,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4216),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 165,
+                            AnswerText = "Đáp án 1 cho câu 42",
+                            BankQuestionId = 42,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4217),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 166,
+                            AnswerText = "Đáp án 2 cho câu 42",
+                            BankQuestionId = 42,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4218),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 167,
+                            AnswerText = "Đáp án 3 cho câu 42",
+                            BankQuestionId = 42,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4219),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 168,
+                            AnswerText = "Đáp án 4 cho câu 42",
+                            BankQuestionId = 42,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4220),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 169,
+                            AnswerText = "Đáp án 1 cho câu 43",
+                            BankQuestionId = 43,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4220),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 170,
+                            AnswerText = "Đáp án 2 cho câu 43",
+                            BankQuestionId = 43,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4221),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 171,
+                            AnswerText = "Đáp án 3 cho câu 43",
+                            BankQuestionId = 43,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4222),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 172,
+                            AnswerText = "Đáp án 4 cho câu 43",
+                            BankQuestionId = 43,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4223),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 173,
+                            AnswerText = "Đáp án 1 cho câu 44",
+                            BankQuestionId = 44,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4224),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 174,
+                            AnswerText = "Đáp án 2 cho câu 44",
+                            BankQuestionId = 44,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4225),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 175,
+                            AnswerText = "Đáp án 3 cho câu 44",
+                            BankQuestionId = 44,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4226),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 176,
+                            AnswerText = "Đáp án 4 cho câu 44",
+                            BankQuestionId = 44,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4227),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 177,
+                            AnswerText = "Đáp án 1 cho câu 45",
+                            BankQuestionId = 45,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4228),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 178,
+                            AnswerText = "Đáp án 2 cho câu 45",
+                            BankQuestionId = 45,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4229),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 179,
+                            AnswerText = "Đáp án 3 cho câu 45",
+                            BankQuestionId = 45,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4230),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 180,
+                            AnswerText = "Đáp án 4 cho câu 45",
+                            BankQuestionId = 45,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4230),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 181,
+                            AnswerText = "Đáp án 1 cho câu 46",
+                            BankQuestionId = 46,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4231),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 182,
+                            AnswerText = "Đáp án 2 cho câu 46",
+                            BankQuestionId = 46,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4232),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 183,
+                            AnswerText = "Đáp án 3 cho câu 46",
+                            BankQuestionId = 46,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4233),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 184,
+                            AnswerText = "Đáp án 4 cho câu 46",
+                            BankQuestionId = 46,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4235),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 185,
+                            AnswerText = "Đáp án 1 cho câu 47",
+                            BankQuestionId = 47,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4236),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 186,
+                            AnswerText = "Đáp án 2 cho câu 47",
+                            BankQuestionId = 47,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4237),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 187,
+                            AnswerText = "Đáp án 3 cho câu 47",
+                            BankQuestionId = 47,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4238),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 188,
+                            AnswerText = "Đáp án 4 cho câu 47",
+                            BankQuestionId = 47,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4239),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 189,
+                            AnswerText = "Đáp án 1 cho câu 48",
+                            BankQuestionId = 48,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4240),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 190,
+                            AnswerText = "Đáp án 2 cho câu 48",
+                            BankQuestionId = 48,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4241),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 191,
+                            AnswerText = "Đáp án 3 cho câu 48",
+                            BankQuestionId = 48,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4242),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 192,
+                            AnswerText = "Đáp án 4 cho câu 48",
+                            BankQuestionId = 48,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4243),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 193,
+                            AnswerText = "Đáp án 1 cho câu 49",
+                            BankQuestionId = 49,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4244),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 194,
+                            AnswerText = "Đáp án 2 cho câu 49",
+                            BankQuestionId = 49,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4251),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 195,
+                            AnswerText = "Đáp án 3 cho câu 49",
+                            BankQuestionId = 49,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4252),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 196,
+                            AnswerText = "Đáp án 4 cho câu 49",
+                            BankQuestionId = 49,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4253),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 197,
+                            AnswerText = "Đáp án 1 cho câu 50",
+                            BankQuestionId = 50,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4254),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 198,
+                            AnswerText = "Đáp án 2 cho câu 50",
+                            BankQuestionId = 50,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4255),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 199,
+                            AnswerText = "Đáp án 3 cho câu 50",
+                            BankQuestionId = 50,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4256),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 200,
+                            AnswerText = "Đáp án 4 cho câu 50",
+                            BankQuestionId = 50,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4257),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 201,
+                            AnswerText = "Đáp án 1 cho câu 51",
+                            BankQuestionId = 51,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4258),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 202,
+                            AnswerText = "Đáp án 2 cho câu 51",
+                            BankQuestionId = 51,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4259),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 203,
+                            AnswerText = "Đáp án 3 cho câu 51",
+                            BankQuestionId = 51,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4260),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 204,
+                            AnswerText = "Đáp án 4 cho câu 51",
+                            BankQuestionId = 51,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4260),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 205,
+                            AnswerText = "Đáp án 1 cho câu 52",
+                            BankQuestionId = 52,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4261),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 206,
+                            AnswerText = "Đáp án 2 cho câu 52",
+                            BankQuestionId = 52,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4262),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 207,
+                            AnswerText = "Đáp án 3 cho câu 52",
+                            BankQuestionId = 52,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4263),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 208,
+                            AnswerText = "Đáp án 4 cho câu 52",
+                            BankQuestionId = 52,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4264),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 209,
+                            AnswerText = "Đáp án 1 cho câu 53",
+                            BankQuestionId = 53,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4265),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 210,
+                            AnswerText = "Đáp án 2 cho câu 53",
+                            BankQuestionId = 53,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4267),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 211,
+                            AnswerText = "Đáp án 3 cho câu 53",
+                            BankQuestionId = 53,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4268),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 212,
+                            AnswerText = "Đáp án 4 cho câu 53",
+                            BankQuestionId = 53,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4269),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 213,
+                            AnswerText = "Đáp án 1 cho câu 54",
+                            BankQuestionId = 54,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4270),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 214,
+                            AnswerText = "Đáp án 2 cho câu 54",
+                            BankQuestionId = 54,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4270),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 215,
+                            AnswerText = "Đáp án 3 cho câu 54",
+                            BankQuestionId = 54,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4272),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 216,
+                            AnswerText = "Đáp án 4 cho câu 54",
+                            BankQuestionId = 54,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4272),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 217,
+                            AnswerText = "Đáp án 1 cho câu 55",
+                            BankQuestionId = 55,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4273),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 218,
+                            AnswerText = "Đáp án 2 cho câu 55",
+                            BankQuestionId = 55,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4274),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 219,
+                            AnswerText = "Đáp án 3 cho câu 55",
+                            BankQuestionId = 55,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4275),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 220,
+                            AnswerText = "Đáp án 4 cho câu 55",
+                            BankQuestionId = 55,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4276),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 221,
+                            AnswerText = "Đáp án 1 cho câu 56",
+                            BankQuestionId = 56,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4277),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 222,
+                            AnswerText = "Đáp án 2 cho câu 56",
+                            BankQuestionId = 56,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4278),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 223,
+                            AnswerText = "Đáp án 3 cho câu 56",
+                            BankQuestionId = 56,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4279),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 224,
+                            AnswerText = "Đáp án 4 cho câu 56",
+                            BankQuestionId = 56,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4280),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 225,
+                            AnswerText = "Đáp án 1 cho câu 57",
+                            BankQuestionId = 57,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4281),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 226,
+                            AnswerText = "Đáp án 2 cho câu 57",
+                            BankQuestionId = 57,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4282),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 227,
+                            AnswerText = "Đáp án 3 cho câu 57",
+                            BankQuestionId = 57,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4282),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 228,
+                            AnswerText = "Đáp án 4 cho câu 57",
+                            BankQuestionId = 57,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4283),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 229,
+                            AnswerText = "Đáp án 1 cho câu 58",
+                            BankQuestionId = 58,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4284),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 230,
+                            AnswerText = "Đáp án 2 cho câu 58",
+                            BankQuestionId = 58,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4285),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 231,
+                            AnswerText = "Đáp án 3 cho câu 58",
+                            BankQuestionId = 58,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4286),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 232,
+                            AnswerText = "Đáp án 4 cho câu 58",
+                            BankQuestionId = 58,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4287),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 233,
+                            AnswerText = "Đáp án 1 cho câu 59",
+                            BankQuestionId = 59,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4288),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 234,
+                            AnswerText = "Đáp án 2 cho câu 59",
+                            BankQuestionId = 59,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4289),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 235,
+                            AnswerText = "Đáp án 3 cho câu 59",
+                            BankQuestionId = 59,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4290),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 236,
+                            AnswerText = "Đáp án 4 cho câu 59",
+                            BankQuestionId = 59,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4472),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 237,
+                            AnswerText = "Đáp án 1 cho câu 60",
+                            BankQuestionId = 60,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4474),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 238,
+                            AnswerText = "Đáp án 2 cho câu 60",
+                            BankQuestionId = 60,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4476),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 239,
+                            AnswerText = "Đáp án 3 cho câu 60",
+                            BankQuestionId = 60,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4477),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 240,
+                            AnswerText = "Đáp án 4 cho câu 60",
+                            BankQuestionId = 60,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4478),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 241,
+                            AnswerText = "Đáp án 1 cho câu 61",
+                            BankQuestionId = 61,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4478),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 242,
+                            AnswerText = "Đáp án 2 cho câu 61",
+                            BankQuestionId = 61,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4479),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 243,
+                            AnswerText = "Đáp án 3 cho câu 61",
+                            BankQuestionId = 61,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4480),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 244,
+                            AnswerText = "Đáp án 4 cho câu 61",
+                            BankQuestionId = 61,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4481),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 245,
+                            AnswerText = "Đáp án 1 cho câu 62",
+                            BankQuestionId = 62,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4482),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 246,
+                            AnswerText = "Đáp án 2 cho câu 62",
+                            BankQuestionId = 62,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4483),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 247,
+                            AnswerText = "Đáp án 3 cho câu 62",
+                            BankQuestionId = 62,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4484),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 248,
+                            AnswerText = "Đáp án 4 cho câu 62",
+                            BankQuestionId = 62,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4485),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 249,
+                            AnswerText = "Đáp án 1 cho câu 63",
+                            BankQuestionId = 63,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4486),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 250,
+                            AnswerText = "Đáp án 2 cho câu 63",
+                            BankQuestionId = 63,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4487),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 251,
+                            AnswerText = "Đáp án 3 cho câu 63",
+                            BankQuestionId = 63,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4488),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 252,
+                            AnswerText = "Đáp án 4 cho câu 63",
+                            BankQuestionId = 63,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4490),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 253,
+                            AnswerText = "Đáp án 1 cho câu 64",
+                            BankQuestionId = 64,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4491),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 254,
+                            AnswerText = "Đáp án 2 cho câu 64",
+                            BankQuestionId = 64,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4492),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 255,
+                            AnswerText = "Đáp án 3 cho câu 64",
+                            BankQuestionId = 64,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4493),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 256,
+                            AnswerText = "Đáp án 4 cho câu 64",
+                            BankQuestionId = 64,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4494),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 257,
+                            AnswerText = "Đáp án 1 cho câu 65",
+                            BankQuestionId = 65,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4495),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 258,
+                            AnswerText = "Đáp án 2 cho câu 65",
+                            BankQuestionId = 65,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4496),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 259,
+                            AnswerText = "Đáp án 3 cho câu 65",
+                            BankQuestionId = 65,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4497),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 260,
+                            AnswerText = "Đáp án 4 cho câu 65",
+                            BankQuestionId = 65,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4498),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 261,
+                            AnswerText = "Đáp án 1 cho câu 66",
+                            BankQuestionId = 66,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4500),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 262,
+                            AnswerText = "Đáp án 2 cho câu 66",
+                            BankQuestionId = 66,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4501),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 263,
+                            AnswerText = "Đáp án 3 cho câu 66",
+                            BankQuestionId = 66,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4501),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 264,
+                            AnswerText = "Đáp án 4 cho câu 66",
+                            BankQuestionId = 66,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4502),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 265,
+                            AnswerText = "Đáp án 1 cho câu 67",
+                            BankQuestionId = 67,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4503),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 266,
+                            AnswerText = "Đáp án 2 cho câu 67",
+                            BankQuestionId = 67,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4504),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 267,
+                            AnswerText = "Đáp án 3 cho câu 67",
+                            BankQuestionId = 67,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4505),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 268,
+                            AnswerText = "Đáp án 4 cho câu 67",
+                            BankQuestionId = 67,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4506),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 269,
+                            AnswerText = "Đáp án 1 cho câu 68",
+                            BankQuestionId = 68,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4507),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 270,
+                            AnswerText = "Đáp án 2 cho câu 68",
+                            BankQuestionId = 68,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4508),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 271,
+                            AnswerText = "Đáp án 3 cho câu 68",
+                            BankQuestionId = 68,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4509),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 272,
+                            AnswerText = "Đáp án 4 cho câu 68",
+                            BankQuestionId = 68,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4510),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 273,
+                            AnswerText = "Đáp án 1 cho câu 69",
+                            BankQuestionId = 69,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4511),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 274,
+                            AnswerText = "Đáp án 2 cho câu 69",
+                            BankQuestionId = 69,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4512),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 275,
+                            AnswerText = "Đáp án 3 cho câu 69",
+                            BankQuestionId = 69,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4513),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 276,
+                            AnswerText = "Đáp án 4 cho câu 69",
+                            BankQuestionId = 69,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4514),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 277,
+                            AnswerText = "Đáp án 1 cho câu 70",
+                            BankQuestionId = 70,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4515),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 278,
+                            AnswerText = "Đáp án 2 cho câu 70",
+                            BankQuestionId = 70,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4516),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 279,
+                            AnswerText = "Đáp án 3 cho câu 70",
+                            BankQuestionId = 70,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4517),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 280,
+                            AnswerText = "Đáp án 4 cho câu 70",
+                            BankQuestionId = 70,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4517),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 281,
+                            AnswerText = "Đáp án 1 cho câu 71",
+                            BankQuestionId = 71,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4518),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 282,
+                            AnswerText = "Đáp án 2 cho câu 71",
+                            BankQuestionId = 71,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4519),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 283,
+                            AnswerText = "Đáp án 3 cho câu 71",
+                            BankQuestionId = 71,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4520),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 284,
+                            AnswerText = "Đáp án 4 cho câu 71",
+                            BankQuestionId = 71,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4521),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 285,
+                            AnswerText = "Đáp án 1 cho câu 72",
+                            BankQuestionId = 72,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4522),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 286,
+                            AnswerText = "Đáp án 2 cho câu 72",
+                            BankQuestionId = 72,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4523),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 287,
+                            AnswerText = "Đáp án 3 cho câu 72",
+                            BankQuestionId = 72,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4532),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 288,
+                            AnswerText = "Đáp án 4 cho câu 72",
+                            BankQuestionId = 72,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4533),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 289,
+                            AnswerText = "Đáp án 1 cho câu 73",
+                            BankQuestionId = 73,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4534),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 290,
+                            AnswerText = "Đáp án 2 cho câu 73",
+                            BankQuestionId = 73,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4535),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 291,
+                            AnswerText = "Đáp án 3 cho câu 73",
+                            BankQuestionId = 73,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4536),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 292,
+                            AnswerText = "Đáp án 4 cho câu 73",
+                            BankQuestionId = 73,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4537),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 293,
+                            AnswerText = "Đáp án 1 cho câu 74",
+                            BankQuestionId = 74,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4537),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 294,
+                            AnswerText = "Đáp án 2 cho câu 74",
+                            BankQuestionId = 74,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4538),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 295,
+                            AnswerText = "Đáp án 3 cho câu 74",
+                            BankQuestionId = 74,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4539),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 296,
+                            AnswerText = "Đáp án 4 cho câu 74",
+                            BankQuestionId = 74,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4540),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 297,
+                            AnswerText = "Đáp án 1 cho câu 75",
+                            BankQuestionId = 75,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4541),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 298,
+                            AnswerText = "Đáp án 2 cho câu 75",
+                            BankQuestionId = 75,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4542),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 299,
+                            AnswerText = "Đáp án 3 cho câu 75",
+                            BankQuestionId = 75,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4543),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 300,
+                            AnswerText = "Đáp án 4 cho câu 75",
+                            BankQuestionId = 75,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4544),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 301,
+                            AnswerText = "Đáp án 1 cho câu 76",
+                            BankQuestionId = 76,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4545),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 302,
+                            AnswerText = "Đáp án 2 cho câu 76",
+                            BankQuestionId = 76,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4546),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 303,
+                            AnswerText = "Đáp án 3 cho câu 76",
+                            BankQuestionId = 76,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4547),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 304,
+                            AnswerText = "Đáp án 4 cho câu 76",
+                            BankQuestionId = 76,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4548),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 305,
+                            AnswerText = "Đáp án 1 cho câu 77",
+                            BankQuestionId = 77,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4549),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 306,
+                            AnswerText = "Đáp án 2 cho câu 77",
+                            BankQuestionId = 77,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4550),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 307,
+                            AnswerText = "Đáp án 3 cho câu 77",
+                            BankQuestionId = 77,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4550),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 308,
+                            AnswerText = "Đáp án 4 cho câu 77",
+                            BankQuestionId = 77,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4551),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 309,
+                            AnswerText = "Đáp án 1 cho câu 78",
+                            BankQuestionId = 78,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4552),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 310,
+                            AnswerText = "Đáp án 2 cho câu 78",
+                            BankQuestionId = 78,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4553),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 311,
+                            AnswerText = "Đáp án 3 cho câu 78",
+                            BankQuestionId = 78,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4554),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 312,
+                            AnswerText = "Đáp án 4 cho câu 78",
+                            BankQuestionId = 78,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4555),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 313,
+                            AnswerText = "Đáp án 1 cho câu 79",
+                            BankQuestionId = 79,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4557),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 314,
+                            AnswerText = "Đáp án 2 cho câu 79",
+                            BankQuestionId = 79,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4558),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 315,
+                            AnswerText = "Đáp án 3 cho câu 79",
+                            BankQuestionId = 79,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4559),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 316,
+                            AnswerText = "Đáp án 4 cho câu 79",
+                            BankQuestionId = 79,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4559),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 317,
+                            AnswerText = "Đáp án 1 cho câu 80",
+                            BankQuestionId = 80,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4560),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 318,
+                            AnswerText = "Đáp án 2 cho câu 80",
+                            BankQuestionId = 80,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4561),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 319,
+                            AnswerText = "Đáp án 3 cho câu 80",
+                            BankQuestionId = 80,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4562),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 320,
+                            AnswerText = "Đáp án 4 cho câu 80",
+                            BankQuestionId = 80,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4563),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 321,
+                            AnswerText = "Đáp án 1 cho câu 81",
+                            BankQuestionId = 81,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4564),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 322,
+                            AnswerText = "Đáp án 2 cho câu 81",
+                            BankQuestionId = 81,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4565),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 323,
+                            AnswerText = "Đáp án 3 cho câu 81",
+                            BankQuestionId = 81,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4566),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 324,
+                            AnswerText = "Đáp án 4 cho câu 81",
+                            BankQuestionId = 81,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4567),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 325,
+                            AnswerText = "Đáp án 1 cho câu 82",
+                            BankQuestionId = 82,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4568),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 326,
+                            AnswerText = "Đáp án 2 cho câu 82",
+                            BankQuestionId = 82,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4568),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 327,
+                            AnswerText = "Đáp án 3 cho câu 82",
+                            BankQuestionId = 82,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4569),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 328,
+                            AnswerText = "Đáp án 4 cho câu 82",
+                            BankQuestionId = 82,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4570),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 329,
+                            AnswerText = "Đáp án 1 cho câu 83",
+                            BankQuestionId = 83,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4571),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 330,
+                            AnswerText = "Đáp án 2 cho câu 83",
+                            BankQuestionId = 83,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4572),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 331,
+                            AnswerText = "Đáp án 3 cho câu 83",
+                            BankQuestionId = 83,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4573),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 332,
+                            AnswerText = "Đáp án 4 cho câu 83",
+                            BankQuestionId = 83,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4574),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 333,
+                            AnswerText = "Đáp án 1 cho câu 84",
+                            BankQuestionId = 84,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4576),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 334,
+                            AnswerText = "Đáp án 2 cho câu 84",
+                            BankQuestionId = 84,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4577),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 335,
+                            AnswerText = "Đáp án 3 cho câu 84",
+                            BankQuestionId = 84,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4578),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 336,
+                            AnswerText = "Đáp án 4 cho câu 84",
+                            BankQuestionId = 84,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4579),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 337,
+                            AnswerText = "Đáp án 1 cho câu 85",
+                            BankQuestionId = 85,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4580),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 338,
+                            AnswerText = "Đáp án 2 cho câu 85",
+                            BankQuestionId = 85,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4581),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 339,
+                            AnswerText = "Đáp án 3 cho câu 85",
+                            BankQuestionId = 85,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4582),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 340,
+                            AnswerText = "Đáp án 4 cho câu 85",
+                            BankQuestionId = 85,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4583),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 341,
+                            AnswerText = "Đáp án 1 cho câu 86",
+                            BankQuestionId = 86,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4584),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 342,
+                            AnswerText = "Đáp án 2 cho câu 86",
+                            BankQuestionId = 86,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4585),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 343,
+                            AnswerText = "Đáp án 3 cho câu 86",
+                            BankQuestionId = 86,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4586),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 344,
+                            AnswerText = "Đáp án 4 cho câu 86",
+                            BankQuestionId = 86,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4587),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 345,
+                            AnswerText = "Đáp án 1 cho câu 87",
+                            BankQuestionId = 87,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4587),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 346,
+                            AnswerText = "Đáp án 2 cho câu 87",
+                            BankQuestionId = 87,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4588),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 347,
+                            AnswerText = "Đáp án 3 cho câu 87",
+                            BankQuestionId = 87,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4589),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 348,
+                            AnswerText = "Đáp án 4 cho câu 87",
+                            BankQuestionId = 87,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4590),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 349,
+                            AnswerText = "Đáp án 1 cho câu 88",
+                            BankQuestionId = 88,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4591),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 350,
+                            AnswerText = "Đáp án 2 cho câu 88",
+                            BankQuestionId = 88,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4592),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 351,
+                            AnswerText = "Đáp án 3 cho câu 88",
+                            BankQuestionId = 88,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4593),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 352,
+                            AnswerText = "Đáp án 4 cho câu 88",
+                            BankQuestionId = 88,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4594),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 353,
+                            AnswerText = "Đáp án 1 cho câu 89",
+                            BankQuestionId = 89,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4595),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 354,
+                            AnswerText = "Đáp án 2 cho câu 89",
+                            BankQuestionId = 89,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4595),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 355,
+                            AnswerText = "Đáp án 3 cho câu 89",
+                            BankQuestionId = 89,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4597),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 356,
+                            AnswerText = "Đáp án 4 cho câu 89",
+                            BankQuestionId = 89,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4598),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 357,
+                            AnswerText = "Đáp án 1 cho câu 90",
+                            BankQuestionId = 90,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4599),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 358,
+                            AnswerText = "Đáp án 2 cho câu 90",
+                            BankQuestionId = 90,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4600),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 359,
+                            AnswerText = "Đáp án 3 cho câu 90",
+                            BankQuestionId = 90,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4601),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 360,
+                            AnswerText = "Đáp án 4 cho câu 90",
+                            BankQuestionId = 90,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4602),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 361,
+                            AnswerText = "Đáp án 1 cho câu 91",
+                            BankQuestionId = 91,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4603),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 362,
+                            AnswerText = "Đáp án 2 cho câu 91",
+                            BankQuestionId = 91,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4604),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 363,
+                            AnswerText = "Đáp án 3 cho câu 91",
+                            BankQuestionId = 91,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4604),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 364,
+                            AnswerText = "Đáp án 4 cho câu 91",
+                            BankQuestionId = 91,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4606),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 365,
+                            AnswerText = "Đáp án 1 cho câu 92",
+                            BankQuestionId = 92,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4607),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 366,
+                            AnswerText = "Đáp án 2 cho câu 92",
+                            BankQuestionId = 92,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4608),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 367,
+                            AnswerText = "Đáp án 3 cho câu 92",
+                            BankQuestionId = 92,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4609),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 368,
+                            AnswerText = "Đáp án 4 cho câu 92",
+                            BankQuestionId = 92,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4610),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 369,
+                            AnswerText = "Đáp án 1 cho câu 93",
+                            BankQuestionId = 93,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4611),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 370,
+                            AnswerText = "Đáp án 2 cho câu 93",
+                            BankQuestionId = 93,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4612),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 371,
+                            AnswerText = "Đáp án 3 cho câu 93",
+                            BankQuestionId = 93,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4613),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 372,
+                            AnswerText = "Đáp án 4 cho câu 93",
+                            BankQuestionId = 93,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4614),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 373,
+                            AnswerText = "Đáp án 1 cho câu 94",
+                            BankQuestionId = 94,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4615),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 374,
+                            AnswerText = "Đáp án 2 cho câu 94",
+                            BankQuestionId = 94,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4616),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 375,
+                            AnswerText = "Đáp án 3 cho câu 94",
+                            BankQuestionId = 94,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4616),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 376,
+                            AnswerText = "Đáp án 4 cho câu 94",
+                            BankQuestionId = 94,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4617),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 377,
+                            AnswerText = "Đáp án 1 cho câu 95",
+                            BankQuestionId = 95,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4618),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 378,
+                            AnswerText = "Đáp án 2 cho câu 95",
+                            BankQuestionId = 95,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4619),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 379,
+                            AnswerText = "Đáp án 3 cho câu 95",
+                            BankQuestionId = 95,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4620),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 380,
+                            AnswerText = "Đáp án 4 cho câu 95",
+                            BankQuestionId = 95,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4628),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 381,
+                            AnswerText = "Đáp án 1 cho câu 96",
+                            BankQuestionId = 96,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4629),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 382,
+                            AnswerText = "Đáp án 2 cho câu 96",
+                            BankQuestionId = 96,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4630),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 383,
+                            AnswerText = "Đáp án 3 cho câu 96",
+                            BankQuestionId = 96,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4631),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 384,
+                            AnswerText = "Đáp án 4 cho câu 96",
+                            BankQuestionId = 96,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4632),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 385,
+                            AnswerText = "Đáp án 1 cho câu 97",
+                            BankQuestionId = 97,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4632),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 386,
+                            AnswerText = "Đáp án 2 cho câu 97",
+                            BankQuestionId = 97,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4633),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 387,
+                            AnswerText = "Đáp án 3 cho câu 97",
+                            BankQuestionId = 97,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4634),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 388,
+                            AnswerText = "Đáp án 4 cho câu 97",
+                            BankQuestionId = 97,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4635),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 389,
+                            AnswerText = "Đáp án 1 cho câu 98",
+                            BankQuestionId = 98,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4636),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 390,
+                            AnswerText = "Đáp án 2 cho câu 98",
+                            BankQuestionId = 98,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4638),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 391,
+                            AnswerText = "Đáp án 3 cho câu 98",
+                            BankQuestionId = 98,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4639),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 392,
+                            AnswerText = "Đáp án 4 cho câu 98",
+                            BankQuestionId = 98,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4640),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 393,
+                            AnswerText = "Đáp án 1 cho câu 99",
+                            BankQuestionId = 99,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4641),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 394,
+                            AnswerText = "Đáp án 2 cho câu 99",
+                            BankQuestionId = 99,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4642),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 395,
+                            AnswerText = "Đáp án 3 cho câu 99",
+                            BankQuestionId = 99,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4642),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 396,
+                            AnswerText = "Đáp án 4 cho câu 99",
+                            BankQuestionId = 99,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4643),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 397,
+                            AnswerText = "Đáp án 1 cho câu 100",
+                            BankQuestionId = 100,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4644),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = true,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 398,
+                            AnswerText = "Đáp án 2 cho câu 100",
+                            BankQuestionId = 100,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4645),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 399,
+                            AnswerText = "Đáp án 3 cho câu 100",
+                            BankQuestionId = 100,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4646),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 400,
+                            AnswerText = "Đáp án 4 cho câu 100",
+                            BankQuestionId = 100,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(4647),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsCorrected = false,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BankQuestion", b =>
@@ -107,6 +4109,1108 @@ namespace Persistence.Migrations
                     b.HasIndex("QuestionTypeId");
 
                     b.ToTable("BankQuestions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Câu 1: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 1",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "Câu 2: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 2",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "Câu 3: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 3",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Content = "Câu 4: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 4",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Content = "Câu 5: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 5",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Content = "Câu 6: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 6",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Content = "Câu 7: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 7",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Content = "Câu 8: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 8",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Content = "Câu 9: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 9",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Content = "Câu 10: Phép biện chứng - Nội dung trọng tâm số 10",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Content = "Câu 11: Phép biện chứng - Nội dung trọng tâm số 11",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Content = "Câu 12: Phép biện chứng - Nội dung trọng tâm số 12",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Content = "Câu 13: Phép biện chứng - Nội dung trọng tâm số 13",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Content = "Câu 14: Phép biện chứng - Nội dung trọng tâm số 14",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Content = "Câu 15: Phép biện chứng - Nội dung trọng tâm số 15",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Content = "Câu 16: Phép biện chứng - Nội dung trọng tâm số 16",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Content = "Câu 17: Phép biện chứng - Nội dung trọng tâm số 17",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Content = "Câu 18: Phép biện chứng - Nội dung trọng tâm số 18",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Content = "Câu 19: Vật chất và ý thức - Nội dung trọng tâm số 19",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Content = "Câu 20: Vật chất và ý thức - Nội dung trọng tâm số 20",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Content = "Câu 21: Vật chất và ý thức - Nội dung trọng tâm số 21",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Content = "Câu 22: Vật chất và ý thức - Nội dung trọng tâm số 22",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Content = "Câu 23: Vật chất và ý thức - Nội dung trọng tâm số 23",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Content = "Câu 24: Vật chất và ý thức - Nội dung trọng tâm số 24",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Content = "Câu 25: Vật chất và ý thức - Nội dung trọng tâm số 25",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Content = "Câu 26: Vật chất và ý thức - Nội dung trọng tâm số 26",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Content = "Câu 27: Vật chất và ý thức - Nội dung trọng tâm số 27",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Content = "Câu 28: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 28",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Content = "Câu 29: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 29",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Content = "Câu 30: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 30",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Content = "Câu 31: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 31",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Content = "Câu 32: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 32",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Content = "Câu 33: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 33",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Content = "Câu 34: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 34",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Content = "Câu 35: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 35",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Content = "Câu 36: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 36",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Content = "Câu 37: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 37",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Content = "Câu 38: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 38",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Content = "Câu 39: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 39",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Content = "Câu 40: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 40",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Content = "Câu 41: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 41",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Content = "Câu 42: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 42",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Content = "Câu 43: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 43",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Content = "Câu 44: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 44",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Content = "Câu 45: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 45",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Content = "Câu 46: Nhận thức và thực tiễn - Nội dung trọng tâm số 46",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Content = "Câu 47: Nhận thức và thực tiễn - Nội dung trọng tâm số 47",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Content = "Câu 48: Nhận thức và thực tiễn - Nội dung trọng tâm số 48",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Content = "Câu 49: Nhận thức và thực tiễn - Nội dung trọng tâm số 49",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Content = "Câu 50: Nhận thức và thực tiễn - Nội dung trọng tâm số 50",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Content = "Câu 51: Nhận thức và thực tiễn - Nội dung trọng tâm số 1",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Content = "Câu 52: Nhận thức và thực tiễn - Nội dung trọng tâm số 2",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Content = "Câu 53: Nhận thức và thực tiễn - Nội dung trọng tâm số 3",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Content = "Câu 54: Nhận thức và thực tiễn - Nội dung trọng tâm số 4",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Content = "Câu 55: Vai trò của con người - Nội dung trọng tâm số 5",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Content = "Câu 56: Vai trò của con người - Nội dung trọng tâm số 6",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Content = "Câu 57: Vai trò của con người - Nội dung trọng tâm số 7",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Content = "Câu 58: Vai trò của con người - Nội dung trọng tâm số 8",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Content = "Câu 59: Vai trò của con người - Nội dung trọng tâm số 9",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Content = "Câu 60: Vai trò của con người - Nội dung trọng tâm số 10",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Content = "Câu 61: Vai trò của con người - Nội dung trọng tâm số 11",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Content = "Câu 62: Vai trò của con người - Nội dung trọng tâm số 12",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 63,
+                            Content = "Câu 63: Vai trò của con người - Nội dung trọng tâm số 13",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 64,
+                            Content = "Câu 64: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 14",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 65,
+                            Content = "Câu 65: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 15",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 66,
+                            Content = "Câu 66: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 16",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 67,
+                            Content = "Câu 67: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 17",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 68,
+                            Content = "Câu 68: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 18",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 69,
+                            Content = "Câu 69: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 19",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 70,
+                            Content = "Câu 70: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 20",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Content = "Câu 71: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 21",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 72,
+                            Content = "Câu 72: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 22",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 73,
+                            Content = "Câu 73: Hình thái kinh tế xã hội - Nội dung trọng tâm số 23",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 74,
+                            Content = "Câu 74: Hình thái kinh tế xã hội - Nội dung trọng tâm số 24",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 75,
+                            Content = "Câu 75: Hình thái kinh tế xã hội - Nội dung trọng tâm số 25",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 76,
+                            Content = "Câu 76: Hình thái kinh tế xã hội - Nội dung trọng tâm số 26",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 77,
+                            Content = "Câu 77: Hình thái kinh tế xã hội - Nội dung trọng tâm số 27",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 78,
+                            Content = "Câu 78: Hình thái kinh tế xã hội - Nội dung trọng tâm số 28",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 79,
+                            Content = "Câu 79: Hình thái kinh tế xã hội - Nội dung trọng tâm số 29",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 80,
+                            Content = "Câu 80: Hình thái kinh tế xã hội - Nội dung trọng tâm số 30",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 81,
+                            Content = "Câu 81: Hình thái kinh tế xã hội - Nội dung trọng tâm số 31",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 82,
+                            Content = "Câu 82: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 32",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 83,
+                            Content = "Câu 83: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 33",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 84,
+                            Content = "Câu 84: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 34",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 85,
+                            Content = "Câu 85: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 35",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 86,
+                            Content = "Câu 86: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 36",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 87,
+                            Content = "Câu 87: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 37",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 88,
+                            Content = "Câu 88: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 38",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 89,
+                            Content = "Câu 89: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 39",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 90,
+                            Content = "Câu 90: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 40",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 91,
+                            Content = "Câu 91: Nhà nước và cách mạng - Nội dung trọng tâm số 41",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 92,
+                            Content = "Câu 92: Nhà nước và cách mạng - Nội dung trọng tâm số 42",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 93,
+                            Content = "Câu 93: Nhà nước và cách mạng - Nội dung trọng tâm số 43",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 94,
+                            Content = "Câu 94: Nhà nước và cách mạng - Nội dung trọng tâm số 44",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 95,
+                            Content = "Câu 95: Nhà nước và cách mạng - Nội dung trọng tâm số 45",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 96,
+                            Content = "Câu 96: Nhà nước và cách mạng - Nội dung trọng tâm số 46",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 97,
+                            Content = "Câu 97: Nhà nước và cách mạng - Nội dung trọng tâm số 47",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 98,
+                            Content = "Câu 98: Nhà nước và cách mạng - Nội dung trọng tâm số 48",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Content = "Câu 99: Nhà nước và cách mạng - Nội dung trọng tâm số 49",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 100,
+                            Content = "Câu 100: Chủ nghĩa xã hội khoa học - Nội dung trọng tâm số 50",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.BasicUser", b =>
@@ -230,6 +5334,34 @@ namespace Persistence.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Examss");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Các câu hỏi thuộc nội dung: Vật chất & Ý thức, Lượng – Chất, Phép biện chứng",
+                            IsPublic = true,
+                            SourceText = "Tổng hợp 12 nội dung môn Triết học",
+                            SubjectId = 1,
+                            Title = "Đề thi Triết học - Phần 1",
+                            TotalQuestion = 50,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5080),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Các câu hỏi thuộc nội dung: Con người, Nhận thức, Thực tiễn, Chủ nghĩa xã hội",
+                            IsPublic = true,
+                            SourceText = "Tổng hợp 12 nội dung môn Triết học",
+                            SubjectId = 1,
+                            Title = "Đề thi Triết học - Phần 2",
+                            TotalQuestion = 50,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamAccess", b =>
@@ -571,6 +5703,32 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3661),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Easy",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3664),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Medium",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3665),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Hard",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Notification", b =>
@@ -618,37 +5776,6 @@ namespace Persistence.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PackageDuration", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PackageDurations");
-                });
-
             modelBuilder.Entity("Domain.Entities.PackageOfUser", b =>
                 {
                     b.Property<int>("Id")
@@ -663,14 +5790,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DurationId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("PackageDurationId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -692,8 +5813,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PackageDurationId");
 
                     b.HasIndex("SubcriptionPackagesId");
 
@@ -785,6 +5904,1308 @@ namespace Persistence.Migrations
                     b.HasIndex("ExamId");
 
                     b.ToTable("QuestionExams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BankQuestionId = 1,
+                            Content = "Câu 1: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 1",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BankQuestionId = 2,
+                            Content = "Câu 2: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 2",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BankQuestionId = 3,
+                            Content = "Câu 3: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 3",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BankQuestionId = 4,
+                            Content = "Câu 4: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 4",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BankQuestionId = 5,
+                            Content = "Câu 5: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 5",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BankQuestionId = 6,
+                            Content = "Câu 6: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 6",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BankQuestionId = 7,
+                            Content = "Câu 7: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 7",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BankQuestionId = 8,
+                            Content = "Câu 8: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 8",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BankQuestionId = 9,
+                            Content = "Câu 9: Chủ nghĩa duy vật biện chứng - Nội dung trọng tâm số 9",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BankQuestionId = 10,
+                            Content = "Câu 10: Phép biện chứng - Nội dung trọng tâm số 10",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BankQuestionId = 11,
+                            Content = "Câu 11: Phép biện chứng - Nội dung trọng tâm số 11",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BankQuestionId = 12,
+                            Content = "Câu 12: Phép biện chứng - Nội dung trọng tâm số 12",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BankQuestionId = 13,
+                            Content = "Câu 13: Phép biện chứng - Nội dung trọng tâm số 13",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BankQuestionId = 14,
+                            Content = "Câu 14: Phép biện chứng - Nội dung trọng tâm số 14",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BankQuestionId = 15,
+                            Content = "Câu 15: Phép biện chứng - Nội dung trọng tâm số 15",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            BankQuestionId = 16,
+                            Content = "Câu 16: Phép biện chứng - Nội dung trọng tâm số 16",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            BankQuestionId = 17,
+                            Content = "Câu 17: Phép biện chứng - Nội dung trọng tâm số 17",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BankQuestionId = 18,
+                            Content = "Câu 18: Phép biện chứng - Nội dung trọng tâm số 18",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            BankQuestionId = 19,
+                            Content = "Câu 19: Vật chất và ý thức - Nội dung trọng tâm số 19",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            BankQuestionId = 20,
+                            Content = "Câu 20: Vật chất và ý thức - Nội dung trọng tâm số 20",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            BankQuestionId = 21,
+                            Content = "Câu 21: Vật chất và ý thức - Nội dung trọng tâm số 21",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            BankQuestionId = 22,
+                            Content = "Câu 22: Vật chất và ý thức - Nội dung trọng tâm số 22",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            BankQuestionId = 23,
+                            Content = "Câu 23: Vật chất và ý thức - Nội dung trọng tâm số 23",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            BankQuestionId = 24,
+                            Content = "Câu 24: Vật chất và ý thức - Nội dung trọng tâm số 24",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            BankQuestionId = 25,
+                            Content = "Câu 25: Vật chất và ý thức - Nội dung trọng tâm số 25",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 26,
+                            BankQuestionId = 26,
+                            Content = "Câu 26: Vật chất và ý thức - Nội dung trọng tâm số 26",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 27,
+                            BankQuestionId = 27,
+                            Content = "Câu 27: Vật chất và ý thức - Nội dung trọng tâm số 27",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 28,
+                            BankQuestionId = 28,
+                            Content = "Câu 28: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 28",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 29,
+                            BankQuestionId = 29,
+                            Content = "Câu 29: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 29",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 30,
+                            BankQuestionId = 30,
+                            Content = "Câu 30: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 30",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 31,
+                            BankQuestionId = 31,
+                            Content = "Câu 31: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 31",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            BankQuestionId = 32,
+                            Content = "Câu 32: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 32",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 33,
+                            BankQuestionId = 33,
+                            Content = "Câu 33: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 33",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 34,
+                            BankQuestionId = 34,
+                            Content = "Câu 34: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 34",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 35,
+                            BankQuestionId = 35,
+                            Content = "Câu 35: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 35",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 36,
+                            BankQuestionId = 36,
+                            Content = "Câu 36: Phép biện chứng về lượng và chất - Nội dung trọng tâm số 36",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 37,
+                            BankQuestionId = 37,
+                            Content = "Câu 37: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 37",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 38,
+                            BankQuestionId = 38,
+                            Content = "Câu 38: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 38",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 39,
+                            BankQuestionId = 39,
+                            Content = "Câu 39: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 39",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 40,
+                            BankQuestionId = 40,
+                            Content = "Câu 40: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 40",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 41,
+                            BankQuestionId = 41,
+                            Content = "Câu 41: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 41",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 42,
+                            BankQuestionId = 42,
+                            Content = "Câu 42: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 42",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 43,
+                            BankQuestionId = 43,
+                            Content = "Câu 43: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 43",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 44,
+                            BankQuestionId = 44,
+                            Content = "Câu 44: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 44",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 45,
+                            BankQuestionId = 45,
+                            Content = "Câu 45: Nguyên lý về mâu thuẫn - Nội dung trọng tâm số 45",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 46,
+                            BankQuestionId = 46,
+                            Content = "Câu 46: Nhận thức và thực tiễn - Nội dung trọng tâm số 46",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 47,
+                            BankQuestionId = 47,
+                            Content = "Câu 47: Nhận thức và thực tiễn - Nội dung trọng tâm số 47",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 48,
+                            BankQuestionId = 48,
+                            Content = "Câu 48: Nhận thức và thực tiễn - Nội dung trọng tâm số 48",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 49,
+                            BankQuestionId = 49,
+                            Content = "Câu 49: Nhận thức và thực tiễn - Nội dung trọng tâm số 49",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 50,
+                            BankQuestionId = 50,
+                            Content = "Câu 50: Nhận thức và thực tiễn - Nội dung trọng tâm số 50",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 1,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 51,
+                            BankQuestionId = 51,
+                            Content = "Câu 51: Nhận thức và thực tiễn - Nội dung trọng tâm số 1",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 52,
+                            BankQuestionId = 52,
+                            Content = "Câu 52: Nhận thức và thực tiễn - Nội dung trọng tâm số 2",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 53,
+                            BankQuestionId = 53,
+                            Content = "Câu 53: Nhận thức và thực tiễn - Nội dung trọng tâm số 3",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 54,
+                            BankQuestionId = 54,
+                            Content = "Câu 54: Nhận thức và thực tiễn - Nội dung trọng tâm số 4",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 55,
+                            BankQuestionId = 55,
+                            Content = "Câu 55: Vai trò của con người - Nội dung trọng tâm số 5",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 56,
+                            BankQuestionId = 56,
+                            Content = "Câu 56: Vai trò của con người - Nội dung trọng tâm số 6",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 57,
+                            BankQuestionId = 57,
+                            Content = "Câu 57: Vai trò của con người - Nội dung trọng tâm số 7",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 58,
+                            BankQuestionId = 58,
+                            Content = "Câu 58: Vai trò của con người - Nội dung trọng tâm số 8",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 59,
+                            BankQuestionId = 59,
+                            Content = "Câu 59: Vai trò của con người - Nội dung trọng tâm số 9",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 60,
+                            BankQuestionId = 60,
+                            Content = "Câu 60: Vai trò của con người - Nội dung trọng tâm số 10",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 61,
+                            BankQuestionId = 61,
+                            Content = "Câu 61: Vai trò của con người - Nội dung trọng tâm số 11",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 62,
+                            BankQuestionId = 62,
+                            Content = "Câu 62: Vai trò của con người - Nội dung trọng tâm số 12",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 63,
+                            BankQuestionId = 63,
+                            Content = "Câu 63: Vai trò của con người - Nội dung trọng tâm số 13",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 64,
+                            BankQuestionId = 64,
+                            Content = "Câu 64: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 14",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 65,
+                            BankQuestionId = 65,
+                            Content = "Câu 65: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 15",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 66,
+                            BankQuestionId = 66,
+                            Content = "Câu 66: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 16",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 67,
+                            BankQuestionId = 67,
+                            Content = "Câu 67: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 17",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 68,
+                            BankQuestionId = 68,
+                            Content = "Câu 68: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 18",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 69,
+                            BankQuestionId = 69,
+                            Content = "Câu 69: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 19",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 70,
+                            BankQuestionId = 70,
+                            Content = "Câu 70: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 20",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 71,
+                            BankQuestionId = 71,
+                            Content = "Câu 71: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 21",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 72,
+                            BankQuestionId = 72,
+                            Content = "Câu 72: Chủ nghĩa duy vật lịch sử - Nội dung trọng tâm số 22",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 73,
+                            BankQuestionId = 73,
+                            Content = "Câu 73: Hình thái kinh tế xã hội - Nội dung trọng tâm số 23",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 74,
+                            BankQuestionId = 74,
+                            Content = "Câu 74: Hình thái kinh tế xã hội - Nội dung trọng tâm số 24",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 75,
+                            BankQuestionId = 75,
+                            Content = "Câu 75: Hình thái kinh tế xã hội - Nội dung trọng tâm số 25",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 76,
+                            BankQuestionId = 76,
+                            Content = "Câu 76: Hình thái kinh tế xã hội - Nội dung trọng tâm số 26",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 77,
+                            BankQuestionId = 77,
+                            Content = "Câu 77: Hình thái kinh tế xã hội - Nội dung trọng tâm số 27",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 78,
+                            BankQuestionId = 78,
+                            Content = "Câu 78: Hình thái kinh tế xã hội - Nội dung trọng tâm số 28",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 79,
+                            BankQuestionId = 79,
+                            Content = "Câu 79: Hình thái kinh tế xã hội - Nội dung trọng tâm số 29",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 80,
+                            BankQuestionId = 80,
+                            Content = "Câu 80: Hình thái kinh tế xã hội - Nội dung trọng tâm số 30",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 81,
+                            BankQuestionId = 81,
+                            Content = "Câu 81: Hình thái kinh tế xã hội - Nội dung trọng tâm số 31",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 82,
+                            BankQuestionId = 82,
+                            Content = "Câu 82: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 32",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 83,
+                            BankQuestionId = 83,
+                            Content = "Câu 83: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 33",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 84,
+                            BankQuestionId = 84,
+                            Content = "Câu 84: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 34",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 85,
+                            BankQuestionId = 85,
+                            Content = "Câu 85: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 35",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 86,
+                            BankQuestionId = 86,
+                            Content = "Câu 86: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 36",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 87,
+                            BankQuestionId = 87,
+                            Content = "Câu 87: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 37",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 88,
+                            BankQuestionId = 88,
+                            Content = "Câu 88: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 38",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 89,
+                            BankQuestionId = 89,
+                            Content = "Câu 89: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 39",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 90,
+                            BankQuestionId = 90,
+                            Content = "Câu 90: Giai cấp và đấu tranh giai cấp - Nội dung trọng tâm số 40",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 91,
+                            BankQuestionId = 91,
+                            Content = "Câu 91: Nhà nước và cách mạng - Nội dung trọng tâm số 41",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 92,
+                            BankQuestionId = 92,
+                            Content = "Câu 92: Nhà nước và cách mạng - Nội dung trọng tâm số 42",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 93,
+                            BankQuestionId = 93,
+                            Content = "Câu 93: Nhà nước và cách mạng - Nội dung trọng tâm số 43",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 94,
+                            BankQuestionId = 94,
+                            Content = "Câu 94: Nhà nước và cách mạng - Nội dung trọng tâm số 44",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 3,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 95,
+                            BankQuestionId = 95,
+                            Content = "Câu 95: Nhà nước và cách mạng - Nội dung trọng tâm số 45",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 96,
+                            BankQuestionId = 96,
+                            Content = "Câu 96: Nhà nước và cách mạng - Nội dung trọng tâm số 46",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 97,
+                            BankQuestionId = 97,
+                            Content = "Câu 97: Nhà nước và cách mạng - Nội dung trọng tâm số 47",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 98,
+                            BankQuestionId = 98,
+                            Content = "Câu 98: Nhà nước và cách mạng - Nội dung trọng tâm số 48",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 1,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 99,
+                            BankQuestionId = 99,
+                            Content = "Câu 99: Nhà nước và cách mạng - Nội dung trọng tâm số 49",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 100,
+                            BankQuestionId = 100,
+                            Content = "Câu 100: Chủ nghĩa xã hội khoa học - Nội dung trọng tâm số 50",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExamId = 2,
+                            IsPublic = true,
+                            LevelId = 2,
+                            QuestionTypeId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -814,6 +7235,32 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("QuestionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3697),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Multiple Choice",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3699),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Fill in the Blank",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(3701),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Matching",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.SubcriptionPackages", b =>
@@ -833,8 +7280,14 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -845,6 +7298,41 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubcriptionPackages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5420),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Truy cập nội dung cơ bản",
+                            Duration = 14,
+                            Name = "Gói cơ bản",
+                            Price = 99000.0,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5423),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên",
+                            Duration = 30,
+                            Name = "Gói nâng cao",
+                            Price = 199000.0,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5425),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Truy cập không giới hạn trong 1 năm",
+                            Duration = 365,
+                            Name = "Gói hàng năm",
+                            Price = 1990000.0,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Subject", b =>
@@ -874,6 +7362,104 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5352),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Toán học",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5356),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Ngữ văn",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5357),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tiếng Anh",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5359),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Vật lý",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5361),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Hóa học",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5364),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinh học",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5366),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Lịch sử",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5367),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Địa lý",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5369),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Giáo dục công dân",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5371),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tin học",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5373),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Công nghệ",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(2025, 6, 5, 10, 16, 48, 929, DateTimeKind.Local).AddTicks(5375),
+                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Thể dục",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserAccessExam", b =>
@@ -1265,23 +7851,17 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.PackageOfUser", b =>
                 {
-                    b.HasOne("Domain.Entities.PackageDuration", "PackageDuration")
-                        .WithMany("Users")
-                        .HasForeignKey("PackageDurationId");
-
                     b.HasOne("Domain.Entities.SubcriptionPackages", "SubcriptionPackages")
                         .WithMany()
                         .HasForeignKey("SubcriptionPackagesId");
 
-                    b.HasOne("Domain.Entities.PremiumUser", "PremiumUser")
+                    b.HasOne("Domain.Entities.BasicUser", "BasicUser")
                         .WithMany("PackageOfUsers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("PackageDuration");
-
-                    b.Navigation("PremiumUser");
+                    b.Navigation("BasicUser");
 
                     b.Navigation("SubcriptionPackages");
                 });
@@ -1414,6 +7994,8 @@ namespace Persistence.Migrations
 
                     b.Navigation("HistoryPurchase");
 
+                    b.Navigation("PackageOfUsers");
+
                     b.Navigation("PremiumUser");
 
                     b.Navigation("Profile");
@@ -1449,16 +8031,9 @@ namespace Persistence.Migrations
                     b.Navigation("Levels");
                 });
 
-            modelBuilder.Entity("Domain.Entities.PackageDuration", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Domain.Entities.PremiumUser", b =>
                 {
                     b.Navigation("BankQuestions");
-
-                    b.Navigation("PackageOfUsers");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>

@@ -35,8 +35,6 @@ namespace Application.UnitOfWork
 
         public INotificationRepository Notifications { get; }
 
-        public IPackageDurationRepository PackageDurations { get; }
-
         public IPackageOfUserRepository PackageOfUsers { get; } 
 
         public IPremiumUserRepository PremiumUsers { get; }

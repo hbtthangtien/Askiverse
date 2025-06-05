@@ -12,8 +12,6 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
 
-        public int DurationId { get; set; }
-
         public int SubscriptionId { get; set; }
 
         public string UserId { get; set; }
@@ -24,10 +22,8 @@ namespace Domain.Entities
 
         public bool IsActived => DateTime.Now <= EndTime;
 
-        public virtual PackageDuration? PackageDuration { get; set; }
-
         public virtual SubcriptionPackages? SubcriptionPackages { get; set; }
 
-        public virtual PremiumUser? PremiumUser {  get; set; }  
+        public virtual BasicUser? BasicUser {  get; set; }  
     }
 }

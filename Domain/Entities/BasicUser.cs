@@ -34,5 +34,7 @@ namespace Domain.Entities
 
         public virtual ICollection<ExamAccess> ExamAccesses { get; set; } = new List<ExamAccess>();
 
+        public virtual ICollection<PackageOfUser> PackageOfUsers { get; set; } = new List<PackageOfUser>()!;
+
     }
 }

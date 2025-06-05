@@ -38,8 +38,6 @@ namespace Persistence.UnitOfWork
 
         public INotificationRepository Notifications { get; private set; }
 
-        public IPackageDurationRepository PackageDurations { get; private set; }
-
         public IPackageOfUserRepository PackageOfUsers { get; private set; }
 
         public IPremiumUserRepository PremiumUsers { get; private set; }
@@ -70,7 +68,6 @@ namespace Persistence.UnitOfWork
             IHistoryPurchaseRepository historyPurchases,
             ILevelRepository levels,
             INotificationRepository notifications,
-            IPackageDurationRepository packageDurations,
             IPackageOfUserRepository packageOfUsers,
             IPremiumUserRepository premiumUsers,
             IProfileRepository profiles,
@@ -94,7 +91,6 @@ namespace Persistence.UnitOfWork
             HistoryPurchases = historyPurchases;
             Levels = levels;
             Notifications = notifications;
-            PackageDurations = packageDurations;
             PackageOfUsers = packageOfUsers;
             PremiumUsers = premiumUsers;
             Profiles = profiles;

@@ -3,6 +3,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,6 @@ namespace Persistence.DatabaseConfig
 
         public virtual DbSet<Notification> Notifications { get; set; }
 
-        public virtual DbSet<PackageDuration> PackageDurations { get; set; }
-
         public virtual DbSet<PackageOfUser> PackageOfUsers { get; set; }
 
         public virtual DbSet<PremiumUser> PremiumUsers { get; set; }
@@ -65,6 +64,11 @@ namespace Persistence.DatabaseConfig
             builder.Entity<BasicUser>(entity =>
             {
                 entity.ToTable("BasicUser");
+
+                entity.HasMany(e => e.PackageOfUsers)
+                      .WithOne(e => e.BasicUser)
+                      .HasForeignKey(e => e.UserId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(e => e.Profile)
                       .WithOne(e => e.User)
@@ -114,9 +118,6 @@ namespace Persistence.DatabaseConfig
                 entity.HasMany(e => e.BankQuestions)
                       .WithOne(e => e.PremiumUser)
                       .HasForeignKey(e => e.PremiumUserId);
-                entity.HasMany(e => e.PackageOfUsers)
-                      .WithOne(e => e.PremiumUser)
-                      .HasForeignKey(e => e.UserId);
             });
             builder.Entity<Profile>(entity =>
             {
@@ -211,6 +212,14 @@ namespace Persistence.DatabaseConfig
                     new IdentityRole { Id = "2", Name = UserRole.PREMIUM_USER, NormalizedName = UserRole.PREMIUM_USER },
                     new IdentityRole { Id = "3", Name = UserRole.ADMIN, NormalizedName = UserRole.ADMIN }
                 );
+
+
+            //seeding data
+            CategoryQuestionSeedingData.Seed(builder);
+            SeedingTrietExamData.Seeding(builder);
+            SubjectSeedingData.Seeding(builder);
+            SubscriptionSeedingData.Seeding(builder);
+
         }
     }
 }
