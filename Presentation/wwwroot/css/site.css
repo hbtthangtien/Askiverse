@@ -18,16 +18,11 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
-    height:100vh;
-    max-height:100%;
-}
-
-body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background: linear-gradient(180deg, #F5F5F5, #D8F8F2);
     color: #121117;
+    
 }
 
 .navbar {
