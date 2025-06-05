@@ -1,66 +1,86 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Askiverse</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel='shortcut icon' href="~/image/logo.ico" />
-    <link rel="stylesheet" href="~/Presentation.styles.css" asp-append-version="true" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    @RenderSection("Styles", required: false)
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Askiverse</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel='shortcut icon' href="~/image/logo.ico" />
+	<link rel="stylesheet" href="~/Presentation.styles.css" asp-append-version="true" />
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+	@RenderSection("Styles", required: false)
 </head>
 <body style="background: linear-gradient(180deg, #F5F5F5, #D8F8F2);">
 
-    <header class="navbar">
-        <div class="logo">
-            <img src="~/image/logo.png" alt="Askiverse Logo">
-            Askiverse
-        </div>
-        <nav>
-            <a href="#">Trang chủ</a>
-            <a href="#">Khoá học</a>
-            <a href="#">Lịch học</a>
-            <a href="#">Liên hệ</a>
+	<header class="navbar">
+		<div class="logo">
+			<img src="~/image/logo.png" alt="Askiverse Logo">
+			Askiverse
+		</div>
+		<nav>
+			<a href="#">Trang chủ</a>
+			<a href="#">Khoá học</a>
+			<a href="#">Lịch học</a>
+			<a href="#">Liên hệ</a>
 
-        </nav>
-        <div class="auth" id="auth-area">
-            <a href="#">Đăng nhập</a>
-            <a href="#">Đăng ký</a>
-        </div>
-    </header>
-    <div class="full-container">
-        <main role="main" class="pb-3" >
-            @RenderBody()
-        </main>
-    </div>
+		</nav>
+		<div class="auth" id="auth-area">
+			@if (User.Identity?.IsAuthenticated ?? false)
+			{
+				<div class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+					   data-bs-toggle="dropdown" aria-expanded="false">
+						👤 @User.Identity.Name
+					</a>
 
-    <footer>
-        <p>© 2025 Askiverse - Cộng đồng học tập sáng tạo và hiệu quả.</p>
-        <p><a href="#">Chính sách bảo mật</a> | <a href="#">Điều khoản sử dụng</a></p>
-    </footer>
-    
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+						<li>
+							<form asp-controller="BasicUser" asp-action="Logout" method="get" class="d-inline">
+								<button type="submit" class=" dropdown-item">Đăng xuất</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+			}
+			else
+			{
+				<a asp-controller="BasicUser" asp-action="Login">Đăng nhập</a>
+				<a asp-controller="BasicUser" asp-action="Register">Đăng ký</a>
+			}
+		</div>
+	</header>
+	<div class="full-container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
 
-    <script>
-        const dropdownTrigger = document.querySelectorAll('.nav-item.dropdown');
-        dropdownTrigger.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
-                const dropdown = new bootstrap.Dropdown(toggle);
-                dropdown.show();
-            });
-            item.addEventListener('mouseleave', () => {
-                const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
-                const dropdown = new bootstrap.Dropdown(toggle);
-                dropdown.hide();
-            })
-        })
-    </script>
+	<footer>
+		<p>© 2025 Askiverse - Cộng đồng học tập sáng tạo và hiệu quả.</p>
+		<p><a href="#">Chính sách bảo mật</a> | <a href="#">Điều khoản sử dụng</a></p>
+	</footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+	<script>
+		const dropdownTrigger = document.querySelectorAll('.nav-item.dropdown');
+		dropdownTrigger.forEach(item => {
+			item.addEventListener('mouseenter', () => {
+				const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
+				const dropdown = new bootstrap.Dropdown(toggle);
+				dropdown.show();
+			});
+			item.addEventListener('mouseleave', () => {
+				const toggle = item.querySelector('[data-bs-toggle="dropdown"]');
+				const dropdown = new bootstrap.Dropdown(toggle);
+				dropdown.hide();
+			})
+		})
+	</script>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
