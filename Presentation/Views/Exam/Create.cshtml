@@ -1,0 +1,207 @@
+﻿@using Application.DTOs.Exam
+@using Domain.Entities
+@model CreateExamDTO
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-9 mb-4">
+
+
+    <h1 class="mt-9  mb-4">Tạo đề thi mới</h1>
+
+    <div id="questionCountError" class="text-danger mb-3" style="display:none;">
+        Vui lòng chọn đúng số câu hỏi theo yêu cầu.
+    </div>
+
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Tiêu đề</label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Mô tả</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SourceText" class="form-label">Source Text</label>
+            <input asp-for="SourceText" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SubjectId" class="form-label">Môn học</label>
+            <select asp-for="SubjectId" asp-items="@(new SelectList(ViewBag.Subjects, "Id", "Name"))" class="form-select">
+                <option value="">-- Chọn môn học --</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TotalQuestion" class="form-label">Số lượng câu hỏi</label>
+            <select asp-for="TotalQuestion" id="TotalQuestion" class="form-select" style="max-width:150px;">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+          
+        </div>
+
+        <!-- Thêm checkbox Đề thi công khai -->
+        <div class="mb-3 form-check">
+            <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
+            <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
+        </div>
+        <div id="questionCountWarning" class="text-danger mt-1" style="display:none;"></div>
+
+        <hr />
+
+        <h4>Lọc câu hỏi</h4>
+
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label for="questionTypeFilter" class="form-label">Loại câu hỏi</label>
+                <select id="questionTypeFilter" class="form-select">
+                    <option value="">Tất cả loại câu hỏi</option>
+                    @foreach (var qt in ViewBag.QuestionTypes as List<QuestionType>)
+                    {
+                        <option value="@qt.Id">@qt.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="levelFilter" class="form-label">Độ khó</label>
+                <select id="levelFilter" class="form-select">
+                    <option value="">Tất cả độ khó</option>
+                    @foreach (var lv in ViewBag.Levels as List<Level>)
+                    {
+                        <option value="@lv.Id">@lv.DisplayName</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Bỏ checkbox "Chỉ hiển thị câu hỏi công khai" khỏi đây -->
+        </div>
+
+        <div class="mb-3">
+            <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
+            <button type="button" id="btnSearch" class="btn btn-primary mt-2">Tìm câu hỏi</button>
+        </div>
+
+        <div id="searchResults" class="mb-3">
+            <div id="questionListContainer" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
+                @Html.Partial("_SearchQuestionResults", ViewBag.InitialQuestions as List<Domain.Entities.BankQuestion>, new ViewDataDictionary(ViewData.ModelMetadata, ViewData.ModelState) { { "SelectedIds", Model.SelectedQuestionIds } })
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Tạo đề" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        var selectedQuestionIds = [];
+
+        // Lưu câu hỏi đã chọn
+        $(document).on('change', '.question-checkbox', function () {
+            var questionId = parseInt($(this).val());
+            if ($(this).is(':checked')) {
+                if (!selectedQuestionIds.includes(questionId)) {
+                    selectedQuestionIds.push(questionId);
+                }
+            } else {
+                selectedQuestionIds = selectedQuestionIds.filter(id => id !== questionId);
+            }
+        });
+
+        // Tìm kiếm câu hỏi
+        $('#btnSearch').click(function () {
+            var questionTypeId = $('#questionTypeFilter').val() || null;
+            var levelId = $('#levelFilter').val() || null;
+            // Bỏ biến isPublic filter, nếu bạn không muốn filter câu hỏi công khai
+            var keyword = $('#keywordFilter').val().trim() || null;
+
+            $.ajax({
+                url: '@Url.Action("SearchQuestions", "Exam")',
+                data: {
+                    questionTypeId: questionTypeId,
+                    levelId: levelId,
+                    keyword: keyword
+                },
+                success: function (result) {
+                    $('#searchResults').html(result);
+
+                    // Đánh dấu lại checkbox cho các câu đã chọn
+                    selectedQuestionIds.forEach(function (id) {
+                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                    });
+
+                    if (typeof showPage === "function") {
+                        showPage(1);
+                    }
+                }
+            });
+        });
+
+        // Validate form trước khi submit
+        $('form').submit(function (e) {
+            var title = $('input[name="Title"]').val().trim();
+            var description = $('textarea[name="Description"]').val().trim();
+            var sourceText = $('input[name="SourceText"]').val().trim();
+            var subjectId = $('select[name="SubjectId"]').val();
+            var totalQuestion = parseInt($('#TotalQuestion').val());
+            var selectedCount = $('.question-checkbox:checked').length;
+
+            if (!title) {
+                e.preventDefault();
+                alert('Tiêu đề không được để trống.');
+                return false;
+            }
+
+            if (!description) {
+                e.preventDefault();
+                alert('Mô tả không được để trống.');
+                return false;
+            }
+
+            if (!sourceText) {
+                e.preventDefault();
+                alert('Source Text không được để trống.');
+                return false;
+            }
+
+            if (!subjectId) {
+                e.preventDefault();
+                alert('Vui lòng chọn môn học.');
+                return false;
+            }
+
+            if (selectedCount !== totalQuestion) {
+                e.preventDefault();
+                var diff = totalQuestion - selectedCount;
+                var message = diff > 0 ? `Bạn còn thiếu ${diff} câu hỏi.` : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`;
+                $('#questionCountWarning').text(message).show();
+                $('html, body').animate({ scrollTop: $("#questionCountWarning").offset().top - 50 }, 400);
+                return false;
+            }
+
+            $('#questionCountWarning').hide();
+
+            // Gửi các câu hỏi đã chọn qua hidden input
+            $('input[name="SelectedQuestionIds"]').remove();
+            $('.question-checkbox:checked').each(function () {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'SelectedQuestionIds',
+                    value: $(this).val()
+                }).appendTo('form');
+            });
+
+            return true;
+        });
+    </script>
+}

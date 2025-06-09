@@ -14,5 +14,10 @@ namespace Persistence.Repositories
         public BankQuestionRepository(AskiverseContext context) : base(context)
         {
         }
+        public IQueryable<BankQuestion> Query()
+        {
+            return _context.Set<BankQuestion>().AsQueryable();
+        }
+
     }
 }

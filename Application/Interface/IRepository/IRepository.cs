@@ -20,5 +20,10 @@ namespace Application.Interface.IRepository
         public Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression);
         public Task<bool> HasAnyAsync(Expression<Func<T, bool>> expression);
         public IQueryable<T> GetPaginatedList(Expression<Func<T, bool>> condition, Expression<Func<T, object>> orderBy, bool ascending);
+        public IQueryable<T> Query();
+        Task<T> GetSingle(Expression<Func<T, bool>> predicate,
+                 Func<IQueryable<T>, IQueryable<T>> include = null);
+
+
     }
 }

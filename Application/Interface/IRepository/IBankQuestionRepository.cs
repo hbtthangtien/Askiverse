@@ -9,5 +9,7 @@ namespace Application.Interface.IRepository
 {
     public interface IBankQuestionRepository : IRepository<BankQuestion>
     {
+        IQueryable<BankQuestion> Query();
+
     }
 }
