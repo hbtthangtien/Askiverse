@@ -4,16 +4,12 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<div class="container mt-9 mb-4">
+<div class="container mt-5 mb-4">
+    <h1 class="mb-4">Tạo đề thi mới</h1>
 
-
-    <h1 class="mt-9  mb-4">Tạo đề thi mới</h1>
-
-    <div id="questionCountError" class="text-danger mb-3" style="display:none;">
-        Vui lòng chọn đúng số câu hỏi theo yêu cầu.
-    </div>
-
+    <!-- Form tạo đề ở trên -->
     <form asp-action="Create" method="post">
+
         <div class="mb-3">
             <label asp-for="Title" class="form-label">Tiêu đề</label>
             <input asp-for="Title" class="form-control" />
@@ -36,65 +32,74 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3" style="max-width: 150px;">
             <label asp-for="TotalQuestion" class="form-label">Số lượng câu hỏi</label>
-            <select asp-for="TotalQuestion" id="TotalQuestion" class="form-select" style="max-width:150px;">
+            <select asp-for="TotalQuestion" id="TotalQuestion" class="form-select">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
-          
         </div>
 
-        <!-- Thêm checkbox Đề thi công khai -->
         <div class="mb-3 form-check">
             <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
             <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
         </div>
-        <div id="questionCountWarning" class="text-danger mt-1" style="display:none;"></div>
 
-        <hr />
+        <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
 
-        <h4>Lọc câu hỏi</h4>
+        <!-- Khung lớn chứa danh sách câu hỏi bên trái + phần lọc bên phải -->
+        <div class="border rounded p-3">
+            <h4 class="mb-3">Quản lý câu hỏi</h4>
 
-        <div class="row g-3 mb-3">
-            <div class="col-md-6">
-                <label for="questionTypeFilter" class="form-label">Loại câu hỏi</label>
-                <select id="questionTypeFilter" class="form-select">
-                    <option value="">Tất cả loại câu hỏi</option>
-                    @foreach (var qt in ViewBag.QuestionTypes as List<QuestionType>)
-                    {
-                        <option value="@qt.Id">@qt.Name</option>
-                    }
-                </select>
+            <div class="row">
+                <!-- Danh sách câu hỏi (bên trái, rộng 8 cột) -->
+                <div class="col-md-8" style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
+                    <div id="searchResults">
+                        <div id="questionListContainer">
+                            @Html.Partial("_SearchQuestionResults", ViewBag.InitialQuestions as List<Domain.Entities.BankQuestion>, new ViewDataDictionary(ViewData.ModelMetadata, ViewData.ModelState) { { "SelectedIds", Model.SelectedQuestionIds } })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phần lọc câu hỏi (bên phải, rộng 4 cột) -->
+                <div class="col-md-4">
+                    <h5>Lọc câu hỏi</h5>
+
+                    <div class="mb-3">
+                        <label for="questionTypeFilter" class="form-label">Loại câu hỏi</label>
+                        <select id="questionTypeFilter" class="form-select">
+                            <option value="">Tất cả loại câu hỏi</option>
+                            @foreach (var qt in ViewBag.QuestionTypes as List<QuestionType>)
+                            {
+                                <option value="@qt.Id">@qt.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="levelFilter" class="form-label">Độ khó</label>
+                        <select id="levelFilter" class="form-select">
+                            <option value="">Tất cả độ khó</option>
+                            @foreach (var lv in ViewBag.Levels as List<Level>)
+                            {
+                                <option value="@lv.Id">@lv.DisplayName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button" id="btnSearch" class="btn btn-primary w-100">Tìm câu hỏi</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-6">
-                <label for="levelFilter" class="form-label">Độ khó</label>
-                <select id="levelFilter" class="form-select">
-                    <option value="">Tất cả độ khó</option>
-                    @foreach (var lv in ViewBag.Levels as List<Level>)
-                    {
-                        <option value="@lv.Id">@lv.DisplayName</option>
-                    }
-                </select>
-            </div>
-
-            <!-- Bỏ checkbox "Chỉ hiển thị câu hỏi công khai" khỏi đây -->
         </div>
 
-        <div class="mb-3">
-            <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
-            <button type="button" id="btnSearch" class="btn btn-primary mt-2">Tìm câu hỏi</button>
-        </div>
-
-        <div id="searchResults" class="mb-3">
-            <div id="questionListContainer" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
-                @Html.Partial("_SearchQuestionResults", ViewBag.InitialQuestions as List<Domain.Entities.BankQuestion>, new ViewDataDictionary(ViewData.ModelMetadata, ViewData.ModelState) { { "SelectedIds", Model.SelectedQuestionIds } })
-            </div>
-        </div>
-
-        <div>
+        <div class="mt-4">
             <input type="submit" value="Tạo đề" class="btn btn-success" />
         </div>
     </form>
@@ -122,7 +127,6 @@
         $('#btnSearch').click(function () {
             var questionTypeId = $('#questionTypeFilter').val() || null;
             var levelId = $('#levelFilter').val() || null;
-            // Bỏ biến isPublic filter, nếu bạn không muốn filter câu hỏi công khai
             var keyword = $('#keywordFilter').val().trim() || null;
 
             $.ajax({

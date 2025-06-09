@@ -3,6 +3,11 @@
     var selectedIds = ViewData["SelectedIds"] as List<int> ?? new List<int>();
 }
 <style>
+    /* Đặt box-sizing để tính padding vào width */
+    #questionTable th, #questionTable td {
+        box-sizing: border-box;
+    }
+
     /* Cột Chi tiết */
     #questionTable thead tr th:nth-child(5),
     #questionTable tbody tr td:nth-child(5) {
@@ -12,83 +17,85 @@
 
     #questionTable {
         border-collapse: collapse;
-        width: 100%;
-        table-layout: fixed; /* đảm bảo phân bố cố định */
+        width: 100%; /* đổi từ 120% thành 100% */
+        max-width: 100%; /* tránh table vượt container */
+        table-layout: fixed;
+        /* Không đặt overflow hay max-height ở đây */
     }
 
-    #questionTable thead tr th {
-        position: sticky;
-        top: 0;
-        background: white;
-        z-index: 10;
-        border-bottom: 2px solid #ccc;
-        height: 40px;
-        line-height: 40px;
-        text-align: left;
-        padding: 5px;
-        font-weight: bold;
-    }
-
-    #questionTable tbody {
-        display: block;
-        max-height: 400px;
-        overflow-y: auto;
-    }
-
-        #questionTable thead,
-        #questionTable tbody tr {
-            display: table;
-            width: 100%;
-            table-layout: fixed;
+        #questionTable thead tr th {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            border-bottom: 2px solid #ccc;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            padding: 5px;
+            font-weight: bold;
         }
 
-            /* Cột checkbox */
-            #questionTable thead tr th:nth-child(1),
-            #questionTable tbody tr td:nth-child(1) {
-                width: 80px; /* rộng hơn */
-                text-align: center;
+        #questionTable tbody {
+            display: table-row-group;
+            max-height: none;
+            overflow-y: visible;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+
+            /* Giữ layout chuẩn */
+            #questionTable thead,
+            #questionTable tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
             }
 
-                /* Checkbox lớn hơn */
-                #questionTable tbody tr td:nth-child(1) input[type="checkbox"] {
-                    width: 24px;
-                    height: 24px;
-                    cursor: pointer;
+                /* Cột checkbox */
+                #questionTable thead tr th:nth-child(1),
+                #questionTable tbody tr td:nth-child(1) {
+                    width: 80px;
+                    text-align: center;
                 }
 
-            /* Cột Nội dung rộng nhất */
-            #questionTable thead tr th:nth-child(2),
-            #questionTable tbody tr td:nth-child(2) {
-                width: 60%;
-                padding-left: 10px;
-                white-space: normal; /* xuống dòng nếu dài */
-            }
+                    #questionTable tbody tr td:nth-child(1) input[type="checkbox"] {
+                        width: 24px;
+                        height: 24px;
+                        cursor: pointer;
+                    }
 
-            /* Cột Loại câu hỏi */
-            #questionTable thead tr th:nth-child(3),
-            #questionTable tbody tr td:nth-child(3) {
-                width: 18%;
-                padding-left: 5px;
-                white-space: nowrap;
-                font-size: 0.9em;
-                color: #555;
-            }
+                /* Cột Nội dung rộng nhất */
+                #questionTable thead tr th:nth-child(2),
+                #questionTable tbody tr td:nth-child(2) {
+                    width: 60%;
+                    padding-left: 10px;
+                    white-space: normal;
+                }
 
-            /* Cột Độ khó */
-            #questionTable thead tr th:nth-child(4),
-            #questionTable tbody tr td:nth-child(4) {
-                width: 15%;
-                padding-left: 5px;
-                white-space: nowrap;
-                font-size: 0.9em;
-                color: #555;
-            }
+                /* Cột Loại câu hỏi */
+                #questionTable thead tr th:nth-child(3),
+                #questionTable tbody tr td:nth-child(3) {
+                    width: 18%;
+                    padding-left: 5px;
+                    white-space: nowrap;
+                    font-size: 0.9em;
+                    color: #555;
+                }
 
-
-
+                /* Cột Độ khó */
+                #questionTable thead tr th:nth-child(4),
+                #questionTable tbody tr td:nth-child(4) {
+                    width: 15%;
+                    padding-left: 5px;
+                    white-space: nowrap;
+                    font-size: 0.9em;
+                    color: #555;
+                }
 
 </style>
-<table id="questionTable" style="width:100%">
+<table id="questionTable" ">
     <thead>
         <tr>
             <th>Chọn</th>
