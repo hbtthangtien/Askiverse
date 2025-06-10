@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	ViewData["Title"] = "Nộp bài";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 65vh">
+	<div class="d-flex justify-content-center align-items-center" style="width: 400px; height: 300px; background-color: white; flex-direction: column;">
+		@if (ViewData["Error"] == null)
+		{
+			<h1>Nộp bài thành công!</h1>
+			<a class="btn" asp-controller="ExamScored" asp-action="ViewResult" asp-route-ExamId="@ViewData["ExamId"]" asp-route-examScoredId="@ViewData["examScoredId"]">Xem kết quả</a>
+		}
+		else
+		{
+			<h1>Nộp bài thất bại!</h1>
+			<button>Quay lại trang chủ!</button>
+		}
+	</div>
+</div>

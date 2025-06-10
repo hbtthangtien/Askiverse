@@ -63,6 +63,11 @@ namespace Persistence.DatabaseConfig.Config
             })
                 .AddEntityFrameworkStores<AskiverseContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/BasicUser/Login";
+            });
         }
     }
 }

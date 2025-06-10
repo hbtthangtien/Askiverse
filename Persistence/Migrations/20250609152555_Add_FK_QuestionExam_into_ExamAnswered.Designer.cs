@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.DatabaseConfig;
 
@@ -11,9 +12,11 @@ using Persistence.DatabaseConfig;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AskiverseContext))]
-    partial class AskiverseContextModelSnapshot : ModelSnapshot
+    [Migration("20250609152555_Add_FK_QuestionExam_into_ExamAnswered")]
+    partial class Add_FK_QuestionExam_into_ExamAnswered
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace Persistence.Migrations
                             Id = 1,
                             AnswerText = "Đáp án 1 cho câu 1",
                             BankQuestionId = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6813),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9289),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -77,7 +80,7 @@ namespace Persistence.Migrations
                             Id = 2,
                             AnswerText = "Đáp án 2 cho câu 1",
                             BankQuestionId = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6816),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9291),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -87,7 +90,7 @@ namespace Persistence.Migrations
                             Id = 3,
                             AnswerText = "Đáp án 3 cho câu 1",
                             BankQuestionId = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6818),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9292),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -97,7 +100,7 @@ namespace Persistence.Migrations
                             Id = 4,
                             AnswerText = "Đáp án 4 cho câu 1",
                             BankQuestionId = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6819),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9294),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -107,7 +110,7 @@ namespace Persistence.Migrations
                             Id = 5,
                             AnswerText = "Đáp án 1 cho câu 2",
                             BankQuestionId = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6821),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9295),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -117,7 +120,7 @@ namespace Persistence.Migrations
                             Id = 6,
                             AnswerText = "Đáp án 2 cho câu 2",
                             BankQuestionId = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6822),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9296),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -127,7 +130,7 @@ namespace Persistence.Migrations
                             Id = 7,
                             AnswerText = "Đáp án 3 cho câu 2",
                             BankQuestionId = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6824),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9298),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -137,7 +140,7 @@ namespace Persistence.Migrations
                             Id = 8,
                             AnswerText = "Đáp án 4 cho câu 2",
                             BankQuestionId = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6825),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9299),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -147,7 +150,7 @@ namespace Persistence.Migrations
                             Id = 9,
                             AnswerText = "Đáp án 1 cho câu 3",
                             BankQuestionId = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6826),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9300),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -157,7 +160,7 @@ namespace Persistence.Migrations
                             Id = 10,
                             AnswerText = "Đáp án 2 cho câu 3",
                             BankQuestionId = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6828),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9301),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -167,7 +170,7 @@ namespace Persistence.Migrations
                             Id = 11,
                             AnswerText = "Đáp án 3 cho câu 3",
                             BankQuestionId = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6829),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9302),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -177,7 +180,7 @@ namespace Persistence.Migrations
                             Id = 12,
                             AnswerText = "Đáp án 4 cho câu 3",
                             BankQuestionId = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6831),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9303),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -187,7 +190,7 @@ namespace Persistence.Migrations
                             Id = 13,
                             AnswerText = "Đáp án 1 cho câu 4",
                             BankQuestionId = 4,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6832),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9305),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -197,7 +200,7 @@ namespace Persistence.Migrations
                             Id = 14,
                             AnswerText = "Đáp án 2 cho câu 4",
                             BankQuestionId = 4,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6833),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9306),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -207,7 +210,7 @@ namespace Persistence.Migrations
                             Id = 15,
                             AnswerText = "Đáp án 3 cho câu 4",
                             BankQuestionId = 4,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6835),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9307),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -217,7 +220,7 @@ namespace Persistence.Migrations
                             Id = 16,
                             AnswerText = "Đáp án 4 cho câu 4",
                             BankQuestionId = 4,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6836),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9308),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -227,7 +230,7 @@ namespace Persistence.Migrations
                             Id = 17,
                             AnswerText = "Đáp án 1 cho câu 5",
                             BankQuestionId = 5,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6838),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9310),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -237,7 +240,7 @@ namespace Persistence.Migrations
                             Id = 18,
                             AnswerText = "Đáp án 2 cho câu 5",
                             BankQuestionId = 5,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6839),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9311),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -247,7 +250,7 @@ namespace Persistence.Migrations
                             Id = 19,
                             AnswerText = "Đáp án 3 cho câu 5",
                             BankQuestionId = 5,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6841),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9312),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -257,7 +260,7 @@ namespace Persistence.Migrations
                             Id = 20,
                             AnswerText = "Đáp án 4 cho câu 5",
                             BankQuestionId = 5,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6842),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9320),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -267,7 +270,7 @@ namespace Persistence.Migrations
                             Id = 21,
                             AnswerText = "Đáp án 1 cho câu 6",
                             BankQuestionId = 6,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6843),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9322),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -277,7 +280,7 @@ namespace Persistence.Migrations
                             Id = 22,
                             AnswerText = "Đáp án 2 cho câu 6",
                             BankQuestionId = 6,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6845),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9323),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -287,7 +290,7 @@ namespace Persistence.Migrations
                             Id = 23,
                             AnswerText = "Đáp án 3 cho câu 6",
                             BankQuestionId = 6,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6846),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9324),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -297,7 +300,7 @@ namespace Persistence.Migrations
                             Id = 24,
                             AnswerText = "Đáp án 4 cho câu 6",
                             BankQuestionId = 6,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6848),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9325),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -307,7 +310,7 @@ namespace Persistence.Migrations
                             Id = 25,
                             AnswerText = "Đáp án 1 cho câu 7",
                             BankQuestionId = 7,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6849),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9326),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -317,7 +320,7 @@ namespace Persistence.Migrations
                             Id = 26,
                             AnswerText = "Đáp án 2 cho câu 7",
                             BankQuestionId = 7,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6850),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9327),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -327,7 +330,7 @@ namespace Persistence.Migrations
                             Id = 27,
                             AnswerText = "Đáp án 3 cho câu 7",
                             BankQuestionId = 7,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6852),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9329),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -337,7 +340,7 @@ namespace Persistence.Migrations
                             Id = 28,
                             AnswerText = "Đáp án 4 cho câu 7",
                             BankQuestionId = 7,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6853),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9330),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -347,7 +350,7 @@ namespace Persistence.Migrations
                             Id = 29,
                             AnswerText = "Đáp án 1 cho câu 8",
                             BankQuestionId = 8,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6855),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9331),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -357,7 +360,7 @@ namespace Persistence.Migrations
                             Id = 30,
                             AnswerText = "Đáp án 2 cho câu 8",
                             BankQuestionId = 8,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6856),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9332),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -367,7 +370,7 @@ namespace Persistence.Migrations
                             Id = 31,
                             AnswerText = "Đáp án 3 cho câu 8",
                             BankQuestionId = 8,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6858),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9334),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -377,7 +380,7 @@ namespace Persistence.Migrations
                             Id = 32,
                             AnswerText = "Đáp án 4 cho câu 8",
                             BankQuestionId = 8,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6860),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9335),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -387,7 +390,7 @@ namespace Persistence.Migrations
                             Id = 33,
                             AnswerText = "Đáp án 1 cho câu 9",
                             BankQuestionId = 9,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6861),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9336),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -397,7 +400,7 @@ namespace Persistence.Migrations
                             Id = 34,
                             AnswerText = "Đáp án 2 cho câu 9",
                             BankQuestionId = 9,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6863),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9338),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -407,7 +410,7 @@ namespace Persistence.Migrations
                             Id = 35,
                             AnswerText = "Đáp án 3 cho câu 9",
                             BankQuestionId = 9,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6864),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9339),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -417,7 +420,7 @@ namespace Persistence.Migrations
                             Id = 36,
                             AnswerText = "Đáp án 4 cho câu 9",
                             BankQuestionId = 9,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6865),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9340),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -427,7 +430,7 @@ namespace Persistence.Migrations
                             Id = 37,
                             AnswerText = "Đáp án 1 cho câu 10",
                             BankQuestionId = 10,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6867),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9341),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -437,7 +440,7 @@ namespace Persistence.Migrations
                             Id = 38,
                             AnswerText = "Đáp án 2 cho câu 10",
                             BankQuestionId = 10,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6868),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9342),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -447,7 +450,7 @@ namespace Persistence.Migrations
                             Id = 39,
                             AnswerText = "Đáp án 3 cho câu 10",
                             BankQuestionId = 10,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6870),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9343),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -457,7 +460,7 @@ namespace Persistence.Migrations
                             Id = 40,
                             AnswerText = "Đáp án 4 cho câu 10",
                             BankQuestionId = 10,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6871),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9344),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -467,7 +470,7 @@ namespace Persistence.Migrations
                             Id = 41,
                             AnswerText = "Đáp án 1 cho câu 11",
                             BankQuestionId = 11,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6872),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9346),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -477,7 +480,7 @@ namespace Persistence.Migrations
                             Id = 42,
                             AnswerText = "Đáp án 2 cho câu 11",
                             BankQuestionId = 11,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6874),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9347),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -487,7 +490,7 @@ namespace Persistence.Migrations
                             Id = 43,
                             AnswerText = "Đáp án 3 cho câu 11",
                             BankQuestionId = 11,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6875),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9348),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -497,7 +500,7 @@ namespace Persistence.Migrations
                             Id = 44,
                             AnswerText = "Đáp án 4 cho câu 11",
                             BankQuestionId = 11,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6876),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9349),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -507,7 +510,7 @@ namespace Persistence.Migrations
                             Id = 45,
                             AnswerText = "Đáp án 1 cho câu 12",
                             BankQuestionId = 12,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6878),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9350),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -517,7 +520,7 @@ namespace Persistence.Migrations
                             Id = 46,
                             AnswerText = "Đáp án 2 cho câu 12",
                             BankQuestionId = 12,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6879),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9351),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -527,7 +530,7 @@ namespace Persistence.Migrations
                             Id = 47,
                             AnswerText = "Đáp án 3 cho câu 12",
                             BankQuestionId = 12,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6881),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9353),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -537,7 +540,7 @@ namespace Persistence.Migrations
                             Id = 48,
                             AnswerText = "Đáp án 4 cho câu 12",
                             BankQuestionId = 12,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6882),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9354),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -547,7 +550,7 @@ namespace Persistence.Migrations
                             Id = 49,
                             AnswerText = "Đáp án 1 cho câu 13",
                             BankQuestionId = 13,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6883),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9355),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -557,7 +560,7 @@ namespace Persistence.Migrations
                             Id = 50,
                             AnswerText = "Đáp án 2 cho câu 13",
                             BankQuestionId = 13,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6885),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9356),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -567,7 +570,7 @@ namespace Persistence.Migrations
                             Id = 51,
                             AnswerText = "Đáp án 3 cho câu 13",
                             BankQuestionId = 13,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6886),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9357),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -577,7 +580,7 @@ namespace Persistence.Migrations
                             Id = 52,
                             AnswerText = "Đáp án 4 cho câu 13",
                             BankQuestionId = 13,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6887),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9358),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -587,7 +590,7 @@ namespace Persistence.Migrations
                             Id = 53,
                             AnswerText = "Đáp án 1 cho câu 14",
                             BankQuestionId = 14,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6889),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9359),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -597,7 +600,7 @@ namespace Persistence.Migrations
                             Id = 54,
                             AnswerText = "Đáp án 2 cho câu 14",
                             BankQuestionId = 14,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6890),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9361),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -607,7 +610,7 @@ namespace Persistence.Migrations
                             Id = 55,
                             AnswerText = "Đáp án 3 cho câu 14",
                             BankQuestionId = 14,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6891),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9362),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -617,7 +620,7 @@ namespace Persistence.Migrations
                             Id = 56,
                             AnswerText = "Đáp án 4 cho câu 14",
                             BankQuestionId = 14,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6893),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9364),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -627,7 +630,7 @@ namespace Persistence.Migrations
                             Id = 57,
                             AnswerText = "Đáp án 1 cho câu 15",
                             BankQuestionId = 15,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6895),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9365),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -637,7 +640,7 @@ namespace Persistence.Migrations
                             Id = 58,
                             AnswerText = "Đáp án 2 cho câu 15",
                             BankQuestionId = 15,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6896),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9366),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -647,7 +650,7 @@ namespace Persistence.Migrations
                             Id = 59,
                             AnswerText = "Đáp án 3 cho câu 15",
                             BankQuestionId = 15,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6898),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9367),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -657,7 +660,7 @@ namespace Persistence.Migrations
                             Id = 60,
                             AnswerText = "Đáp án 4 cho câu 15",
                             BankQuestionId = 15,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6899),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9368),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -667,7 +670,7 @@ namespace Persistence.Migrations
                             Id = 61,
                             AnswerText = "Đáp án 1 cho câu 16",
                             BankQuestionId = 16,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6907),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9370),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -677,7 +680,7 @@ namespace Persistence.Migrations
                             Id = 62,
                             AnswerText = "Đáp án 2 cho câu 16",
                             BankQuestionId = 16,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6909),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9371),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -687,7 +690,7 @@ namespace Persistence.Migrations
                             Id = 63,
                             AnswerText = "Đáp án 3 cho câu 16",
                             BankQuestionId = 16,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6910),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9372),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -697,7 +700,7 @@ namespace Persistence.Migrations
                             Id = 64,
                             AnswerText = "Đáp án 4 cho câu 16",
                             BankQuestionId = 16,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6911),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9373),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -707,7 +710,7 @@ namespace Persistence.Migrations
                             Id = 65,
                             AnswerText = "Đáp án 1 cho câu 17",
                             BankQuestionId = 17,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6913),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9374),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -717,7 +720,7 @@ namespace Persistence.Migrations
                             Id = 66,
                             AnswerText = "Đáp án 2 cho câu 17",
                             BankQuestionId = 17,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6914),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9375),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -727,7 +730,7 @@ namespace Persistence.Migrations
                             Id = 67,
                             AnswerText = "Đáp án 3 cho câu 17",
                             BankQuestionId = 17,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6915),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9377),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -737,7 +740,7 @@ namespace Persistence.Migrations
                             Id = 68,
                             AnswerText = "Đáp án 4 cho câu 17",
                             BankQuestionId = 17,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6917),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9378),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -747,7 +750,7 @@ namespace Persistence.Migrations
                             Id = 69,
                             AnswerText = "Đáp án 1 cho câu 18",
                             BankQuestionId = 18,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6918),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9379),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -757,7 +760,7 @@ namespace Persistence.Migrations
                             Id = 70,
                             AnswerText = "Đáp án 2 cho câu 18",
                             BankQuestionId = 18,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6919),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9380),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -767,7 +770,7 @@ namespace Persistence.Migrations
                             Id = 71,
                             AnswerText = "Đáp án 3 cho câu 18",
                             BankQuestionId = 18,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6921),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9381),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -777,7 +780,7 @@ namespace Persistence.Migrations
                             Id = 72,
                             AnswerText = "Đáp án 4 cho câu 18",
                             BankQuestionId = 18,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6922),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9383),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -787,7 +790,7 @@ namespace Persistence.Migrations
                             Id = 73,
                             AnswerText = "Đáp án 1 cho câu 19",
                             BankQuestionId = 19,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6923),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9384),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -797,7 +800,7 @@ namespace Persistence.Migrations
                             Id = 74,
                             AnswerText = "Đáp án 2 cho câu 19",
                             BankQuestionId = 19,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6925),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9385),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -807,7 +810,7 @@ namespace Persistence.Migrations
                             Id = 75,
                             AnswerText = "Đáp án 3 cho câu 19",
                             BankQuestionId = 19,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6926),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9386),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -817,7 +820,7 @@ namespace Persistence.Migrations
                             Id = 76,
                             AnswerText = "Đáp án 4 cho câu 19",
                             BankQuestionId = 19,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6927),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9387),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -827,7 +830,7 @@ namespace Persistence.Migrations
                             Id = 77,
                             AnswerText = "Đáp án 1 cho câu 20",
                             BankQuestionId = 20,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6929),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9389),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -837,7 +840,7 @@ namespace Persistence.Migrations
                             Id = 78,
                             AnswerText = "Đáp án 2 cho câu 20",
                             BankQuestionId = 20,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6930),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9390),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -847,7 +850,7 @@ namespace Persistence.Migrations
                             Id = 79,
                             AnswerText = "Đáp án 3 cho câu 20",
                             BankQuestionId = 20,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6931),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9391),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -857,7 +860,7 @@ namespace Persistence.Migrations
                             Id = 80,
                             AnswerText = "Đáp án 4 cho câu 20",
                             BankQuestionId = 20,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6933),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9393),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -867,7 +870,7 @@ namespace Persistence.Migrations
                             Id = 81,
                             AnswerText = "Đáp án 1 cho câu 21",
                             BankQuestionId = 21,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6934),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9394),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -877,7 +880,7 @@ namespace Persistence.Migrations
                             Id = 82,
                             AnswerText = "Đáp án 2 cho câu 21",
                             BankQuestionId = 21,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6936),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9395),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -887,7 +890,7 @@ namespace Persistence.Migrations
                             Id = 83,
                             AnswerText = "Đáp án 3 cho câu 21",
                             BankQuestionId = 21,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6938),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9396),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -897,7 +900,7 @@ namespace Persistence.Migrations
                             Id = 84,
                             AnswerText = "Đáp án 4 cho câu 21",
                             BankQuestionId = 21,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6939),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9403),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -907,7 +910,7 @@ namespace Persistence.Migrations
                             Id = 85,
                             AnswerText = "Đáp án 1 cho câu 22",
                             BankQuestionId = 22,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6940),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9405),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -917,7 +920,7 @@ namespace Persistence.Migrations
                             Id = 86,
                             AnswerText = "Đáp án 2 cho câu 22",
                             BankQuestionId = 22,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6942),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9406),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -927,7 +930,7 @@ namespace Persistence.Migrations
                             Id = 87,
                             AnswerText = "Đáp án 3 cho câu 22",
                             BankQuestionId = 22,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6943),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9407),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -937,7 +940,7 @@ namespace Persistence.Migrations
                             Id = 88,
                             AnswerText = "Đáp án 4 cho câu 22",
                             BankQuestionId = 22,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6944),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9408),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -947,7 +950,7 @@ namespace Persistence.Migrations
                             Id = 89,
                             AnswerText = "Đáp án 1 cho câu 23",
                             BankQuestionId = 23,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6946),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9409),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -957,7 +960,7 @@ namespace Persistence.Migrations
                             Id = 90,
                             AnswerText = "Đáp án 2 cho câu 23",
                             BankQuestionId = 23,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6947),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9410),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -967,7 +970,7 @@ namespace Persistence.Migrations
                             Id = 91,
                             AnswerText = "Đáp án 3 cho câu 23",
                             BankQuestionId = 23,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6948),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9411),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -977,7 +980,7 @@ namespace Persistence.Migrations
                             Id = 92,
                             AnswerText = "Đáp án 4 cho câu 23",
                             BankQuestionId = 23,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6950),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9413),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -987,7 +990,7 @@ namespace Persistence.Migrations
                             Id = 93,
                             AnswerText = "Đáp án 1 cho câu 24",
                             BankQuestionId = 24,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6951),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9414),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -997,7 +1000,7 @@ namespace Persistence.Migrations
                             Id = 94,
                             AnswerText = "Đáp án 2 cho câu 24",
                             BankQuestionId = 24,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6953),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9415),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1007,7 +1010,7 @@ namespace Persistence.Migrations
                             Id = 95,
                             AnswerText = "Đáp án 3 cho câu 24",
                             BankQuestionId = 24,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6954),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9416),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1017,7 +1020,7 @@ namespace Persistence.Migrations
                             Id = 96,
                             AnswerText = "Đáp án 4 cho câu 24",
                             BankQuestionId = 24,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6955),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9417),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1027,7 +1030,7 @@ namespace Persistence.Migrations
                             Id = 97,
                             AnswerText = "Đáp án 1 cho câu 25",
                             BankQuestionId = 25,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6957),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9418),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1037,7 +1040,7 @@ namespace Persistence.Migrations
                             Id = 98,
                             AnswerText = "Đáp án 2 cho câu 25",
                             BankQuestionId = 25,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6958),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9420),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1047,7 +1050,7 @@ namespace Persistence.Migrations
                             Id = 99,
                             AnswerText = "Đáp án 3 cho câu 25",
                             BankQuestionId = 25,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6959),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9421),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1057,7 +1060,7 @@ namespace Persistence.Migrations
                             Id = 100,
                             AnswerText = "Đáp án 4 cho câu 25",
                             BankQuestionId = 25,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6961),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9422),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1067,7 +1070,7 @@ namespace Persistence.Migrations
                             Id = 101,
                             AnswerText = "Đáp án 1 cho câu 26",
                             BankQuestionId = 26,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6962),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9423),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1077,7 +1080,7 @@ namespace Persistence.Migrations
                             Id = 102,
                             AnswerText = "Đáp án 2 cho câu 26",
                             BankQuestionId = 26,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6963),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9424),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1087,7 +1090,7 @@ namespace Persistence.Migrations
                             Id = 103,
                             AnswerText = "Đáp án 3 cho câu 26",
                             BankQuestionId = 26,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6965),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9426),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1097,7 +1100,7 @@ namespace Persistence.Migrations
                             Id = 104,
                             AnswerText = "Đáp án 4 cho câu 26",
                             BankQuestionId = 26,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6966),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9427),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1107,7 +1110,7 @@ namespace Persistence.Migrations
                             Id = 105,
                             AnswerText = "Đáp án 1 cho câu 27",
                             BankQuestionId = 27,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6967),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9428),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1117,7 +1120,7 @@ namespace Persistence.Migrations
                             Id = 106,
                             AnswerText = "Đáp án 2 cho câu 27",
                             BankQuestionId = 27,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6969),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9429),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1127,7 +1130,7 @@ namespace Persistence.Migrations
                             Id = 107,
                             AnswerText = "Đáp án 3 cho câu 27",
                             BankQuestionId = 27,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6971),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9431),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1137,7 +1140,7 @@ namespace Persistence.Migrations
                             Id = 108,
                             AnswerText = "Đáp án 4 cho câu 27",
                             BankQuestionId = 27,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6972),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9432),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1147,7 +1150,7 @@ namespace Persistence.Migrations
                             Id = 109,
                             AnswerText = "Đáp án 1 cho câu 28",
                             BankQuestionId = 28,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6974),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9433),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1157,7 +1160,7 @@ namespace Persistence.Migrations
                             Id = 110,
                             AnswerText = "Đáp án 2 cho câu 28",
                             BankQuestionId = 28,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6975),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9435),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1167,7 +1170,7 @@ namespace Persistence.Migrations
                             Id = 111,
                             AnswerText = "Đáp án 3 cho câu 28",
                             BankQuestionId = 28,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6976),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9436),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1177,7 +1180,7 @@ namespace Persistence.Migrations
                             Id = 112,
                             AnswerText = "Đáp án 4 cho câu 28",
                             BankQuestionId = 28,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6978),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9437),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1187,7 +1190,7 @@ namespace Persistence.Migrations
                             Id = 113,
                             AnswerText = "Đáp án 1 cho câu 29",
                             BankQuestionId = 29,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6979),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9438),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1197,7 +1200,7 @@ namespace Persistence.Migrations
                             Id = 114,
                             AnswerText = "Đáp án 2 cho câu 29",
                             BankQuestionId = 29,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6980),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9440),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1207,7 +1210,7 @@ namespace Persistence.Migrations
                             Id = 115,
                             AnswerText = "Đáp án 3 cho câu 29",
                             BankQuestionId = 29,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6982),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9441),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1217,7 +1220,7 @@ namespace Persistence.Migrations
                             Id = 116,
                             AnswerText = "Đáp án 4 cho câu 29",
                             BankQuestionId = 29,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6983),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9442),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1227,7 +1230,7 @@ namespace Persistence.Migrations
                             Id = 117,
                             AnswerText = "Đáp án 1 cho câu 30",
                             BankQuestionId = 30,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6984),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9443),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1237,7 +1240,7 @@ namespace Persistence.Migrations
                             Id = 118,
                             AnswerText = "Đáp án 2 cho câu 30",
                             BankQuestionId = 30,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6986),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9444),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1247,7 +1250,7 @@ namespace Persistence.Migrations
                             Id = 119,
                             AnswerText = "Đáp án 3 cho câu 30",
                             BankQuestionId = 30,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6987),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9445),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1257,7 +1260,7 @@ namespace Persistence.Migrations
                             Id = 120,
                             AnswerText = "Đáp án 4 cho câu 30",
                             BankQuestionId = 30,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6988),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9446),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1267,7 +1270,7 @@ namespace Persistence.Migrations
                             Id = 121,
                             AnswerText = "Đáp án 1 cho câu 31",
                             BankQuestionId = 31,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6990),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9448),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1277,7 +1280,7 @@ namespace Persistence.Migrations
                             Id = 122,
                             AnswerText = "Đáp án 2 cho câu 31",
                             BankQuestionId = 31,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6991),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9449),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1287,7 +1290,7 @@ namespace Persistence.Migrations
                             Id = 123,
                             AnswerText = "Đáp án 3 cho câu 31",
                             BankQuestionId = 31,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6992),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9450),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1297,7 +1300,7 @@ namespace Persistence.Migrations
                             Id = 124,
                             AnswerText = "Đáp án 4 cho câu 31",
                             BankQuestionId = 31,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6994),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9451),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1307,7 +1310,7 @@ namespace Persistence.Migrations
                             Id = 125,
                             AnswerText = "Đáp án 1 cho câu 32",
                             BankQuestionId = 32,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7002),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9452),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1317,7 +1320,7 @@ namespace Persistence.Migrations
                             Id = 126,
                             AnswerText = "Đáp án 2 cho câu 32",
                             BankQuestionId = 32,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7004),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9453),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1327,7 +1330,7 @@ namespace Persistence.Migrations
                             Id = 127,
                             AnswerText = "Đáp án 3 cho câu 32",
                             BankQuestionId = 32,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7005),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9455),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1337,7 +1340,7 @@ namespace Persistence.Migrations
                             Id = 128,
                             AnswerText = "Đáp án 4 cho câu 32",
                             BankQuestionId = 32,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7006),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9456),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1347,7 +1350,7 @@ namespace Persistence.Migrations
                             Id = 129,
                             AnswerText = "Đáp án 1 cho câu 33",
                             BankQuestionId = 33,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7008),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9458),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1357,7 +1360,7 @@ namespace Persistence.Migrations
                             Id = 130,
                             AnswerText = "Đáp án 2 cho câu 33",
                             BankQuestionId = 33,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7009),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9459),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1367,7 +1370,7 @@ namespace Persistence.Migrations
                             Id = 131,
                             AnswerText = "Đáp án 3 cho câu 33",
                             BankQuestionId = 33,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7011),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9460),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1377,7 +1380,7 @@ namespace Persistence.Migrations
                             Id = 132,
                             AnswerText = "Đáp án 4 cho câu 33",
                             BankQuestionId = 33,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7012),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9461),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1387,7 +1390,7 @@ namespace Persistence.Migrations
                             Id = 133,
                             AnswerText = "Đáp án 1 cho câu 34",
                             BankQuestionId = 34,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7014),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9462),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1397,7 +1400,7 @@ namespace Persistence.Migrations
                             Id = 134,
                             AnswerText = "Đáp án 2 cho câu 34",
                             BankQuestionId = 34,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7016),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9463),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1407,7 +1410,7 @@ namespace Persistence.Migrations
                             Id = 135,
                             AnswerText = "Đáp án 3 cho câu 34",
                             BankQuestionId = 34,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7017),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9464),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1417,7 +1420,7 @@ namespace Persistence.Migrations
                             Id = 136,
                             AnswerText = "Đáp án 4 cho câu 34",
                             BankQuestionId = 34,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7019),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9467),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1427,7 +1430,7 @@ namespace Persistence.Migrations
                             Id = 137,
                             AnswerText = "Đáp án 1 cho câu 35",
                             BankQuestionId = 35,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7020),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9468),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1437,7 +1440,7 @@ namespace Persistence.Migrations
                             Id = 138,
                             AnswerText = "Đáp án 2 cho câu 35",
                             BankQuestionId = 35,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7021),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9469),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1447,7 +1450,7 @@ namespace Persistence.Migrations
                             Id = 139,
                             AnswerText = "Đáp án 3 cho câu 35",
                             BankQuestionId = 35,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7023),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9470),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1457,7 +1460,7 @@ namespace Persistence.Migrations
                             Id = 140,
                             AnswerText = "Đáp án 4 cho câu 35",
                             BankQuestionId = 35,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7024),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9471),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1467,7 +1470,7 @@ namespace Persistence.Migrations
                             Id = 141,
                             AnswerText = "Đáp án 1 cho câu 36",
                             BankQuestionId = 36,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7025),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9472),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1477,7 +1480,7 @@ namespace Persistence.Migrations
                             Id = 142,
                             AnswerText = "Đáp án 2 cho câu 36",
                             BankQuestionId = 36,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7027),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9473),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1487,7 +1490,7 @@ namespace Persistence.Migrations
                             Id = 143,
                             AnswerText = "Đáp án 3 cho câu 36",
                             BankQuestionId = 36,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7028),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9475),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1497,7 +1500,7 @@ namespace Persistence.Migrations
                             Id = 144,
                             AnswerText = "Đáp án 4 cho câu 36",
                             BankQuestionId = 36,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7030),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9476),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1507,7 +1510,7 @@ namespace Persistence.Migrations
                             Id = 145,
                             AnswerText = "Đáp án 1 cho câu 37",
                             BankQuestionId = 37,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7031),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9477),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1517,7 +1520,7 @@ namespace Persistence.Migrations
                             Id = 146,
                             AnswerText = "Đáp án 2 cho câu 37",
                             BankQuestionId = 37,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7032),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9479),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1527,7 +1530,7 @@ namespace Persistence.Migrations
                             Id = 147,
                             AnswerText = "Đáp án 3 cho câu 37",
                             BankQuestionId = 37,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7034),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9480),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1537,7 +1540,7 @@ namespace Persistence.Migrations
                             Id = 148,
                             AnswerText = "Đáp án 4 cho câu 37",
                             BankQuestionId = 37,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7035),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9487),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1547,7 +1550,7 @@ namespace Persistence.Migrations
                             Id = 149,
                             AnswerText = "Đáp án 1 cho câu 38",
                             BankQuestionId = 38,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7036),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9488),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1557,7 +1560,7 @@ namespace Persistence.Migrations
                             Id = 150,
                             AnswerText = "Đáp án 2 cho câu 38",
                             BankQuestionId = 38,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7038),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9489),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1567,7 +1570,7 @@ namespace Persistence.Migrations
                             Id = 151,
                             AnswerText = "Đáp án 3 cho câu 38",
                             BankQuestionId = 38,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7039),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9491),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1577,7 +1580,7 @@ namespace Persistence.Migrations
                             Id = 152,
                             AnswerText = "Đáp án 4 cho câu 38",
                             BankQuestionId = 38,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7040),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9492),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1587,7 +1590,7 @@ namespace Persistence.Migrations
                             Id = 153,
                             AnswerText = "Đáp án 1 cho câu 39",
                             BankQuestionId = 39,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7042),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9493),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1597,7 +1600,7 @@ namespace Persistence.Migrations
                             Id = 154,
                             AnswerText = "Đáp án 2 cho câu 39",
                             BankQuestionId = 39,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7043),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9494),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1607,7 +1610,7 @@ namespace Persistence.Migrations
                             Id = 155,
                             AnswerText = "Đáp án 3 cho câu 39",
                             BankQuestionId = 39,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7045),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9495),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1617,7 +1620,7 @@ namespace Persistence.Migrations
                             Id = 156,
                             AnswerText = "Đáp án 4 cho câu 39",
                             BankQuestionId = 39,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7046),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9496),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1627,7 +1630,7 @@ namespace Persistence.Migrations
                             Id = 157,
                             AnswerText = "Đáp án 1 cho câu 40",
                             BankQuestionId = 40,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7047),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9497),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1637,7 +1640,7 @@ namespace Persistence.Migrations
                             Id = 158,
                             AnswerText = "Đáp án 2 cho câu 40",
                             BankQuestionId = 40,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7049),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9498),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1647,7 +1650,7 @@ namespace Persistence.Migrations
                             Id = 159,
                             AnswerText = "Đáp án 3 cho câu 40",
                             BankQuestionId = 40,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7051),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9500),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1657,7 +1660,7 @@ namespace Persistence.Migrations
                             Id = 160,
                             AnswerText = "Đáp án 4 cho câu 40",
                             BankQuestionId = 40,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7052),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9501),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1667,7 +1670,7 @@ namespace Persistence.Migrations
                             Id = 161,
                             AnswerText = "Đáp án 1 cho câu 41",
                             BankQuestionId = 41,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7053),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9503),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1677,7 +1680,7 @@ namespace Persistence.Migrations
                             Id = 162,
                             AnswerText = "Đáp án 2 cho câu 41",
                             BankQuestionId = 41,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7055),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9504),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1687,7 +1690,7 @@ namespace Persistence.Migrations
                             Id = 163,
                             AnswerText = "Đáp án 3 cho câu 41",
                             BankQuestionId = 41,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7056),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9505),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1697,7 +1700,7 @@ namespace Persistence.Migrations
                             Id = 164,
                             AnswerText = "Đáp án 4 cho câu 41",
                             BankQuestionId = 41,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7057),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9506),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1707,7 +1710,7 @@ namespace Persistence.Migrations
                             Id = 165,
                             AnswerText = "Đáp án 1 cho câu 42",
                             BankQuestionId = 42,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7059),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9507),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1717,7 +1720,7 @@ namespace Persistence.Migrations
                             Id = 166,
                             AnswerText = "Đáp án 2 cho câu 42",
                             BankQuestionId = 42,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7060),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9508),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1727,7 +1730,7 @@ namespace Persistence.Migrations
                             Id = 167,
                             AnswerText = "Đáp án 3 cho câu 42",
                             BankQuestionId = 42,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7061),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9509),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1737,7 +1740,7 @@ namespace Persistence.Migrations
                             Id = 168,
                             AnswerText = "Đáp án 4 cho câu 42",
                             BankQuestionId = 42,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7063),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9510),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1747,7 +1750,7 @@ namespace Persistence.Migrations
                             Id = 169,
                             AnswerText = "Đáp án 1 cho câu 43",
                             BankQuestionId = 43,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7064),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9512),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1757,7 +1760,7 @@ namespace Persistence.Migrations
                             Id = 170,
                             AnswerText = "Đáp án 2 cho câu 43",
                             BankQuestionId = 43,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7065),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9513),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1767,7 +1770,7 @@ namespace Persistence.Migrations
                             Id = 171,
                             AnswerText = "Đáp án 3 cho câu 43",
                             BankQuestionId = 43,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7067),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9514),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1777,7 +1780,7 @@ namespace Persistence.Migrations
                             Id = 172,
                             AnswerText = "Đáp án 4 cho câu 43",
                             BankQuestionId = 43,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7068),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9515),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1787,7 +1790,7 @@ namespace Persistence.Migrations
                             Id = 173,
                             AnswerText = "Đáp án 1 cho câu 44",
                             BankQuestionId = 44,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7070),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9516),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1797,7 +1800,7 @@ namespace Persistence.Migrations
                             Id = 174,
                             AnswerText = "Đáp án 2 cho câu 44",
                             BankQuestionId = 44,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7071),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9517),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1807,7 +1810,7 @@ namespace Persistence.Migrations
                             Id = 175,
                             AnswerText = "Đáp án 3 cho câu 44",
                             BankQuestionId = 44,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7072),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9518),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1817,7 +1820,7 @@ namespace Persistence.Migrations
                             Id = 176,
                             AnswerText = "Đáp án 4 cho câu 44",
                             BankQuestionId = 44,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7073),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9519),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1827,7 +1830,7 @@ namespace Persistence.Migrations
                             Id = 177,
                             AnswerText = "Đáp án 1 cho câu 45",
                             BankQuestionId = 45,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7075),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9521),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1837,7 +1840,7 @@ namespace Persistence.Migrations
                             Id = 178,
                             AnswerText = "Đáp án 2 cho câu 45",
                             BankQuestionId = 45,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7076),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9522),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1847,7 +1850,7 @@ namespace Persistence.Migrations
                             Id = 179,
                             AnswerText = "Đáp án 3 cho câu 45",
                             BankQuestionId = 45,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7077),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9523),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1857,7 +1860,7 @@ namespace Persistence.Migrations
                             Id = 180,
                             AnswerText = "Đáp án 4 cho câu 45",
                             BankQuestionId = 45,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7079),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9525),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1867,7 +1870,7 @@ namespace Persistence.Migrations
                             Id = 181,
                             AnswerText = "Đáp án 1 cho câu 46",
                             BankQuestionId = 46,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7080),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9526),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1877,7 +1880,7 @@ namespace Persistence.Migrations
                             Id = 182,
                             AnswerText = "Đáp án 2 cho câu 46",
                             BankQuestionId = 46,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7081),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9527),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1887,7 +1890,7 @@ namespace Persistence.Migrations
                             Id = 183,
                             AnswerText = "Đáp án 3 cho câu 46",
                             BankQuestionId = 46,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7083),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9528),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1897,7 +1900,7 @@ namespace Persistence.Migrations
                             Id = 184,
                             AnswerText = "Đáp án 4 cho câu 46",
                             BankQuestionId = 46,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7085),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9529),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1907,7 +1910,7 @@ namespace Persistence.Migrations
                             Id = 185,
                             AnswerText = "Đáp án 1 cho câu 47",
                             BankQuestionId = 47,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7086),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9530),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1917,7 +1920,7 @@ namespace Persistence.Migrations
                             Id = 186,
                             AnswerText = "Đáp án 2 cho câu 47",
                             BankQuestionId = 47,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7087),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9531),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1927,7 +1930,7 @@ namespace Persistence.Migrations
                             Id = 187,
                             AnswerText = "Đáp án 3 cho câu 47",
                             BankQuestionId = 47,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7089),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9532),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1937,7 +1940,7 @@ namespace Persistence.Migrations
                             Id = 188,
                             AnswerText = "Đáp án 4 cho câu 47",
                             BankQuestionId = 47,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7090),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9533),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1947,7 +1950,7 @@ namespace Persistence.Migrations
                             Id = 189,
                             AnswerText = "Đáp án 1 cho câu 48",
                             BankQuestionId = 48,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7098),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9534),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1957,7 +1960,7 @@ namespace Persistence.Migrations
                             Id = 190,
                             AnswerText = "Đáp án 2 cho câu 48",
                             BankQuestionId = 48,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7100),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9536),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1967,7 +1970,7 @@ namespace Persistence.Migrations
                             Id = 191,
                             AnswerText = "Đáp án 3 cho câu 48",
                             BankQuestionId = 48,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7101),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9537),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1977,7 +1980,7 @@ namespace Persistence.Migrations
                             Id = 192,
                             AnswerText = "Đáp án 4 cho câu 48",
                             BankQuestionId = 48,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7102),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9538),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1987,7 +1990,7 @@ namespace Persistence.Migrations
                             Id = 193,
                             AnswerText = "Đáp án 1 cho câu 49",
                             BankQuestionId = 49,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7104),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9539),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1997,7 +2000,7 @@ namespace Persistence.Migrations
                             Id = 194,
                             AnswerText = "Đáp án 2 cho câu 49",
                             BankQuestionId = 49,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7105),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9540),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2007,7 +2010,7 @@ namespace Persistence.Migrations
                             Id = 195,
                             AnswerText = "Đáp án 3 cho câu 49",
                             BankQuestionId = 49,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7106),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9541),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2017,7 +2020,7 @@ namespace Persistence.Migrations
                             Id = 196,
                             AnswerText = "Đáp án 4 cho câu 49",
                             BankQuestionId = 49,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7108),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9542),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2027,7 +2030,7 @@ namespace Persistence.Migrations
                             Id = 197,
                             AnswerText = "Đáp án 1 cho câu 50",
                             BankQuestionId = 50,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7109),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9543),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2037,7 +2040,7 @@ namespace Persistence.Migrations
                             Id = 198,
                             AnswerText = "Đáp án 2 cho câu 50",
                             BankQuestionId = 50,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7110),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9544),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2047,7 +2050,7 @@ namespace Persistence.Migrations
                             Id = 199,
                             AnswerText = "Đáp án 3 cho câu 50",
                             BankQuestionId = 50,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7112),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9545),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2057,7 +2060,7 @@ namespace Persistence.Migrations
                             Id = 200,
                             AnswerText = "Đáp án 4 cho câu 50",
                             BankQuestionId = 50,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7113),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9546),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2067,7 +2070,7 @@ namespace Persistence.Migrations
                             Id = 201,
                             AnswerText = "Đáp án 1 cho câu 51",
                             BankQuestionId = 51,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7114),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9547),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2077,7 +2080,7 @@ namespace Persistence.Migrations
                             Id = 202,
                             AnswerText = "Đáp án 2 cho câu 51",
                             BankQuestionId = 51,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7116),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9549),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2087,7 +2090,7 @@ namespace Persistence.Migrations
                             Id = 203,
                             AnswerText = "Đáp án 3 cho câu 51",
                             BankQuestionId = 51,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7117),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9550),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2097,7 +2100,7 @@ namespace Persistence.Migrations
                             Id = 204,
                             AnswerText = "Đáp án 4 cho câu 51",
                             BankQuestionId = 51,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7118),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9551),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2107,7 +2110,7 @@ namespace Persistence.Migrations
                             Id = 205,
                             AnswerText = "Đáp án 1 cho câu 52",
                             BankQuestionId = 52,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7120),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9552),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2117,7 +2120,7 @@ namespace Persistence.Migrations
                             Id = 206,
                             AnswerText = "Đáp án 2 cho câu 52",
                             BankQuestionId = 52,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7121),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9553),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2127,7 +2130,7 @@ namespace Persistence.Migrations
                             Id = 207,
                             AnswerText = "Đáp án 3 cho câu 52",
                             BankQuestionId = 52,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7122),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9554),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2137,7 +2140,7 @@ namespace Persistence.Migrations
                             Id = 208,
                             AnswerText = "Đáp án 4 cho câu 52",
                             BankQuestionId = 52,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7124),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9555),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2147,7 +2150,7 @@ namespace Persistence.Migrations
                             Id = 209,
                             AnswerText = "Đáp án 1 cho câu 53",
                             BankQuestionId = 53,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7125),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9556),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2157,7 +2160,7 @@ namespace Persistence.Migrations
                             Id = 210,
                             AnswerText = "Đáp án 2 cho câu 53",
                             BankQuestionId = 53,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7127),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9558),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2167,7 +2170,7 @@ namespace Persistence.Migrations
                             Id = 211,
                             AnswerText = "Đáp án 3 cho câu 53",
                             BankQuestionId = 53,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7128),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9559),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2177,7 +2180,7 @@ namespace Persistence.Migrations
                             Id = 212,
                             AnswerText = "Đáp án 4 cho câu 53",
                             BankQuestionId = 53,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7130),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9566),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2187,7 +2190,7 @@ namespace Persistence.Migrations
                             Id = 213,
                             AnswerText = "Đáp án 1 cho câu 54",
                             BankQuestionId = 54,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7131),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9568),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2197,7 +2200,7 @@ namespace Persistence.Migrations
                             Id = 214,
                             AnswerText = "Đáp án 2 cho câu 54",
                             BankQuestionId = 54,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7132),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9570),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2207,7 +2210,7 @@ namespace Persistence.Migrations
                             Id = 215,
                             AnswerText = "Đáp án 3 cho câu 54",
                             BankQuestionId = 54,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7134),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9571),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2217,7 +2220,7 @@ namespace Persistence.Migrations
                             Id = 216,
                             AnswerText = "Đáp án 4 cho câu 54",
                             BankQuestionId = 54,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7135),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9572),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2227,7 +2230,7 @@ namespace Persistence.Migrations
                             Id = 217,
                             AnswerText = "Đáp án 1 cho câu 55",
                             BankQuestionId = 55,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7136),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9573),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2237,7 +2240,7 @@ namespace Persistence.Migrations
                             Id = 218,
                             AnswerText = "Đáp án 2 cho câu 55",
                             BankQuestionId = 55,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7138),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9574),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2247,7 +2250,7 @@ namespace Persistence.Migrations
                             Id = 219,
                             AnswerText = "Đáp án 3 cho câu 55",
                             BankQuestionId = 55,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7139),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9576),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2257,7 +2260,7 @@ namespace Persistence.Migrations
                             Id = 220,
                             AnswerText = "Đáp án 4 cho câu 55",
                             BankQuestionId = 55,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7140),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9577),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2267,7 +2270,7 @@ namespace Persistence.Migrations
                             Id = 221,
                             AnswerText = "Đáp án 1 cho câu 56",
                             BankQuestionId = 56,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7142),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9578),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2277,7 +2280,7 @@ namespace Persistence.Migrations
                             Id = 222,
                             AnswerText = "Đáp án 2 cho câu 56",
                             BankQuestionId = 56,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7143),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9579),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2287,7 +2290,7 @@ namespace Persistence.Migrations
                             Id = 223,
                             AnswerText = "Đáp án 3 cho câu 56",
                             BankQuestionId = 56,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7144),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9580),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2297,7 +2300,7 @@ namespace Persistence.Migrations
                             Id = 224,
                             AnswerText = "Đáp án 4 cho câu 56",
                             BankQuestionId = 56,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7146),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9581),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2307,7 +2310,7 @@ namespace Persistence.Migrations
                             Id = 225,
                             AnswerText = "Đáp án 1 cho câu 57",
                             BankQuestionId = 57,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7147),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9582),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2317,7 +2320,7 @@ namespace Persistence.Migrations
                             Id = 226,
                             AnswerText = "Đáp án 2 cho câu 57",
                             BankQuestionId = 57,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7148),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9584),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2327,7 +2330,7 @@ namespace Persistence.Migrations
                             Id = 227,
                             AnswerText = "Đáp án 3 cho câu 57",
                             BankQuestionId = 57,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7150),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9585),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2337,7 +2340,7 @@ namespace Persistence.Migrations
                             Id = 228,
                             AnswerText = "Đáp án 4 cho câu 57",
                             BankQuestionId = 57,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7151),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9586),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2347,7 +2350,7 @@ namespace Persistence.Migrations
                             Id = 229,
                             AnswerText = "Đáp án 1 cho câu 58",
                             BankQuestionId = 58,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7152),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9587),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2357,7 +2360,7 @@ namespace Persistence.Migrations
                             Id = 230,
                             AnswerText = "Đáp án 2 cho câu 58",
                             BankQuestionId = 58,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7153),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9588),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2367,7 +2370,7 @@ namespace Persistence.Migrations
                             Id = 231,
                             AnswerText = "Đáp án 3 cho câu 58",
                             BankQuestionId = 58,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7155),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9589),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2377,7 +2380,7 @@ namespace Persistence.Migrations
                             Id = 232,
                             AnswerText = "Đáp án 4 cho câu 58",
                             BankQuestionId = 58,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7156),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9590),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2387,7 +2390,7 @@ namespace Persistence.Migrations
                             Id = 233,
                             AnswerText = "Đáp án 1 cho câu 59",
                             BankQuestionId = 59,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7157),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9592),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2397,7 +2400,7 @@ namespace Persistence.Migrations
                             Id = 234,
                             AnswerText = "Đáp án 2 cho câu 59",
                             BankQuestionId = 59,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7159),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9593),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2407,7 +2410,7 @@ namespace Persistence.Migrations
                             Id = 235,
                             AnswerText = "Đáp án 3 cho câu 59",
                             BankQuestionId = 59,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7160),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9594),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2417,7 +2420,7 @@ namespace Persistence.Migrations
                             Id = 236,
                             AnswerText = "Đáp án 4 cho câu 59",
                             BankQuestionId = 59,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7162),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9596),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2427,7 +2430,7 @@ namespace Persistence.Migrations
                             Id = 237,
                             AnswerText = "Đáp án 1 cho câu 60",
                             BankQuestionId = 60,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7164),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9597),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2437,7 +2440,7 @@ namespace Persistence.Migrations
                             Id = 238,
                             AnswerText = "Đáp án 2 cho câu 60",
                             BankQuestionId = 60,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7165),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9598),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2447,7 +2450,7 @@ namespace Persistence.Migrations
                             Id = 239,
                             AnswerText = "Đáp án 3 cho câu 60",
                             BankQuestionId = 60,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7166),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9599),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2457,7 +2460,7 @@ namespace Persistence.Migrations
                             Id = 240,
                             AnswerText = "Đáp án 4 cho câu 60",
                             BankQuestionId = 60,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7167),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9600),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2467,7 +2470,7 @@ namespace Persistence.Migrations
                             Id = 241,
                             AnswerText = "Đáp án 1 cho câu 61",
                             BankQuestionId = 61,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7169),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9601),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2477,7 +2480,7 @@ namespace Persistence.Migrations
                             Id = 242,
                             AnswerText = "Đáp án 2 cho câu 61",
                             BankQuestionId = 61,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7170),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9603),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2487,7 +2490,7 @@ namespace Persistence.Migrations
                             Id = 243,
                             AnswerText = "Đáp án 3 cho câu 61",
                             BankQuestionId = 61,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7171),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9604),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2497,7 +2500,7 @@ namespace Persistence.Migrations
                             Id = 244,
                             AnswerText = "Đáp án 4 cho câu 61",
                             BankQuestionId = 61,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7173),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9605),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2507,7 +2510,7 @@ namespace Persistence.Migrations
                             Id = 245,
                             AnswerText = "Đáp án 1 cho câu 62",
                             BankQuestionId = 62,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7174),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9606),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2517,7 +2520,7 @@ namespace Persistence.Migrations
                             Id = 246,
                             AnswerText = "Đáp án 2 cho câu 62",
                             BankQuestionId = 62,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7175),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9608),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2527,7 +2530,7 @@ namespace Persistence.Migrations
                             Id = 247,
                             AnswerText = "Đáp án 3 cho câu 62",
                             BankQuestionId = 62,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7177),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9609),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2537,7 +2540,7 @@ namespace Persistence.Migrations
                             Id = 248,
                             AnswerText = "Đáp án 4 cho câu 62",
                             BankQuestionId = 62,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7178),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9610),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2547,7 +2550,7 @@ namespace Persistence.Migrations
                             Id = 249,
                             AnswerText = "Đáp án 1 cho câu 63",
                             BankQuestionId = 63,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7179),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9611),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2557,7 +2560,7 @@ namespace Persistence.Migrations
                             Id = 250,
                             AnswerText = "Đáp án 2 cho câu 63",
                             BankQuestionId = 63,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7181),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9612),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2567,7 +2570,7 @@ namespace Persistence.Migrations
                             Id = 251,
                             AnswerText = "Đáp án 3 cho câu 63",
                             BankQuestionId = 63,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7182),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9613),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2577,7 +2580,7 @@ namespace Persistence.Migrations
                             Id = 252,
                             AnswerText = "Đáp án 4 cho câu 63",
                             BankQuestionId = 63,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7183),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9614),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2587,7 +2590,7 @@ namespace Persistence.Migrations
                             Id = 253,
                             AnswerText = "Đáp án 1 cho câu 64",
                             BankQuestionId = 64,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7192),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9615),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2597,7 +2600,7 @@ namespace Persistence.Migrations
                             Id = 254,
                             AnswerText = "Đáp án 2 cho câu 64",
                             BankQuestionId = 64,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7193),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9617),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2607,7 +2610,7 @@ namespace Persistence.Migrations
                             Id = 255,
                             AnswerText = "Đáp án 3 cho câu 64",
                             BankQuestionId = 64,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7194),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9618),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2617,7 +2620,7 @@ namespace Persistence.Migrations
                             Id = 256,
                             AnswerText = "Đáp án 4 cho câu 64",
                             BankQuestionId = 64,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7196),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9619),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2627,7 +2630,7 @@ namespace Persistence.Migrations
                             Id = 257,
                             AnswerText = "Đáp án 1 cho câu 65",
                             BankQuestionId = 65,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7197),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9620),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2637,7 +2640,7 @@ namespace Persistence.Migrations
                             Id = 258,
                             AnswerText = "Đáp án 2 cho câu 65",
                             BankQuestionId = 65,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7198),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9621),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2647,7 +2650,7 @@ namespace Persistence.Migrations
                             Id = 259,
                             AnswerText = "Đáp án 3 cho câu 65",
                             BankQuestionId = 65,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7200),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9622),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2657,7 +2660,7 @@ namespace Persistence.Migrations
                             Id = 260,
                             AnswerText = "Đáp án 4 cho câu 65",
                             BankQuestionId = 65,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7201),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9623),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2667,7 +2670,7 @@ namespace Persistence.Migrations
                             Id = 261,
                             AnswerText = "Đáp án 1 cho câu 66",
                             BankQuestionId = 66,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7203),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9625),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2677,7 +2680,7 @@ namespace Persistence.Migrations
                             Id = 262,
                             AnswerText = "Đáp án 2 cho câu 66",
                             BankQuestionId = 66,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7204),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9626),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2687,7 +2690,7 @@ namespace Persistence.Migrations
                             Id = 263,
                             AnswerText = "Đáp án 3 cho câu 66",
                             BankQuestionId = 66,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7206),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9627),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2697,7 +2700,7 @@ namespace Persistence.Migrations
                             Id = 264,
                             AnswerText = "Đáp án 4 cho câu 66",
                             BankQuestionId = 66,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7207),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9629),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2707,7 +2710,7 @@ namespace Persistence.Migrations
                             Id = 265,
                             AnswerText = "Đáp án 1 cho câu 67",
                             BankQuestionId = 67,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7208),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9630),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2717,7 +2720,7 @@ namespace Persistence.Migrations
                             Id = 266,
                             AnswerText = "Đáp án 2 cho câu 67",
                             BankQuestionId = 67,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7210),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9631),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2727,7 +2730,7 @@ namespace Persistence.Migrations
                             Id = 267,
                             AnswerText = "Đáp án 3 cho câu 67",
                             BankQuestionId = 67,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7211),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9632),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2737,7 +2740,7 @@ namespace Persistence.Migrations
                             Id = 268,
                             AnswerText = "Đáp án 4 cho câu 67",
                             BankQuestionId = 67,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7212),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9633),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2747,7 +2750,7 @@ namespace Persistence.Migrations
                             Id = 269,
                             AnswerText = "Đáp án 1 cho câu 68",
                             BankQuestionId = 68,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7213),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9634),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2757,7 +2760,7 @@ namespace Persistence.Migrations
                             Id = 270,
                             AnswerText = "Đáp án 2 cho câu 68",
                             BankQuestionId = 68,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7215),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9635),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2767,7 +2770,7 @@ namespace Persistence.Migrations
                             Id = 271,
                             AnswerText = "Đáp án 3 cho câu 68",
                             BankQuestionId = 68,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7216),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9636),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2777,7 +2780,7 @@ namespace Persistence.Migrations
                             Id = 272,
                             AnswerText = "Đáp án 4 cho câu 68",
                             BankQuestionId = 68,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7217),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9637),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2787,7 +2790,7 @@ namespace Persistence.Migrations
                             Id = 273,
                             AnswerText = "Đáp án 1 cho câu 69",
                             BankQuestionId = 69,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7219),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9639),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2797,7 +2800,7 @@ namespace Persistence.Migrations
                             Id = 274,
                             AnswerText = "Đáp án 2 cho câu 69",
                             BankQuestionId = 69,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7220),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9640),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2807,7 +2810,7 @@ namespace Persistence.Migrations
                             Id = 275,
                             AnswerText = "Đáp án 3 cho câu 69",
                             BankQuestionId = 69,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7221),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9641),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2817,7 +2820,7 @@ namespace Persistence.Migrations
                             Id = 276,
                             AnswerText = "Đáp án 4 cho câu 69",
                             BankQuestionId = 69,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7223),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9648),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2827,7 +2830,7 @@ namespace Persistence.Migrations
                             Id = 277,
                             AnswerText = "Đáp án 1 cho câu 70",
                             BankQuestionId = 70,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7224),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9649),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2837,7 +2840,7 @@ namespace Persistence.Migrations
                             Id = 278,
                             AnswerText = "Đáp án 2 cho câu 70",
                             BankQuestionId = 70,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7225),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9650),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2847,7 +2850,7 @@ namespace Persistence.Migrations
                             Id = 279,
                             AnswerText = "Đáp án 3 cho câu 70",
                             BankQuestionId = 70,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7227),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9651),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2857,7 +2860,7 @@ namespace Persistence.Migrations
                             Id = 280,
                             AnswerText = "Đáp án 4 cho câu 70",
                             BankQuestionId = 70,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7228),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9652),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2867,7 +2870,7 @@ namespace Persistence.Migrations
                             Id = 281,
                             AnswerText = "Đáp án 1 cho câu 71",
                             BankQuestionId = 71,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7229),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9654),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2877,7 +2880,7 @@ namespace Persistence.Migrations
                             Id = 282,
                             AnswerText = "Đáp án 2 cho câu 71",
                             BankQuestionId = 71,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7230),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9655),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2887,7 +2890,7 @@ namespace Persistence.Migrations
                             Id = 283,
                             AnswerText = "Đáp án 3 cho câu 71",
                             BankQuestionId = 71,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7232),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9656),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2897,7 +2900,7 @@ namespace Persistence.Migrations
                             Id = 284,
                             AnswerText = "Đáp án 4 cho câu 71",
                             BankQuestionId = 71,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7233),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9657),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2907,7 +2910,7 @@ namespace Persistence.Migrations
                             Id = 285,
                             AnswerText = "Đáp án 1 cho câu 72",
                             BankQuestionId = 72,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7234),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9658),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2917,7 +2920,7 @@ namespace Persistence.Migrations
                             Id = 286,
                             AnswerText = "Đáp án 2 cho câu 72",
                             BankQuestionId = 72,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7236),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9659),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2927,7 +2930,7 @@ namespace Persistence.Migrations
                             Id = 287,
                             AnswerText = "Đáp án 3 cho câu 72",
                             BankQuestionId = 72,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7238),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9661),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2937,7 +2940,7 @@ namespace Persistence.Migrations
                             Id = 288,
                             AnswerText = "Đáp án 4 cho câu 72",
                             BankQuestionId = 72,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7239),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9662),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2947,7 +2950,7 @@ namespace Persistence.Migrations
                             Id = 289,
                             AnswerText = "Đáp án 1 cho câu 73",
                             BankQuestionId = 73,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7241),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9664),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2957,7 +2960,7 @@ namespace Persistence.Migrations
                             Id = 290,
                             AnswerText = "Đáp án 2 cho câu 73",
                             BankQuestionId = 73,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7242),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9665),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2967,7 +2970,7 @@ namespace Persistence.Migrations
                             Id = 291,
                             AnswerText = "Đáp án 3 cho câu 73",
                             BankQuestionId = 73,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7243),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9666),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2977,7 +2980,7 @@ namespace Persistence.Migrations
                             Id = 292,
                             AnswerText = "Đáp án 4 cho câu 73",
                             BankQuestionId = 73,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7245),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9667),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2987,7 +2990,7 @@ namespace Persistence.Migrations
                             Id = 293,
                             AnswerText = "Đáp án 1 cho câu 74",
                             BankQuestionId = 74,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7246),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9668),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -2997,7 +3000,7 @@ namespace Persistence.Migrations
                             Id = 294,
                             AnswerText = "Đáp án 2 cho câu 74",
                             BankQuestionId = 74,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7247),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9669),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3007,7 +3010,7 @@ namespace Persistence.Migrations
                             Id = 295,
                             AnswerText = "Đáp án 3 cho câu 74",
                             BankQuestionId = 74,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7249),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9670),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3017,7 +3020,7 @@ namespace Persistence.Migrations
                             Id = 296,
                             AnswerText = "Đáp án 4 cho câu 74",
                             BankQuestionId = 74,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7250),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9672),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3027,7 +3030,7 @@ namespace Persistence.Migrations
                             Id = 297,
                             AnswerText = "Đáp án 1 cho câu 75",
                             BankQuestionId = 75,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7251),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9673),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3037,7 +3040,7 @@ namespace Persistence.Migrations
                             Id = 298,
                             AnswerText = "Đáp án 2 cho câu 75",
                             BankQuestionId = 75,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7253),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9674),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3047,7 +3050,7 @@ namespace Persistence.Migrations
                             Id = 299,
                             AnswerText = "Đáp án 3 cho câu 75",
                             BankQuestionId = 75,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7254),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9675),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3057,7 +3060,7 @@ namespace Persistence.Migrations
                             Id = 300,
                             AnswerText = "Đáp án 4 cho câu 75",
                             BankQuestionId = 75,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7255),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9676),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3067,7 +3070,7 @@ namespace Persistence.Migrations
                             Id = 301,
                             AnswerText = "Đáp án 1 cho câu 76",
                             BankQuestionId = 76,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7257),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9678),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3077,7 +3080,7 @@ namespace Persistence.Migrations
                             Id = 302,
                             AnswerText = "Đáp án 2 cho câu 76",
                             BankQuestionId = 76,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7258),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9679),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3087,7 +3090,7 @@ namespace Persistence.Migrations
                             Id = 303,
                             AnswerText = "Đáp án 3 cho câu 76",
                             BankQuestionId = 76,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7259),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9680),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3097,7 +3100,7 @@ namespace Persistence.Migrations
                             Id = 304,
                             AnswerText = "Đáp án 4 cho câu 76",
                             BankQuestionId = 76,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7261),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9682),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3107,7 +3110,7 @@ namespace Persistence.Migrations
                             Id = 305,
                             AnswerText = "Đáp án 1 cho câu 77",
                             BankQuestionId = 77,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7262),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9683),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3117,7 +3120,7 @@ namespace Persistence.Migrations
                             Id = 306,
                             AnswerText = "Đáp án 2 cho câu 77",
                             BankQuestionId = 77,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7263),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9684),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3127,7 +3130,7 @@ namespace Persistence.Migrations
                             Id = 307,
                             AnswerText = "Đáp án 3 cho câu 77",
                             BankQuestionId = 77,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7265),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9685),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3137,7 +3140,7 @@ namespace Persistence.Migrations
                             Id = 308,
                             AnswerText = "Đáp án 4 cho câu 77",
                             BankQuestionId = 77,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7266),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9686),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3147,7 +3150,7 @@ namespace Persistence.Migrations
                             Id = 309,
                             AnswerText = "Đáp án 1 cho câu 78",
                             BankQuestionId = 78,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7267),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9688),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3157,7 +3160,7 @@ namespace Persistence.Migrations
                             Id = 310,
                             AnswerText = "Đáp án 2 cho câu 78",
                             BankQuestionId = 78,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7269),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9689),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3167,7 +3170,7 @@ namespace Persistence.Migrations
                             Id = 311,
                             AnswerText = "Đáp án 3 cho câu 78",
                             BankQuestionId = 78,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7270),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9690),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3177,7 +3180,7 @@ namespace Persistence.Migrations
                             Id = 312,
                             AnswerText = "Đáp án 4 cho câu 78",
                             BankQuestionId = 78,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7271),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9691),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3187,7 +3190,7 @@ namespace Persistence.Migrations
                             Id = 313,
                             AnswerText = "Đáp án 1 cho câu 79",
                             BankQuestionId = 79,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7273),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9693),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3197,7 +3200,7 @@ namespace Persistence.Migrations
                             Id = 314,
                             AnswerText = "Đáp án 2 cho câu 79",
                             BankQuestionId = 79,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7275),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9694),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3207,7 +3210,7 @@ namespace Persistence.Migrations
                             Id = 315,
                             AnswerText = "Đáp án 3 cho câu 79",
                             BankQuestionId = 79,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7276),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9695),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3217,7 +3220,7 @@ namespace Persistence.Migrations
                             Id = 316,
                             AnswerText = "Đáp án 4 cho câu 79",
                             BankQuestionId = 79,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7277),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9697),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3227,7 +3230,7 @@ namespace Persistence.Migrations
                             Id = 317,
                             AnswerText = "Đáp án 1 cho câu 80",
                             BankQuestionId = 80,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7286),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9698),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3237,7 +3240,7 @@ namespace Persistence.Migrations
                             Id = 318,
                             AnswerText = "Đáp án 2 cho câu 80",
                             BankQuestionId = 80,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7287),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9699),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3247,7 +3250,7 @@ namespace Persistence.Migrations
                             Id = 319,
                             AnswerText = "Đáp án 3 cho câu 80",
                             BankQuestionId = 80,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7289),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9700),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3257,7 +3260,7 @@ namespace Persistence.Migrations
                             Id = 320,
                             AnswerText = "Đáp án 4 cho câu 80",
                             BankQuestionId = 80,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7290),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9701),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3267,7 +3270,7 @@ namespace Persistence.Migrations
                             Id = 321,
                             AnswerText = "Đáp án 1 cho câu 81",
                             BankQuestionId = 81,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7291),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9703),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3277,7 +3280,7 @@ namespace Persistence.Migrations
                             Id = 322,
                             AnswerText = "Đáp án 2 cho câu 81",
                             BankQuestionId = 81,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7293),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9704),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3287,7 +3290,7 @@ namespace Persistence.Migrations
                             Id = 323,
                             AnswerText = "Đáp án 3 cho câu 81",
                             BankQuestionId = 81,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7294),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9705),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3297,7 +3300,7 @@ namespace Persistence.Migrations
                             Id = 324,
                             AnswerText = "Đáp án 4 cho câu 81",
                             BankQuestionId = 81,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7295),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9706),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3307,7 +3310,7 @@ namespace Persistence.Migrations
                             Id = 325,
                             AnswerText = "Đáp án 1 cho câu 82",
                             BankQuestionId = 82,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7297),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9707),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3317,7 +3320,7 @@ namespace Persistence.Migrations
                             Id = 326,
                             AnswerText = "Đáp án 2 cho câu 82",
                             BankQuestionId = 82,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7298),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9708),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3327,7 +3330,7 @@ namespace Persistence.Migrations
                             Id = 327,
                             AnswerText = "Đáp án 3 cho câu 82",
                             BankQuestionId = 82,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7299),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9710),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3337,7 +3340,7 @@ namespace Persistence.Migrations
                             Id = 328,
                             AnswerText = "Đáp án 4 cho câu 82",
                             BankQuestionId = 82,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7301),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9711),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3347,7 +3350,7 @@ namespace Persistence.Migrations
                             Id = 329,
                             AnswerText = "Đáp án 1 cho câu 83",
                             BankQuestionId = 83,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7302),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9712),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3357,7 +3360,7 @@ namespace Persistence.Migrations
                             Id = 330,
                             AnswerText = "Đáp án 2 cho câu 83",
                             BankQuestionId = 83,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7303),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9713),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3367,7 +3370,7 @@ namespace Persistence.Migrations
                             Id = 331,
                             AnswerText = "Đáp án 3 cho câu 83",
                             BankQuestionId = 83,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7305),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9714),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3377,7 +3380,7 @@ namespace Persistence.Migrations
                             Id = 332,
                             AnswerText = "Đáp án 4 cho câu 83",
                             BankQuestionId = 83,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7306),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9716),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3387,7 +3390,7 @@ namespace Persistence.Migrations
                             Id = 333,
                             AnswerText = "Đáp án 1 cho câu 84",
                             BankQuestionId = 84,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7307),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9717),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3397,7 +3400,7 @@ namespace Persistence.Migrations
                             Id = 334,
                             AnswerText = "Đáp án 2 cho câu 84",
                             BankQuestionId = 84,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7309),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9718),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3407,7 +3410,7 @@ namespace Persistence.Migrations
                             Id = 335,
                             AnswerText = "Đáp án 3 cho câu 84",
                             BankQuestionId = 84,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7310),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9719),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3417,7 +3420,7 @@ namespace Persistence.Migrations
                             Id = 336,
                             AnswerText = "Đáp án 4 cho câu 84",
                             BankQuestionId = 84,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7311),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9720),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3427,7 +3430,7 @@ namespace Persistence.Migrations
                             Id = 337,
                             AnswerText = "Đáp án 1 cho câu 85",
                             BankQuestionId = 85,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7313),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9722),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3437,7 +3440,7 @@ namespace Persistence.Migrations
                             Id = 338,
                             AnswerText = "Đáp án 2 cho câu 85",
                             BankQuestionId = 85,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7315),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9723),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3447,7 +3450,7 @@ namespace Persistence.Migrations
                             Id = 339,
                             AnswerText = "Đáp án 3 cho câu 85",
                             BankQuestionId = 85,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7316),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9725),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3457,7 +3460,7 @@ namespace Persistence.Migrations
                             Id = 340,
                             AnswerText = "Đáp án 4 cho câu 85",
                             BankQuestionId = 85,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7317),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9733),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3467,7 +3470,7 @@ namespace Persistence.Migrations
                             Id = 341,
                             AnswerText = "Đáp án 1 cho câu 86",
                             BankQuestionId = 86,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7319),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9734),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3477,7 +3480,7 @@ namespace Persistence.Migrations
                             Id = 342,
                             AnswerText = "Đáp án 2 cho câu 86",
                             BankQuestionId = 86,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7320),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9735),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3487,7 +3490,7 @@ namespace Persistence.Migrations
                             Id = 343,
                             AnswerText = "Đáp án 3 cho câu 86",
                             BankQuestionId = 86,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7321),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9736),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3497,7 +3500,7 @@ namespace Persistence.Migrations
                             Id = 344,
                             AnswerText = "Đáp án 4 cho câu 86",
                             BankQuestionId = 86,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7323),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9737),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3507,7 +3510,7 @@ namespace Persistence.Migrations
                             Id = 345,
                             AnswerText = "Đáp án 1 cho câu 87",
                             BankQuestionId = 87,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7324),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9738),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3517,7 +3520,7 @@ namespace Persistence.Migrations
                             Id = 346,
                             AnswerText = "Đáp án 2 cho câu 87",
                             BankQuestionId = 87,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7325),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9739),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3527,7 +3530,7 @@ namespace Persistence.Migrations
                             Id = 347,
                             AnswerText = "Đáp án 3 cho câu 87",
                             BankQuestionId = 87,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7327),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9741),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3537,7 +3540,7 @@ namespace Persistence.Migrations
                             Id = 348,
                             AnswerText = "Đáp án 4 cho câu 87",
                             BankQuestionId = 87,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7328),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9742),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3547,7 +3550,7 @@ namespace Persistence.Migrations
                             Id = 349,
                             AnswerText = "Đáp án 1 cho câu 88",
                             BankQuestionId = 88,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7329),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9743),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3557,7 +3560,7 @@ namespace Persistence.Migrations
                             Id = 350,
                             AnswerText = "Đáp án 2 cho câu 88",
                             BankQuestionId = 88,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7331),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9744),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3567,7 +3570,7 @@ namespace Persistence.Migrations
                             Id = 351,
                             AnswerText = "Đáp án 3 cho câu 88",
                             BankQuestionId = 88,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7332),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9745),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3577,7 +3580,7 @@ namespace Persistence.Migrations
                             Id = 352,
                             AnswerText = "Đáp án 4 cho câu 88",
                             BankQuestionId = 88,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7333),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9746),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3587,7 +3590,7 @@ namespace Persistence.Migrations
                             Id = 353,
                             AnswerText = "Đáp án 1 cho câu 89",
                             BankQuestionId = 89,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7335),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9747),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3597,7 +3600,7 @@ namespace Persistence.Migrations
                             Id = 354,
                             AnswerText = "Đáp án 2 cho câu 89",
                             BankQuestionId = 89,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7336),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9748),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3607,7 +3610,7 @@ namespace Persistence.Migrations
                             Id = 355,
                             AnswerText = "Đáp án 3 cho câu 89",
                             BankQuestionId = 89,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7337),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9750),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3617,7 +3620,7 @@ namespace Persistence.Migrations
                             Id = 356,
                             AnswerText = "Đáp án 4 cho câu 89",
                             BankQuestionId = 89,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7338),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9751),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3627,7 +3630,7 @@ namespace Persistence.Migrations
                             Id = 357,
                             AnswerText = "Đáp án 1 cho câu 90",
                             BankQuestionId = 90,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7340),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9752),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3637,7 +3640,7 @@ namespace Persistence.Migrations
                             Id = 358,
                             AnswerText = "Đáp án 2 cho câu 90",
                             BankQuestionId = 90,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7341),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9753),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3647,7 +3650,7 @@ namespace Persistence.Migrations
                             Id = 359,
                             AnswerText = "Đáp án 3 cho câu 90",
                             BankQuestionId = 90,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7343),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9754),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3657,7 +3660,7 @@ namespace Persistence.Migrations
                             Id = 360,
                             AnswerText = "Đáp án 4 cho câu 90",
                             BankQuestionId = 90,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7344),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9755),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3667,7 +3670,7 @@ namespace Persistence.Migrations
                             Id = 361,
                             AnswerText = "Đáp án 1 cho câu 91",
                             BankQuestionId = 91,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7345),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9756),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3677,7 +3680,7 @@ namespace Persistence.Migrations
                             Id = 362,
                             AnswerText = "Đáp án 2 cho câu 91",
                             BankQuestionId = 91,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7347),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9758),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3687,7 +3690,7 @@ namespace Persistence.Migrations
                             Id = 363,
                             AnswerText = "Đáp án 3 cho câu 91",
                             BankQuestionId = 91,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7348),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9759),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3697,7 +3700,7 @@ namespace Persistence.Migrations
                             Id = 364,
                             AnswerText = "Đáp án 4 cho câu 91",
                             BankQuestionId = 91,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7350),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9761),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3707,7 +3710,7 @@ namespace Persistence.Migrations
                             Id = 365,
                             AnswerText = "Đáp án 1 cho câu 92",
                             BankQuestionId = 92,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7351),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9762),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3717,7 +3720,7 @@ namespace Persistence.Migrations
                             Id = 366,
                             AnswerText = "Đáp án 2 cho câu 92",
                             BankQuestionId = 92,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7353),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9763),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3727,7 +3730,7 @@ namespace Persistence.Migrations
                             Id = 367,
                             AnswerText = "Đáp án 3 cho câu 92",
                             BankQuestionId = 92,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7354),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9764),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3737,7 +3740,7 @@ namespace Persistence.Migrations
                             Id = 368,
                             AnswerText = "Đáp án 4 cho câu 92",
                             BankQuestionId = 92,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7355),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9765),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3747,7 +3750,7 @@ namespace Persistence.Migrations
                             Id = 369,
                             AnswerText = "Đáp án 1 cho câu 93",
                             BankQuestionId = 93,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7357),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9766),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3757,7 +3760,7 @@ namespace Persistence.Migrations
                             Id = 370,
                             AnswerText = "Đáp án 2 cho câu 93",
                             BankQuestionId = 93,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7358),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9767),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3767,7 +3770,7 @@ namespace Persistence.Migrations
                             Id = 371,
                             AnswerText = "Đáp án 3 cho câu 93",
                             BankQuestionId = 93,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7359),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9769),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3777,7 +3780,7 @@ namespace Persistence.Migrations
                             Id = 372,
                             AnswerText = "Đáp án 4 cho câu 93",
                             BankQuestionId = 93,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7361),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9770),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3787,7 +3790,7 @@ namespace Persistence.Migrations
                             Id = 373,
                             AnswerText = "Đáp án 1 cho câu 94",
                             BankQuestionId = 94,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7362),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9771),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3797,7 +3800,7 @@ namespace Persistence.Migrations
                             Id = 374,
                             AnswerText = "Đáp án 2 cho câu 94",
                             BankQuestionId = 94,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7363),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9772),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3807,7 +3810,7 @@ namespace Persistence.Migrations
                             Id = 375,
                             AnswerText = "Đáp án 3 cho câu 94",
                             BankQuestionId = 94,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7365),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9773),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3817,7 +3820,7 @@ namespace Persistence.Migrations
                             Id = 376,
                             AnswerText = "Đáp án 4 cho câu 94",
                             BankQuestionId = 94,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7366),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9774),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3827,7 +3830,7 @@ namespace Persistence.Migrations
                             Id = 377,
                             AnswerText = "Đáp án 1 cho câu 95",
                             BankQuestionId = 95,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7367),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9775),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3837,7 +3840,7 @@ namespace Persistence.Migrations
                             Id = 378,
                             AnswerText = "Đáp án 2 cho câu 95",
                             BankQuestionId = 95,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7369),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9776),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3847,7 +3850,7 @@ namespace Persistence.Migrations
                             Id = 379,
                             AnswerText = "Đáp án 3 cho câu 95",
                             BankQuestionId = 95,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7370),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9777),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3857,7 +3860,7 @@ namespace Persistence.Migrations
                             Id = 380,
                             AnswerText = "Đáp án 4 cho câu 95",
                             BankQuestionId = 95,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7371),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9779),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3867,7 +3870,7 @@ namespace Persistence.Migrations
                             Id = 381,
                             AnswerText = "Đáp án 1 cho câu 96",
                             BankQuestionId = 96,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7373),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9780),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3877,7 +3880,7 @@ namespace Persistence.Migrations
                             Id = 382,
                             AnswerText = "Đáp án 2 cho câu 96",
                             BankQuestionId = 96,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7381),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9781),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3887,7 +3890,7 @@ namespace Persistence.Migrations
                             Id = 383,
                             AnswerText = "Đáp án 3 cho câu 96",
                             BankQuestionId = 96,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7382),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9782),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3897,7 +3900,7 @@ namespace Persistence.Migrations
                             Id = 384,
                             AnswerText = "Đáp án 4 cho câu 96",
                             BankQuestionId = 96,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7383),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9783),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3907,7 +3910,7 @@ namespace Persistence.Migrations
                             Id = 385,
                             AnswerText = "Đáp án 1 cho câu 97",
                             BankQuestionId = 97,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7385),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9784),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3917,7 +3920,7 @@ namespace Persistence.Migrations
                             Id = 386,
                             AnswerText = "Đáp án 2 cho câu 97",
                             BankQuestionId = 97,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7386),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9785),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3927,7 +3930,7 @@ namespace Persistence.Migrations
                             Id = 387,
                             AnswerText = "Đáp án 3 cho câu 97",
                             BankQuestionId = 97,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7388),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9786),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3937,7 +3940,7 @@ namespace Persistence.Migrations
                             Id = 388,
                             AnswerText = "Đáp án 4 cho câu 97",
                             BankQuestionId = 97,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7389),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9788),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3947,7 +3950,7 @@ namespace Persistence.Migrations
                             Id = 389,
                             AnswerText = "Đáp án 1 cho câu 98",
                             BankQuestionId = 98,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7390),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9789),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3957,7 +3960,7 @@ namespace Persistence.Migrations
                             Id = 390,
                             AnswerText = "Đáp án 2 cho câu 98",
                             BankQuestionId = 98,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7393),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9791),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3967,7 +3970,7 @@ namespace Persistence.Migrations
                             Id = 391,
                             AnswerText = "Đáp án 3 cho câu 98",
                             BankQuestionId = 98,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7394),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9792),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3977,7 +3980,7 @@ namespace Persistence.Migrations
                             Id = 392,
                             AnswerText = "Đáp án 4 cho câu 98",
                             BankQuestionId = 98,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7395),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9793),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3987,7 +3990,7 @@ namespace Persistence.Migrations
                             Id = 393,
                             AnswerText = "Đáp án 1 cho câu 99",
                             BankQuestionId = 99,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7397),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9794),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -3997,7 +4000,7 @@ namespace Persistence.Migrations
                             Id = 394,
                             AnswerText = "Đáp án 2 cho câu 99",
                             BankQuestionId = 99,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7398),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9795),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4007,7 +4010,7 @@ namespace Persistence.Migrations
                             Id = 395,
                             AnswerText = "Đáp án 3 cho câu 99",
                             BankQuestionId = 99,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7399),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9796),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4017,7 +4020,7 @@ namespace Persistence.Migrations
                             Id = 396,
                             AnswerText = "Đáp án 4 cho câu 99",
                             BankQuestionId = 99,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7401),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9797),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4027,7 +4030,7 @@ namespace Persistence.Migrations
                             Id = 397,
                             AnswerText = "Đáp án 1 cho câu 100",
                             BankQuestionId = 100,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7402),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9799),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = true,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4037,7 +4040,7 @@ namespace Persistence.Migrations
                             Id = 398,
                             AnswerText = "Đáp án 2 cho câu 100",
                             BankQuestionId = 100,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7403),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9800),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4047,7 +4050,7 @@ namespace Persistence.Migrations
                             Id = 399,
                             AnswerText = "Đáp án 3 cho câu 100",
                             BankQuestionId = 100,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7405),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9801),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -4057,7 +4060,7 @@ namespace Persistence.Migrations
                             Id = 400,
                             AnswerText = "Đáp án 4 cho câu 100",
                             BankQuestionId = 100,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7406),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9802),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsCorrected = false,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -5321,9 +5324,6 @@ namespace Persistence.Migrations
                     b.Property<int>("TotalQuestion")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("TotalTime")
-                        .HasColumnType("time");
-
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -5342,7 +5342,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7739),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Các câu hỏi thuộc nội dung: Vật chất & Ý thức, Lượng – Chất, Phép biện chứng",
                             IsPublic = true,
@@ -5350,13 +5350,12 @@ namespace Persistence.Migrations
                             SubjectId = 1,
                             Title = "Đề thi Triết học - Phần 1",
                             TotalQuestion = 50,
-                            TotalTime = new TimeSpan(0, 0, 0, 10, 0),
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(7751),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(75),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Các câu hỏi thuộc nội dung: Con người, Nhận thức, Thực tiễn, Chủ nghĩa xã hội",
                             IsPublic = true,
@@ -5364,7 +5363,6 @@ namespace Persistence.Migrations
                             SubjectId = 1,
                             Title = "Đề thi Triết học - Phần 2",
                             TotalQuestion = 50,
-                            TotalTime = new TimeSpan(0, 0, 0, 10, 0),
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -5717,7 +5715,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6406),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(8966),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Easy",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -5725,7 +5723,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6409),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(8968),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Medium",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -5733,7 +5731,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6411),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(8970),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Hard",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7249,7 +7247,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6448),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(8999),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Multiple Choice",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7257,7 +7255,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6450),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9001),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Fill in the Blank",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7265,7 +7263,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(6452),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 89, DateTimeKind.Local).AddTicks(9002),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Matching",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7312,7 +7310,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8179),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(425),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Truy cập nội dung cơ bản",
                             Duration = 14,
@@ -7323,7 +7321,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8183),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(429),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên",
                             Duration = 30,
@@ -7334,7 +7332,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8185),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(431),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Truy cập không giới hạn trong 1 năm",
                             Duration = 365,
@@ -7376,7 +7374,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8100),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(365),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Toán học",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7384,7 +7382,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8104),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(369),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Ngữ văn",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7392,7 +7390,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8106),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(371),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tiếng Anh",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7400,7 +7398,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8108),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(372),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Vật lý",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7408,7 +7406,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8110),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(374),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Hóa học",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7416,7 +7414,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8114),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(377),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Sinh học",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7424,7 +7422,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8115),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(378),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Lịch sử",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7432,7 +7430,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8117),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(380),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Địa lý",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7440,7 +7438,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8119),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(381),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Giáo dục công dân",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7448,7 +7446,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8122),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(384),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tin học",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7456,7 +7454,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8124),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(385),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Công nghệ",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -7464,7 +7462,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2025, 6, 10, 21, 19, 6, 807, DateTimeKind.Local).AddTicks(8126),
+                            CreatedAt = new DateTime(2025, 6, 9, 22, 25, 54, 90, DateTimeKind.Local).AddTicks(387),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Thể dục",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)

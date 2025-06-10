@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs.Exam;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace Application.Interface.IRepository
 {
     public interface IExamScoredRepository : IRepository<ExamScored>
     {
+        public Task<ExamScored?> GetExamScoredById(int examScoredId);
+        public Task<ExamViewDetailsDTO?> GetExamDetails(int examScoredId, int examId);
     }
 }

@@ -27,7 +27,7 @@ namespace Domain.Entities
 
         public virtual PremiumUser? PremiumUser { get; set; }
 
-        public virtual ICollection<Answer> Answers { get; set; } = new List<Answer>();
+        public virtual ICollection<Answer> Answers { get; set; } = new List<Answer>()!;
 
         public virtual ICollection<QuestionExam> QuestionExams { get; set; } = new List<QuestionExam>()!;
     }

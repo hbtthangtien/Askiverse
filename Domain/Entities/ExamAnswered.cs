@@ -14,10 +14,14 @@ namespace Domain.Entities
 
         public int  AnswerId { get; set; }
 
+        public int QuestionExamId { get; set; }
+
         public bool IsCorrected { get; set; }
 
         public virtual ExamScored? ExamScored { get; set; }
 
         public virtual Answer? Answer {  get; set; } 
+
+        public virtual QuestionExam? QuestionExam { get; set; }
     }
 }

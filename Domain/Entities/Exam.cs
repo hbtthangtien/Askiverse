@@ -25,6 +25,7 @@ namespace Domain.Entities
         public DateTime CreatedAt { get; set; }
 
         public bool IsPublic { get; set; }
+        public TimeSpan TotalTime { get; set; }
 
         public virtual PremiumUser? PremiumUser {  get; set; }
         
