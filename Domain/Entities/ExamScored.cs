@@ -17,6 +17,8 @@ namespace Domain.Entities
 
         public double Score { get; set; }
 
+        public int ExamId { get; set; }
+
         public virtual BasicUser? User { get; set; }
 
         public virtual Exam? Exam { get; set; }

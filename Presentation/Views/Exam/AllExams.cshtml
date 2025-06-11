@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Application.DTOs.Exam.ExamDTO>
+
+<div class="container" style="min-height: 65vh">
+	<h1 class="text-center">Danh sách các đề thi</h1>
+
+	<table class="table table-bordered border-2 border-dark">
+		<thead>
+			<tr class="text-center">
+				<th>STT</th>
+				<th>Tiêu đề</th>
+				<th>Miêu tả</th>
+				<th>Văn bản nguồn</th>
+				<th>Tổng số câu hỏi</th>
+				<th>Ngày tạo</th>
+				<th>Hoạt động</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				int stt = 1;
+			}
+			@foreach (var exam in Model)
+			{
+				<tr>
+					<td>@stt</td>
+					<td>@exam.Title</td>
+					<td>@exam.Description</td>
+					<td>@exam.SourceText</td>
+					<td>@exam.TotalQuestion</td>
+					<td>@exam.CreatedAt.ToString("dd/MM/yyyy")</td>
+					<td>
+						<a asp-controller="Exam" asp-action="GetExamTakeById" asp-route-examId="@exam.Id" class="text-decoration-none text-dark">Vào thi</a> |
+						<a href="#" class="text-decoration-none text-dark">Xem kết quả</a>
+					</td>
+				</tr>
+				stt++;
+			}
+		</tbody>
+	</table>
+</div>

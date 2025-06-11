@@ -24,5 +24,7 @@ namespace Domain.Entities
         public string? Content { get; set; }
 
         public virtual Exam? Exam { get; set; }
+        public virtual BankQuestion? BankQuestion { get; set; }
+        public virtual ICollection<ExamAnswered> ExamAnswereds { get; set; } = new List<ExamAnswered>();
     }
 }

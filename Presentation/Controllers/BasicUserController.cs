@@ -128,7 +128,7 @@ namespace Presentation.Controllers
         {
             await HttpContext.SignOutAsync();
             await _authenticateService.Logout();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

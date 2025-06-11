@@ -531,7 +531,9 @@ namespace Persistence.Extensions
                         TotalQuestion = 50,
                         IsPublic = true,
                         Title = "Đề thi Triết học - Phần 1",
-                        Description = "Các câu hỏi thuộc nội dung: Vật chất & Ý thức, Lượng – Chất, Phép biện chứng"},
+                        Description = "Các câu hỏi thuộc nội dung: Vật chất & Ý thức, Lượng – Chất, Phép biện chứng",
+                        CreatedAt = DateTime.Now,
+                        TotalTime = TimeSpan.FromSeconds(10)},
                     new Exam
                            {
                                Id = 2,
@@ -541,8 +543,9 @@ namespace Persistence.Extensions
                                SubjectId = 1,
                                TotalQuestion = 50,
                                IsPublic = true,
-                               CreatedAt = DateTime.Now
-                           }
+                               CreatedAt = DateTime.Now,
+							   TotalTime = TimeSpan.FromSeconds(10)
+						   }
                  };
                 entity.HasData(exams);
             });
