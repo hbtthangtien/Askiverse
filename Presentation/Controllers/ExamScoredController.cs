@@ -12,6 +12,7 @@ namespace Presentation.Controllers
 			_examScoredSerivce = examScoredSerivce;
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> ViewResult(int examScoredId, int examId)
 		{
 			var examResult = await _examScoredSerivce.ViewResultAsync(examScoredId);

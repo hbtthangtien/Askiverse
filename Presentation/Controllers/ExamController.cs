@@ -23,6 +23,7 @@ namespace Presentation.Controllers
 		}
 
 		[Authorize]
+		[HttpPost]
 		public async Task<IActionResult> GetExamTakeById(int examId)
 		{
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -77,7 +78,8 @@ namespace Presentation.Controllers
 			}
 		}
 
-		[HttpGet]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult SubmitExamResult(int? examScoredId, int? examId, string? error)
 		{
 			if (!string.IsNullOrEmpty(error))

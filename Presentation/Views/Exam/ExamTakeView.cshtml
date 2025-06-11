@@ -2,10 +2,14 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
 @model Application.DTOs.Exam.ExamTakeDTO
 
 @{
 	ViewData["Title"] = "Vào thi - " + Model.Title;
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <style>
@@ -78,18 +82,22 @@
 
 @section Scripts {
 	<script>
-		// -----------------------------------------------------
-		// khoi phuc trang thai khi reload
+		const userId = "@userId";
+		const examId = "@Model.Id";
+
+		let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+		function saveLocalState() {
+			localStorage.setItem("examStates", JSON.stringify(localData));
+		}
 
 		window.addEventListener("DOMContentLoaded", () => {
-			const selectedAnswers = JSON.parse(localStorage.getItem("selectedAnswers") || "{}");
-			for (const name in selectedAnswers) {
-				const value = selectedAnswers[name];
+			// ------------------ PHỤC HỒI CÂU TRẢ LỜI -------------------
+			const savedAnswers = localData[userId]?.[examId]?.selectedAnswers || {};
+			for (const name in savedAnswers) {
+				const value = savedAnswers[name];
 				const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
 				if (radio) {
 					radio.checked = true;
-
-					// danh dau nut cau da tra loi
 					const match = name.match(/Answers\[(\d+)\]/);
 					if (match) {
 						const index = parseInt(match[1]);
@@ -100,33 +108,26 @@
 					}
 				}
 			}
-		});
 
-		// -------------------------------
-		// thoi gian lam bai (phuc hoi tu localStorage)
-		let totalTime = localStorage.getItem("timeRemaining");
-		if (totalTime === null) {
-			totalTime = @(Model.TotalTime.TotalSeconds);
-		} else {
-			totalTime = parseInt(totalTime);
-		}
+			// ------------------ ĐỒNG HỒ ĐẾM NGƯỢC -------------------
+			let totalTime;
+			const savedTime = localData[userId]?.[examId]?.timeRemaining;
+			const lastUpdated = localData[userId]?.[examId]?.lastUpdated;
 
+			if (savedTime !== undefined && lastUpdated !== undefined) {
+				const now = Date.now();
+				const secondsElapsed = Math.floor((now - lastUpdated) / 1000);
+				totalTime = savedTime - secondsElapsed;
+			} else {
+				totalTime = @(Model.TotalTime.TotalSeconds);
+			}
 
-		// --------------------------------------------
-		// het gio tu nop bai
-		const countdownEl = document.getElementById("time");
-		const submitBtn = document.getElementById("submitBtn");
+			const countdownEl = document.getElementById("time");
+			const submitBtn = document.getElementById("submitBtn");
 
-		function updateCountdown() {
-			const minutes = Math.floor(totalTime / 60);
-			const seconds = totalTime % 60;
-			countdownEl.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+			function autoSubmitExam() {
+				alert("⏰ Bài thi đã hết giờ và sẽ được tự động nộp.");
 
-			if (totalTime < 0) {
-				clearInterval(timerInterval);
-				countdownEl.innerText = "0:00";
-				alert("⏰ Hết giờ! Bài thi sẽ được tự động nộp.");
-				submitBtn.disabled = true;
 				const form = document.getElementById("examForm");
 				const formData = new FormData(form);
 				const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
@@ -139,70 +140,118 @@
 					},
 					body: new URLSearchParams(formData)
 				})
-				.then(response => response.json())
+					.then(response => response.json())
 					.then(data => {
-
-						localStorage.removeItem("selectedAnswers");
-						localStorage.removeItem("timeRemaining");
+						if (localData[userId] && localData[userId][examId]) {
+							delete localData[userId];
+							saveLocalState();
+						}
 
 						if (data.success) {
-							window.location.href = `/Exam/SubmitExamResult?examScoredId=${data.examScoredId}&examId=${data.examId}`;
+							const postForm = document.createElement("form");
+							postForm.method = "POST";
+							postForm.action = "/Exam/SubmitExamResult";
+
+							const tokenInput = document.createElement("input");
+							tokenInput.type = "hidden";
+							tokenInput.name = "__RequestVerificationToken";
+							tokenInput.value = token;
+							postForm.appendChild(tokenInput);
+
+							const scoredInput = document.createElement("input");
+							scoredInput.type = "hidden";
+							scoredInput.name = "examScoredId";
+							scoredInput.value = data.examScoredId;
+							postForm.appendChild(scoredInput);
+
+							const examInput = document.createElement("input");
+							examInput.type = "hidden";
+							examInput.name = "examId";
+							examInput.value = data.examId;
+							postForm.appendChild(examInput);
+
+							document.body.appendChild(postForm);
+							postForm.submit();
 						}
 						else {
 							const errorParam = encodeURIComponent(data.error);
 							window.location.href = `/Exam/SubmitExamResult?error=${errorParam}`;
 						}
 					});
-				return;
 			}
-			localStorage.setItem("timeRemaining", totalTime);
-			totalTime--;
-		}
 
-		updateCountdown(); 
-		const timerInterval = setInterval(updateCountdown, 1000);
-
-		// ----------------------------------------------------
-		// chuyen doi nd cau hoi cau tra loi khi chon cau khac
-
-		function showQuestion(index) {
-			const boxes = document.querySelectorAll('.question-box');
-			boxes.forEach((box, i) => {
-				box.style.display = (i === index) ? 'block' : 'none';
-			});
-		}
-
-		// ------------------------------------------------
-		// doi mau voi cau da chon va luu vao localStorage
-
-		document.querySelectorAll('input[type="radio"]').forEach(radio => {
-			radio.addEventListener('change', function () {
-				const name = this.name; 
-				const match = name.match(/Answers\[(\d+)\]/);
-				if (match) {
-					const index = parseInt(match[1]);
-					const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
-					if (btn) {
-						btn.classList.add("answered");
-					}
+			function updateCountdown() {
+				if (totalTime < 0) {
+					clearInterval(timerInterval);
+					countdownEl.innerText = "0:00";
+					submitBtn.disabled = true;
+					autoSubmitExam();
+					return;
 				}
 
-				const selectedAnswers = JSON.parse(localStorage.getItem("selectedAnswers") || "{}");
-				selectedAnswers[name] = this.value;
-				localStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
-			});
-		});
+				const minutes = Math.floor(totalTime / 60);
+				const seconds = totalTime % 60;
+				countdownEl.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-		// --------------------------------------------------
-		// hoi xac nhan nop bai
-		document.getElementById("examForm").addEventListener("submit", function (e) {
-			if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
-				e.preventDefault();
+				const now = Date.now();
+				if (!localData[userId]) localData[userId] = {};
+				if (!localData[userId][examId]) localData[userId][examId] = {};
+				localData[userId][examId]["timeRemaining"] = totalTime;
+				localData[userId][examId]["lastUpdated"] = now;
+				saveLocalState();
+
+				totalTime--;
 			}
-			else {
-				localStorage.removeItem("selectedAnswers");
-				localStorage.removeItem("timeRemaining");
+
+			if (totalTime <= 0) {
+				autoSubmitExam();
+				return;
 			}
+
+			updateCountdown();
+			const timerInterval = setInterval(updateCountdown, 1000);
+
+			// ------------------ ĐỔI CÂU HỎI -------------------
+			window.showQuestion = function (index) {
+				const boxes = document.querySelectorAll('.question-box');
+				boxes.forEach((box, i) => {
+					box.style.display = (i === index) ? 'block' : 'none';
+				});
+			};
+
+			// ------------------ GHI CÂU TRẢ LỜI -------------------
+			document.querySelectorAll('input[type="radio"]').forEach(radio => {
+				radio.addEventListener('change', function () {
+					const name = this.name;
+					const match = name.match(/Answers\[(\d+)\]/);
+					if (match) {
+						const index = parseInt(match[1]);
+						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+						if (btn) {
+							btn.classList.add("answered");
+						}
+					}
+
+					if (!localData[userId]) localData[userId] = {};
+					if (!localData[userId][examId]) localData[userId][examId] = {};
+					if (!localData[userId][examId]["selectedAnswers"]) localData[userId][examId]["selectedAnswers"] = {};
+					localData[userId][examId]["selectedAnswers"][name] = this.value;
+					saveLocalState();
+				});
+			});
+
+			// ------------------ NỘP BÀI THỦ CÔNG -------------------
+			document.getElementById("examForm").addEventListener("submit", function (e) {
+				if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
+					e.preventDefault();
+				} else {
+					if (localData[userId] && localData[userId][examId]) {
+						clearInterval(timerInterval);
+						delete localData[userId];
+						saveLocalState();
+					}
+				}
+			});
 		});
 	</script>
 }
