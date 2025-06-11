@@ -10,7 +10,8 @@ namespace Application.Interface.IRepository
 {
     public interface IExamRepository : IRepository<Exam>
     {
-        public Task<ExamTakeDTO?> GetExamTakeById(int examId);
-        public Task<int> SubmitExamAsync(ExamSubmitDTO dto, string userId);
+		public Task<List<Exam>> GetAllExams();
+		public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
+        public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
 	}
 }

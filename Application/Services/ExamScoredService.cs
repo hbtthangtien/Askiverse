@@ -20,6 +20,12 @@ namespace Application.Services
 
         }
 
+        public async Task<List<ExamScoredDTO>> GetAllExamScoredByUserIdByExamIdAsync(string userId, int examId)
+        {
+            var examScored = await _unitOfWork.ExamScoreds.GetAllExamScoredByUserIdByExamId(userId, examId);
+            return _mapper.Map<List<ExamScoredDTO>>(examScored);
+        }
+
 		public async Task<ExamScoredDTO?> ViewResultAsync(int examId)
         {
             var examResult = await _unitOfWork.ExamScoreds.GetExamScoredById(examId);

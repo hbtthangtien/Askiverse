@@ -1,7 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
 @{
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 @model List<Application.DTOs.Exam.ExamDTO>
@@ -36,7 +41,7 @@
 					<td>@exam.CreatedAt.ToString("dd/MM/yyyy")</td>
 					<td>
 						<a asp-controller="Exam" asp-action="GetExamTakeById" asp-route-examId="@exam.Id" class="text-decoration-none text-dark">Vào thi</a> |
-						<a href="#" class="text-decoration-none text-dark">Xem kết quả</a>
+						<a asp-controller="ExamScored" asp-action="AllExamScoredByUserIdByExamId" asp-route-userId="@userId" asp-route-examId="@exam.Id" class="text-decoration-none text-dark">Xem kết quả</a>
 					</td>
 				</tr>
 				stt++;

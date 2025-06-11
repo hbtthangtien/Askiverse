@@ -25,5 +25,11 @@ namespace Presentation.Controllers
 			var examDetails = await _examScoredSerivce.ViewDetailsAsync(examScoredId, examId);
 			return View(examDetails);
 		}
+
+		public async Task<IActionResult> AllExamScoredByUserIdByExamId(string userId, int examId)
+		{
+			var examScored = await _examScoredSerivce.GetAllExamScoredByUserIdByExamIdAsync(userId, examId);
+			return View(examScored);
+		}
 	}
 }

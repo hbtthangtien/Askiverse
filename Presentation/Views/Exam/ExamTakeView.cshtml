@@ -8,9 +8,19 @@
 	ViewData["Title"] = "Vào thi - " + Model.Title;
 }
 
-<form method="post" asp-controller="Exam" asp-action="SubmitExam">
+<style>
+	.question-nav-btn.answered {
+		background-color: #28a745 !important; 
+		color: white !important;
+		border-color: #28a745 !important;
+	}
+</style>
+
+
+<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm">
 	@Html.AntiForgeryToken()
 	<input type="hidden" name="ExamId" value="@Model.Id" />
+	<input type="hidden" name="ExamScoredId" value="@Model.ExanScoredId"/>
 
 	<div class="container mt-4">
 		<h2 class="text-center mb-4">@Model.Title</h2>
@@ -25,8 +35,9 @@
 				<div class="d-grid" style="grid-template-columns: repeat(5, 1fr); gap: 8px; padding-left: 20px">
 					@for (int i = 0; i < Model.Questions.Count; i++)
 					{
-						<button type="button" class="btn btn-outline-primary p-1 text-center"
+						<button type="button" class="btn btn-outline-primary p-1 text-center question-nav-btn"
 								style="width: 26px; height: 26px; font-size: 14px;"
+								data-question-index="@i"
 								onclick="showQuestion(@i)">
 							@(@i + 1)
 						</button>
@@ -67,9 +78,43 @@
 
 @section Scripts {
 	<script>
-		let totalTime = @(Model.TotalTime.TotalSeconds);
+		// -----------------------------------------------------
+		// khoi phuc trang thai khi reload
+
+		window.addEventListener("DOMContentLoaded", () => {
+			const selectedAnswers = JSON.parse(localStorage.getItem("selectedAnswers") || "{}");
+			for (const name in selectedAnswers) {
+				const value = selectedAnswers[name];
+				const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+				if (radio) {
+					radio.checked = true;
+
+					// danh dau nut cau da tra loi
+					const match = name.match(/Answers\[(\d+)\]/);
+					if (match) {
+						const index = parseInt(match[1]);
+						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+						if (btn) {
+							btn.classList.add("answered");
+						}
+					}
+				}
+			}
+		});
+
+		// -------------------------------
+		// thoi gian lam bai (phuc hoi tu localStorage)
+		let totalTime = localStorage.getItem("timeRemaining");
+		if (totalTime === null) {
+			totalTime = @(Model.TotalTime.TotalSeconds);
+		} else {
+			totalTime = parseInt(totalTime);
+		}
+
+
+		// --------------------------------------------
+		// het gio tu nop bai
 		const countdownEl = document.getElementById("time");
-		const form = document.querySelector("form");
 		const submitBtn = document.getElementById("submitBtn");
 
 		function updateCountdown() {
@@ -77,12 +122,12 @@
 			const seconds = totalTime % 60;
 			countdownEl.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
-			if (totalTime <= 0) {
+			if (totalTime < 0) {
 				clearInterval(timerInterval);
 				countdownEl.innerText = "0:00";
 				alert("⏰ Hết giờ! Bài thi sẽ được tự động nộp.");
 				submitBtn.disabled = true;
-				const form = document.querySelector("form");
+				const form = document.getElementById("examForm");
 				const formData = new FormData(form);
 				const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
@@ -90,21 +135,35 @@
 					method: 'POST',
 					headers: {
 						'RequestVerificationToken': token,
-						'Content-Type': 'application/x-www-form-urlencoded'
+						'X-Requested-With': 'XMLHttpRequest'
 					},
-					body: new URLSearchParams(new FormData(form))
-				}).then(response => {
-					if (response.redirected) {
-						window.location.href = response.url;
-					}
-				});
-			}
+					body: new URLSearchParams(formData)
+				})
+				.then(response => response.json())
+					.then(data => {
 
+						localStorage.removeItem("selectedAnswers");
+						localStorage.removeItem("timeRemaining");
+
+						if (data.success) {
+							window.location.href = `/Exam/SubmitExamResult?examScoredId=${data.examScoredId}&examId=${data.examId}`;
+						}
+						else {
+							const errorParam = encodeURIComponent(data.error);
+							window.location.href = `/Exam/SubmitExamResult?error=${errorParam}`;
+						}
+					});
+				return;
+			}
+			localStorage.setItem("timeRemaining", totalTime);
 			totalTime--;
 		}
 
 		updateCountdown(); 
 		const timerInterval = setInterval(updateCountdown, 1000);
+
+		// ----------------------------------------------------
+		// chuyen doi nd cau hoi cau tra loi khi chon cau khac
 
 		function showQuestion(index) {
 			const boxes = document.querySelectorAll('.question-box');
@@ -112,5 +171,38 @@
 				box.style.display = (i === index) ? 'block' : 'none';
 			});
 		}
+
+		// ------------------------------------------------
+		// doi mau voi cau da chon va luu vao localStorage
+
+		document.querySelectorAll('input[type="radio"]').forEach(radio => {
+			radio.addEventListener('change', function () {
+				const name = this.name; 
+				const match = name.match(/Answers\[(\d+)\]/);
+				if (match) {
+					const index = parseInt(match[1]);
+					const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+					if (btn) {
+						btn.classList.add("answered");
+					}
+				}
+
+				const selectedAnswers = JSON.parse(localStorage.getItem("selectedAnswers") || "{}");
+				selectedAnswers[name] = this.value;
+				localStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
+			});
+		});
+
+		// --------------------------------------------------
+		// hoi xac nhan nop bai
+		document.getElementById("examForm").addEventListener("submit", function (e) {
+			if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
+				e.preventDefault();
+			}
+			else {
+				localStorage.removeItem("selectedAnswers");
+				localStorage.removeItem("timeRemaining");
+			}
+		});
 	</script>
 }

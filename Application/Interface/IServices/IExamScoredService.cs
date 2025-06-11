@@ -12,7 +12,8 @@ namespace Application.Interface.IServices
 {
     public interface IExamScoredService
     {
-        public Task<ExamScoredDTO?> ViewResultAsync(int examId);
+        public Task<List<ExamScoredDTO>> GetAllExamScoredByUserIdByExamIdAsync(string userId, int examId);
+		public Task<ExamScoredDTO?> ViewResultAsync(int examId);
         public Task<ExamViewDetailsDTO?> ViewDetailsAsync(int examScoredId, int examId);
 	}
 }

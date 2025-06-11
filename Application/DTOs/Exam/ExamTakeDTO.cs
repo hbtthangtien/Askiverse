@@ -13,5 +13,6 @@ namespace Application.DTOs.Exam
         public string? Title { get; set; }
         public TimeSpan TotalTime { get; set; }
         public List<QuestionTakeDTO> Questions { get; set; } = new();
+        public int ExanScoredId { get; set; }
     }
 }

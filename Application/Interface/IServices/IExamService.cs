@@ -10,7 +10,7 @@ namespace Application.Interface.IServices
     public interface IExamService
     {
 		public Task<List<ExamDTO>> GetAllExams();
-		public Task<ExamTakeDTO?> GetExamTakeById(int examId);
-		public Task<int> SubmitExamAsync(ExamSubmitDTO dto, string userId);
+		public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
+		public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
 	}
 }

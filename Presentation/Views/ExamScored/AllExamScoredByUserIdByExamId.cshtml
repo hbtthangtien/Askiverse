@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Application.DTOs.ExamScored.ExamScoredDTO>;
+
+<div class="d-flex justify-content-center align-items-center text-center container" style="min-height:65vh">
+	<table class="table table-bordered border-2 border-dark">
+		<thead>
+			<tr>
+				<th>Thời gian làm bài</th>
+				<th>Thời gian nộp bài</th>
+				<th>Điểm</th>
+				<th>Hoạt động</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var scored in Model)
+			{
+				<tr>
+					<td>@scored.StartTime</td>
+					<td>@scored.SubmitedTime</td>
+					<td>@scored.Score</td>
+					<td><a asp-controller="ExamScored" asp-action="ViewDetails" asp-route-examScoredId="@scored.Id" asp-route-ExamId="@scored.ExamId">Xem chi tiết</a></td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

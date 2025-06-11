@@ -19,19 +19,19 @@ namespace Application.Services
 
         public async Task<List<ExamDTO>> GetAllExams()
         {
-            var exams = await _unitOfWork.Exams.GetAllAsync();
+            var exams = await _unitOfWork.Exams.GetAllExams();
             return _mapper.Map<List<ExamDTO>>(exams);
         }
 
-        public async Task<ExamTakeDTO?> GetExamTakeById(int examId)
+        public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
         {
-            var exam = await _unitOfWork.Exams.GetExamTakeById(examId);
+            var exam = await _unitOfWork.Exams.GetExamTakeById(examId, userId);
             return exam;
         }
 
-        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, string userId)
+        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
         {
-            var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, userId);
+            var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, ExamScoredId);
             return examScoredId;
         }
 

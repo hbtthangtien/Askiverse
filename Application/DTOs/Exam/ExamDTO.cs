@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs.ExamScored;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,7 @@ namespace Application.DTOs.Exam
 		public virtual PremiumUser? PremiumUser { get; set; }
 
 		public virtual Subject? Subject { get; set; }
+
+		public virtual ICollection<ExamScoredDTO> ExamScoreds { get; set; } = new List<ExamScoredDTO>();
 	}
 }
