@@ -95,15 +95,17 @@
                 }
 
 </style>
-<table id="questionTable" ">
+
+<table id="questionTable" >
     <thead>
         <tr>
-            <th>Chọn</th>
+            <th id="select-all" style="cursor: pointer;">Chọn</th>
             <th>Nội dung</th>
             <th>Loại câu hỏi</th>
             <th>Độ khó</th>
             <th>Chi tiết</th>
         </tr>
+
     </thead>
 
     <tbody>
@@ -226,7 +228,62 @@
 
     // Khi partial mới load (ajax) hoặc lần đầu tiên, hiển thị trang đầu
     showPage(1);
+    
+     function chonCauHoiNgauNhien() {
+         var max = parseInt($('#randomCount').val());
+         var checkboxes = $('.question-checkbox');
+
+         if (isNaN(max) || max <= 0) {
+             alert("Vui lòng chọn số lượng hợp lệ.");
+             return;
+         }
+
+         if (checkboxes.length < max) {
+             alert("Không đủ câu hỏi để chọn.");
+             return;
+         }
+
+         // Gán vào input ẩn
+         $('#TotalQuestion').val(max);
+
+         // Bỏ chọn hết trước
+         checkboxes.prop('checked', false);
+
+         // Chọn ngẫu nhiên
+         var randomIndexes = [];
+         while (randomIndexes.length < max) {
+             var i = Math.floor(Math.random() * checkboxes.length);
+             if (!randomIndexes.includes(i)) {
+                 randomIndexes.push(i);
+                 checkboxes.eq(i).prop('checked', true);
+             }
+         }
+
+         $('#questionCountWarning').hide();
+     }
+
+
 
     // Khi bạn load partial mới (từ ajax), nhớ gọi lại showPage(1)
+ 
+        let allSelected = false;
+
+           document.getElementById('select-all').addEventListener('click', function () {
+        allSelected = !allSelected;
+
+        const checkboxes = document.querySelectorAll('.question-checkbox');
+
+        checkboxes.forEach(cb => {
+            const row = cb.closest('tr');
+            const display = window.getComputedStyle(row).display;
+
+            if (display !== 'none') {
+                cb.checked = allSelected;
+            }
+        });
+    });
+
 </script>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
