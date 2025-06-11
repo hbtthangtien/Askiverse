@@ -17,8 +17,7 @@ namespace Application.Interface.IServices
         Task<List<Level>> GetAllLevelsAsync();
         Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId);
         public Task<List<ExamDTO>> GetAllExams();
-        public Task<ExamTakeDTO?> GetExamTakeById(int examId);
-        public Task<int> SubmitExamAsync(ExamSubmitDTO dto, string userId);
+        public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
+        public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
     }
 }
-

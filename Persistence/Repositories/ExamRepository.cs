@@ -17,7 +17,13 @@ namespace Persistence.Repositories
         {
         }
 
-        public async Task<ExamTakeDTO?> GetExamTakeById(int examId)
+		public async Task<List<Exam>> GetAllExams()
+        {
+            var exam = await _context.Examss.Include(e => e.ExamScoreds).ToListAsync();
+            return exam;
+        }
+
+		public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
         {
             var exam = await _context.Examss
                 .Where(e => e.Id == examId)
@@ -28,7 +34,21 @@ namespace Persistence.Repositories
 
             if (exam == null) return null;
 
-            return new ExamTakeDTO
+			var now = DateTime.Now;
+
+            var examScored = new ExamScored
+            {
+                UserId = userId,
+                StartTime = now,
+                SubmitedTime = now,
+                Score = 0,
+                ExamId = examId
+            };
+
+			_context.ExamssScoreds.Add(examScored);
+			await _context.SaveChangesAsync();
+
+			return new ExamTakeDTO
             {
                 Id = exam.Id,
                 Title = exam.Title,
@@ -43,10 +63,11 @@ namespace Persistence.Repositories
                     }).ToList() ?? new()
                 }).ToList(),
                 TotalTime = exam.TotalTime,
-            };
+                ExanScoredId = examScored.Id
+			};
 		}
 
-        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, string userId)
+        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
         {
             var exam = await _context.Examss
                 .Include(e => e.QuestionExam)
@@ -54,21 +75,15 @@ namespace Persistence.Repositories
                         .ThenInclude(b => b.Answers)
                 .FirstOrDefaultAsync(e => e.Id == dto.ExamId);
 
-
+            var examScored = await _context.ExamssScoreds.FirstOrDefaultAsync(es => es.Id == ExamScoredId);
             var now = DateTime.Now;
-            int totalQuestions = exam.QuestionExam.Count;
+            examScored!.SubmitedTime = now;
+
+
+            int totalQuestions = exam!.QuestionExam.Count;
             int correctCount = 0;
 
-            var examScored = new ExamScored
-            {
-                UserId = userId,
-                StartTime = now,
-                SubmitedTime = now,
-                Score = 0,
-                ExamId = dto.ExamId
-            };
-
-            _context.ExamssScoreds.Add(examScored);
+            _context.ExamssScoreds.Update(examScored);
             await _context.SaveChangesAsync();
 
             foreach(var submitted in dto.Answers)

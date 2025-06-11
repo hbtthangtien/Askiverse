@@ -17,7 +17,13 @@ namespace Persistence.Repositories
         {
         }
 
-        public async Task<ExamScored?> GetExamScoredById(int examScoredId)
+		public async Task<List<ExamScored>> GetAllExamScoredByUserIdByExamId(string userId, int examId)
+        {
+            var examScored = await _context.ExamssScoreds.Where(es => es.UserId.Equals(userId) && es.ExamId == examId).ToListAsync();
+            return examScored;
+        }
+
+		public async Task<ExamScored?> GetExamScoredById(int examScoredId)
         {
             var examScored = await _context.ExamssScoreds
                 .Include(es => es.Exam)
