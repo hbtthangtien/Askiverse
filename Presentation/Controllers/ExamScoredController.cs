@@ -19,7 +19,7 @@ namespace Presentation.Controllers
 			ViewData["ExamId"] = examId;
 			return View(examResult);
 		}
-
+		
 		public async Task<IActionResult> ViewDetails(int examId, int examScoredId)
 		{
 			var examDetails = await _examScoredSerivce.ViewDetailsAsync(examScoredId, examId);

@@ -106,8 +106,7 @@ namespace Persistence.DatabaseConfig
 				entity.HasMany(e => e.ForumVoteds)
 					  .WithOne(e => e.VotedBy)
 					  .HasForeignKey(e => e.VotedById);
-
-
+				
 			});
 			builder.Entity<PremiumUser>(entity =>
 			{
