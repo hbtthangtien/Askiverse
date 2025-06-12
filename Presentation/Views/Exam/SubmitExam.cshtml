@@ -1,8 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
 @{
 	ViewData["Title"] = "Nộp bài";
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <div class="d-flex justify-content-center align-items-center" style="min-height: 65vh">
@@ -10,7 +14,11 @@
 		@if (ViewData["Error"] == null)
 		{
 			<h1>Nộp bài thành công!</h1>
-			<a class="btn" asp-controller="ExamScored" asp-action="ViewResult" asp-route-ExamId="@ViewData["ExamId"]" asp-route-examScoredId="@ViewData["examScoredId"]">Xem kết quả</a>
+			<form method="post" asp-controller="ExamScored" asp-action="ViewResult">
+				<input type="hidden" name="ExamId" value="@ViewData["ExamId"]" />
+				<input type="hidden" name="examScoredId" value="@ViewData["examScoredId"]" />
+				<button type="submit">Xem kết quả</button>
+			</form>
 		}
 		else
 		{

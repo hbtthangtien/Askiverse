@@ -36,7 +36,16 @@ namespace Presentation.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null) return Unauthorized();
 
+<<<<<<< HEAD
             var exam = await _examService.GetExamTakeById(examId, userId);
+=======
+		[Authorize]
+		[HttpPost]
+		public async Task<IActionResult> GetExamTakeById(int examId)
+		{
+			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			if (userId == null) return Unauthorized();
+>>>>>>> origin/minh
 
             if (exam == null) return NotFound();
 
@@ -154,7 +163,8 @@ namespace Presentation.Controllers
 			}
 		}
 
-		[HttpGet]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult SubmitExamResult(int? examScoredId, int? examId, string? error)
 		{
 			if (!string.IsNullOrEmpty(error))

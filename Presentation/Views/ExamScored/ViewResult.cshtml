@@ -23,7 +23,14 @@
                 <th>@Model.StartTime</th>
                 <th>@Model.SubmitedTime</th>
                 <th>@Model.Score</th>
-                <th><a asp-controller="ExamScored" asp-action="ViewDetails" asp-route-examScoredId="@ViewData["examScoredId"]" asp-route-ExamId="@ViewData["ExamId"]">Xem chi tiết</a></th>
+                <th>
+                    <form method="post" asp-controller="ExamScored" asp-action="ViewDetails">
+                        <input type="hidden" name="examScoredId" value="@ViewData["examScoredId"]" />
+                        <input type="hidden" name="ExamId" value="@ViewData["ExamId"]" />
+                        <button type="submit">Xem chi tiết</button>
+                    </form>
+                    @* <a asp-controller="ExamScored" asp-action="ViewDetails" asp-route-examScoredId="@ViewData["examScoredId"]" asp-route-ExamId="@ViewData["ExamId"]">Xem chi tiết</a> *@
+                </th>
             </tr>
         </tbody>
     </table>
