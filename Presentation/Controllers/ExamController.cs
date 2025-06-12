@@ -16,7 +16,6 @@ namespace Presentation.Controllers
         {
             _examService = examService;
         }
-
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -30,25 +29,21 @@ namespace Presentation.Controllers
             ViewBag.InitialQuestions = allQuestions;
             return View(new CreateExamDTO());
         }
-        [Authorize]
-        public async Task<IActionResult> GetExamTakeById(int examId)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userId == null) return Unauthorized();
 
-<<<<<<< HEAD
-            var exam = await _examService.GetExamTakeById(examId, userId);
-=======
+
 		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> GetExamTakeById(int examId)
 		{
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 			if (userId == null) return Unauthorized();
->>>>>>> origin/minh
+
+            if (userId == null) return Unauthorized();
+
+            var exam = await _examService.GetExamTakeById(examId, userId);
 
             if (exam == null) return NotFound();
-
+            
             return View("ExamTakeView", exam);
         }
         [HttpPost]
