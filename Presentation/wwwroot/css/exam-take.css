@@ -1,0 +1,186 @@
+
+body {
+    background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+    font-family: 'Segoe UI', sans-serif;
+    color: #121117;
+}
+
+
+
+.question-nav-btn.answered {
+    background-color: #FE9FC3 !important;
+    color: #fff !important;
+    box-shadow: 0 0 8px #FE9FC3;
+}
+
+.question-nav-btn:hover {
+    transform: scale(1.1);
+}
+
+.card-question {
+    background-color: #FFFFFF;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    border-left: 6px solid #D8F8F2;
+    animation: fadeSlide 0.3s ease;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-check {
+    background-color: #F8F9FA;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: 1.5px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+    .form-check:hover {
+        background-color: #FFF0F5;
+        border-color: #FE9FC3;
+    }
+
+#submitBtn {
+    background: linear-gradient(90deg, #FE9FC3, #FAD3E7);
+    color: #121117;
+    font-weight: bold;
+    padding: 12px 32px;
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background 0.2s ease;
+}
+
+    #submitBtn:hover {
+        background: #121117;
+        color: white;
+    }
+/* Countdown box */
+#countdown {
+    background-color: #FFF4F7;
+    color: #D13D76;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 14px 18px;
+    text-align: center;
+    border-radius: 16px;
+    border: 2px dashed #FE9FC3;
+    box-shadow: 0 4px 12px rgba(254, 159, 195, 0.15);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 20px;
+}
+
+/* Grid navigation layout */
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+    gap: 10px;
+    padding: 0 10px;
+}
+
+/* Navigation button */
+.question-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #FE9FC3;
+    background-color: #fff;
+    color: #D13D76;
+    font-weight: bold;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+    .question-nav-btn:hover {
+        transform: scale(1.1);
+        background-color: #FEECF5;
+    }
+
+    /* Đã trả lời */
+    .question-nav-btn.answered {
+        background-color: #FE9FC3 !important;
+        color: #fff !important;
+        box-shadow: 0 0 8px #FE9FC3;
+        border-color: #FE9FC3;
+        animation: pop 0.3s ease;
+    }
+
+/* Animation nhỏ khi chọn */
+@keyframes pop {
+    from {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border: 2px solid #FE9FC3;
+}
+
+    .modal-content h4 {
+        color: #D13D76;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .modal-content button {
+        margin-top: 20px;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 50px;
+        background-color: #D13D76;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+        .modal-content button:hover {
+            background-color: #121117;
+        }
+
+.question-nav-btn.answered {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+}

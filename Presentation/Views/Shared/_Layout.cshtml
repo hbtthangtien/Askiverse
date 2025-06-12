@@ -23,7 +23,7 @@
 			<a href="#">Khoá học</a>
 			<a href="#">Lịch học</a>
 			<a href="#">Liên hệ</a>
-
+			<a asp-controller="Exam" asp-action="Create">Tạo đề</a>
 		</nav>
 		<div class="auth" id="auth-area">
 			@if (User.Identity?.IsAuthenticated ?? false)
@@ -35,10 +35,14 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
 						<li>
+							<a class="dropdown-item" asp-controller="Profile" asp-action="ViewProfile">Trang cá nhân</a>
+						</li>
+						<li>
 							<form asp-controller="BasicUser" asp-action="Logout" method="get" class="d-inline">
 								<button type="submit" class=" dropdown-item">Đăng xuất</button>
 							</form>
 						</li>
+
 					</ul>
 				</div>
 			}

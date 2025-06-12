@@ -1,78 +1,85 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    Trang danh sách đề thi - Giao diện cải tiến
 *@
 
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 
 @{
-	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 @model List<Application.DTOs.Exam.ExamDTO>
 
-<div class="container" style="min-height: 65vh">
-	<h1 class="text-center">Danh sách các đề thi</h1>
+<div class="container py-4" style="min-height: 65vh">
+    <h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
 
-	<table class="table table-bordered border-2 border-dark">
-		<thead>
-			<tr class="text-center">
-				<th>STT</th>
-				<th>Tiêu đề</th>
-				<th>Miêu tả</th>
-				<th>Văn bản nguồn</th>
-				<th>Tổng số câu hỏi</th>
-				<th>Ngày tạo</th>
-				<th>Hoạt động</th>
-			</tr>
-		</thead>
-		<tbody>
-			@{
-				int stt = 1;
-			}
-			@foreach (var exam in Model)
-			{
-				<tr>
-					<td>@stt</td>
-					<td>@exam.Title</td>
-					<td>@exam.Description</td>
-					<td>@exam.SourceText</td>
-					<td>@exam.TotalQuestion</td>
-					<td>@exam.CreatedAt.ToString("dd/MM/yyyy")</td>
-					<td>
-						<form id="exam-form-@exam.Id" method="post" asp-controller="Exam" asp-action="GetExamTakeById">
-							<input type="hidden" name="examId" value="@exam.Id" />
-							<button class="btn btn-primary exam-start-btn" type="submit" data-exam-id="@exam.Id">Vào thi</button>
-						</form>
-						<br>
-						<a asp-controller="ExamScored" asp-action="AllExamScoredByUserIdByExamId" asp-route-userId="@userId" asp-route-examId="@exam.Id" class="btn btn-danger text-decoration-none">Xem kết quả</a>
-					</td>
-				</tr>
-				stt++;
-			}
-		</tbody>
-	</table>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle shadow-sm">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">📝 Tiêu đề</th>
+                    <th scope="col">📖 Miêu tả</th>
+                    <th scope="col">📄 Văn bản nguồn</th>
+                    <th scope="col">❓ Tổng câu hỏi</th>
+                    <th scope="col">📅 Ngày tạo</th>
+                    <th scope="col">🎯 Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 1;
+                }
+                @foreach (var exam in Model)
+                {
+                    <tr>
+                        <td class="text-center fw-semibold">@stt</td>
+                        <td>@exam.Title</td>
+                        <td>@exam.Description</td>
+                        <td><span class="badge bg-info text-dark">@exam.SourceText</span></td>
+                        <td><span class="badge bg-secondary">@exam.TotalQuestion câu</span></td>
+                        <td><span class="text-muted">@exam.CreatedAt.ToString("dd/MM/yyyy")</span></td>
+                        <td>
+                            <form id="exam-form-@exam.Id" method="post" asp-controller="Exam" asp-action="GetExamTakeById">
+                                <input type="hidden" name="examId" value="@exam.Id" />
+                                <button class="btn btn-primary exam-start-btn w-100 mb-2" type="submit" data-exam-id="@exam.Id">
+                                    🚀 Vào thi
+                                </button>
+                            </form>
+                            <a asp-controller="ExamScored" asp-action="AllExamScoredByUserIdByExamId" asp-route-userId="@userId" asp-route-examId="@exam.Id"
+                               class="btn btn-outline-danger w-100">
+                                📊 Xem kết quả
+                            </a>
+                        </td>
+                    </tr>
+                    stt++;
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
-	<script>
-		const userId = "@userId";
-		let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+    <script>
+        const userId = "@userId";
+        let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
 
-		const currentExamIds = Object.keys(localData[userId] || {});
-		const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
+        const currentExamIds = Object.keys(localData[userId] || {});
+        const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
 
-		document.querySelectorAll(".exam-start-btn").forEach(btn => {
-			const examId = btn.getAttribute("data-exam-id");
+        document.querySelectorAll(".exam-start-btn").forEach(btn => {
+            const examId = btn.getAttribute("data-exam-id");
 
-			if (examId === ongoingExamId) {
-				btn.innerText = "Tiếp tục làm bài";
-				btn.classList.remove("btn-primary");
-				btn.classList.add("btn-warning");
-			} else if (ongoingExamId !== null) {
-				btn.disabled = true;
-				btn.title = "Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
-			}
-		});
-	</script>
+            if (examId === ongoingExamId) {
+                btn.innerText = "⏱️ Tiếp tục làm bài";
+                btn.classList.remove("btn-primary");
+                btn.classList.add("btn-warning");
+            } else if (ongoingExamId !== null) {
+                btn.disabled = true;
+                btn.title = "⚠️ Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
+                btn.classList.add("opacity-50", "cursor-not-allowed");
+            }
+        });
+    </script>
 }

@@ -1,31 +1,99 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<Application.DTOs.ExamScored.ExamScoredDTO>
 
-@model List<Application.DTOs.ExamScored.ExamScoredDTO>;
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4" style="font-size: 2.3rem; color: #D13D76;">
+        📘 Kết quả các bài thi của bạn
+    </h2>
 
-<div class="d-flex justify-content-center align-items-center text-center container" style="min-height:65vh">
-	<table class="table table-bordered border-2 border-dark">
-		<thead>
-			<tr>
-				<th>Thời gian làm bài</th>
-				<th>Thời gian nộp bài</th>
-				<th>Điểm</th>
-				<th>Hoạt động</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var scored in Model)
-			{
-				<tr>
-					<td>@scored.StartTime</td>
-					<td>@scored.SubmitedTime</td>
-					<td>@scored.Score</td>
-					<td><a asp-controller="ExamScored" asp-action="ViewDetails" asp-route-examScoredId="@scored.Id" asp-route-ExamId="@scored.ExamId">Xem chi tiết</a></td>
-				</tr>
-			}
-		</tbody>
-	</table>
+    <style>
+        body {
+            background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+        }
+
+        .result-card {
+            background-color: #FFFFFF;
+            border: 1.5px solid #D8F8F2;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+            .result-card:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                transform: scale(1.01);
+            }
+
+        .result-score {
+            border: 1px solid #FE9FC3;
+            background-color: rgba(254, 159, 195, 0.1);
+            color: #D13D76;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .btn-view {
+            background-color: #FAD3E7;
+            color: #121117;
+            border: none;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 999px;
+            transition: background 0.2s ease;
+        }
+
+            .btn-view:hover {
+                background-color: #C4F0E0;
+                color: #121117;
+            }
+
+        .emoji-score {
+            font-size: 1.8rem;
+        }
+
+        .score-comment {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+
+    <div class="row">
+        @foreach (var scored in Model)
+        {
+            var score = scored.Score;
+            var emoji = score >= 8 ? "🌸" : score >= 5 ? "🌼" : "🍂";
+            var message = score >= 8 ? "Rất tốt! Bạn đang tiến bộ!" :
+            score >= 5 ? "Ổn rồi, nhưng vẫn còn dư địa!" :
+            "Cần kiên trì luyện tập thêm nha~";
+
+            <div class="col-md-6 col-lg-4">
+                <div class="result-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="fw-bold mb-2">📅 @scored.StartTime.ToString("dd/MM/yyyy")</h6>
+                            <p class="mb-1">Bắt đầu: @scored.StartTime.ToString("HH:mm")</p>
+                            <p class="mb-1">Nộp bài: @scored.SubmitedTime.ToString("HH:mm")</p>
+                        </div>
+                        <div class="text-end">
+                            <div class="emoji-score">@emoji</div>
+                            <div class="result-score mt-2">@score.ToString("0.##") điểm</div>
+                        </div>
+                    </div>
+                    <p class="score-comment mt-3">💡 @message</p>
+                    <div class="text-end mt-2">
+                        <a class="btn btn-view" asp-controller="ExamScored"
+                           asp-action="ViewDetails"
+                           asp-route-examScoredId="@scored.Id"
+                           asp-route-ExamId="@scored.ExamId">
+                            👀 Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
