@@ -26,7 +26,8 @@ namespace Application.Services
                 PremiumUserId = dto.PremiumUserId,
                 IsPublic = dto.IsPublic,
                 TotalQuestion = dto.TotalQuestion,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                TotalTime = TimeSpan.FromMinutes(50)
             };
 
             await _unitOfWork.Exams.AddAsync(exam);
