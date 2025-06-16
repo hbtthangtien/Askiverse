@@ -28,7 +28,7 @@ namespace Application.DTOs.Exam
 
 		public virtual PremiumUser? PremiumUser { get; set; }
 
-		public virtual Subject? Subject { get; set; }
+		public virtual Domain.Entities.Subject? Subject { get; set; }
 
 		public virtual ICollection<ExamScoredDTO> ExamScoreds { get; set; } = new List<ExamScoredDTO>();
 	}
