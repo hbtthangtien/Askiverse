@@ -110,5 +110,10 @@ namespace Persistence.UnitOfWork
         {
             _context.Dispose();
         }
+        public Task<int> CompleteAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 using Application.DTOs.Exam;
+using Application.DTOs.Question;
 using Application.Interface.IServices;
 using Application.UnitOfWork;
 using AutoMapper;
@@ -55,6 +56,7 @@ namespace Application.Services
 
             return true;
         }
+       
 
         public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter)
         {
@@ -81,6 +83,8 @@ namespace Application.Services
 
             return await query.ToListAsync();
         }
+
+
 
 
 
@@ -138,7 +142,84 @@ namespace Application.Services
             return examScoredId;
         }
 
+        public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
+        {
+            var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(dto.Id);
 
+
+
+            if (question == null) return false;
+
+            question.Content = dto.Content;
+            question.QuestionTypeId = dto.QuestionTypeId;
+            question.LevelId = dto.LevelId;
+            question.IsPublic = dto.IsPublic;
+
+            // Xử lý đáp án
+            foreach (var ans in dto.Answers)
+            {
+                if (ans.Id.HasValue && ans.IsDeleted)
+                {
+                    var toRemove = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
+                    if (toRemove != null)
+                        _unitOfWork.Answers.Remove(toRemove);
+
+
+                }
+
+                else if (ans.Id.HasValue)
+                {
+                    var toUpdate = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
+                    if (toUpdate != null)
+                    {
+                        toUpdate.AnswerText = ans.AnswerText;
+                        toUpdate.IsCorrected = ans.IsCorrected;
+                        toUpdate.MatchingPairKey = ans.MatchingPairKey;
+                    }
+                }
+                else if (!ans.IsDeleted)
+                {
+                    question.Answers.Add(new Answer
+                    {
+                        AnswerText = ans.AnswerText,
+                        IsCorrected = ans.IsCorrected,
+                        MatchingPairKey = ans.MatchingPairKey
+                    });
+                }
+            }
+
+            await _unitOfWork.CompleteAsync();
+            return true;
+        }
+        public async Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id)
+        {
+            var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(id);
+            if (question == null) return null;
+
+            return new UpdateBankQuestionDTO
+            {
+                Id = question.Id,
+                Content = question.Content,
+                QuestionTypeId = question.QuestionTypeId,
+                LevelId = question.LevelId,
+                IsPublic = question.IsPublic,
+                Answers = question.Answers.Select(a => new UpdateAnswerDTO
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText,
+                    IsCorrected = a.IsCorrected,
+                    MatchingPairKey = a.MatchingPairKey
+                }).ToList(),
+
+                QuestionTypeName = question.QuestionType?.Name,
+                LevelName = question.Level?.DisplayName
+            };
+        }
+
+        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter)
+        {
+            return await _unitOfWork.BankQuestions.GetRandomQuestionIdsAsync(count, filter);
+        }
     }
 
 }

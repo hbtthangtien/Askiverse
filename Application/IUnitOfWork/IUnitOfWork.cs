@@ -52,5 +52,7 @@ namespace Application.UnitOfWork
         public IUserAccessExamRepository UserAccessExams { get; }
 
         public Task CommitAsync();
+        Task<int> CompleteAsync();
+
     }
 }

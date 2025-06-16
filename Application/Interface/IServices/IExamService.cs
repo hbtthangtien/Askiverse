@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.Exam;
+using Application.DTOs.Question;
 using Domain.Entities;
 
 namespace Application.Interface.IServices
@@ -19,5 +20,8 @@ namespace Application.Interface.IServices
         public Task<List<ExamDTO>> GetAllExams();
         public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
         public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
+        Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto);
+        Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id);
+        Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter);
     }
 }

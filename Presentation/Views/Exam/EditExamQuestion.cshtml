@@ -1,0 +1,103 @@
+﻿@model UpdateBankQuestionDTO
+@using Application.DTOs.Question
+
+<div class="container mt-4">
+    <h2>Edit Question</h2>
+    <form asp-action="EditExamQuestion" method="post">
+        @Html.HiddenFor(m => m.Id)
+
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "3" })
+            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Loại câu hỏi</label>
+                <select asp-for="QuestionTypeId" class="form-select" asp-items="ViewBag.QuestionTypes">
+                    <option value="">-- Chọn loại câu hỏi --</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Độ khó</label>
+                <select asp-for="LevelId" class="form-select" asp-items="ViewBag.Levels">
+                    <option value="">-- Chọn độ khó --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            @Html.CheckBoxFor(m => m.IsPublic, new { @class = "form-check-input", role = "switch" })
+            <label class="form-check-label">Public</label>
+        </div>
+
+        <h6>Answers</h6>
+        <div id="answer-list">
+            @for (int i = 0; i < Model.Answers.Count; i++)
+            {
+                <div class="answer-item mb-2 border p-2 rounded" data-index="@i">
+                    @Html.HiddenFor(m => m.Answers[i].Id)
+                    @Html.HiddenFor(m => m.Answers[i].IsDeleted)
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.Answers[i].AnswerText, new { @class = "form-control", placeholder = "Answer text" })
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            @Html.CheckBoxFor(m => m.Answers[i].IsCorrected)
+                            <label class="ms-1">Correct</label>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button type="button" class="btn btn-outline-primary mt-2" id="btn-add-answer">+ Add Answer</button>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="/Exam/Create" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <script>
+        $(document).on('click', '#btn-add-answer', function () {
+            const index = $('#answer-list .answer-item').length;
+
+            const html = `
+                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
+                    <input type="hidden" name="Answers[${index}].Id" />
+                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Answer text" />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <input type="checkbox" name="Answers[${index}].IsCorrected" />
+                            <label class="ms-1">Correct</label>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
+                        </div>
+                    </div>
+                </div>`;
+            $('#answer-list').append(html);
+        });
+
+        $(document).on('click', '.btn-remove-answer', function () {
+            const container = $(this).closest('.answer-item');
+            const inputDeleted = container.find('input[name$=".IsDeleted"]');
+            if (inputDeleted.length) {
+                inputDeleted.val('true');
+                container.hide();
+            } else {
+                container.remove();
+            }
+        });
+    </script>
+}
