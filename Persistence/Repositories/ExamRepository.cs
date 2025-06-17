@@ -111,5 +111,25 @@ namespace Persistence.Repositories
             await _context.SaveChangesAsync();
             return examScored.Id;
         }
-	}
+        public async Task<Exam?> GetByIdAsync(int id)
+        {
+            return await _context.Examss.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Exam>> GetByPremiumUserIdAsync(string premiumUserId)
+        {
+            return await _context.Examss
+                .Where(e => e.PremiumUserId == premiumUserId)
+                .ToListAsync();
+        }
+        public async Task<Exam?> GetExamWithRelationsAsync(int examId)
+        {
+            return await _context.Examss
+                .Include(e => e.ExamAccesses)
+                .Include(e => e.QuestionExam)
+                .Include(e => e.ExamScoreds)
+                .FirstOrDefaultAsync(e => e.Id == examId);
+        }
+
+    }
 }

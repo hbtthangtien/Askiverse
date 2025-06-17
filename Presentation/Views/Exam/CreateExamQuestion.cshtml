@@ -1,0 +1,118 @@
+﻿@model Application.DTOs.Question.CreateBankQuestionDTO
+
+@{
+    ViewData["Title"] = "Tạo câu hỏi mới";
+}
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Lỗi dữ liệu:</strong>
+        <ul>
+            @foreach (var state in ViewData.ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    <li><strong>@state.Key</strong>: @error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <form asp-action="CreateExamQuestion" method="post">
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "3" })
+            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Loại câu hỏi</label>
+                <select asp-for="QuestionTypeId" class="form-select" asp-items="ViewBag.QuestionTypes">
+                    <option value="">-- Chọn loại câu hỏi --</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.QuestionTypeId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Độ khó</label>
+                <select asp-for="LevelId" class="form-select" asp-items="ViewBag.Levels">
+                    <option value="">-- Chọn độ khó --</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.LevelId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            @Html.CheckBoxFor(m => m.IsPublic, new { @class = "form-check-input", role = "switch" })
+            <label class="form-check-label">Public</label>
+        </div>
+
+        <h6>Answers</h6>
+        <div id="answer-list"></div>
+
+        <button type="button" class="btn btn-outline-primary mt-2" id="btn-add-answer">+ Add Answer</button>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Create</button>
+            <a href="/Exam/Create" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        function reindexAnswers() {
+            $('#answer-list .answer-item:visible').each(function (i) {
+                $(this).attr('data-index', i);
+                $(this).find('input, select, textarea').each(function () {
+                    const name = $(this).attr('name');
+                    if (name) {
+                        const newName = name.replace(/Answers\[\d+\]/, `Answers[${i}]`);
+                        $(this).attr('name', newName);
+                    }
+                });
+            });
+        }
+
+        $(document).on('click', '#btn-add-answer', function () {
+            const index = $('#answer-list .answer-item').length;
+
+            const html = `
+                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
+                    <input type="hidden" name="Answers[${index}].Id" value="0" />
+                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Answer text" required />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                           <input type="checkbox" name="Answers[${index}].IsCorrected" value="true" />
+
+                            <label class="ms-1">Correct</label>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
+                        </div>
+                    </div>
+                </div>`;
+            $('#answer-list').append(html);
+            reindexAnswers();
+        });
+
+        $(document).on('click', '.btn-remove-answer', function () {
+            const container = $(this).closest('.answer-item');
+            const inputDeleted = container.find('input[name$=".IsDeleted"]');
+            if (inputDeleted.length) {
+                inputDeleted.val('true');
+                container.hide();
+            } else {
+                container.remove();
+            }
+            reindexAnswers();
+        });
+    </script>
+}
+

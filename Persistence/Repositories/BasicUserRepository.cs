@@ -1,6 +1,7 @@
 ﻿using Application.Interface.IRepository;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Persistence.DatabaseConfig;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,11 @@ namespace Persistence.Repositories
             UserManager = userManager;
             SignInManager = signInManager;
         }
+        public async Task<BasicUser?> GetByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
 
-       
+
     }
 }
