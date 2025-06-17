@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.ViewModel;
 using Domain.Entities;
 
 namespace Application.Interface.IServices
@@ -17,7 +18,7 @@ namespace Application.Interface.IServices
         Task<List<QuestionType>> GetAllQuestionTypesAsync();
         Task<List<Level>> GetAllLevelsAsync();
         Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId);
-        public Task<List<ExamDTO>> GetAllExams();
+        public Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId);
         public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
         public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
         Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto);
