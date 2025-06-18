@@ -64,7 +64,7 @@ namespace Application.Services
                 .Query()
                 .Include(q => q.QuestionType)
                 .Include(q => q.Level)
-                .Where(q => q.PremiumUserId == PremiumUserId && q.IsPublic)
+                .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
                 .AsQueryable();
 
             if (filter.QuestionTypeId.HasValue)

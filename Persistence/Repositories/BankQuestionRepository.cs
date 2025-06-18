@@ -32,7 +32,7 @@ namespace Persistence.Repositories
         public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter,string? PremiumUserId)
         {
             var query = _context.BankQuestions.AsQueryable();
-            query = query.Where(q => q.PremiumUserId == PremiumUserId && q.IsPublic);
+            query = query.Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true);
 
             if (filter.QuestionTypeId.HasValue)
                 query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId);
