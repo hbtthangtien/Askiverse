@@ -14,7 +14,7 @@ namespace Application.DTOs.Question
         [Required]
         public int QuestionTypeId { get; set; }
         public string? QuestionTypeName { get; set; } // ✅
-
+        public string? PremiumUserId { get; set; }
         [Required]
         public int LevelId { get; set; }
         public string? LevelName { get; set; } // ✅

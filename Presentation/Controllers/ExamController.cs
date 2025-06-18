@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Exam;
 using Application.DTOs.Question;
 using Application.Interface.IServices;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -36,7 +37,7 @@ namespace Presentation.Controllers
 		var subjects = await _examService.GetAllSubjectsAsync();
 		var questionTypes = await _examService.GetAllQuestionTypesAsync();
 		var levels = await _examService.GetAllLevelsAsync();
-		var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter());
+		var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(), userId);
 		ViewBag.Subjects = subjects;
 		ViewBag.QuestionTypes = questionTypes;
 		ViewBag.Levels = levels;
@@ -75,7 +76,7 @@ namespace Presentation.Controllers
             {
                 ModelState.AddModelError("", $"Bạn phải chọn đúng {dto.TotalQuestion} câu hỏi.");
             }
-
+            dto.PremiumUserId = userId; 
             if (!ModelState.IsValid)
             {
                 // Nạp lại dữ liệu cho ViewBag để không lỗi View khi load lại
@@ -100,11 +101,12 @@ namespace Presentation.Controllers
         // Gợi ý tạo hàm riêng để không lặp code
         private async Task PrepareViewBagDataForCreatePage()
         {
+            var userId = GetCurrentUserId();
             ViewBag.Subjects = await _examService.GetAllSubjectsAsync();
             ViewBag.QuestionTypes = await _examService.GetAllQuestionTypesAsync();
             ViewBag.Levels = await _examService.GetAllLevelsAsync();
 
-            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter());
+            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(), userId);
             ViewBag.InitialQuestions = allQuestions;
             ViewBag.CurrentPage = 1;
             ViewBag.TotalPages = 1;
@@ -114,6 +116,7 @@ namespace Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, bool? isPublic, string? keyword, int page = 1, int pageSize = 10)
         {
+            var userId = GetCurrentUserId();
             if (string.IsNullOrWhiteSpace(keyword))
                 keyword = null;
 
@@ -125,7 +128,7 @@ namespace Presentation.Controllers
                 Keyword = keyword
             };
 
-            var allResults = await _examService.SearchBankQuestionsAsync(filter); 
+            var allResults = await _examService.SearchBankQuestionsAsync(filter, userId); 
             var total = allResults.Count;
 
             var paginated = allResults
@@ -275,8 +278,8 @@ namespace Presentation.Controllers
                 IsPublic = isPublic,
                 Keyword = string.IsNullOrWhiteSpace(keyword) ? null : keyword
             };
-
-            var ids = await _examService.GetRandomQuestionIdsAsync(count, filter);
+            var userId = GetCurrentUserId();
+            var ids = await _examService.GetRandomQuestionIdsAsync(count, filter, userId);
 
             return Json(ids);
         }
@@ -339,6 +342,11 @@ namespace Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateExamQuestion()
         {
+            var userId = GetCurrentUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "BasicUser");
+            }
             var questionTypes = await _examService.GetAllQuestionTypesAsync();
             var levels = await _examService.GetAllLevelsAsync();
 
@@ -352,11 +360,15 @@ namespace Presentation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateExamQuestion(CreateBankQuestionDTO dto)
         {
-            // Lọc trước khi kiểm tra model state
+            var userId = GetCurrentUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "BasicUser");
+            }
             dto.Answers = dto.Answers
                 .Where(a => !a.IsDeleted)
                 .ToList();
-
+            dto.PremiumUserId = userId;
             if (!ModelState.IsValid)
             {
                 var questionTypes = await _examService.GetAllQuestionTypesAsync();

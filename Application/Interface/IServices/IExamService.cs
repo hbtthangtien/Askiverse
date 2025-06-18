@@ -12,7 +12,7 @@ namespace Application.Interface.IServices
     public interface IExamService
     {
         Task<bool> CreateExamAsync(CreateExamDTO dto);
-        Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter);
+        Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId);
         Task<List<Subject>> GetAllSubjectsAsync();
         Task<List<QuestionType>> GetAllQuestionTypesAsync();
         Task<List<Level>> GetAllLevelsAsync();
@@ -22,7 +22,7 @@ namespace Application.Interface.IServices
         public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
         Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto);
         Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id);
-        Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter);
+        Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId);
             Task<List<ExamDTO>> GetExamsByPremiumUserIdAsync(string premiumUserId);
         Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string grantedByPremiumUserId);
         Task<bool> DeleteExamAsync(int examId);

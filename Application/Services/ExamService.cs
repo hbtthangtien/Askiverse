@@ -31,7 +31,7 @@ namespace Application.Services
             };
 
             await _unitOfWork.Exams.AddAsync(exam);
-            await _unitOfWork.CommitAsync();  // Commit để EF gán exam.Id
+            await _unitOfWork.CommitAsync();  
 
             foreach (var questionId in dto.SelectedQuestionIds)
             {
@@ -58,12 +58,13 @@ namespace Application.Services
         }
        
 
-        public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter)
+        public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId)
         {
             var query = _unitOfWork.BankQuestions
                 .Query()
                 .Include(q => q.QuestionType)
                 .Include(q => q.Level)
+                .Where(q => q.PremiumUserId == PremiumUserId && q.IsPublic)
                 .AsQueryable();
 
             if (filter.QuestionTypeId.HasValue)
@@ -216,9 +217,9 @@ namespace Application.Services
             };
         }
 
-        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter)
+        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId)
         {
-            return await _unitOfWork.BankQuestions.GetRandomQuestionIdsAsync(count, filter);
+            return await _unitOfWork.BankQuestions.GetRandomQuestionIdsAsync(count, filter, PremiumUserId);
         }
         public async Task<List<ExamDTO>> GetExamsByPremiumUserIdAsync(string premiumUserId)
         {
@@ -283,6 +284,7 @@ namespace Application.Services
                 Content = dto.Content!,
                 QuestionTypeId = dto.QuestionTypeId,
                 LevelId = dto.LevelId,
+                PremiumUserId = dto.PremiumUserId,
                 IsPublic = dto.IsPublic,
                 CreatedAt = DateTime.UtcNow,
                 Answers = dto.Answers.Select(a => new Answer

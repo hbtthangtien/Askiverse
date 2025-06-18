@@ -29,9 +29,10 @@ namespace Persistence.Repositories
                 .Include(q => q.Answers)
                 .FirstOrDefaultAsync(q => q.Id == id);
         }
-        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter)
+        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter,string? PremiumUserId)
         {
             var query = _context.BankQuestions.AsQueryable();
+            query = query.Where(q => q.PremiumUserId == PremiumUserId && q.IsPublic);
 
             if (filter.QuestionTypeId.HasValue)
                 query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId);
