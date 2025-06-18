@@ -61,12 +61,13 @@ namespace Application.Services
         }
        
 
-        public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter)
+        public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string PremiumUserId)
         {
             var query = _unitOfWork.BankQuestions
                 .Query()
                 .Include(q => q.QuestionType)
                 .Include(q => q.Level)
+                .Where(q => q.PremiumUserId == PremiumUserId && q.IsPublic)
                 .AsQueryable();
 
             if (filter.QuestionTypeId.HasValue)

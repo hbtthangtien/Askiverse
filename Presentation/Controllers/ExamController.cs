@@ -36,7 +36,7 @@ namespace Presentation.Controllers
             var subjects = await _examService.GetAllSubjectsAsync();
             var questionTypes = await _examService.GetAllQuestionTypesAsync();
             var levels = await _examService.GetAllLevelsAsync();
-            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter());
+            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(),userId);
             ViewBag.Subjects = subjects;
             ViewBag.QuestionTypes = questionTypes;
             ViewBag.Levels = levels;
@@ -100,11 +100,12 @@ namespace Presentation.Controllers
         // Gợi ý tạo hàm riêng để không lặp code
         private async Task PrepareViewBagDataForCreatePage()
         {
+            var userId = GetCurrentUserId();
             ViewBag.Subjects = await _examService.GetAllSubjectsAsync();
             ViewBag.QuestionTypes = await _examService.GetAllQuestionTypesAsync();
             ViewBag.Levels = await _examService.GetAllLevelsAsync();
 
-            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter());
+            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(), userId);
             ViewBag.InitialQuestions = allQuestions;
             ViewBag.CurrentPage = 1;
             ViewBag.TotalPages = 1;
@@ -114,6 +115,7 @@ namespace Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, bool? isPublic, string? keyword, int page = 1, int pageSize = 10)
         {
+            var userId = GetCurrentUserId();
             if (string.IsNullOrWhiteSpace(keyword))
                 keyword = null;
 
@@ -125,7 +127,7 @@ namespace Presentation.Controllers
                 Keyword = keyword
             };
 
-            var allResults = await _examService.SearchBankQuestionsAsync(filter); 
+            var allResults = await _examService.SearchBankQuestionsAsync(filter, userId); 
             var total = allResults.Count;
 
             var paginated = allResults
@@ -154,29 +156,7 @@ namespace Presentation.Controllers
             return Json(detail);
         }
 
-        [Authorize]
-        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "")
-        {
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId);
-
-                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-                {
-                    return PartialView("_ExamListPartial", exams);
-                }
-
-                return View(exams);
-            }
-            catch (Exception ex)
-            {
-                ViewData["Error"] = ex.Message;
-                return PartialView("_ExamListPartial");
-            }
-        }
-
-         [Authorize]
+      
          [Authorize]
         public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "")
         {

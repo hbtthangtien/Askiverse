@@ -13,7 +13,7 @@ namespace Application.Interface.IServices
     public interface IExamService
     {
         Task<bool> CreateExamAsync(CreateExamDTO dto);
-        Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter);
+        Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string PremiumUserId);
         Task<List<Subject>> GetAllSubjectsAsync();
         Task<List<QuestionType>> GetAllQuestionTypesAsync();
         Task<List<Level>> GetAllLevelsAsync();
