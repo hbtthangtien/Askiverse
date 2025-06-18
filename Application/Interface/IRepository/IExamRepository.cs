@@ -13,5 +13,9 @@ namespace Application.Interface.IRepository
 		public Task<List<Exam>> GetAllExams();
 		public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
         public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
-	}
+        Task<Exam?> GetByIdAsync(int id);
+        Task<IEnumerable<Exam>> GetByPremiumUserIdAsync(string premiumUserId);
+        Task<Exam?> GetExamWithRelationsAsync(int examId);
+
+    }
 }

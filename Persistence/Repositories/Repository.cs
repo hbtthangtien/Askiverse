@@ -11,7 +11,7 @@ using Persistence.DatabaseConfig;
 
 namespace Persistence.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class 
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly AskiverseContext _context;
         private readonly DbSet<T> _dbSet;
@@ -102,6 +102,14 @@ namespace Persistence.Repositories
 
             return await query.FirstOrDefaultAsync(predicate);
         }
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+        }
 
+        public void Remove(T entities)
+        {
+            _context.Set<T>().Remove(entities);
+        }
     }
 }

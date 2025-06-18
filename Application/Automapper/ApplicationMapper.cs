@@ -1,6 +1,5 @@
 ﻿using Application.DTOs.Exam;
 using Application.DTOs.ExamScored;
-using Application.DTOs.Subject;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -18,7 +17,6 @@ namespace Application.Automapper
         {
             CreateMap<ExamDTO, Exam>().ReverseMap();
             CreateMap<ExamScoredDTO, ExamScored>().ReverseMap();
-            CreateMap<SubjectDTO, Subject>().ReverseMap();
         }
     }
 }

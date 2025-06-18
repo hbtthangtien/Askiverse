@@ -35,9 +35,8 @@ window.addEventListener("DOMContentLoaded", () => {
 	const submitBtn = document.getElementById("submitBtn");
 
 	const totalTimeAttr = parseInt(formEl.dataset.totalSeconds || "0");
-	
-
 	let totalTime = totalTimeAttr;
+
 	const savedTime = localData[userId]?.[examId]?.timeRemaining;
 	const lastUpdated = localData[userId]?.[examId]?.lastUpdated;
 
@@ -45,8 +44,6 @@ window.addEventListener("DOMContentLoaded", () => {
 		const now = Date.now();
 		const secondsElapsed = Math.floor((now - lastUpdated) / 1000);
 		totalTime = savedTime - secondsElapsed;
-	} else {
-		totalTime = 0;
 	}
 
 	function autoSubmitExam() {

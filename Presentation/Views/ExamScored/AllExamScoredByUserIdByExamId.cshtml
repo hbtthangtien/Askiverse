@@ -1,6 +1,6 @@
 ﻿@model List<Application.DTOs.ExamScored.ExamScoredDTO>
 
-<div class="container py-5" style="min-height:65vh;">
+<div class="container py-5">
     <h2 class="text-center fw-bold mb-4" style="font-size: 2.3rem; color: #D13D76;">
         📘 Kết quả các bài thi của bạn
     </h2>
@@ -61,45 +61,39 @@
         }
     </style>
 
-    @if(Model.Count == 0){
-        <h3 class="text-center">Bạn chưa thi lần nào. Hãy vào thi thử để biêt kết quả của mình.</h3>
-    }
-    else
-    {
-        <div class="row">
-            @foreach (var scored in Model)
-            {
-                var score = scored.Score;
-                var emoji = score >= 8 ? "🌸" : score >= 5 ? "🌼" : "🍂";
-                var message = score >= 8 ? "Rất tốt! Bạn đang tiến bộ!" :
-                score >= 5 ? "Ổn rồi, nhưng vẫn còn dư địa!" :
-                "Cần kiên trì luyện tập thêm nha~";
+    <div class="row">
+        @foreach (var scored in Model)
+        {
+            var score = scored.Score;
+            var emoji = score >= 8 ? "🌸" : score >= 5 ? "🌼" : "🍂";
+            var message = score >= 8 ? "Rất tốt! Bạn đang tiến bộ!" :
+            score >= 5 ? "Ổn rồi, nhưng vẫn còn dư địa!" :
+            "Cần kiên trì luyện tập thêm nha~";
 
-                <div class="col-md-6 col-lg-4">
-                    <div class="result-card">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <h6 class="fw-bold mb-2">📅 @scored.StartTime.ToString("dd/MM/yyyy")</h6>
-                                <p class="mb-1">Bắt đầu: @scored.StartTime.ToString("HH:mm")</p>
-                                <p class="mb-1">Nộp bài: @scored.SubmitedTime.ToString("HH:mm")</p>
-                            </div>
-                            <div class="text-end">
-                                <div class="emoji-score">@emoji</div>
-                                <div class="result-score mt-2">@score.ToString("0.##") điểm</div>
-                            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="result-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="fw-bold mb-2">📅 @scored.StartTime.ToString("dd/MM/yyyy")</h6>
+                            <p class="mb-1">Bắt đầu: @scored.StartTime.ToString("HH:mm")</p>
+                            <p class="mb-1">Nộp bài: @scored.SubmitedTime.ToString("HH:mm")</p>
                         </div>
-                        <p class="score-comment mt-3">💡 @message</p>
-                        <div class="text-end mt-2">
-                            <a class="btn btn-view" asp-controller="ExamScored"
-                               asp-action="ViewDetails"
-                               asp-route-examScoredId="@scored.Id"
-                               asp-route-ExamId="@scored.ExamId">
-                                👀 Xem chi tiết
-                            </a>
+                        <div class="text-end">
+                            <div class="emoji-score">@emoji</div>
+                            <div class="result-score mt-2">@score.ToString("0.##") điểm</div>
                         </div>
                     </div>
+                    <p class="score-comment mt-3">💡 @message</p>
+                    <div class="text-end mt-2">
+                        <a class="btn btn-view" asp-controller="ExamScored"
+                           asp-action="ViewDetails"
+                           asp-route-examScoredId="@scored.Id"
+                           asp-route-ExamId="@scored.ExamId">
+                            👀 Xem chi tiết
+                        </a>
+                    </div>
                 </div>
-            }
-        </div>
-    }
+            </div>
+        }
+    </div>
 </div>
