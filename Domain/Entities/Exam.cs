@@ -37,6 +37,6 @@ namespace Domain.Entities
 
         public virtual ICollection<ExamScored> ExamScoreds { get; set; } = new List<ExamScored>();
 
-
+        public virtual ICollection<Favourite> FavouritedByUsers { get; set; } = new List<Favourite>();
     }
 }

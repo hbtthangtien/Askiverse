@@ -6,112 +6,144 @@
 @using System.Security.Claims
 
 @{
-    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 @model Application.DTOs.ViewModel.ExamSubjectViewModel;
 
 
 <style>
-    #btn-dechung.active,
-    #btn-detutao.active {
-        background-color: #007bff; /* Màu xanh dương */
-        color: white;
-        font-weight: bold;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
-        transition: 0.3s ease;
-    }
+	#btn-dechung.active,
+	#btn-detutao.active,
+	#btn-deyeuthich.active{
+		background-color: #007bff; /* Màu xanh dương */
+		color: white;
+		font-weight: bold;
+		box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+		transition: 0.3s ease;
+	}
 
-    #btn-dechung:hover,
-    #btn-detutao:hover {
-        background-color: #f0f0f0;
-    }
+	#btn-dechung:hover,
+	#btn-detutao:hover,
+	#btn-deyeuthich:hover{
+		background-color: #f0f0f0;
+	}
 </style>
 
 
 <div class="container py-4" style="min-height: 65vh">
-    <h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
-    
-    <div class="d-flex justify-content-center align-items-center mb-1">
-        <div class="me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-dechung" style="cursor: pointer">
-            <h3>Đề chung</h3>
-        </div>
-        <div class="ms-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-detutao" style="cursor: pointer">
-            <h3 >Đề tự tạo</h3>
-        </div>
-    </div>
+	<h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
 
-    <div class="btn mb-3" style="left:20px">
-        <select id="subject-select" class="form-select w-auto d-inline-block ms-2">
-            <option value="">Tất cả</option>
-            @foreach(var subject in Model.Subjects)
-            {
-                <option value="@subject.Id">@subject.Name</option>
-            }
-        </select>
-    </div>
-    
-        <div id="exam-list">
-            @await Html.PartialAsync("_ExamListPartial", Model)
-        </div>
-    
+	<div class="d-flex justify-content-center align-items-center mb-1">
+		<div class="tab-btn me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-dechung" style="cursor: pointer">
+			<h3>Đề chung</h3>
+		</div>
+		<div class="tab-btn ms-3 me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-detutao" style="cursor: pointer">
+			<h3>Đề tự tạo</h3>
+		</div>
+		<div class="tab-btn ms-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-deyeuthich" style="cursor: pointer">
+			<h3>Đề yêu thích</h3>
+		</div>
+	</div>
+
+	<div class="btn mb-3" style="left:20px">
+		<select id="subject-select" class="form-select w-auto d-inline-block ms-2">
+			<option value="">Tất cả</option>
+			@foreach (var subject in Model.Subjects)
+			{
+				<option value="@subject.Id">@subject.Name</option>
+			}
+		</select>
+	</div>
+
+	<div id="exam-list">
+		@await Html.PartialAsync("_ExamListPartial", Model)
+	</div>
+
 </div>
 
 @section Scripts {
-    <script>
-        const userId = "@userId";
+	<script>
+		const userId = "@userId";
+		let currentTab = "dechung";
 
-        document.getElementById("btn-dechung").addEventListener("click", function () {
-            this.classList.add("active");
-            document.getElementById("btn-detutao").classList.remove("active");
-            loadExamList(true);
-        });
+		document.getElementById("btn-dechung").addEventListener("click", () => setTab("dechung"));
+		document.getElementById("btn-detutao").addEventListener("click", () => setTab("detutao"));
+		document.getElementById("btn-deyeuthich").addEventListener("click", () => setTab("deyeuthich"));
+		document.getElementById("subject-select").addEventListener("change", () => reload());
 
-        document.getElementById("btn-detutao").addEventListener("click", function () {
-            this.classList.add("active");
-            document.getElementById("btn-dechung").classList.remove("active");
-            loadExamList(false);
-        });
+		function setTab(tab) {
+			currentTab = tab;
+			document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+			document.getElementById("btn-" + tab).classList.add("active");
+			reload();
+		}
 
-        document.getElementById("subject-select").addEventListener("change", function () {
-            const isPublic = document.getElementById("btn-dechung").classList.contains("active");
-            loadExamList(isPublic);
-        });
+		function reload() {
+			const subjectId = document.getElementById("subject-select").value;
+			let url = `/Exam/AllExams?subjectId=${subjectId}`;
 
-        function loadExamList(isPublic) {
-            const selectedSubjectId = document.getElementById("subject-select").value;
-            fetch(`/Exam/AllExams?isPublic=${isPublic}&subjectId=${selectedSubjectId}`, {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            })
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById("exam-list").innerHTML = html;
-                    updateExamButtons(); // Re-init button states after reload
-                });
-        }
+			if (currentTab === "dechung") url += `&isPublic=true`;
+			else if (currentTab === "detutao") url += `&isPublic=false`;
+			else if (currentTab === "deyeuthich") url += `&isFavourite=true`;
 
-        function updateExamButtons() {
-            let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
-            const currentExamIds = Object.keys(localData[userId] || {});
-            const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
+			fetch(url, {
+				headers: { "X-Requested-With": "XMLHttpRequest" }
+			})
+				.then(res => res.text())
+				.then(html => {
+					document.getElementById("exam-list").innerHTML = html;
+					updateExamButtons();
+				});
+		}
 
-            document.querySelectorAll(".exam-start-btn").forEach(btn => {
-                const examId = btn.getAttribute("data-exam-id");
+		function updateExamButtons() {
+			let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+			const currentExamIds = Object.keys(localData[userId] || {});
+			const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
 
-                if (examId === ongoingExamId) {
-                    btn.innerText = "⏱️ Tiếp tục làm bài";
-                    btn.classList.remove("btn-primary");
-                    btn.classList.add("btn-warning");
-                } else if (ongoingExamId !== null) {
-                    btn.disabled = true;
-                    btn.title = "⚠️ Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
-                    btn.classList.add("opacity-50", "cursor-not-allowed");
-                }
-            });
-        }
+			document.querySelectorAll(".exam-start-btn").forEach(btn => {
+				const examId = btn.getAttribute("data-exam-id");
 
-        updateExamButtons();
-    </script>
+				if (examId === ongoingExamId) {
+					btn.innerText = "⏱️ Tiếp tục làm bài";
+					btn.classList.remove("btn-primary");
+					btn.classList.add("btn-warning");
+				} else if (ongoingExamId !== null) {
+					btn.disabled = true;
+					btn.title = "⚠️ Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
+					btn.classList.add("opacity-50", "cursor-not-allowed");
+				}
+			});
+		}
+
+		
+
+		// ------------------------------------------------
+		// them xoa yeu thich
+		document.addEventListener("click", async function (e) {
+			if (e.target.classList.contains("favourite-btn")) {
+				const btn = e.target;
+				const examId = btn.getAttribute("data-exam-id");
+				const userId = btn.getAttribute("data-user-id");
+				const isFav = btn.getAttribute("data-is-fav") === "true";
+
+				const url = isFav
+					? `/Favourite/RemoveFavourite?examId=${examId}&userId=${userId}`
+					: `/Favourite/AddFavourite?examId=${examId}&userId=${userId}`;
+
+				try {
+					const res = await fetch(url);
+					if (!res.ok) throw new Error("Lỗi khi xử lý yêu thích");
+
+					btn.setAttribute("data-is-fav", (!isFav).toString());
+					btn.innerText = !isFav ? "Bỏ yêu thích" : "Thêm vào yêu thích";
+				} catch (error) {
+					alert(error.message);
+				}
+			}
+		});
+
+		updateExamButtons();
+	</script>
 }

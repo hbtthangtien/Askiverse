@@ -58,6 +58,8 @@ namespace Persistence.DatabaseConfig
 
 		public virtual DbSet<UserAccessExam> UserAccessExams { get; set; }
 
+		public virtual DbSet<Favourite> Favourites { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
@@ -206,6 +208,21 @@ namespace Persistence.DatabaseConfig
 					  .WithMany(e => e.Voteds)
 					  .HasForeignKey(e => e.PostId)
 					  .OnDelete(DeleteBehavior.NoAction);
+			});
+
+			builder.Entity<Favourite>(entity =>
+			{
+				entity.HasKey(f => new { f.UserId, f.ExamId });
+
+				entity.HasOne(f => f.User)
+						.WithMany(u => u.Favourites)
+						.HasForeignKey(f => f.UserId)
+						.OnDelete(DeleteBehavior.NoAction);
+
+				entity.HasOne(f => f.Exam)
+						.WithMany(e => e.FavouritedByUsers)
+						.HasForeignKey(f => f.ExamId)
+						.OnDelete(DeleteBehavior.NoAction);
 			});
 
 

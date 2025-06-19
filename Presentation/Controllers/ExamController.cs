@@ -129,12 +129,12 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "")
+        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", bool isFavourite = false)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId);
+                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, isFavourite);
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {

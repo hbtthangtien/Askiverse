@@ -123,7 +123,7 @@ namespace Application.Services
                 }).ToList()
             };
         }
-        public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId)
+        public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, bool isFavourite = false)
         {
 
             var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
@@ -135,11 +135,19 @@ namespace Application.Services
                 subjectIdInt = parsedInt;
             }
 
-            var examQuery = _unitOfWork.Exams.Query();
+            var examQuery = _unitOfWork.Exams.Query().Include(e => e.FavouritedByUsers).AsQueryable();
 
-            examQuery = isPublic
-                ? examQuery.Where(e => e.IsPublic == true)
-                : examQuery.Where(e => e.PremiumUserId == userId);
+            if (isFavourite)
+            {
+				examQuery = examQuery.Where(e => e.FavouritedByUsers.Any(f => f.UserId == userId));
+			}
+            else
+            {
+				if (isPublic == true)
+					examQuery = examQuery.Where(e => e.IsPublic == true);
+				else if (isPublic == false)
+					examQuery = examQuery.Where(e => e.PremiumUserId == userId);
+			}
 
             if (subjectIdInt.HasValue)
             {
@@ -149,11 +157,13 @@ namespace Application.Services
             var exams = await examQuery.ToListAsync();
             if(exams.Count == 0)
             {
-                if (isPublic)
+                if (isFavourite)
                     throw new Exception("Hiện tại không có đề chung phù hợp với bộ lọc!");
-                else
+                else if (isPublic)
                     throw new Exception("Bạn chưa tạo đề nào phù hợp với bộ lọc!");
-            }
+                else
+					throw new Exception("Bạn chưa tạo đề nào phù hợp với bộ lọc!");
+			}
 
             return new ExamSubjectViewModel
             {
