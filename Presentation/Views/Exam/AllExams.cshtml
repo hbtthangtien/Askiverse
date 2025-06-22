@@ -6,196 +6,144 @@
 @using System.Security.Claims
 
 @{
-    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
-@model List<Application.DTOs.Exam.ExamDTO>
+@model Application.DTOs.ViewModel.ExamSubjectViewModel;
+
+
+<style>
+	#btn-dechung.active,
+	#btn-detutao.active,
+	#btn-deyeuthich.active{
+		background-color: #007bff; /* Màu xanh dương */
+		color: white;
+		font-weight: bold;
+		box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+		transition: 0.3s ease;
+	}
+
+	#btn-dechung:hover,
+	#btn-detutao:hover,
+	#btn-deyeuthich:hover{
+		background-color: #f0f0f0;
+	}
+</style>
+
 
 <div class="container py-4" style="min-height: 65vh">
-    <h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
-    <!-- Button trigger modal -->
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#grantExamAccessModal">
-        Cấp quyền truy cập đề
-    </button>
+	<h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
 
-    <!-- Modal -->
-    <div class="modal fade" id="grantExamAccessModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cấp quyền truy cập đề</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Email người dùng</label>
-                        <input type="email" class="form-control" id="userEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Chọn đề</label>
-                        <select class="form-select" id="examSelect">
-                            <option value="">-- Chọn đề --</option>
-                        </select>
-                    </div>
-                    <div id="accessError" class="text-danger d-none"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" id="grantAccessBtn">Cấp quyền</button>
+	<div class="d-flex justify-content-center align-items-center mb-1">
+		<div class="tab-btn me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-dechung" style="cursor: pointer">
+			<h3>Đề chung</h3>
+		</div>
+		<div class="tab-btn ms-3 me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-detutao" style="cursor: pointer">
+			<h3>Đề tự tạo</h3>
+		</div>
+		<div class="tab-btn ms-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-deyeuthich" style="cursor: pointer">
+			<h3>Đề yêu thích</h3>
+		</div>
+	</div>
 
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="btn mb-3" style="left:20px">
+		<select id="subject-select" class="form-select w-auto d-inline-block ms-2">
+			<option value="">Tất cả</option>
+			@foreach (var subject in Model.Subjects)
+			{
+				<option value="@subject.Id">@subject.Name</option>
+			}
+		</select>
+	</div>
 
-    <div class="table-responsive">
-        <table class="table table-hover align-middle shadow-sm">
-            <thead class="table-dark text-center">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">📝 Tiêu đề</th>
-                    <th scope="col">📖 Miêu tả</th>
-                    <th scope="col">📄 Văn bản nguồn</th>
-                    <th scope="col">❓ Tổng câu hỏi</th>
-                    <th scope="col">📅 Ngày tạo</th>
-                    <th scope="col">🎯 Hoạt động</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    int stt = 1;
-                }
-                @foreach (var exam in Model)
-                {
-                    <tr>
-                        <td class="text-center fw-semibold">@stt</td>
-                        <td>@exam.Title</td>
-                        <td>@exam.Description</td>
-                        <td><span class="badge bg-info text-dark">@exam.SourceText</span></td>
-                        <td><span class="badge bg-secondary">@exam.TotalQuestion câu</span></td>
-                        <td><span class="text-muted">@exam.CreatedAt.ToString("dd/MM/yyyy")</span></td>
-                        <td>
-                            <form id="exam-form-@exam.Id" method="post" asp-controller="Exam" asp-action="GetExamTakeById">
-                                <input type="hidden" name="examId" value="@exam.Id" />
-                                <button class="btn btn-primary exam-start-btn w-100 mb-2" type="submit" data-exam-id="@exam.Id">
-                                    🚀 Vào thi
-                                </button>
+	<div id="exam-list">
+		@await Html.PartialAsync("_ExamListPartial", Model)
+	</div>
 
-                            </form>
-                            <a asp-controller="ExamScored" asp-action="AllExamScoredByUserIdByExamId" asp-route-userId="@userId" asp-route-examId="@exam.Id"
-                               class="btn btn-outline-danger w-100">
-                                📊 Xem kết quả
-                            </a>
-                            <!-- ✅ Thêm nút xem trước tại đây -->
-                            <a asp-controller="Exam" asp-action="PreviewExam" asp-route-examId="@exam.Id"
-
-                               class="btn btn-outline-secondary w-100">
-                                👁️ Xem trước
-                            </a>
-                            <form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="examId" value="@exam.Id" />
-                                <button type="button" class="btn btn-danger w-100 mt-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal-@exam.Id">
-                                    🗑️ Xóa đề
-                                </button>
-
-                            </form>
-
-
-
-                        </td>
-                    </tr>
-                    stt++;
-                    <div class="modal fade" id="confirmDeleteModal-@exam.Id" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-danger text-white">
-                                    <h5 class="modal-title" id="confirmDeleteLabel">Xác nhận xóa đề</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Bạn có chắc chắn muốn xóa đề "<strong>@exam.Title</strong>" không? Hành động này không thể hoàn tác.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                                    <form asp-controller="Exam" asp-action="DeleteExam" method="post">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="examId" value="@exam.Id" />
-                                        <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                }
-            </tbody>
-        </table>
-    </div>
 </div>
 
 @section Scripts {
-    <script>
-        const userId = "@userId";
-        let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+	<script>
+		const userId = "@userId";
+		let currentTab = "dechung";
 
-        const currentExamIds = Object.keys(localData[userId] || {});
-        const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
+		document.getElementById("btn-dechung").addEventListener("click", () => setTab("dechung"));
+		document.getElementById("btn-detutao").addEventListener("click", () => setTab("detutao"));
+		document.getElementById("btn-deyeuthich").addEventListener("click", () => setTab("deyeuthich"));
+		document.getElementById("subject-select").addEventListener("change", () => reload());
 
-        document.querySelectorAll(".exam-start-btn").forEach(btn => {
-            const examId = btn.getAttribute("data-exam-id");
+		function setTab(tab) {
+			currentTab = tab;
+			document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+			document.getElementById("btn-" + tab).classList.add("active");
+			reload();
+		}
 
-            if (examId === ongoingExamId) {
-                btn.innerText = "⏱️ Tiếp tục làm bài";
-                btn.classList.remove("btn-primary");
-                btn.classList.add("btn-warning");
-            } else if (ongoingExamId !== null) {
-                btn.disabled = true;
-                btn.title = "⚠️ Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
-                btn.classList.add("opacity-50", "cursor-not-allowed");
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Load exams when modal opens
-            $('#grantExamAccessModal').on('show.bs.modal', function () {
-                $.get('/Exam/GetExamsByPremiumUserId', function (data) {
-                    const $select = $('#examSelect');
-                    $select.empty().append('<option value="">-- Chọn đề --</option>');
-                    data.forEach(exam => {
-                        $select.append(`<option value="${exam.id}">${exam.title}</option>`);
-                    });
-                });
-            });
+		function reload() {
+			const subjectId = document.getElementById("subject-select").value;
+			let url = `/Exam/AllExams?subjectId=${subjectId}`;
 
-            // Handle grant access
-            $('#grantAccessBtn').click(function () {
-                const email = $('#userEmail').val();
-                const examId = $('#examSelect').val();
-                const $error = $('#accessError');
+			if (currentTab === "dechung") url += `&isPublic=true`;
+			else if (currentTab === "detutao") url += `&isPublic=false`;
+			else if (currentTab === "deyeuthich") url += `&isFavourite=true`;
 
-                if (!email || !examId) {
-                    $error.text("Vui lòng nhập email và chọn đề.").removeClass('d-none');
-                    return;
-                }
+			fetch(url, {
+				headers: { "X-Requested-With": "XMLHttpRequest" }
+			})
+				.then(res => res.text())
+				.then(html => {
+					document.getElementById("exam-list").innerHTML = html;
+					updateExamButtons();
+				});
+		}
 
-                $.ajax({
-                    url: '/Exam/GrantExamAccessByEmail',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ email, examId }),
-                    success: function (message) {
-                        $error.addClass('d-none');
-                        alert(message);
-                        $('#grantExamAccessModal').modal('hide');
-                    },
-                    error: function (xhr) {
-                        $error.text(xhr.responseText).removeClass('d-none');
-                    }
-                });
-            });
-        });
-    </script>
+		function updateExamButtons() {
+			let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+			const currentExamIds = Object.keys(localData[userId] || {});
+			const ongoingExamId = currentExamIds.length > 0 ? currentExamIds[0] : null;
 
+			document.querySelectorAll(".exam-start-btn").forEach(btn => {
+				const examId = btn.getAttribute("data-exam-id");
+
+				if (examId === ongoingExamId) {
+					btn.innerText = "⏱️ Tiếp tục làm bài";
+					btn.classList.remove("btn-primary");
+					btn.classList.add("btn-warning");
+				} else if (ongoingExamId !== null) {
+					btn.disabled = true;
+					btn.title = "⚠️ Bạn đang làm một bài thi khác. Vui lòng hoàn thành trước khi làm bài mới.";
+					btn.classList.add("opacity-50", "cursor-not-allowed");
+				}
+			});
+		}
+
+		
+
+		// ------------------------------------------------
+		// them xoa yeu thich
+		document.addEventListener("click", async function (e) {
+			if (e.target.classList.contains("favourite-btn")) {
+				const btn = e.target;
+				const examId = btn.getAttribute("data-exam-id");
+				const userId = btn.getAttribute("data-user-id");
+				const isFav = btn.getAttribute("data-is-fav") === "true";
+
+				const url = isFav
+					? `/Favourite/RemoveFavourite?examId=${examId}&userId=${userId}`
+					: `/Favourite/AddFavourite?examId=${examId}&userId=${userId}`;
+
+				try {
+					const res = await fetch(url);
+					if (!res.ok) throw new Error("Lỗi khi xử lý yêu thích");
+
+					btn.setAttribute("data-is-fav", (!isFav).toString());
+					btn.innerText = !isFav ? "Bỏ yêu thích" : "Thêm vào yêu thích";
+				} catch (error) {
+					alert(error.message);
+				}
+			}
+		});
+
+		updateExamButtons();
+	</script>
 }

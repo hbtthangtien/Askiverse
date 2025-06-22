@@ -125,10 +125,52 @@ namespace Application.Services
                 }).ToList()
             };
         }
-        public async Task<List<ExamDTO>> GetAllExams()
+        public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, bool isFavourite = false)
         {
-            var exams = await _unitOfWork.Exams.GetAllExams();
-            return _mapper.Map<List<ExamDTO>>(exams);
+            var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
+            if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
+
+            int? subjectIdInt = null;
+            if(!string.IsNullOrEmpty(subjectId) && int.TryParse(subjectId, out int parsedInt))
+            {
+                subjectIdInt = parsedInt;
+            }
+
+            var examQuery = _unitOfWork.Exams.Query().Include(e => e.FavouritedByUsers).AsQueryable();
+
+            if (isFavourite)
+            {
+				examQuery = examQuery.Where(e => e.FavouritedByUsers.Any(f => f.UserId == userId));
+			}
+            else
+            {
+				if (isPublic == true)
+					examQuery = examQuery.Where(e => e.IsPublic == true);
+				else if (isPublic == false)
+					examQuery = examQuery.Where(e => e.PremiumUserId == userId);
+			}
+
+            if (subjectIdInt.HasValue)
+            {
+                examQuery = examQuery.Where(e => e.SubjectId == subjectIdInt);
+            }
+
+            var exams = await examQuery.ToListAsync();
+            if(exams.Count == 0)
+            {
+                if (isFavourite)
+                    throw new Exception("Hiện tại không có đề chung phù hợp với bộ lọc!");
+                else if (isPublic)
+                    throw new Exception("Bạn chưa tạo đề nào phù hợp với bộ lọc!");
+                else
+					throw new Exception("Bạn chưa tạo đề nào phù hợp với bộ lọc!");
+			}
+
+            return new ExamSubjectViewModel
+            {
+                Exams = _mapper.Map<List<ExamDTO>>(exams),
+                Subjects = _mapper.Map<List<SubjectDTO>>(subjects)
+            };
         }
 
         public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)

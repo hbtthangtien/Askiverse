@@ -1,4 +1,4 @@
-﻿using Application.Interface.IRepository;
+using Application.Interface.IRepository;
 using Application.UnitOfWork;
 using Persistence.DatabaseConfig;
 using System;

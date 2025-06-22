@@ -36,5 +36,6 @@ namespace Domain.Entities
 
         public virtual ICollection<PackageOfUser> PackageOfUsers { get; set; } = new List<PackageOfUser>()!;
 
+        public virtual ICollection<Favourite> Favourites { get; set; } = new List<Favourite>();
     }
 }

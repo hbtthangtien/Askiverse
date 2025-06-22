@@ -51,6 +51,8 @@ namespace Application.UnitOfWork
 
         public IUserAccessExamRepository UserAccessExams { get; }
 
+        public IFavouriteRepository Favorites { get; }
+
         public Task CommitAsync();
         Task<int> CompleteAsync();
        

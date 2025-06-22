@@ -157,12 +157,7 @@ namespace Presentation.Controllers
 		return Json(detail);
 	}
 
-	[Authorize]
-	public async Task<IActionResult> AllExams()
-	{
-		var exams = await _examService.GetAllExams();
-		return View(exams);
-	}
+	
 
 	[Authorize]
 	[HttpPost]
@@ -239,6 +234,15 @@ namespace Presentation.Controllers
                 LevelId = question.LevelId,
                 IsPublic = question.IsPublic,
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
+        [Authorize]
+        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", bool isFavourite = false)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, isFavourite);
+
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
                     Id = a.Id,
                     AnswerText = a.AnswerText,
