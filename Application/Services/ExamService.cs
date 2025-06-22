@@ -139,8 +139,12 @@ namespace Application.Services
                 subjectIdInt = parsedInt;
             }
 
-            var examQuery = _unitOfWork.Exams.Query().Include(e => e.FavouritedByUsers).AsQueryable();
-
+            var examQuery = _unitOfWork.Exams
+                     .Query()
+                     .Include(e => e.FavouritedByUsers)
+                     .Include(e => e.ExamAccesses) 
+                     .AsQueryable();
+            
             if (isFavourite)
             {
 				examQuery = examQuery.Where(e => e.FavouritedByUsers.Any(f => f.UserId == userId));
@@ -148,7 +152,7 @@ namespace Application.Services
             else
             {
 				if (isPublic == true)
-					examQuery = examQuery.Where(e => e.IsPublic == true);
+					examQuery = examQuery.Where(e => e.IsPublic == true || e.ExamAccesses.Any(a => a.userId == userId));
 				else if (isPublic == false)
 					examQuery = examQuery.Where(e => e.PremiumUserId == userId);
 			}
