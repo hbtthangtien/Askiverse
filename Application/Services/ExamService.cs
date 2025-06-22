@@ -1,5 +1,7 @@
 using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.Subject;
+using Application.DTOs.ViewModel;
 using Application.Interface.IServices;
 using Application.UnitOfWork;
 using AutoMapper;
@@ -27,7 +29,8 @@ namespace Application.Services
                 PremiumUserId = dto.PremiumUserId,
                 IsPublic = dto.IsPublic,
                 TotalQuestion = dto.TotalQuestion,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                TotalTime = TimeSpan.FromMinutes(50)
             };
 
             await _unitOfWork.Exams.AddAsync(exam);

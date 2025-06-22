@@ -156,64 +156,61 @@ namespace Presentation.Controllers
 
 		return Json(detail);
 	}
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubmitExam(ExamSubmitDTO dto, int ExamScoredId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null) return Unauthorized();
 
-	
+            try
+            {
+                var examScoredId = await _examService.SubmitExamAsync(dto, ExamScoredId);
 
-	[Authorize]
-	[HttpPost]
-	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> SubmitExam(ExamSubmitDTO dto, int ExamScoredId)
-	{
-		var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-		if (userId == null) return Unauthorized();
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        examScoredId = examScoredId,
+                        examId = dto.ExamId
+                    });
+                }
+                ViewData["examScoredId"] = examScoredId;
+                ViewData["ExamId"] = dto.ExamId;
+                return View("SubmitExam");
+            }
+            catch (Exception ex)
+            {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new
+                    {
+                        success = false,
+                        error = ex.Message
+                    });
+                }
+                ViewData["Error"] = ex.Message;
+                return View("SubmitExam");
+            }
+        }
 
-		try
-		{
-			var examScoredId = await _examService.SubmitExamAsync(dto, ExamScoredId);
-
-			if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-			{
-				return Json(new
-				{
-					success = true,
-					examScoredId = examScoredId,
-					examId = dto.ExamId
-				});
-			}
-			ViewData["examScoredId"] = examScoredId;
-			ViewData["ExamId"] = dto.ExamId;
-			return View("SubmitExam");
-		}
-		catch (Exception ex)
-		{
-			if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-			{
-				return Json(new
-				{
-					success = false,
-					error = ex.Message
-				});
-			}
-			ViewData["Error"] = ex.Message;
-			return View("SubmitExam");
-		}
-	}
-
-	[HttpPost]
-	[ValidateAntiForgeryToken]
-	public IActionResult SubmitExamResult(int? examScoredId, int? examId, string? error)
-	{
-		if (!string.IsNullOrEmpty(error))
-		{
-			ViewData["Error"] = error;
-		}
-		else
-		{
-			ViewData["examScoredId"] = examScoredId;
-			ViewData["ExamId"] = examId;
-		}
-		return View("SubmitExam");
-	}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubmitExamResult(int? examScoredId, int? examId, string? error)
+        {
+            if (!string.IsNullOrEmpty(error))
+            {
+                ViewData["Error"] = error;
+            }
+            else
+            {
+                ViewData["examScoredId"] = examScoredId;
+                ViewData["ExamId"] = examId;
+            }
+            return View("SubmitExam");
+        }
         [HttpGet]
         public async Task<IActionResult> EditExamQuestion(int id)
         {
@@ -234,6 +231,16 @@ namespace Presentation.Controllers
                 LevelId = question.LevelId,
                 IsPublic = question.IsPublic,
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText,
+                    IsCorrected = a.IsCorrected,
+                    MatchingPairKey = a.MatchingPairKey
+                }).ToList()
+            };
+
+            return View("EditExamQuestion", dto);
+        }
         [Authorize]
         public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", bool isFavourite = false)
         {
@@ -244,14 +251,16 @@ namespace Presentation.Controllers
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
-                    Id = a.Id,
-                    AnswerText = a.AnswerText,
-                    IsCorrected = a.IsCorrected,
-                    MatchingPairKey = a.MatchingPairKey
-                }).ToList()
-            };
+                    return PartialView("_ExamListPartial", exams);
+                }
 
-            return View("EditExamQuestion", dto);
+                return View(exams);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = ex.Message;
+                return PartialView("_ExamListPartial");
+            }
         }
 
         [HttpPost]
@@ -326,16 +335,18 @@ namespace Presentation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteExam(int examId)
-
         {
             try
             {
                 var success = await _examService.DeleteExamAsync(examId);
                 if (!success)
-                    return NotFound();
+                {
+                    TempData["Error"] = "Đề thi không tồn tại.";
+                    return RedirectToAction("AllExams");
+                }
 
                 TempData["Success"] = "Đã xóa đề thi thành công.";
-                return RedirectToAction("AllExams"); // hoặc tên view bạn đang dùng
+                return RedirectToAction("AllExams");
             }
             catch (InvalidOperationException ex)
             {
@@ -343,6 +354,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("AllExams");
             }
         }
+
         [HttpGet]
         public async Task<IActionResult> CreateExamQuestion()
         {

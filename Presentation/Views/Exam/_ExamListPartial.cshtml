@@ -14,7 +14,22 @@
 	<h3 class="text-center">@ViewData["Error"]</h3>
 }
 else
-{
+{@if (TempData["Success"] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			✅ @TempData["Success"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
+	@if (TempData["Error"] != null)
+	{
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			⚠️ @TempData["Error"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
 	<table class="table table-hover align-middle shadow-sm">
 		<thead class="table-dark text-center">
 			<tr>
@@ -48,6 +63,18 @@ else
 						   class="btn btn-outline-danger w-100 mb-2">
 							📊 Xem kết quả
 						</a>
+						<!-- ✅ Thêm nút xem trước tại đây -->
+						<a asp-controller="Exam" asp-action="PreviewExam" asp-route-examId="@exam.Id"
+						   class="btn btn-outline-secondary w-100">
+							👁️ Xem trước
+						</a>
+						<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
+							@Html.AntiForgeryToken()
+							<input type="hidden" name="examId" value="@exam.Id" />
+							<button type="submit" class="btn btn-danger w-100 mt-2">🗑️ Xóa đề</button>
+						</form>
+
+
 						@{
 							var isFavourite = exam.FavouritedByUsers.Any(f => f.UserId == userId);
 						}
@@ -64,6 +91,7 @@ else
 					</td>
 				</tr>
 				stt++;
+				
 			}
 		</tbody>
 	</table>

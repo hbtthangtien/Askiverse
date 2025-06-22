@@ -53,7 +53,7 @@ namespace Persistence.UnitOfWork
         public ISubjectRepository Subjects { get; private set; }
 
         public IUserAccessExamRepository UserAccessExams { get; private set; }
-
+        public IFavouriteRepository Favorites { get; private set; }
         public UnitOfWork(AskiverseContext context,
             IAnswerRepository answers,
             IBankQuestionRepository bankQuestions,

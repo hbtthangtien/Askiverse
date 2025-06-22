@@ -23,7 +23,7 @@ namespace Persistence.Repositories
             return exam;
         }
 
-		public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
+        public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
         {
             var exam = await _context.Examss
                 .Where(e => e.Id == examId)
@@ -34,7 +34,7 @@ namespace Persistence.Repositories
 
             if (exam == null) return null;
 
-			var now = DateTime.Now;
+            var now = DateTime.Now;
 
             var examScored = new ExamScored
             {
@@ -45,10 +45,10 @@ namespace Persistence.Repositories
                 ExamId = examId
             };
 
-			_context.ExamssScoreds.Add(examScored);
-			await _context.SaveChangesAsync();
+            _context.ExamssScoreds.Add(examScored);
+            await _context.SaveChangesAsync();
 
-			return new ExamTakeDTO
+            return new ExamTakeDTO
             {
                 Id = exam.Id,
                 Title = exam.Title,
@@ -64,9 +64,8 @@ namespace Persistence.Repositories
                 }).ToList(),
                 TotalTime = exam.TotalTime,
                 ExanScoredId = examScored.Id
-			};
-		}
-
+            };
+        }
         public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
         {
             var exam = await _context.Examss
@@ -86,7 +85,7 @@ namespace Persistence.Repositories
             _context.ExamssScoreds.Update(examScored);
             await _context.SaveChangesAsync();
 
-            foreach(var submitted in dto.Answers)
+            foreach (var submitted in dto.Answers)
             {
                 if (submitted.AnswerId <= 0) continue;
 

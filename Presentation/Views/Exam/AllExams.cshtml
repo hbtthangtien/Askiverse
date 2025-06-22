@@ -33,7 +33,40 @@
 
 <div class="container py-4" style="min-height: 65vh">
 	<h1 class="text-center mb-4 text-primary fw-bold">📘 Danh sách các đề thi</h1>
+	<!-- Button trigger modal -->
+	<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#grantExamAccessModal">
+		Cấp quyền truy cập đề
+	</button>
 
+	<!-- Modal -->
+	<div class="modal fade" id="grantExamAccessModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Cấp quyền truy cập đề</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label>Email người dùng</label>
+						<input type="email" class="form-control" id="userEmail" required>
+					</div>
+					<div class="mb-3">
+						<label>Chọn đề</label>
+						<select class="form-select" id="examSelect">
+							<option value="">-- Chọn đề --</option>
+						</select>
+					</div>
+					<div id="accessError" class="text-danger d-none"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+					<button type="button" class="btn btn-primary" id="grantAccessBtn">Cấp quyền</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="d-flex justify-content-center align-items-center mb-1">
 		<div class="tab-btn me-3 border border-1 border-dark rounded rounded-3 px-3 py-2" id="btn-dechung" style="cursor: pointer">
 			<h3>Đề chung</h3>
@@ -145,5 +178,52 @@
 		});
 
 		updateExamButtons();
+	</script>
+	<script>
+				$(document).ready(function () {
+					// Load exams when modal opens
+					$('#grantExamAccessModal').on('show.bs.modal', function () {
+						$.get('/Exam/GetExamsByPremiumUserId', function (data) {
+							const $select = $('#examSelect');
+							$select.empty().append('<option value="">-- Chọn đề --</option>');
+							data.forEach(exam => {
+								$select.append(`<option value="${exam.id}">${exam.title}</option>`);
+							});
+						});
+					});
+
+					// Handle grant access
+					$('#grantAccessBtn').click(function () {
+						const email = $('#userEmail').val();
+						const examId = $('#examSelect').val();
+						const $error = $('#accessError');
+
+						if (!email || !examId) {
+							$error.text("Vui lòng nhập email và chọn đề.").removeClass('d-none');
+							return;
+
+
+						}
+
+						$.ajax({
+							url: '/Exam/GrantExamAccessByEmail',
+							type: 'POST',
+							contentType: 'application/json',
+							data: JSON.stringify({ email, examId }),
+							success: function (message) {
+								$error.addClass('d-none');
+								alert(message);
+								$('#grantExamAccessModal').modal('hide');
+							},
+							error: function (xhr) {
+								$error.text(xhr.responseText).removeClass('d-none');
+							}
+						});
+
+					});
+				});
+
+
+
 	</script>
 }

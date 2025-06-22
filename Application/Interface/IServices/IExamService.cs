@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.ViewModel;
 using Domain.Entities;
 
 namespace Application.Interface.IServices

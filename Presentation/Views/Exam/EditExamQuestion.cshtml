@@ -1,5 +1,85 @@
 ﻿@model UpdateBankQuestionDTO
 @using Application.DTOs.Question
+<style>
+    body {
+        background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+        color: #121117;
+    }
+
+    h2, h6, label.form-label, .form-check-label {
+        color: #D13D76;
+    }
+
+    .container {
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        transition: border 0.3s ease;
+    }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #FE9FC3;
+            box-shadow: 0 0 0 0.2rem rgba(254, 159, 195, 0.3);
+        }
+
+    .btn-success {
+        background-color: #D13D76;
+        border-color: #D13D76;
+    }
+
+        .btn-success:hover {
+            background-color: #a52d5c;
+            border-color: #a52d5c;
+        }
+
+    .btn-outline-primary {
+        border-color: #D13D76;
+        color: #D13D76;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #FE9FC3;
+            color: #fff;
+        }
+
+    .btn-outline-danger {
+        border-color: #D13D76;
+        color: #D13D76;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #D13D76;
+            color: #fff;
+        }
+
+    .form-check-input:checked {
+        background-color: #D13D76;
+        border-color: #D13D76;
+    }
+
+    .answer-item {
+        background-color: #F0F8F6;
+        border: 1px solid #C4F0E0;
+        border-radius: 12px;
+    }
+
+    .text-danger {
+        font-size: 0.875rem;
+        color: #D13D76 !important;
+    }
+
+    .form-check-label {
+        font-weight: 500;
+    }
+</style>
 
 <div class="container mt-4">
     <h2>Edit Question</h2>
