@@ -75,7 +75,8 @@ namespace Persistence.UnitOfWork
             IQuestionTypeRepository questionTypes,
             ISubcriptionPackageRepository subcriptionPackages,
             ISubjectRepository subjects,
-            IUserAccessExamRepository userAccessExams)
+            IUserAccessExamRepository userAccessExams,
+          IFavouriteRepository favourite)
         {
             _context = context;
             Answers = answers;
@@ -99,6 +100,7 @@ namespace Persistence.UnitOfWork
             SubcriptionPackages = subcriptionPackages;
             Subjects = subjects;
             UserAccessExams = userAccessExams;
+            Favorites = favourite;
         }
 
         public async Task CommitAsync()
