@@ -1,4 +1,4 @@
-﻿@*
+﻿﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -12,12 +12,16 @@
 	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
-@section Styles {
-	<link rel="stylesheet" href="~/css/exam-take.css" />
-}
+<style>
+	.question-nav-btn.answered {
+		background-color: #28a745 !important;
+		color: white !important;
+		border-color: #28a745 !important;
+	}
+</style>
 
-<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm" data-userid="@userId"
-	  data-totalseconds="@Model.TotalTime.TotalSeconds">
+
+<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm">
 	@Html.AntiForgeryToken()
 	<input type="hidden" name="ExamId" value="@Model.Id" />
 	<input type="hidden" name="ExamScoredId" value="@Model.ExanScoredId" />
@@ -28,16 +32,17 @@
 			<!-- Sidebar -->
 			<div class="col-md-3 py-3 rounded rounded-5" style="background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-				<div id="countdown" class="text-center">
+				<div id="countdown" class="text-center fs-5 fw-bold text-danger mb-4">
 					⏳ Thời gian còn lại: <span id="time">--:--</span>
 				</div>
 
-				<div class="nav-grid">
+				<div class="d-grid" style="grid-template-columns: repeat(5, 1fr); gap: 8px; padding-left: 20px">
 					@for (int i = 0; i < Model.Questions.Count; i++)
 					{
-						<button type="button" class="btn question-nav-btn"
+						<button type="button" class="btn btn-outline-primary p-1 text-center question-nav-btn"
+								style="width: 26px; height: 26px; font-size: 14px;"
 								data-question-index="@i"
-								>
+								onclick="showQuestion(@i)">
 							@(@i + 1)
 						</button>
 					}
@@ -45,11 +50,11 @@
 			</div>
 
 			<!-- Main content -->
-			<div class="col-md-9 rounded rounded-5" style="padding-left: 60px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;">
+			<div class="col-md-9 rounded rounded-5" style="padding-left: 60px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 				@for (int i = 0; i < Model.Questions.Count; i++)
 				{
 					var question = Model.Questions[i];
-					<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
+					<div class="question-box" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px">
 						<p><strong>@("Câu " + (i + 1) + ": ")</strong>@question.Content</p>
 
 						@foreach (var answer in question.Answers)
@@ -64,31 +69,10 @@
 								</label>
 							</div>
 						}
-						<div class="d-flex justify-content-between mt-4">
-							@if (i > 0)
-							{
-								<button type="button" class="btn btn-outline-secondary px-4"
-										onclick="showQuestion(@(i - 1))">
-									⬅ Câu trước
-								</button>
-							}
-							else
-							{
-								<span></span>
-							}
 
-							@if (i < Model.Questions.Count - 1)
-							{
-								<button type="button" class="btn btn-outline-primary px-4"
-										onclick="showQuestion(@(i + 1))">
-									Câu tiếp ➡
-								</button>
-							}
-						</div>
 						<input type="hidden" name="Answers[@i].QuestionId" value="@question.Id" />
 					</div>
 				}
-
 			</div>
 		</div>
 
@@ -96,29 +80,178 @@
 	</div>
 </form>
 
-<!-- Hết giờ Modal -->
-<div id="timeoutModal" class="modal-overlay" style="display: none;">
-	<div class="modal-content">
-		<h4>⏰ Hết giờ làm bài</h4>
-		<p>Bài thi của bạn đã hết giờ. Hệ thống sẽ tự động nộp bài ngay bây giờ.</p>
-		<button class="btn btn-dark" onclick="confirmAutoSubmit()">OK</button>
-	</div>
-</div>
-
 @section Scripts {
-	<script src="~/js/exam-take.js"></script>	
-}
-<script>
-	const isNewExam = @(Model.ExanScoredId == null || Model.ExanScoredId == 0 ? "true" : "false");
-	const userId = "@User.FindFirstValue(ClaimTypes.NameIdentifier)";
-	const examId = "@Model.Id";
+	<script>
+		const userId = "@userId";
+		const examId = "@Model.Id";
 
-	if (isNewExam === "true" && localStorage.getItem("examStates")) {
-		let data = JSON.parse(localStorage.getItem("examStates") || "{}");
-		if (data[userId] && data[userId][examId]) {
-			delete data[userId][examId];
-			localStorage.setItem("examStates", JSON.stringify(data));
-			console.log("🧹 Đã xoá dữ liệu cũ vì là bài thi mới");
+		let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
+		function saveLocalState() {
+			localStorage.setItem("examStates", JSON.stringify(localData));
 		}
-	}
-</script>
+
+		window.addEventListener("DOMContentLoaded", () => {
+			// ------------------ PHỤC HỒI CÂU TRẢ LỜI -------------------
+			const savedAnswers = localData[userId]?.[examId]?.selectedAnswers || {};
+			for (const name in savedAnswers) {
+				const value = savedAnswers[name];
+				const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+				if (radio) {
+					radio.checked = true;
+					const match = name.match(/Answers\[(\d+)\]/);
+					if (match) {
+						const index = parseInt(match[1]);
+						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+						if (btn) {
+							btn.classList.add("answered");
+						}
+					}
+				}
+			}
+
+			// ------------------ ĐỒNG HỒ ĐẾM NGƯỢC -------------------
+			let totalTime;
+			const savedTime = localData[userId]?.[examId]?.timeRemaining;
+			const lastUpdated = localData[userId]?.[examId]?.lastUpdated;
+
+			if (savedTime !== undefined && lastUpdated !== undefined) {
+				const now = Date.now();
+				const secondsElapsed = Math.floor((now - lastUpdated) / 1000);
+				totalTime = savedTime - secondsElapsed;
+			} else {
+				totalTime = @(Model.TotalTime.TotalSeconds);
+			}
+
+			const countdownEl = document.getElementById("time");
+			const submitBtn = document.getElementById("submitBtn");
+
+			function autoSubmitExam() {
+				alert("⏰ Bài thi đã hết giờ và sẽ được tự động nộp.");
+
+				const form = document.getElementById("examForm");
+				const formData = new FormData(form);
+				const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+				fetch(form.action, {
+					method: 'POST',
+					headers: {
+						'RequestVerificationToken': token,
+						'X-Requested-With': 'XMLHttpRequest'
+					},
+					body: new URLSearchParams(formData)
+				})
+					.then(response => response.json())
+					.then(data => {
+						if (localData[userId] && localData[userId][examId]) {
+							delete localData[userId];
+							saveLocalState();
+						}
+
+						if (data.success) {
+							const postForm = document.createElement("form");
+							postForm.method = "POST";
+							postForm.action = "/Exam/SubmitExamResult";
+
+							const tokenInput = document.createElement("input");
+							tokenInput.type = "hidden";
+							tokenInput.name = "__RequestVerificationToken";
+							tokenInput.value = token;
+							postForm.appendChild(tokenInput);
+
+							const scoredInput = document.createElement("input");
+							scoredInput.type = "hidden";
+							scoredInput.name = "examScoredId";
+							scoredInput.value = data.examScoredId;
+							postForm.appendChild(scoredInput);
+
+							const examInput = document.createElement("input");
+							examInput.type = "hidden";
+							examInput.name = "examId";
+							examInput.value = data.examId;
+							postForm.appendChild(examInput);
+
+							document.body.appendChild(postForm);
+							postForm.submit();
+						}
+						else {
+							const errorParam = encodeURIComponent(data.error);
+							window.location.href = `/Exam/SubmitExamResult?error=${errorParam}`;
+						}
+					});
+			}
+
+			function updateCountdown() {
+				if (totalTime < 0) {
+					clearInterval(timerInterval);
+					countdownEl.innerText = "0:00";
+					submitBtn.disabled = true;
+					autoSubmitExam();
+					return;
+				}
+
+				const minutes = Math.floor(totalTime / 60);
+				const seconds = totalTime % 60;
+				countdownEl.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+				const now = Date.now();
+				if (!localData[userId]) localData[userId] = {};
+				if (!localData[userId][examId]) localData[userId][examId] = {};
+				localData[userId][examId]["timeRemaining"] = totalTime;
+				localData[userId][examId]["lastUpdated"] = now;
+				saveLocalState();
+
+				totalTime--;
+			}
+
+			if (totalTime <= 0) {
+				autoSubmitExam();
+				return;
+			}
+
+			updateCountdown();
+			const timerInterval = setInterval(updateCountdown, 1000);
+
+			// ------------------ ĐỔI CÂU HỎI -------------------
+			window.showQuestion = function (index) {
+				const boxes = document.querySelectorAll('.question-box');
+				boxes.forEach((box, i) => {
+					box.style.display = (i === index) ? 'block' : 'none';
+				});
+			};
+
+			// ------------------ GHI CÂU TRẢ LỜI -------------------
+			document.querySelectorAll('input[type="radio"]').forEach(radio => {
+				radio.addEventListener('change', function () {
+					const name = this.name;
+					const match = name.match(/Answers\[(\d+)\]/);
+					if (match) {
+						const index = parseInt(match[1]);
+						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+						if (btn) {
+							btn.classList.add("answered");
+						}
+					}
+
+					if (!localData[userId]) localData[userId] = {};
+					if (!localData[userId][examId]) localData[userId][examId] = {};
+					if (!localData[userId][examId]["selectedAnswers"]) localData[userId][examId]["selectedAnswers"] = {};
+					localData[userId][examId]["selectedAnswers"][name] = this.value;
+					saveLocalState();
+				});
+			});
+
+			// ------------------ NỘP BÀI THỦ CÔNG -------------------
+			document.getElementById("examForm").addEventListener("submit", function (e) {
+				if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
+					e.preventDefault();
+				} else {
+					if (localData[userId] && localData[userId][examId]) {
+						clearInterval(timerInterval);
+						delete localData[userId];
+						saveLocalState();
+					}
+				}
+			});
+		});
+	</script>
+}
