@@ -1,4 +1,5 @@
 using Application.DTOs.Exam;
+using Application.DTOs.Favourite;
 using Application.DTOs.Question;
 using Application.DTOs.Subject;
 using Application.DTOs.ViewModel;
@@ -175,7 +176,24 @@ namespace Application.Services
 
             return new ExamSubjectViewModel
             {
-                Exams = _mapper.Map<List<ExamDTO>>(exams),
+                Exams = exams.Select(e => new ExamDTO
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Description = e.Description,
+                    SourceText = e.SourceText,
+                    CreatedAt = e.CreatedAt,
+                    TotalQuestion = e.TotalQuestion,
+                    FavouritedByUsers = e.FavouritedByUsers
+        .Select(f => new FavouriteDTO
+        {
+            UserId = f.UserId,
+            ExamId = f.ExamId
+        }).ToList(),
+                    // ⬇️ Thêm dòng này
+                    CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission)
+                }).ToList(),
+
                 Subjects = _mapper.Map<List<SubjectDTO>>(subjects)
             };
         }
@@ -303,7 +321,8 @@ namespace Application.Services
             {
                 userId = user.Id,
                 ExamId = exam.Id,
-                AccessDate = DateTime.UtcNow
+                AccessDate = DateTime.UtcNow,
+                Permission = dto.Permission
             };
 
             await _unitOfWork.ExamAccess.AddAsync(access);
@@ -311,21 +330,35 @@ namespace Application.Services
 
             return ResultDTO.Success("Cấp quyền thành công.");
         }
-        public async Task<bool> DeleteExamAsync(int examId)
+        public async Task<bool> DeleteExamAsync(int examId, string userId)
         {
             var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
             if (exam == null) return false;
 
-            if (exam.ExamScoreds.Any())
-                throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
+            // 🧠 Nếu là chủ sở hữu -> xóa toàn bộ
+            if (exam.PremiumUserId == userId)
+            {
+                if (exam.ExamScoreds.Any())
+                    throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
 
-            _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
-            _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
-            _unitOfWork.Exams.Remove(exam);
+                _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
+                _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
+                _unitOfWork.Exams.Remove(exam);
+            }
+            else
+            {
+                // 🔐 Nếu là người được chia sẻ và có quyền chỉnh sửa -> chỉ xóa quyền truy cập
+                var access = exam.ExamAccesses.FirstOrDefault(ea => ea.userId == userId && ea.Permission);
+                if (access == null)
+                    throw new InvalidOperationException("Bạn không có quyền xóa đề này.");
+
+                _unitOfWork.ExamAccess.Remove(access);
+            }
 
             await _unitOfWork.CompleteAsync();
             return true;
         }
+
         public async Task CreateBankQuestionAsync(CreateBankQuestionDTO dto)
         {
             var question = new BankQuestion

@@ -338,7 +338,8 @@ namespace Presentation.Controllers
         {
             try
             {
-                var success = await _examService.DeleteExamAsync(examId);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var success = await _examService.DeleteExamAsync(examId, userId!);
                 if (!success)
                 {
                     TempData["Error"] = "Đề thi không tồn tại.";
@@ -354,6 +355,8 @@ namespace Presentation.Controllers
                 return RedirectToAction("AllExams");
             }
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> CreateExamQuestion()

@@ -26,8 +26,9 @@ namespace Application.DTOs.Exam
 		public DateTime CreatedAt { get; set; }
 
 		public bool IsPublic { get; set; }
+        public bool CanEdit { get; set; }
 
-		public virtual PremiumUser? PremiumUser { get; set; }
+        public virtual PremiumUser? PremiumUser { get; set; }
 
         public virtual Domain.Entities.Subject? Subject { get; set; }
 

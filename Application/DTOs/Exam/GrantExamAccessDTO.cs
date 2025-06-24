@@ -10,6 +10,8 @@ namespace Application.DTOs.Exam
     {
         public string Email { get; set; } = null!;
         public int ExamId { get; set; }
+        public bool Permission { get; set; } 
     }
+
 
 }
