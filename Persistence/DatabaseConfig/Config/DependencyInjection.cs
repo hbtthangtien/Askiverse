@@ -47,6 +47,7 @@ namespace Persistence.DatabaseConfig.Config
             services.AddScoped<ISubcriptionPackageRepository,SubscriptionPackagesRepository>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IUserAccessExamRepository, UserAccessExamRepository>();
+            services.AddScoped<IFavouriteRepository, FavouriteRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
         }
         public static void AddIdentityConfig(this IServiceCollection services)

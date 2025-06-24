@@ -13,5 +13,6 @@ namespace Application.Interface.IRepository
         public UserManager<BasicUser> UserManager { get; }
 
         public SignInManager<BasicUser> SignInManager { get; }
+        Task<BasicUser?> GetByEmailAsync(string email);
     }
 }

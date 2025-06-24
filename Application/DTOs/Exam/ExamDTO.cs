@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.ExamScored;
+using Application.DTOs.Favourite;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,10 @@ namespace Application.DTOs.Exam
 
 		public virtual PremiumUser? PremiumUser { get; set; }
 
-		public virtual Subject? Subject { get; set; }
+        public virtual Domain.Entities.Subject? Subject { get; set; }
 
-		public virtual ICollection<ExamScoredDTO> ExamScoreds { get; set; } = new List<ExamScoredDTO>();
+        public virtual ICollection<ExamScoredDTO> ExamScoreds { get; set; } = new List<ExamScoredDTO>();
+
+		public virtual ICollection<FavouriteDTO> FavouritedByUsers { get; set; } = new List<FavouriteDTO>();
 	}
 }

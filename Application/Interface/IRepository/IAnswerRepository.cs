@@ -9,5 +9,6 @@ namespace Application.Interface.IRepository
 {
     public interface IAnswerRepository : IRepository<Answer>
     {
+        void Remove(Answer entity);
     }
 }

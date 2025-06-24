@@ -14,5 +14,10 @@ namespace Persistence.Repositories
         public AnswerRepository(AskiverseContext context) : base(context)
         {
         }
+        public void Remove(Answer entity)
+        {
+            _context.Answers.Remove(entity);
+        }
+
     }
 }

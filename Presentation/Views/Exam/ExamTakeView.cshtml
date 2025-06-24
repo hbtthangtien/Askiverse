@@ -12,16 +12,12 @@
 	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
-<style>
-	.question-nav-btn.answered {
-		background-color: #28a745 !important;
-		color: white !important;
-		border-color: #28a745 !important;
-	}
-</style>
+@section Styles {
+	<link rel="stylesheet" href="~/css/exam-take.css" />
+}
 
-
-<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm">
+<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm" data-userid="@userId"
+	  data-totalseconds="@Model.TotalTime.TotalSeconds">
 	@Html.AntiForgeryToken()
 	<input type="hidden" name="ExamId" value="@Model.Id" />
 	<input type="hidden" name="ExamScoredId" value="@Model.ExanScoredId" />
@@ -32,17 +28,15 @@
 			<!-- Sidebar -->
 			<div class="col-md-3 py-3 rounded rounded-5" style="background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-				<div id="countdown" class="text-center fs-5 fw-bold text-danger mb-4">
+				<div id="countdown" class="text-center">
 					⏳ Thời gian còn lại: <span id="time">--:--</span>
 				</div>
 
-				<div class="d-grid" style="grid-template-columns: repeat(5, 1fr); gap: 8px; padding-left: 20px">
+				<div class="nav-grid">
 					@for (int i = 0; i < Model.Questions.Count; i++)
 					{
-						<button type="button" class="btn btn-outline-primary p-1 text-center question-nav-btn"
-								style="width: 26px; height: 26px; font-size: 14px;"
-								data-question-index="@i"
-								onclick="showQuestion(@i)">
+						<button type="button" class="btn question-nav-btn"
+								data-question-index="@i">
 							@(@i + 1)
 						</button>
 					}
@@ -50,11 +44,11 @@
 			</div>
 
 			<!-- Main content -->
-			<div class="col-md-9 rounded rounded-5" style="padding-left: 60px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+			<div class="col-md-9 rounded rounded-5" style="padding-left: 60px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;">
 				@for (int i = 0; i < Model.Questions.Count; i++)
 				{
 					var question = Model.Questions[i];
-					<div class="question-box" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px">
+					<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
 						<p><strong>@("Câu " + (i + 1) + ": ")</strong>@question.Content</p>
 
 						@foreach (var answer in question.Answers)
@@ -69,10 +63,31 @@
 								</label>
 							</div>
 						}
+						<div class="d-flex justify-content-between mt-4">
+							@if (i > 0)
+							{
+								<button type="button" class="btn btn-outline-secondary px-4"
+										onclick="showQuestion(@(i - 1))">
+									⬅ Câu trước
+								</button>
+							}
+							else
+							{
+								<span></span>
+							}
 
+							@if (i < Model.Questions.Count - 1)
+							{
+								<button type="button" class="btn btn-outline-primary px-4"
+										onclick="showQuestion(@(i + 1))">
+									Câu tiếp ➡
+								</button>
+							}
+						</div>
 						<input type="hidden" name="Answers[@i].QuestionId" value="@question.Id" />
 					</div>
 				}
+
 			</div>
 		</div>
 
@@ -80,10 +95,31 @@
 	</div>
 </form>
 
+<!-- Hết giờ Modal -->
+<div id="timeoutModal" class="modal-overlay" style="display: none;">
+	<div class="modal-content">
+		<h4>⏰ Hết giờ làm bài</h4>
+		<p>Bài thi của bạn đã hết giờ. Hệ thống sẽ tự động nộp bài ngay bây giờ.</p>
+		<button class="btn btn-dark" onclick="confirmAutoSubmit()">OK</button>
+	</div>
+</div>
+
 @section Scripts {
 	<script>
+		const isNewExam = @(Model.ExanScoredId == null || Model.ExanScoredId == 0 ? "true" : "false");
+		// const userId = "@User.FindFirstValue(ClaimTypes.NameIdentifier)";
 		const userId = "@userId";
 		const examId = "@Model.Id";
+
+		if (isNewExam === "true" && localStorage.getItem("examStates")) {
+			let data = JSON.parse(localStorage.getItem("examStates") || "{}");
+			if (data[userId] && data[userId][examId]) {
+				delete data[userId][examId];
+				localStorage.setItem("examStates", JSON.stringify(data));
+				console.log("🧹 Đã xoá dữ liệu cũ vì là bài thi mới");
+			}
+		}
+
 
 		let localData = JSON.parse(localStorage.getItem("examStates") || "{}");
 		function saveLocalState() {
@@ -91,7 +127,12 @@
 		}
 
 		window.addEventListener("DOMContentLoaded", () => {
-			// ------------------ PHỤC HỒI CÂU TRẢ LỜI -------------------
+			if (!userId || !examId) {
+				console.error("Missing userId or examId.");
+				return;
+			}
+
+			// ⏪ Khôi phục đáp án
 			const savedAnswers = localData[userId]?.[examId]?.selectedAnswers || {};
 			for (const name in savedAnswers) {
 				const value = savedAnswers[name];
@@ -102,14 +143,17 @@
 					if (match) {
 						const index = parseInt(match[1]);
 						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
-						if (btn) {
-							btn.classList.add("answered");
-						}
+						if (btn) btn.classList.add("answered");
 					}
 				}
 			}
 
-			// ------------------ ĐỒNG HỒ ĐẾM NGƯỢC -------------------
+			// ⏱️ Đếm ngược
+			const formEl = document.getElementById("examForm");
+			const totalTimeAttr = parseInt(formEl.dataset.totalSeconds || "0");
+
+
+			// let totalTime = totalTimeAttr;
 			let totalTime;
 			const savedTime = localData[userId]?.[examId]?.timeRemaining;
 			const lastUpdated = localData[userId]?.[examId]?.lastUpdated;
@@ -125,9 +169,24 @@
 			const countdownEl = document.getElementById("time");
 			const submitBtn = document.getElementById("submitBtn");
 
-			function autoSubmitExam() {
-				alert("⏰ Bài thi đã hết giờ và sẽ được tự động nộp.");
 
+			function autoSubmitExam() {
+				document.getElementById("timeoutModal").style.display = "flex";
+
+				// Xóa dữ liệu để tránh khôi phục sau khi refresh
+				if (localData[userId] && localData[userId][examId]) {
+					delete localData[userId][examId];
+					saveLocalState();
+					console.log("🧹 Đã xoá localStorage khi hết giờ");
+				}
+			}
+
+			window.confirmAutoSubmit = function () {
+				document.getElementById("timeoutModal").style.display = "none";
+				actuallySubmitExam();
+			};
+
+			window.actuallySubmitExam = function () {
 				const form = document.getElementById("examForm");
 				const formData = new FormData(form);
 				const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
@@ -135,50 +194,47 @@
 				fetch(form.action, {
 					method: 'POST',
 					headers: {
-						'RequestVerificationToken': token,
 						'X-Requested-With': 'XMLHttpRequest'
 					},
 					body: new URLSearchParams(formData)
 				})
 					.then(response => response.json())
 					.then(data => {
-						if (localData[userId] && localData[userId][examId]) {
+						if (localData[userId]) {
 							delete localData[userId];
 							saveLocalState();
 						}
-
 						if (data.success) {
 							const postForm = document.createElement("form");
 							postForm.method = "POST";
 							postForm.action = "/Exam/SubmitExamResult";
 
-							const tokenInput = document.createElement("input");
-							tokenInput.type = "hidden";
-							tokenInput.name = "__RequestVerificationToken";
-							tokenInput.value = token;
-							postForm.appendChild(tokenInput);
+							const inputs = [
+								["__RequestVerificationToken", token],
+								["examScoredId", data.examScoredId],
+								["examId", data.examId]
+							];
 
-							const scoredInput = document.createElement("input");
-							scoredInput.type = "hidden";
-							scoredInput.name = "examScoredId";
-							scoredInput.value = data.examScoredId;
-							postForm.appendChild(scoredInput);
-
-							const examInput = document.createElement("input");
-							examInput.type = "hidden";
-							examInput.name = "examId";
-							examInput.value = data.examId;
-							postForm.appendChild(examInput);
+							inputs.forEach(([name, value]) => {
+								const input = document.createElement("input");
+								input.type = "hidden";
+								input.name = name;
+								input.value = value;
+								postForm.appendChild(input);
+							});
 
 							document.body.appendChild(postForm);
 							postForm.submit();
-						}
-						else {
+						} else {
 							const errorParam = encodeURIComponent(data.error);
 							window.location.href = `/Exam/SubmitExamResult?error=${errorParam}`;
 						}
+					})
+					.catch(err => {
+						console.error("Submit error:", err);
+						alert("Gửi bài không thành công. Vui lòng kiểm tra kết nối.");
 					});
-			}
+			};
 
 			function updateCountdown() {
 				if (totalTime < 0) {
@@ -211,15 +267,53 @@
 			updateCountdown();
 			const timerInterval = setInterval(updateCountdown, 1000);
 
-			// ------------------ ĐỔI CÂU HỎI -------------------
+			if (totalTime <= 600) {
+				const countdownBox = document.getElementById("countdown");
+				countdownBox.style.backgroundColor = "#FFF1F0";
+				countdownBox.style.borderColor = "#ff4d4f";
+				countdownBox.style.color = "#c41d7f";
+				countdownBox.style.boxShadow = "0 0 12px rgba(255, 77, 79, 0.3)";
+			}
+
+			// ⏭️ Hiển thị câu hỏi & lưu thời gian từng câu
+			let currentQuestionIndex = 0;
 			window.showQuestion = function (index) {
-				const boxes = document.querySelectorAll('.question-box');
-				boxes.forEach((box, i) => {
-					box.style.display = (i === index) ? 'block' : 'none';
+				const now = Date.now();
+				if (!localData[userId]) localData[userId] = {};
+				if (!localData[userId][examId]) localData[userId][examId] = {};
+				if (!localData[userId][examId]["timePerQuestion"]) localData[userId][examId]["timePerQuestion"] = {};
+
+				const lastSwitch = localData[userId][examId]["lastSwitch"] || now;
+				const elapsed = Math.floor((now - lastSwitch) / 1000);
+				const currentKey = `q${currentQuestionIndex}`;
+				localData[userId][examId]["timePerQuestion"][currentKey] =
+					(localData[userId][examId]["timePerQuestion"][currentKey] || 0) + elapsed;
+
+				localData[userId][examId]["lastSwitch"] = now;
+				currentQuestionIndex = index;
+				saveLocalState();
+
+				document.querySelectorAll('.question-box').forEach(box => {
+					box.style.display = 'none';
+					box.style.opacity = 0;
 				});
+				const next = document.getElementById(`question-${index}`);
+				if (!next) return;
+				next.style.display = 'block';
+				setTimeout(() => {
+					next.style.opacity = 1;
+				}, 100);
 			};
 
-			// ------------------ GHI CÂU TRẢ LỜI -------------------
+			// 🔁 Gán sự kiện chuyển câu hỏi
+			document.querySelectorAll('.question-nav-btn').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const index = parseInt(btn.dataset.questionIndex);
+					window.showQuestion(index);
+				});
+			});
+
+			// 🟢 Ghi nhận đáp án khi chọn
 			document.querySelectorAll('input[type="radio"]').forEach(radio => {
 				radio.addEventListener('change', function () {
 					const name = this.name;
@@ -227,9 +321,7 @@
 					if (match) {
 						const index = parseInt(match[1]);
 						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
-						if (btn) {
-							btn.classList.add("answered");
-						}
+						if (btn) btn.classList.add("answered");
 					}
 
 					if (!localData[userId]) localData[userId] = {};
@@ -240,18 +332,31 @@
 				});
 			});
 
-			// ------------------ NỘP BÀI THỦ CÔNG -------------------
+			// 📝 Cảnh báo khi còn câu chưa làm
 			document.getElementById("examForm").addEventListener("submit", function (e) {
-				if (!confirm("Bạn có chắc chắn muốn nộp bài không?")) {
-					e.preventDefault();
-				} else {
-					if (localData[userId] && localData[userId][examId]) {
-						clearInterval(timerInterval);
-						delete localData[userId];
-						saveLocalState();
+				const unanswered = [];
+				document.querySelectorAll('.question-box').forEach((box, index) => {
+					const hasChecked = box.querySelector('input[type="radio"]:checked');
+					if (!hasChecked) unanswered.push(index + 1);
+				});
+
+				if (unanswered.length > 0) {
+					const confirmText = `⚠️ Bạn chưa trả lời các câu: ${unanswered.join(', ')}.\nBạn vẫn muốn nộp bài?`;
+					if (!confirm(confirmText)) {
+						e.preventDefault();
+						return;
 					}
+				}
+
+				if (localData[userId]) {
+					clearInterval(timerInterval);
+					delete localData[userId];
+					saveLocalState();
 				}
 			});
 		});
+
 	</script>
+
+	@* <script src="~/js/exam-take.js"></script>	 *@
 }

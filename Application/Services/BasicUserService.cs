@@ -39,8 +39,15 @@ namespace Application.Services
 				CreatedAt = DateTime.Now,
 				AccountStatus = AccountStatus.Active
 			};
+            var premiumUser = new PremiumUser
+            {
+                UserId = entityUser.Id,
+                IsActive = true
+            };
 
-			var create = await _unitOfWork.BasicUsers.UserManager.CreateAsync(entityUser, dto.Password);
+            await _unitOfWork.PremiumUsers.AddAsync(premiumUser);
+
+            var create = await _unitOfWork.BasicUsers.UserManager.CreateAsync(entityUser, dto.Password);
 
 			if(!create.Succeeded)
 			{

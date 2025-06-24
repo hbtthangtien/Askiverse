@@ -1,4 +1,4 @@
-﻿using Application.Interface.IRepository;
+using Application.Interface.IRepository;
 using Application.UnitOfWork;
 using Persistence.DatabaseConfig;
 using System;
@@ -53,7 +53,7 @@ namespace Persistence.UnitOfWork
         public ISubjectRepository Subjects { get; private set; }
 
         public IUserAccessExamRepository UserAccessExams { get; private set; }
-
+        public IFavouriteRepository Favorites { get; private set; }
         public UnitOfWork(AskiverseContext context,
             IAnswerRepository answers,
             IBankQuestionRepository bankQuestions,
@@ -75,7 +75,8 @@ namespace Persistence.UnitOfWork
             IQuestionTypeRepository questionTypes,
             ISubcriptionPackageRepository subcriptionPackages,
             ISubjectRepository subjects,
-            IUserAccessExamRepository userAccessExams)
+            IUserAccessExamRepository userAccessExams,
+          IFavouriteRepository favourite)
         {
             _context = context;
             Answers = answers;
@@ -99,6 +100,7 @@ namespace Persistence.UnitOfWork
             SubcriptionPackages = subcriptionPackages;
             Subjects = subjects;
             UserAccessExams = userAccessExams;
+            Favorites = favourite;
         }
 
         public async Task CommitAsync()
@@ -110,5 +112,10 @@ namespace Persistence.UnitOfWork
         {
             _context.Dispose();
         }
+        public Task<int> CompleteAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
+
     }
 }

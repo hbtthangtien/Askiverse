@@ -23,6 +23,8 @@ namespace Application.Interface.IRepository
         public IQueryable<T> Query();
         Task<T> GetSingle(Expression<Func<T, bool>> predicate,
                  Func<IQueryable<T>, IQueryable<T>> include = null);
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
 
 
     }

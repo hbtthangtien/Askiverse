@@ -49,6 +49,8 @@ namespace Infrastructure.DIConfig
             services.AddScoped<ISubjectService, SubjectService>();
             services.AddScoped<ISubscriptionPackagesService, SubscriptionPackageService>();
             services.AddScoped<IUserAccessExamService, UserAccessExamService>();
+            services.AddScoped<IFavouriteService, FavouriteService>();
+            services.AddScoped<IExtractextFileDocService,ExtractTextFromDocxService>();
         }
 
         public static void AddOtherService(this IServiceCollection services, IConfiguration configuration)
