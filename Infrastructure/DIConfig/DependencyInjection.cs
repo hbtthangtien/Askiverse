@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,13 +51,17 @@ namespace Infrastructure.DIConfig
             services.AddScoped<ISubscriptionPackagesService, SubscriptionPackageService>();
             services.AddScoped<IUserAccessExamService, UserAccessExamService>();
             services.AddScoped<IFavouriteService, FavouriteService>();
-            services.AddScoped<IExtractextFileDocService,ExtractTextFromDocxService>();
+           
+
         }
 
         public static void AddOtherService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IEmailService, EmailService>();
-
+            services.AddScoped<IExtractextFileDocService, ExtractTextFromDocxService>();
+            services.AddScoped<IExtractTextFilePdfService,ExtractTextFilePdfService>();
+            services.AddScoped<IExtractTextFromImageService, ExtractTextFromImageService>();
+            services.AddScoped<IExtractTextService, ExtractTextService>();
             services.AddAuthentication().AddCookie().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = configuration.GetSection("GoogleKeys:ClientId").Value!;
@@ -67,7 +72,23 @@ namespace Infrastructure.DIConfig
         public static void InitialValueConfig(this IServiceCollection services, IConfiguration configuration)
         {
 			var emailConfig = configuration.GetSection("EmailConfig");
+            var openAiConfig = configuration.GetSection("OpenAIConfig");
 			services.Configure<EmailConfig>(emailConfig);
+            services.Configure<OpenAIConfig>(openAiConfig);
 		}
+
+        public static void ConfigureHttpClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient("OpenAI", client =>
+            {
+                var openAIConfig = configuration.GetSection("OpenAIConfig").Get<OpenAIConfig>();
+                var endpoint = openAIConfig!.Url;
+                client.BaseAddress = new Uri(endpoint);
+                client.Timeout = TimeSpan.FromSeconds(30);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", openAIConfig.Token);
+            });
+        }
 	}
 }
