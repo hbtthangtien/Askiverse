@@ -1,0 +1,419 @@
+﻿@using Application.DTOs.Exam
+@using Domain.Entities
+@model EditExamDTO
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5 mb-4">
+	<h1 class="mb-4">Chỉnh sửa đề thi </h1>
+<form asp-action="Edit" asp-controller="Exam" method="post" id="editExamForm">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" /> <!-- Hidden để biết đang sửa đề nào -->
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Tiêu đề</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Mô tả</label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SourceText" class="form-label">Source Text</label>
+        <input asp-for="SourceText" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SubjectId" class="form-label">Môn học</label>
+        <select asp-for="SubjectId" asp-items="@(new SelectList(ViewBag.Subjects, "Id", "Name"))" class="form-select">
+            <option value="">-- Chọn môn học --</option>
+        </select>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <label for="randomCount">Chọn số lượng câu hỏi: </label>
+        <select id="randomCount" class="form-select" style="width: 200px; display: inline-block;">
+            <option value="10">10 câu</option>
+            <option value="25">25 câu</option>
+            <option value="50">50 câu</option>
+        </select>
+        <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
+    </div>
+
+    <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
+
+    <div class="mb-3 form-check">
+        <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
+        <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
+    </div>
+
+    <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
+
+   
+    <!-- Khung lớn chứa danh sách câu hỏi bên trái + phần lọc bên phải -->
+    <div class="border rounded p-3">
+        <h4 class="mb-3">Quản lý câu hỏi</h4>
+
+        <div class="row">
+            <!-- Danh sách câu hỏi (bên trái, rộng 8 cột) -->
+            <div class="col-md-8" style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
+                <div id="searchResults">
+
+                    <div id="questionListContainer">
+                        @{
+                            var questions = ViewBag.InitialQuestions as List<BankQuestion>;
+
+                            var partialViewData = new ViewDataDictionary<List<BankQuestion>>(
+                            metadataProvider: ViewContext.HttpContext.RequestServices
+                            .GetService(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider))
+                            as Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,
+                            modelState: new Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary()
+                            )
+            {
+                Model = questions
+            };
+
+                            partialViewData["SelectedIds"] = Model.SelectedQuestionIds;
+                            partialViewData["TotalPages"] = ViewBag.TotalPages ?? 1;
+                            partialViewData["CurrentPage"] = ViewBag.CurrentPage ?? 1;
+                        }
+
+                        @Html.Partial("_SearchQuestionResults", partialViewData.Model, partialViewData)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần lọc câu hỏi (bên phải, rộng 4 cột) -->
+            <div class="col-md-4">
+                <h5>Lọc câu hỏi</h5>
+
+                <div class="mb-3">
+                    <label for="questionTypeFilter" class="form-label">Loại câu hỏi</label>
+                    <select id="questionTypeFilter" class="form-select">
+                        <option value="">Tất cả loại câu hỏi</option>
+                        @foreach (var qt in ViewBag.QuestionTypes as List<QuestionType>)
+                        {
+                            <option value="@qt.Id">@qt.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="levelFilter" class="form-label">Độ khó</label>
+                    <select id="levelFilter" class="form-select">
+                        <option value="">Tất cả độ khó</option>
+                        @foreach (var lv in ViewBag.Levels as List<Level>)
+                        {
+                            <option value="@lv.Id">@lv.DisplayName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <button type="button" id="btnSearch" class="btn btn-primary w-100">Tìm câu hỏi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <input type="submit" value="Lưu thay đổi" class="btn btn-success" />
+    </div>
+    <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
+</form>
+</div>
+@section Scripts {
+    <script>
+        let selectedQuestionIds = @Html.Raw(Json.Serialize(Model.SelectedQuestionIds ?? new List<int>()));
+        let currentPage = 1;
+    </script>
+
+        <script>
+
+
+                function loadQuestions() {
+                const filterData = $('#search-form').serialize(); // Nếu bạn có form lọc
+
+                $.ajax({
+                    url: '/Exam/SearchQuestions', // Hoặc endpoint nào bạn dùng
+                    type: 'GET',
+                    data: filterData,
+                    success: function (res) {
+                        $('#question-list-container').html(res); // ID của div chứa danh sách câu hỏi
+                    },
+                    error: function () {
+                        toastr.error('Không thể tải lại danh sách câu hỏi');
+                    }
+                });
+            }
+
+
+
+
+
+             function loadQuestions(page = 1) {
+                 var questionTypeId = $('#questionTypeFilter').val() || null;
+                 var levelId = $('#levelFilter').val() || null;
+                 var keyword = $('#keywordFilter').val().trim() || null;
+
+                 $.ajax({
+                     url: '@Url.Action("SearchQuestions", "Exam")',
+                     data: {
+                         questionTypeId: questionTypeId,
+                         levelId: levelId,
+                         keyword: keyword,
+                         page: page
+                     },
+                     success: function (result) {
+                         $('#searchResults').html(result);
+
+                         // Đánh dấu lại checkbox cho các câu đã chọn
+                         selectedQuestionIds.forEach(function (id) {
+                             $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                         });
+                     }
+                 });
+             }
+
+             $(document).on('change', '.question-checkbox', function () {
+                 var questionId = parseInt($(this).val());
+                 if ($(this).is(':checked')) {
+                     if (!selectedQuestionIds.includes(questionId)) {
+                         selectedQuestionIds.push(questionId);
+                     }
+                 } else {
+                     selectedQuestionIds = selectedQuestionIds.filter(id => id !== questionId);
+                 }
+             });
+
+             $(document).on('click', '.pagination a', function (e) {
+                 e.preventDefault();
+                 var page = $(this).data('page');
+                 loadQuestions(page);
+             });
+
+             $('#btnSearch').click(function () {
+                 loadQuestions(1);
+             });
+
+             $(document).ready(function () {
+                 loadQuestions(1);
+             });
+
+            // Tìm kiếm câu hỏi
+            $('#btnSearch').click(function () {
+                var questionTypeId = $('#questionTypeFilter').val() || null;
+                var levelId = $('#levelFilter').val() || null;
+                var keyword = $('#keywordFilter').val().trim() || null;
+
+                $.ajax({
+                    url: '@Url.Action("SearchQuestions", "Exam")',
+                    data: {
+                        questionTypeId: questionTypeId,
+                        levelId: levelId,
+                        keyword: keyword
+                    },
+                    success: function (result) {
+                        $('#searchResults').html(result);
+
+                        // Đánh dấu lại checkbox cho các câu đã chọn
+                        selectedQuestionIds.forEach(function (id) {
+                            $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                        });
+
+
+                        if (typeof showPage === "function") {
+                            showPage(1);
+                        }
+                    }
+                });
+            });
+
+
+            // Hàm load dữ liệu theo trang
+            function loadPage(page) {
+                var questionTypeId = $('#questionTypeFilter').val() || null;
+                var levelId = $('#levelFilter').val() || null;
+                var keyword = $('#keywordFilter').val().trim() || null;
+
+                $.ajax({
+                    url: '@Url.Action("SearchQuestions", "Exam")',
+                    data: {
+                        questionTypeId: questionTypeId,
+                        levelId: levelId,
+                        keyword: keyword,
+                        page: page,
+                        pageSize: 10 // hoặc lấy từ ViewBag.PageSize nếu động
+                    },
+                    success: function (result) {
+                        $('#searchResults').html(result);
+
+                        // Đánh dấu lại checkbox cho các câu đã chọn
+                        selectedQuestionIds.forEach(function (id) {
+                            $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                        });
+                    }
+                });
+            }
+
+            // Gán sự kiện click cho các nút phân trang (sau mỗi lần load lại kết quả)
+            $(document).on('click', '.pagination-link', function (e) {
+                e.preventDefault();
+                var page = $(this).data('page');
+                loadPage(page);
+            });
+
+            // Validate form trước khi submit
+                                 $('#editExamForm').submit(function (e) {
+            e.preventDefault();
+
+            const title = $('input[name="Title"]').val().trim();
+            const description = $('textarea[name="Description"]').val().trim();
+            const sourceText = $('input[name="SourceText"]').val().trim();
+            const subjectId = $('select[name="SubjectId"]').val();
+            const totalQuestion = parseInt($('#randomCount').val());
+            const selectedCount = selectedQuestionIds.length;
+
+            $('#totalQuestionHidden').val(selectedCount);
+
+            if (!title || !description || !sourceText || !subjectId) {
+                alert('Vui lòng điền đầy đủ thông tin.');
+                return false;
+            }
+
+            if (selectedCount !== totalQuestion) {
+                const diff = totalQuestion - selectedCount;
+                const message = diff > 0
+                    ? `Bạn còn thiếu ${diff} câu hỏi.`
+                    : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`;
+                $('#questionCountWarning').text(message).show();
+                $('html, body').animate({ scrollTop: $("#questionCountWarning").offset().top - 50 }, 400);
+                return false;
+            }
+
+            $('#questionCountWarning').hide();
+
+            // Xóa input cũ
+            $('input[name="SelectedQuestionIds"]').remove();
+
+            // ✅ Tạo input mới trước khi submit
+            for (const id of selectedQuestionIds) {
+                $('<input>', {
+                    type: 'hidden',
+                    name: 'SelectedQuestionIds',
+                    value: id
+                }).appendTo('#editExamForm');
+            }
+
+            // ✅ Đảm bảo submit sau khi tạo xong
+            setTimeout(() => {
+                $('#editExamForm')[0].submit();
+            }, 50); // nhỏ nhưng đảm bảo render xong
+        });
+
+
+
+        </script>
+
+
+}
+
+<style>
+    body {
+        background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #121117;
+    }
+
+    h1, h4, h5, label {
+        color: #D13D76;
+    }
+
+    .container {
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        transition: border 0.3s;
+    }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #FE9FC3;
+            box-shadow: 0 0 0 0.2rem rgba(254, 159, 195, 0.25);
+        }
+
+    .btn-success {
+        background-color: #D13D76;
+        border-color: #D13D76;
+    }
+
+        .btn-success:hover {
+            background-color: #a52d5c;
+            border-color: #a52d5c;
+        }
+
+    .btn-primary {
+        background-color: #FE9FC3;
+        border-color: #FE9FC3;
+        color: #121117;
+    }
+
+        .btn-primary:hover {
+            background-color: #f97daf;
+            border-color: #f97daf;
+        }
+
+    .form-check-input:checked {
+        background-color: #D13D76;
+        border-color: #D13D76;
+    }
+
+    #questionCountWarning {
+        font-weight: bold;
+    }
+
+    .border {
+        background-color: #D8F8F2;
+        border-color: #C4F0E0 !important;
+    }
+
+    .pagination .page-link {
+        color: #D13D76;
+    }
+
+    .pagination .active .page-link {
+        background-color: #FE9FC3;
+        border-color: #FE9FC3;
+        color: #fff;
+    }
+
+    /* Navbar (nếu có navbar ở layout) */
+    .navbar {
+        background: linear-gradient(90deg, #FAD3E7, #F0F8F6, #C4F0E0);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+        color: #121117;
+    }
+
+        .navbar-brand:hover,
+        .navbar-nav .nav-link:hover {
+            color: #D13D76;
+        }
+</style>

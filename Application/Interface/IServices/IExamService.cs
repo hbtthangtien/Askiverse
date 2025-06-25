@@ -28,6 +28,8 @@ namespace Application.Interface.IServices
         Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string grantedByPremiumUserId);
         Task<bool> DeleteExamAsync(int examId, string userId);
         Task CreateBankQuestionAsync(CreateBankQuestionDTO dto);
+        Task<EditExamDTO> GetExamForEditAsync(int examId);
+        Task<bool> UpdateExamAsync(EditExamDTO dto);
 
     }
 }

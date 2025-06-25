@@ -414,6 +414,41 @@ namespace Presentation.Controllers
             return RedirectToAction("Create");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int examId)
+        {
+            var userId = GetCurrentUserId();
+            var model = await _examService.GetExamForEditAsync(examId);
+
+            // Load ViewBag
+            await PrepareViewBagDataForCreatePage(); // dùng lại từ Create
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditExamDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                await PrepareViewBagDataForCreatePage();
+                return View(dto);
+            }
+
+            try
+            {
+                await _examService.UpdateExamAsync(dto);
+                TempData["Success"] = "Cập nhật đề thành công.";
+                return RedirectToAction("AllExams");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("AllExams"); // hoặc trang bạn hiển thị danh sách đề
+            }
+
+        }
 
 
     }

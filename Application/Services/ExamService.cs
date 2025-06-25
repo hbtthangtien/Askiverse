@@ -143,7 +143,9 @@ namespace Application.Services
             var examQuery = _unitOfWork.Exams
                      .Query()
                      .Include(e => e.FavouritedByUsers)
-                     .Include(e => e.ExamAccesses) 
+                     .Include(e => e.ExamAccesses)
+                     .Include(e => e.ExamScoreds)
+                     .Where(e => e.DeletedAt == DateTime.MinValue)
                      .AsQueryable();
             
             if (isFavourite)
@@ -191,7 +193,9 @@ namespace Application.Services
             ExamId = f.ExamId
         }).ToList(),
                     // ⬇️ Thêm dòng này
-                    CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission)
+                   
+                    CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission),
+                    HasBeenScored = e.ExamScoreds.Any()
                 }).ToList(),
 
                 Subjects = _mapper.Map<List<SubjectDTO>>(subjects)
@@ -335,19 +339,25 @@ namespace Application.Services
             var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
             if (exam == null) return false;
 
-            // 🧠 Nếu là chủ sở hữu -> xóa toàn bộ
+            // 🧠 Nếu là chủ sở hữu -> chỉ soft delete
             if (exam.PremiumUserId == userId)
             {
                 if (exam.ExamScoreds.Any())
                     throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
 
-                _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
-                _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
-                _unitOfWork.Exams.Remove(exam);
+                // Xóa mềm: chỉ set DeletedAt, không remove
+                exam.DeletedAt = DateTime.UtcNow;
+
+                // Optionally: cũng soft-delete access và questionExam nếu cần
+                foreach (var access in exam.ExamAccesses)
+                    access.DeletedAt = DateTime.UtcNow;
+
+                foreach (var q in exam.QuestionExam)
+                    q.DeletedAt = DateTime.UtcNow;
             }
             else
             {
-                // 🔐 Nếu là người được chia sẻ và có quyền chỉnh sửa -> chỉ xóa quyền truy cập
+                // 🔐 Người được chia sẻ có quyền chỉnh sửa -> chỉ xóa access của mình
                 var access = exam.ExamAccesses.FirstOrDefault(ea => ea.userId == userId && ea.Permission);
                 if (access == null)
                     throw new InvalidOperationException("Bạn không có quyền xóa đề này.");
@@ -358,6 +368,7 @@ namespace Application.Services
             await _unitOfWork.CompleteAsync();
             return true;
         }
+
 
         public async Task CreateBankQuestionAsync(CreateBankQuestionDTO dto)
         {
@@ -380,6 +391,80 @@ namespace Application.Services
             await _unitOfWork.BankQuestions.AddAsync(question);
             await _unitOfWork.CompleteAsync();
         }
+        public async Task<EditExamDTO> GetExamForEditAsync(int examId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
+            if (exam == null) throw new Exception("Không tìm thấy đề thi.");
+
+            var selectedQuestionIds = exam.QuestionExam.Select(q => q.BankQuestionId).ToList();
+
+            return new EditExamDTO
+            {
+                Id = exam.Id,
+                Title = exam.Title,
+                Description = exam.Description,
+                SourceText = exam.SourceText,
+                SubjectId = exam.SubjectId ?? 0,
+                IsPublic = exam.IsPublic,
+                TotalQuestion = exam.TotalQuestion,
+                SelectedQuestionIds = selectedQuestionIds
+            };
+        }
+        public async Task<bool> UpdateExamAsync(EditExamDTO dto)
+        {
+            var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(dto.Id);
+            if (exam == null)
+                throw new Exception("Không tìm thấy đề thi.");
+
+            // ❌ Không cho sửa nếu đề đã được làm
+            if (exam.ExamScoreds.Any())
+                throw new InvalidOperationException("Không thể chỉnh sửa vì đề đã được làm.");
+
+            // ✅ Kiểm tra số lượng câu hỏi hợp lệ
+            if (dto.SelectedQuestionIds.Count != dto.TotalQuestion)
+                throw new ArgumentException("Số câu hỏi đã chọn không khớp với tổng số câu hỏi.");
+
+            // ❌ Không cần xóa luôn exam nếu chỉ đang update
+            // _unitOfWork.Exams.Remove(exam); → ⚠️ bỏ dòng này, tránh xóa luôn đề
+
+            // Xóa access và questionExam cũ
+            _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
+            _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
+
+            // Cập nhật thông tin đề
+            exam.Title = dto.Title;
+            exam.Description = dto.Description;
+            exam.SourceText = dto.SourceText;
+            exam.SubjectId = dto.SubjectId;
+            exam.IsPublic = dto.IsPublic;
+            exam.TotalQuestion = dto.TotalQuestion;
+            exam.UpdatedAt = DateTime.UtcNow;
+
+            // Thêm mới các câu hỏi
+            foreach (var questionId in dto.SelectedQuestionIds)
+            {
+                var question = await _unitOfWork.BankQuestions.GetSingle(q => q.Id == questionId);
+                if (question == null)
+                    throw new Exception($"Không tìm thấy câu hỏi có ID {questionId}");
+
+                var questionExam = new QuestionExam
+                {
+                    ExamId = exam.Id,
+                    BankQuestionId = questionId,
+                    QuestionTypeId = question.QuestionTypeId,
+                    LevelId = question.LevelId,
+                    CreatedAt = DateTime.UtcNow,
+                    IsPublic = true
+                };
+
+                await _unitOfWork.QuestionExams.AddAsync(questionExam);
+            }
+
+            await _unitOfWork.CompleteAsync();
+            return true;
+        }
+
+
 
     }
 
