@@ -339,16 +339,17 @@ namespace Application.Services
             var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
             if (exam == null) return false;
 
-            // 🧠 Nếu là chủ sở hữu -> chỉ soft delete
-            if (exam.PremiumUserId == userId)
+            bool isOwner = exam.PremiumUserId == userId;
+
+            if (isOwner)
             {
+                // 🛑 Không cho xóa nếu đã có kết quả làm bài
                 if (exam.ExamScoreds.Any())
                     throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
 
-                // Xóa mềm: chỉ set DeletedAt, không remove
+                // ✅ Soft delete: gán DeletedAt
                 exam.DeletedAt = DateTime.UtcNow;
 
-                // Optionally: cũng soft-delete access và questionExam nếu cần
                 foreach (var access in exam.ExamAccesses)
                     access.DeletedAt = DateTime.UtcNow;
 
@@ -357,17 +358,19 @@ namespace Application.Services
             }
             else
             {
-                // 🔐 Người được chia sẻ có quyền chỉnh sửa -> chỉ xóa access của mình
+                // ✅ Là người được chia sẻ (và có quyền xóa)
                 var access = exam.ExamAccesses.FirstOrDefault(ea => ea.userId == userId && ea.Permission);
                 if (access == null)
                     throw new InvalidOperationException("Bạn không có quyền xóa đề này.");
 
+                // ❌ Xóa cứng access (chỉ với người được chia sẻ)
                 _unitOfWork.ExamAccess.Remove(access);
             }
 
             await _unitOfWork.CompleteAsync();
             return true;
         }
+
 
 
         public async Task CreateBankQuestionAsync(CreateBankQuestionDTO dto)

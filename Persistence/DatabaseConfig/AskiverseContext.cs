@@ -259,9 +259,12 @@ namespace Persistence.DatabaseConfig
             foreach (var entry in ChangeTracker.Entries()
                 .Where(e => e.State == EntityState.Deleted && e.Entity is BaseEntity))
             {
-                entry.State = EntityState.Modified;
-                var entity = (BaseEntity)entry.Entity;
-                entity.DeletedAt = DateTime.UtcNow;
+                if (entry.Entity is Exam || entry.Entity is QuestionExam)
+                {
+                    entry.State = EntityState.Modified;
+                    var entity = (BaseEntity)entry.Entity;
+                    entity.DeletedAt = DateTime.UtcNow;
+                }
             }
         }
 
