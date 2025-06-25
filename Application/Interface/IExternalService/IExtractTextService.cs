@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,7 @@ namespace Application.Interface.IExternalService
         public IExtractTextFilePdfService ExtractTextFilePdfService { get; }
 
         public IExtractextFileDocService ExtractextFileDocService { get; }
+
+        public List<(string ChapterTitle, string ChapterText)> Extractext(IFormFile file);
     }
 }

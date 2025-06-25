@@ -17,6 +17,7 @@ namespace Presentation
             builder.Services.AddApplicationAutoMapper();
             builder.Services.AddOtherService(builder.Configuration);
             builder.Services.InitialValueConfig(builder.Configuration);
+            builder.Services.ConfigureHttpClient(builder.Configuration);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

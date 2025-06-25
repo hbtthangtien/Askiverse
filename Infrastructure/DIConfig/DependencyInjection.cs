@@ -62,6 +62,7 @@ namespace Infrastructure.DIConfig
             services.AddScoped<IExtractTextFilePdfService,ExtractTextFilePdfService>();
             services.AddScoped<IExtractTextFromImageService, ExtractTextFromImageService>();
             services.AddScoped<IExtractTextService, ExtractTextService>();
+            services.AddScoped<IOpenAIService,OpenAIService>();
             services.AddAuthentication().AddCookie().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = configuration.GetSection("GoogleKeys:ClientId").Value!;
@@ -84,7 +85,7 @@ namespace Infrastructure.DIConfig
                 var openAIConfig = configuration.GetSection("OpenAIConfig").Get<OpenAIConfig>();
                 var endpoint = openAIConfig!.Url;
                 client.BaseAddress = new Uri(endpoint);
-                client.Timeout = TimeSpan.FromSeconds(30);
+                client.Timeout = TimeSpan.FromMinutes(3);
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
                 client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", openAIConfig.Token);

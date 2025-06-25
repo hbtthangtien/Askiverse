@@ -87,5 +87,19 @@ namespace Infrastructure.ExternalService
             }
             return chunks;
         }
+
+        public long CountWordDocx(Stream stream)
+        {
+            XWPFDocument doc = new XWPFDocument(stream);
+            var sb = new StringBuilder();
+            foreach (var para in doc.Paragraphs)
+            {
+                sb.AppendLine(para.ParagraphText);
+            }
+            var text = sb.ToString();
+            // Đếm số từ
+            var words = text.Split(new[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            return words.Length;
+        }
     }
 }

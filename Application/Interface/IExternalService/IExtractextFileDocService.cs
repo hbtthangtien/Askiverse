@@ -9,5 +9,7 @@ namespace Application.Interface.IExternalService
     public interface IExtractextFileDocService
     {
         public List<(string ChapterTitle, string ChapterText)> ExtractChapters(Stream stream);
+
+        public long CountWordDocx(Stream stream);
     }
 }

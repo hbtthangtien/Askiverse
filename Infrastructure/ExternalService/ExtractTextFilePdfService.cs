@@ -9,6 +9,15 @@ namespace Infrastructure.ExternalService
 {
     public class ExtractTextFilePdfService : IExtractTextFilePdfService
     {
+        public long CountPagesPdfItext7(Stream pdfStream)
+        {
+            using (var pdfReader = new PdfReader(pdfStream))
+            using (var pdfDoc = new PdfDocument(pdfReader))
+            {
+                return pdfDoc.GetNumberOfPages();
+            }
+        }
+
         public List<ChapterDTO> ExtractChapters(Stream pdfStream)
         {
             var sb = new StringBuilder();

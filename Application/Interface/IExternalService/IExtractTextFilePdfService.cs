@@ -11,5 +11,6 @@ namespace Application.Interface.IExternalService
     {
         public List<ChapterDTO> ExtractChapters(Stream pdfStream);
 
+        public long CountPagesPdfItext7(Stream pdfStream);
     }
 }
