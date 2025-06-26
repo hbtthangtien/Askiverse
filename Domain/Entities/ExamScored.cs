@@ -13,7 +13,7 @@ namespace Domain.Entities
 
         public DateTime StartTime { get; set; }
 
-        public DateTime SubmitedTime { get; set; }
+        public DateTime? SubmitedTime { get; set; }
 
         public double Score { get; set; }
 

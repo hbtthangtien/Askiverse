@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Exam;
+using Application.DTOs.ExamScored;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Application.Interface.IRepository
         Task<Exam?> GetByIdAsync(int id);
         Task<IEnumerable<Exam>> GetByPremiumUserIdAsync(string premiumUserId);
         Task<Exam?> GetExamWithRelationsAsync(int examId);
+        public Task<int> CreateExamScored(int examId, string userId);
 
-    }
+	}
 }

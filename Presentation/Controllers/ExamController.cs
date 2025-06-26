@@ -11,56 +11,71 @@ using System.Security.Claims;
 
 namespace Presentation.Controllers
 {
-	public class ExamController : Controller
-	{
-		private readonly IExamService _examService;
-		private readonly IHttpContextAccessor _httpContextAccessor;
+    public class ExamController : Controller
+    {
+        private readonly IExamService _examService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public ExamController(IExamService examService, IHttpContextAccessor httpContextAccessor)
-		{
-			_examService = examService;
-			_httpContextAccessor = httpContextAccessor;
+        public ExamController(IExamService examService, IHttpContextAccessor httpContextAccessor)
+        {
+            _examService = examService;
+            _httpContextAccessor = httpContextAccessor;
+        }
+        private string? GetCurrentUserId()
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var userId = GetCurrentUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "BasicUser");
+            }
+            var subjects = await _examService.GetAllSubjectsAsync();
+            var questionTypes = await _examService.GetAllQuestionTypesAsync();
+            var levels = await _examService.GetAllLevelsAsync();
+            var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(), userId);
+            ViewBag.Subjects = subjects;
+            ViewBag.QuestionTypes = questionTypes;
+            ViewBag.Levels = levels;
+            ViewBag.InitialQuestions = allQuestions;
+            return View(new CreateExamDTO());
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult GetExamTakeById(int examId)
+        {
+			HttpContext.Session.SetInt32("CurrentExamId", examId);
+			return RedirectToAction("TakeExam");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TakeExam()
+        {
+			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			if (userId == null) return Unauthorized();
+
+			var examId = HttpContext.Session.GetInt32("CurrentExamId");
+			if (examId == null) return RedirectToAction("AllExams");
+
+            var examScored = HttpContext.Session.GetInt32("ExamScoredId");
+            if(examScored == null)
+            {
+                examScored = await _examService.CreateExamScoredAsync(examId.Value, userId);
+                HttpContext.Session.SetInt32("ExamScoredId", examScored.Value);
+            }
+
+			var exam = await _examService.GetExamTakeById(examId.Value, userId);
+			if (exam == null) return NotFound();
+            exam.ExanScoredId = examScored.Value;
+
+			return View("ExamTakeView", exam);
 		}
-		private string? GetCurrentUserId()
-		{
-			return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-		}
-		
-	[HttpGet]
-	public async Task<IActionResult> Create()
-	{
-		var userId = GetCurrentUserId();
-		if (string.IsNullOrEmpty(userId))
-		{
-			return RedirectToAction("Login", "BasicUser");
-		}
-		var subjects = await _examService.GetAllSubjectsAsync();
-		var questionTypes = await _examService.GetAllQuestionTypesAsync();
-		var levels = await _examService.GetAllLevelsAsync();
-		var allQuestions = await _examService.SearchBankQuestionsAsync(new SearchBankQuestionFilter(), userId);
-		ViewBag.Subjects = subjects;
-		ViewBag.QuestionTypes = questionTypes;
-		ViewBag.Levels = levels;
-		ViewBag.InitialQuestions = allQuestions;
-		return View(new CreateExamDTO());
-	}
 
-
-	[Authorize]
-	[HttpPost]
-	public async Task<IActionResult> GetExamTakeById(int examId)
-	{
-		var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-		if (userId == null) return Unauthorized();
-
-		if (userId == null) return Unauthorized();
-
-		var exam = await _examService.GetExamTakeById(examId, userId);
-
-		if (exam == null) return NotFound();
-
-		return View("ExamTakeView", exam);
-	}
         [HttpPost]
         public async Task<IActionResult> Create(CreateExamDTO dto)
         {
@@ -76,7 +91,7 @@ namespace Presentation.Controllers
             {
                 ModelState.AddModelError("", $"Bạn phải chọn đúng {dto.TotalQuestion} câu hỏi.");
             }
-            dto.PremiumUserId = userId; 
+            dto.PremiumUserId = userId;
             if (!ModelState.IsValid)
             {
                 // Nạp lại dữ liệu cho ViewBag để không lỗi View khi load lại
@@ -128,7 +143,7 @@ namespace Presentation.Controllers
                 Keyword = keyword
             };
 
-            var allResults = await _examService.SearchBankQuestionsAsync(filter, userId); 
+            var allResults = await _examService.SearchBankQuestionsAsync(filter, userId);
             var total = allResults.Count;
 
             var paginated = allResults
@@ -147,21 +162,23 @@ namespace Presentation.Controllers
 
 
         [HttpGet]
-	public async Task<IActionResult> GetQuestionDetail(int id)
-	{
-		var detail = await _examService.GetQuestionDetailAsync(id);
+        public async Task<IActionResult> GetQuestionDetail(int id)
+        {
+            var detail = await _examService.GetQuestionDetailAsync(id);
 
-		if (detail == null)
-			return NotFound();
+            if (detail == null)
+                return NotFound();
 
-		return Json(detail);
-	}
+            return Json(detail);
+        }
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitExam(ExamSubmitDTO dto, int ExamScoredId)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			HttpContext.Session.Remove("CurrentExamId");
+			HttpContext.Session.Remove("ExamScoredId");
+			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null) return Unauthorized();
 
             try
@@ -278,7 +295,7 @@ namespace Presentation.Controllers
             }
 
             await _examService.UpdateBankQuestionAsync(dto);
-            return RedirectToAction("Create"); 
+            return RedirectToAction("Create");
         }
 
         [HttpGet]
@@ -327,7 +344,7 @@ namespace Presentation.Controllers
             var userId = GetCurrentUserId();
             if (userId == null) return Unauthorized();
 
-            var exam = await _examService.GetExamTakeById(examId, userId); 
+            var exam = await _examService.GetExamTakeById(examId, userId);
             if (exam == null) return NotFound();
 
             return View("PreviewExam", exam); // View mới

@@ -192,7 +192,13 @@ namespace Application.Services
             return examScoredId;
         }
 
-        public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
+        public async Task<int> CreateExamScoredAsync(int examId, string userId)
+        {
+            var examScored = await _unitOfWork.Exams.CreateExamScored(examId, userId);
+            return examScored;
+        }
+
+		public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
         {
             var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(dto.Id);
 
