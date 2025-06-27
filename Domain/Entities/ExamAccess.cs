@@ -14,6 +14,8 @@ namespace Domain.Entities
         public DateTime AccessDate { get; set; }
 
         public string userId { get; set; }
+        public bool Permission { get; set; }
+
 
         public virtual BasicUser? BasicUser { get; set; }
 

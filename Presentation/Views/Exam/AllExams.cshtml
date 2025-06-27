@@ -57,6 +57,14 @@
 							<option value="">-- Chọn đề --</option>
 						</select>
 					</div>
+					<div class="mb-3">
+						<label>Quyền truy cập</label>
+						<select class="form-select" id="permissionSelect">
+							<option value="false">Chỉ xem</option>
+							<option value="true">Được chỉnh sửa</option>
+						</select>
+					</div>
+
 					<div id="accessError" class="text-danger d-none"></div>
 				</div>
 				<div class="modal-footer">
@@ -196,6 +204,7 @@
 					$('#grantAccessBtn').click(function () {
 						const email = $('#userEmail').val();
 						const examId = $('#examSelect').val();
+				const permission = $('#permissionSelect').val() === "true";
 						const $error = $('#accessError');
 
 						if (!email || !examId) {
@@ -205,20 +214,21 @@
 
 						}
 
-						$.ajax({
-							url: '/Exam/GrantExamAccessByEmail',
-							type: 'POST',
-							contentType: 'application/json',
-							data: JSON.stringify({ email, examId }),
-							success: function (message) {
-								$error.addClass('d-none');
-								alert(message);
-								$('#grantExamAccessModal').modal('hide');
-							},
-							error: function (xhr) {
-								$error.text(xhr.responseText).removeClass('d-none');
-							}
-						});
+								$.ajax({
+			url: '/Exam/GrantExamAccessByEmail',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ email, examId, permission }),
+			success: function (message) {
+				$error.addClass('d-none');
+				alert(message);
+				$('#grantExamAccessModal').modal('hide');
+			},
+			error: function (xhr) {
+				$error.text(xhr.responseText).removeClass('d-none');
+			}
+		});
+
 
 					});
 				});

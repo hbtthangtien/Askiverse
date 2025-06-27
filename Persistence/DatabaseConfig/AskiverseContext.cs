@@ -1,5 +1,6 @@
 ﻿using Domain.Constants;
 using Domain.Entities;
+using Domain.Entities.Commons;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -241,5 +242,31 @@ namespace Persistence.DatabaseConfig
 			SubscriptionSeedingData.Seeding(builder);
 
 		}
-	}
+        public override int SaveChanges()
+        {
+            HandleSoftDelete();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            HandleSoftDelete();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void HandleSoftDelete()
+        {
+            foreach (var entry in ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Deleted && e.Entity is BaseEntity))
+            {
+                if (entry.Entity is Exam || entry.Entity is QuestionExam)
+                {
+                    entry.State = EntityState.Modified;
+                    var entity = (BaseEntity)entry.Entity;
+                    entity.DeletedAt = DateTime.UtcNow;
+                }
+            }
+        }
+
+    }
 }

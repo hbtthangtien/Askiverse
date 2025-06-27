@@ -26,8 +26,10 @@ namespace Application.Interface.IServices
         Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId);
             Task<List<ExamDTO>> GetExamsByPremiumUserIdAsync(string premiumUserId);
         Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string grantedByPremiumUserId);
-        Task<bool> DeleteExamAsync(int examId);
+        Task<bool> DeleteExamAsync(int examId, string userId);
         Task CreateBankQuestionAsync(CreateBankQuestionDTO dto);
+        Task<EditExamDTO> GetExamForEditAsync(int examId);
+        Task<bool> UpdateExamAsync(EditExamDTO dto);
 
     }
 }

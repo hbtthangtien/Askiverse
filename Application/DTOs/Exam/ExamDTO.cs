@@ -26,8 +26,10 @@ namespace Application.DTOs.Exam
 		public DateTime CreatedAt { get; set; }
 
 		public bool IsPublic { get; set; }
-
-		public virtual PremiumUser? PremiumUser { get; set; }
+       
+        public bool CanEdit { get; set; } // Có quyền sửa (người tạo hoặc được cấp quyền)
+        public bool HasBeenScored { get; set; } // Đã được làm chưa
+        public virtual PremiumUser? PremiumUser { get; set; }
 
         public virtual Domain.Entities.Subject? Subject { get; set; }
 
