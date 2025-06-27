@@ -1,6 +1,8 @@
 ﻿using Application.DTOs.Exam;
+using Application.DTOs.ExamScored;
 using Application.Interface.IRepository;
 using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DatabaseConfig;
 using System;
@@ -23,6 +25,23 @@ namespace Persistence.Repositories
             return exam;
         }
 
+        public async Task<int> CreateExamScored(int examId, string userId)
+        {
+            var now = DateTime.Now;
+            var examScored = new ExamScored
+            {
+                UserId = userId,
+                StartTime = now,
+                SubmitedTime = null,
+                Score = 0,
+                ExamId = examId
+            };
+
+            _context.ExamssScoreds.Add(examScored);
+            await _context.SaveChangesAsync();
+            return examScored.Id;
+        }
+
         public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
         {
             var exam = await _context.Examss
@@ -34,19 +53,19 @@ namespace Persistence.Repositories
 
             if (exam == null) return null;
 
-            var now = DateTime.Now;
+            //var now = DateTime.Now;
 
-            var examScored = new ExamScored
-            {
-                UserId = userId,
-                StartTime = now,
-                SubmitedTime = now,
-                Score = 0,
-                ExamId = examId
-            };
+            //var examScored = new ExamScored
+            //{
+            //    UserId = userId,
+            //    StartTime = now,
+            //    SubmitedTime = null,
+            //    Score = 0,
+            //    ExamId = examId
+            //};
 
-            _context.ExamssScoreds.Add(examScored);
-            await _context.SaveChangesAsync();
+            //_context.ExamssScoreds.Add(examScored);
+            //await _context.SaveChangesAsync();
 
             return new ExamTakeDTO
             {
@@ -63,7 +82,7 @@ namespace Persistence.Repositories
                     }).ToList() ?? new()
                 }).ToList(),
                 TotalTime = exam.TotalTime,
-                ExanScoredId = examScored.Id
+                //ExanScoredId = examScored.Id
             };
         }
         public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)

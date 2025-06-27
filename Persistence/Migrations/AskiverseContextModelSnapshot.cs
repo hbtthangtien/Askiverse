@@ -343,7 +343,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("SubmitedTime")
+                    b.Property<DateTime?>("SubmitedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdateBy")

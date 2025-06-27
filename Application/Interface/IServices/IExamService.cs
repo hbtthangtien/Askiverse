@@ -30,6 +30,7 @@ namespace Application.Interface.IServices
         Task CreateBankQuestionAsync(CreateBankQuestionDTO dto);
         Task<EditExamDTO> GetExamForEditAsync(int examId);
         Task<bool> UpdateExamAsync(EditExamDTO dto);
+        public Task<int> CreateExamScoredAsync(int examId, string userId);
 
-    }
+	}
 }
