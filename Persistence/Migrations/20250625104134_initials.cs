@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
@@ -45,32 +47,14 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Levels", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PackageDurations",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<int>(type: "int", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PackageDurations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,9 +64,9 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -112,9 +96,11 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -129,9 +115,9 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -209,9 +195,9 @@ namespace Persistence.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SubcriptionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Duration = table.Column<int>(type: "int", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -236,8 +222,8 @@ namespace Persistence.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsRead = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -342,6 +328,38 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PackageOfUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubscriptionId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SubcriptionPackagesId = table.Column<int>(type: "int", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PackageOfUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PackageOfUsers_BasicUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "BasicUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PackageOfUsers_SubcriptionPackages_SubcriptionPackagesId",
+                        column: x => x.SubcriptionPackagesId,
+                        principalTable: "SubcriptionPackages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BankQuestions",
                 columns: table => new
                 {
@@ -353,8 +371,8 @@ namespace Persistence.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PremiumUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -393,8 +411,9 @@ namespace Persistence.Migrations
                     TotalQuestion = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalTime = table.Column<TimeSpan>(type: "time", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -413,45 +432,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PackageOfUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DurationId = table.Column<int>(type: "int", nullable: false),
-                    SubscriptionId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PackageDurationId = table.Column<int>(type: "int", nullable: true),
-                    SubcriptionPackagesId = table.Column<int>(type: "int", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PackageOfUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PackageOfUsers_PackageDurations_PackageDurationId",
-                        column: x => x.PackageDurationId,
-                        principalTable: "PackageDurations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_PackageOfUsers_PremiumUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "PremiumUsers",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PackageOfUsers_SubcriptionPackages_SubcriptionPackagesId",
-                        column: x => x.SubcriptionPackagesId,
-                        principalTable: "SubcriptionPackages",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Answers",
                 columns: table => new
                 {
@@ -461,9 +441,9 @@ namespace Persistence.Migrations
                     AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsCorrected = table.Column<bool>(type: "bit", nullable: false),
                     MatchingPairKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -486,9 +466,9 @@ namespace Persistence.Migrations
                     ExamId = table.Column<int>(type: "int", nullable: false),
                     AccessDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     userId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -518,10 +498,10 @@ namespace Persistence.Migrations
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SubmitedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Score = table.Column<double>(type: "float", nullable: false),
-                    ExamId = table.Column<int>(type: "int", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExamId = table.Column<int>(type: "int", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -534,6 +514,30 @@ namespace Persistence.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ExamssScoreds_Examss_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Examss",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Favourites",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ExamId = table.Column<int>(type: "int", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favourites", x => new { x.UserId, x.ExamId });
+                    table.ForeignKey(
+                        name: "FK_Favourites_BasicUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "BasicUser",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Favourites_Examss_ExamId",
                         column: x => x.ExamId,
                         principalTable: "Examss",
                         principalColumn: "Id");
@@ -552,8 +556,8 @@ namespace Persistence.Migrations
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -582,9 +586,9 @@ namespace Persistence.Migrations
                     ExamId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasicUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -611,10 +615,11 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamScoredId = table.Column<int>(type: "int", nullable: false),
                     AnswerId = table.Column<int>(type: "int", nullable: false),
+                    QuestionExamId = table.Column<int>(type: "int", nullable: false),
                     IsCorrected = table.Column<bool>(type: "bit", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -631,6 +636,11 @@ namespace Persistence.Migrations
                         principalTable: "ExamssScoreds",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExamAnswereds_QuestionExams_QuestionExamId",
+                        column: x => x.QuestionExamId,
+                        principalTable: "QuestionExams",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -651,7 +661,7 @@ namespace Persistence.Migrations
                     ForumStatus = table.Column<int>(type: "int", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     QuestionExamId = table.Column<int>(type: "int", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -689,7 +699,7 @@ namespace Persistence.Migrations
                     CommentById = table.Column<int>(type: "int", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -717,9 +727,9 @@ namespace Persistence.Migrations
                     VotedById = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     VotedType = table.Column<int>(type: "int", nullable: false),
                     VotedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -736,6 +746,65 @@ namespace Persistence.Migrations
                         column: x => x.PostId,
                         principalTable: "ForumPosts",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Levels",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "DisplayName", "UpdateBy", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5922), null, "Easy", null, null },
+                    { 2, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5925), null, "Medium", null, null },
+                    { 3, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5927), null, "Hard", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "QuestionTypes",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "Name", "UpdateBy", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5968), null, "Multiple Choice", null, null },
+                    { 2, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5971), null, "Fill in the Blank", null, null },
+                    { 3, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5974), null, "Matching", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", null, "BASIC_USER", "BASIC_USER" },
+                    { "2", null, "PREMIUM_USER", "PREMIUM_USER" },
+                    { "3", null, "ADMIN", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubcriptionPackages",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "Description", "Duration", "Name", "Price", "UpdateBy", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6157), null, "Truy cập nội dung cơ bản", 14, "Gói cơ bản", 99000.0, null, null },
+                    { 2, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6161), null, "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên", 30, "Gói nâng cao", 199000.0, null, null },
+                    { 3, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6163), null, "Truy cập không giới hạn trong 1 năm", 365, "Gói hàng năm", 1990000.0, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Subjects",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "Name", "UpdateBy", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6050), null, "Toán học", null, null },
+                    { 2, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6054), null, "Ngữ văn", null, null },
+                    { 3, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6057), null, "Tiếng Anh", null, null },
+                    { 4, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6059), null, "Vật lý", null, null },
+                    { 5, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6062), null, "Hóa học", null, null },
+                    { 6, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6067), null, "Sinh học", null, null },
+                    { 7, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6069), null, "Lịch sử", null, null },
+                    { 8, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6071), null, "Địa lý", null, null },
+                    { 9, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6073), null, "Giáo dục công dân", null, null },
+                    { 10, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6077), null, "Tin học", null, null },
+                    { 11, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6079), null, "Công nghệ", null, null },
+                    { 12, new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6082), null, "Thể dục", null, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -803,13 +872,17 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ExamAnswereds_AnswerId",
                 table: "ExamAnswereds",
-                column: "AnswerId",
-                unique: true);
+                column: "AnswerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamAnswereds_ExamScoredId",
                 table: "ExamAnswereds",
                 column: "ExamScoredId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExamAnswereds_QuestionExamId",
+                table: "ExamAnswereds",
+                column: "QuestionExamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Examss_PremiumUserId",
@@ -830,6 +903,11 @@ namespace Persistence.Migrations
                 name: "IX_ExamssScoreds_UserId",
                 table: "ExamssScoreds",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Favourites_ExamId",
+                table: "Favourites",
+                column: "ExamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumComments_CommentById",
@@ -880,11 +958,6 @@ namespace Persistence.Migrations
                 name: "IX_Notifications_SenderId",
                 table: "Notifications",
                 column: "SenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PackageOfUsers_PackageDurationId",
-                table: "PackageOfUsers",
-                column: "PackageDurationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PackageOfUsers_SubcriptionPackagesId",
@@ -949,6 +1022,9 @@ namespace Persistence.Migrations
                 name: "ExamAnswereds");
 
             migrationBuilder.DropTable(
+                name: "Favourites");
+
+            migrationBuilder.DropTable(
                 name: "ForumComments");
 
             migrationBuilder.DropTable(
@@ -980,9 +1056,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "ForumPosts");
-
-            migrationBuilder.DropTable(
-                name: "PackageDurations");
 
             migrationBuilder.DropTable(
                 name: "SubcriptionPackages");

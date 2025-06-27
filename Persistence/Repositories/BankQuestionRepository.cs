@@ -53,5 +53,9 @@ namespace Persistence.Repositories
                 .ToListAsync();
         }
 
+        public async Task AddRange(List<BankQuestion> list)
+        {
+            await _context.BankQuestions.AddRangeAsync(list);
+        }
     }
 }

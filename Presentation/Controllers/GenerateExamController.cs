@@ -1,35 +1,28 @@
 ﻿using Application.DTOs.Question.GenerateAI;
 using Application.Interface.IExternalService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
+    [Authorize]
     public class GenerateExamController : Controller
     {
-        private IExtractextFileDocService _extractFile;
-        private IExtractTextFilePdfService _extractTextPdf;
-        private IExtractTextFromImageService _extractTextFromImageService;
-        private IOpenAIService _openAiService;
-        public GenerateExamController(IExtractextFileDocService extractFile,
-            IExtractTextFilePdfService extractTextPdf,
-            IExtractTextFromImageService extractTextFromImageService,
-            IOpenAIService openAiService)
+        private readonly IOpenAIService _openAIService;
+        public GenerateExamController(IOpenAIService openAIService)
         {
-            _extractFile = extractFile;
-            _extractTextPdf = extractTextPdf;
-            _extractTextFromImageService = extractTextFromImageService;
-            _openAiService = openAiService;
+            _openAIService = openAIService;
         }
-
         public IActionResult Index()
         {
-            return View();
+            return View(new RequestGenerateAI { });
         }
-        [HttpPost("api/documents")]
-        public async Task<IActionResult> ExtractText([FromForm] RequestGenerateAI request)
+
+        [HttpPost]
+        public async Task<IActionResult> Index(RequestGenerateAI request)
         {
-            var data = await _openAiService.GenerateExamByAI(request);
-            return Ok(data);
+            var data = await _openAIService.GenerateExamByAI(request);
+            return RedirectToAction("AllExams", "Exam");
         }
     }
 }

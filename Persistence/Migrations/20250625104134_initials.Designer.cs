@@ -12,8 +12,8 @@ using Persistence.DatabaseConfig;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AskiverseContext))]
-    [Migration("20250605012130_update_entity")]
-    partial class update_entity
+    [Migration("20250625104134_initials")]
+    partial class initials
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsCorrected")
@@ -55,7 +55,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -80,7 +80,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsPublic")
@@ -98,7 +98,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -194,7 +194,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -220,10 +220,13 @@ namespace Persistence.Migrations
                     b.Property<int>("TotalQuestion")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("TotalTime")
+                        .HasColumnType("time");
+
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -249,7 +252,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExamId")
@@ -258,7 +261,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("userId")
@@ -288,7 +291,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExamScoredId")
@@ -297,18 +300,22 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsCorrected")
                         .HasColumnType("bit");
 
+                    b.Property<int>("QuestionExamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnswerId")
-                        .IsUnique();
+                    b.HasIndex("AnswerId");
 
                     b.HasIndex("ExamScoredId");
+
+                    b.HasIndex("QuestionExamId");
 
                     b.ToTable("ExamAnswereds");
                 });
@@ -324,10 +331,10 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ExamId")
+                    b.Property<int>("ExamId")
                         .HasColumnType("int");
 
                     b.Property<double>("Score")
@@ -342,7 +349,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
@@ -356,6 +363,24 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ExamssScoreds");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Favourite", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "ExamId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Favourites");
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumComment", b =>
@@ -378,7 +403,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostId")
@@ -422,7 +447,7 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ForumStatus")
@@ -480,7 +505,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostId")
@@ -489,7 +514,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("VotedAt")
@@ -522,7 +547,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Duration")
@@ -534,7 +559,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
@@ -558,7 +583,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DisplayName")
@@ -568,12 +593,32 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5922),
+                            DisplayName = "Easy"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5925),
+                            DisplayName = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5927),
+                            DisplayName = "Hard"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Notification", b =>
@@ -587,7 +632,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -609,7 +654,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -632,7 +677,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndTime")
@@ -650,7 +695,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
@@ -721,7 +766,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExamId")
@@ -739,7 +784,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -762,7 +807,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -772,12 +817,32 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("QuestionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5968),
+                            Name = "Multiple Choice"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5971),
+                            Name = "Fill in the Blank"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(5974),
+                            Name = "Matching"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.SubcriptionPackages", b =>
@@ -791,7 +856,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -809,12 +874,41 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("SubcriptionPackages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6157),
+                            Description = "Truy cập nội dung cơ bản",
+                            Duration = 14,
+                            Name = "Gói cơ bản",
+                            Price = 99000.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6161),
+                            Description = "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên",
+                            Duration = 30,
+                            Name = "Gói nâng cao",
+                            Price = 199000.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6163),
+                            Description = "Truy cập không giới hạn trong 1 năm",
+                            Duration = 365,
+                            Name = "Gói hàng năm",
+                            Price = 1990000.0
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Subject", b =>
@@ -828,7 +922,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -838,12 +932,86 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6050),
+                            Name = "Toán học"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6054),
+                            Name = "Ngữ văn"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6057),
+                            Name = "Tiếng Anh"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6059),
+                            Name = "Vật lý"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6062),
+                            Name = "Hóa học"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6067),
+                            Name = "Sinh học"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6069),
+                            Name = "Lịch sử"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6071),
+                            Name = "Địa lý"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6073),
+                            Name = "Giáo dục công dân"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6077),
+                            Name = "Tin học"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6079),
+                            Name = "Công nghệ"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(2025, 6, 25, 17, 41, 33, 858, DateTimeKind.Local).AddTicks(6082),
+                            Name = "Thể dục"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserAccessExam", b =>
@@ -860,7 +1028,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DeletedAt")
+                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ExamId")
@@ -869,7 +1037,7 @@ namespace Persistence.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
@@ -1111,8 +1279,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ExamAnswered", b =>
                 {
                     b.HasOne("Domain.Entities.Answer", "Answer")
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.ExamAnswered", "AnswerId")
+                        .WithMany("ExamAnswereds")
+                        .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -1122,19 +1290,48 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.QuestionExam", "QuestionExam")
+                        .WithMany("ExamAnswereds")
+                        .HasForeignKey("QuestionExamId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Answer");
 
                     b.Navigation("ExamScored");
+
+                    b.Navigation("QuestionExam");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamScored", b =>
                 {
                     b.HasOne("Domain.Entities.Exam", "Exam")
                         .WithMany("ExamScoreds")
-                        .HasForeignKey("ExamId");
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.BasicUser", "User")
                         .WithMany("ExamScored")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Favourite", b =>
+                {
+                    b.HasOne("Domain.Entities.Exam", "Exam")
+                        .WithMany("FavouritedByUsers")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.BasicUser", "User")
+                        .WithMany("Favourites")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -1239,13 +1436,13 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("SubcriptionPackagesId");
 
-                    b.HasOne("Domain.Entities.PremiumUser", "PremiumUser")
+                    b.HasOne("Domain.Entities.BasicUser", "BasicUser")
                         .WithMany("PackageOfUsers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("PremiumUser");
+                    b.Navigation("BasicUser");
 
                     b.Navigation("SubcriptionPackages");
                 });
@@ -1274,7 +1471,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.QuestionExam", b =>
                 {
-                    b.HasOne("Domain.Entities.BankQuestion", null)
+                    b.HasOne("Domain.Entities.BankQuestion", "BankQuestion")
                         .WithMany("QuestionExams")
                         .HasForeignKey("BankQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1285,6 +1482,8 @@ namespace Persistence.Migrations
                         .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("BankQuestion");
 
                     b.Navigation("Exam");
                 });
@@ -1357,6 +1556,11 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Answer", b =>
+                {
+                    b.Navigation("ExamAnswereds");
+                });
+
             modelBuilder.Entity("Domain.Entities.BankQuestion", b =>
                 {
                     b.Navigation("Answers");
@@ -1370,6 +1574,8 @@ namespace Persistence.Migrations
 
                     b.Navigation("ExamScored");
 
+                    b.Navigation("Favourites");
+
                     b.Navigation("ForumComments");
 
                     b.Navigation("ForumPosts");
@@ -1377,6 +1583,8 @@ namespace Persistence.Migrations
                     b.Navigation("ForumVoteds");
 
                     b.Navigation("HistoryPurchase");
+
+                    b.Navigation("PackageOfUsers");
 
                     b.Navigation("PremiumUser");
 
@@ -1392,6 +1600,8 @@ namespace Persistence.Migrations
                     b.Navigation("ExamAccesses");
 
                     b.Navigation("ExamScoreds");
+
+                    b.Navigation("FavouritedByUsers");
 
                     b.Navigation("QuestionExam");
                 });
@@ -1416,8 +1626,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.PremiumUser", b =>
                 {
                     b.Navigation("BankQuestions");
+                });
 
-                    b.Navigation("PackageOfUsers");
+            modelBuilder.Entity("Domain.Entities.QuestionExam", b =>
+                {
+                    b.Navigation("ExamAnswereds");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>

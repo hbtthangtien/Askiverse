@@ -13,5 +13,7 @@ namespace Application.Interface.IRepository
         IQueryable<BankQuestion> Query();
         Task<BankQuestion?> GetByIdWithAnswersAsync(int id);
         Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId);
+
+        Task AddRange(List<BankQuestion> list);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.OpenAI;
 using Application.DTOs.Question.GenerateAI;
 using Application.Interface.IExternalService;
+using Application.Interface.IServices;
 using Domain.Constants;
 using Domain.Entities;
 using Infrastructure.Extensions;
@@ -20,10 +21,14 @@ namespace Infrastructure.ExternalService
     {
         private IExtractTextService _extractTextService;
         private IHttpClientFactory _httpClientFactory;
-        public OpenAIService(IExtractTextService extractTextService, IHttpClientFactory httpClientFactory)
+        private IBankQuestionService _bankQuestionService;
+        public OpenAIService(IExtractTextService extractTextService,
+            IHttpClientFactory httpClientFactory,
+            IBankQuestionService bankQuestionService)
         {
             _extractTextService = extractTextService;
             _httpClientFactory = httpClientFactory;
+            _bankQuestionService = bankQuestionService;
         }
 
         public async Task<List<QuestionCreate>> GenerateExamByAI(RequestGenerateAI request)
@@ -42,7 +47,7 @@ namespace Infrastructure.ExternalService
                 }
             }
             int totalChunks = allChunks.Count;
-            int easyTotal = 25, medTotal = 20, hardTotal = 5;
+            int easyTotal = request.NumberEasyQuestion, medTotal = request.NumberMediumQuestion, hardTotal = request.NumberHardQuestion;
             int easyBase = easyTotal / totalChunks, easyRem = easyTotal % totalChunks;
             int medBase = medTotal / totalChunks, medRem = medTotal % totalChunks;
             int hardBase = hardTotal / totalChunks, hardRem = hardTotal % totalChunks;
@@ -92,6 +97,10 @@ namespace Infrastructure.ExternalService
                     // Có thể retry hoặc log lại prompt để kiểm tra
                     throw ex;
                 }
+            }
+            if(allQuestions.Count > 0)
+            {
+               await _bankQuestionService.CreateQuestionByAI(allQuestions);
             }
             return allQuestions;
         }

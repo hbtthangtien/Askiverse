@@ -27,6 +27,7 @@ namespace Infrastructure.DIConfig
 
         public static void AddApplication(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<IAnswerService,AnsweredService>();
             services.AddScoped<IAuthenticateService,AuthenticateService>();
             services.AddScoped<IBankQuestionService,BankQuestionService>();
@@ -51,7 +52,7 @@ namespace Infrastructure.DIConfig
             services.AddScoped<ISubscriptionPackagesService, SubscriptionPackageService>();
             services.AddScoped<IUserAccessExamService, UserAccessExamService>();
             services.AddScoped<IFavouriteService, FavouriteService>();
-           
+            
 
         }
 
@@ -62,7 +63,9 @@ namespace Infrastructure.DIConfig
             services.AddScoped<IExtractTextFilePdfService,ExtractTextFilePdfService>();
             services.AddScoped<IExtractTextFromImageService, ExtractTextFromImageService>();
             services.AddScoped<IExtractTextService, ExtractTextService>();
-            services.AddScoped<IOpenAIService,OpenAIService>();
+            services.AddScoped<IOpenAIService, OpenAIService>();
+            services.AddScoped<IUserContextService, UserContextService>();
+            
             services.AddAuthentication().AddCookie().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = configuration.GetSection("GoogleKeys:ClientId").Value!;

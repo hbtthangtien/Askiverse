@@ -8,7 +8,7 @@ namespace Domain.Constants
 {
 	public class LinkConstant
 	{
-		public static string baseUri = $"https://localhost:7027";
+		public static string baseUri = $"http://askiverse.somee.com";
 
 		public static UriBuilder UriBuilder(string userId, string token, string path)
 		{
