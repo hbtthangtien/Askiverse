@@ -248,7 +248,7 @@ namespace Presentation.Controllers
         {
             var question = await _examService.GetBankQuestionByIdAsync(id);
             if (question == null) return NotFound();
-
+            
             var questionTypes = await _examService.GetAllQuestionTypesAsync();
             var levels = await _examService.GetAllLevelsAsync();
 
@@ -261,7 +261,7 @@ namespace Presentation.Controllers
                 Content = question.Content,
                 QuestionTypeId = question.QuestionTypeId,
                 LevelId = question.LevelId,
-                IsPublic = question.IsPublic,
+                IsPublic = question.IsPublic,              
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
                 {
                     Id = a.Id,

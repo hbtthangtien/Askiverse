@@ -473,14 +473,25 @@ namespace Application.Services
                     BankQuestionId = questionId,
                     QuestionTypeId = question.QuestionTypeId,
                     LevelId = question.LevelId,
+                    UpdatedAt = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue,
                     IsPublic = true
                 };
 
                 await _unitOfWork.QuestionExams.AddAsync(questionExam);
             }
 
-            await _unitOfWork.CompleteAsync();
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                var innerMessage = ex.InnerException?.Message ?? ex.Message;
+                throw new Exception("Lỗi khi lưu thay đổi: " + innerMessage, ex);
+            }
+
             return true;
         }
 

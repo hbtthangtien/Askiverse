@@ -21,10 +21,21 @@
         <textarea asp-for="Description" class="form-control" rows="3"></textarea>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="SourceText" class="form-label">Source Text</label>
-        <input asp-for="SourceText" class="form-control" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="SourceText" class="form-label">Nguồn đề (Source Text)</label>
+
+            <select id="sourceTextSelect" class="form-select">
+                <option value="" disabled>-- Chọn nguồn đề --</option>
+                <option value="Sách giáo khoa">Sách giáo khoa</option>
+                <option value="Đề kiểm tra">Đề kiểm tra</option>
+                <option value="Tài liệu tham khảo">Tài liệu tham khảo</option>
+                <option value="Tự biên soạn">Tự biên soạn</option>
+                <option value="Khác">Khác...</option>
+            </select>
+
+            <input asp-for="SourceText" class="form-control mt-2" id="customSourceText" placeholder="Nhập nguồn đề khác..." style="display: none;" />
+        </div>
+
 
     <div class="mb-3">
         <label asp-for="SubjectId" class="form-label">Môn học</label>
@@ -32,6 +43,26 @@
             <option value="">-- Chọn môn học --</option>
         </select>
     </div>
+        <div class="mb-3">
+            <label asp-for="TotalTime" class="form-label">Thời gian làm bài (phút)</label>
+            <select asp-for="TotalTime" class="form-select">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="15">15 phút</option>
+                <option value="30">30 phút</option>
+                <option value="45">45 phút</option>
+                <option value="50">50 phút</option>
+                <option value="60">60 phút</option>
+                <option value="90">90 phút</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsPublic" class="form-label">Trạng thái</label>
+            <select asp-for="IsPublic" class="form-select">
+                <option value="true">Công khai</option>
+                <option value="false">Riêng tư</option>
+            </select>
+        </div>
 
     <div style="margin-bottom: 10px;">
         <label for="randomCount">Chọn số lượng câu hỏi: </label>
@@ -44,15 +75,10 @@
     </div>
 
     <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
+        <input type="hidden" asp-for="TotalTime" id="totalTimeHidden" />
+        <input type="hidden" asp-for="TotalQuestion" id="totalQuestionHidden" />
 
-        <div class="mb-3 form-check">
-            <select id="IsPublic" class="form-select">
-
-                <option value="true">Công khai</option>
-                <option value="false">Riêng tư</option>
-            </select>
-
-        </div>
+       
 
     <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
 
@@ -275,57 +301,130 @@
             });
 
             // Validate form trước khi submit
-                                 $('#editExamForm').submit(function (e) {
-            e.preventDefault();
+                              $('#editExamForm').submit(function (e) {
+            e.preventDefault(); // Ngăn submit mặc định
 
-            const title = $('input[name="Title"]').val().trim();
-            const description = $('textarea[name="Description"]').val().trim();
-            const sourceText = $('input[name="SourceText"]').val().trim();
-            const subjectId = $('select[name="SubjectId"]').val();
-            const totalQuestion = parseInt($('#randomCount').val());
-            const selectedCount = selectedQuestionIds.length;
+            const errors = [];
 
+                   const title = $('input[name="Title"]').val().trim();
+        const description = $('textarea[name="Description"]').val().trim();
+
+        const selectedSource = $('#sourceTextSelect').val();
+        let sourceText;
+        if (selectedSource === "Khác") {
+            sourceText = $('#customSourceText').val().trim();
+        } else {
+            sourceText = selectedSource;
+        }
+        $('input[name="SourceText"]').val(sourceText);  // gán lại vào input ẩn
+
+        const subjectId = $('select[name="SubjectId"]').val();
+        const totalQuestion = parseInt($('#randomCount').val());
+        const totalTime = parseInt($('select[name="TotalTime"]').val());
+        const selectedCount = selectedQuestionIds.length;
+
+
+            // Gán giá trị vào input ẩn
+            $('#totalTimeHidden').val(totalTime);
             $('#totalQuestionHidden').val(selectedCount);
 
-            if (!title || !description || !sourceText || !subjectId) {
-                alert('Vui lòng điền đầy đủ thông tin.');
-                return false;
+            // Kiểm tra thông tin bắt buộc
+            if (!title || !description || !sourceText || !subjectId || isNaN(totalTime)) {
+                errors.push("Vui lòng điền đầy đủ các trường bắt buộc và chọn thời gian.");
             }
 
+            // Kiểm tra số câu hỏi
             if (selectedCount !== totalQuestion) {
                 const diff = totalQuestion - selectedCount;
-                const message = diff > 0
+                errors.push(diff > 0
                     ? `Bạn còn thiếu ${diff} câu hỏi.`
-                    : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`;
-                $('#questionCountWarning').text(message).show();
-                $('html, body').animate({ scrollTop: $("#questionCountWarning").offset().top - 50 }, 400);
-                return false;
+                    : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`);
             }
 
-            $('#questionCountWarning').hide();
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể lưu đề',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+                return;
+            }
 
-            // Xóa input cũ
+            // Gỡ các input ẩn cũ (nếu có)
             $('input[name="SelectedQuestionIds"]').remove();
 
-            // ✅ Tạo input mới trước khi submit
-            for (const id of selectedQuestionIds) {
+            // Gắn lại SelectedQuestionIds
+            selectedQuestionIds.forEach(function (id) {
                 $('<input>', {
                     type: 'hidden',
                     name: 'SelectedQuestionIds',
                     value: id
                 }).appendTo('#editExamForm');
-            }
+            });
 
-            // ✅ Đảm bảo submit sau khi tạo xong
-            setTimeout(() => {
-                $('#editExamForm')[0].submit();
-            }, 50); // nhỏ nhưng đảm bảo render xong
+            // Submit form thật
+            this.submit();
         });
 
 
+                $(document).ready(function () {
+            let errors = [];
+
+        @if (TempData["Error"] != null)
+        {
+            <text>errors.push("@TempData["Error"]");</text>
+        }
+
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi khi cập nhật!',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+            }
+        });
+
+                             $(document).ready(function () {
+            const totalQuestion = @Model.TotalQuestion;
+            const totalTime = @Model.TotalTime; // 👈 thêm dòng này
+
+            // ✅ Chuyển Razor Model thành JS string an toàn
+            const sourceText = @Html.Raw(Json.Serialize(Model.SourceText));
+            const trimmedSourceText = sourceText.trim();
+
+            const predefined = [
+                "Sách giáo khoa",
+                "Đề kiểm tra",
+                "Tài liệu tham khảo",
+                "Tự biên soạn"
+            ];
+
+            $('#randomCount').val(totalQuestion);
+            $('#TotalTime').val(totalTime); // 👈 Gán đúng dropdown thời gian
+
+            if (predefined.includes(trimmedSourceText)) {
+                $('#sourceTextSelect').val(trimmedSourceText);
+                $('#customSourceText').hide();
+            } else {
+                $('#sourceTextSelect').val("Khác");
+                $('#customSourceText').val(trimmedSourceText).show();
+            }
+
+            // ✅ Gán lại SourceText chính xác trước khi submit
+            $('#editExamForm').on('submit', function () {
+                const selectedValue = $('#sourceTextSelect').val();
+                if (selectedValue === "Khác") {
+                    $('#customSourceText').val($('#customSourceText').val().trim());
+                } else {
+                    $('#customSourceText').val(selectedValue);
+                }
+            });
+        });
 
         </script>
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 }
 

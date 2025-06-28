@@ -262,11 +262,12 @@ namespace Persistence.DatabaseConfig
                     e.Entity is BaseEntity baseEntity &&
                     !(e.State == EntityState.Added)))
             {
-                if (entry.Entity is Exam || entry.Entity is QuestionExam)
+                if (entry.Entity is Exam) // chỉ soft delete Exam
                 {
                     entry.State = EntityState.Modified;
                     ((BaseEntity)entry.Entity).DeletedAt = DateTime.UtcNow;
                 }
+
             }
         }
 
