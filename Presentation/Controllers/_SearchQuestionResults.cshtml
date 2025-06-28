@@ -318,17 +318,17 @@
 </script>
 
 <script>
-             function chonCauHoiNgauNhien() {
+        function chonCauHoiNgauNhien() {
         const max = parseInt($('#randomCount').val());
         if (isNaN(max) || max <= 0) {
             alert("Vui lòng chọn số lượng hợp lệ.");
             return;
         }
 
-        const questionTypeId = $('#QuestionTypeId').val();
-        const levelId = $('#LevelId').val();
-        const isPublic = $('#IsPublic').val();
-        const keyword = $('#Keyword').val();
+        // Lấy filter của câu hỏi
+        const questionTypeId = $('#questionTypeFilter').val() || null;
+        const levelId = $('#levelFilter').val() || null;
+        const keyword = $('#keywordFilter').val().trim() || null;
 
         $.ajax({
             url: '/Exam/GetRandomQuestionIds',
@@ -337,12 +337,11 @@
                 count: max,
                 questionTypeId,
                 levelId,
-                isPublic,
                 keyword
             },
             success: function (ids) {
                 selectedQuestionIds = ids;
-                markSelectedCheckboxes();
+                reloadQuestionTable();
                 $('#questionCountWarning').hide();
             },
             error: function () {
@@ -350,23 +349,6 @@
             }
         });
     }
-
-
-       $(document).on('change', '.question-checkbox', function () {
-        const id = parseInt($(this).val());
-        if ($(this).is(':checked')) {
-            if (!selectedQuestionIds.includes(id)) {
-                selectedQuestionIds.push(id);
-            }
-        } else {
-            selectedQuestionIds = selectedQuestionIds.filter(x => x !== id);
-        }
-    });
-
-
-
-
-
 
 </script>
 

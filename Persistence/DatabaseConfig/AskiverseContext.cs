@@ -257,16 +257,19 @@ namespace Persistence.DatabaseConfig
         private void HandleSoftDelete()
         {
             foreach (var entry in ChangeTracker.Entries()
-                .Where(e => e.State == EntityState.Deleted && e.Entity is BaseEntity))
+                .Where(e =>
+                    e.State == EntityState.Deleted &&
+                    e.Entity is BaseEntity baseEntity &&
+                    !(e.State == EntityState.Added)))
             {
                 if (entry.Entity is Exam || entry.Entity is QuestionExam)
                 {
                     entry.State = EntityState.Modified;
-                    var entity = (BaseEntity)entry.Entity;
-                    entity.DeletedAt = DateTime.UtcNow;
+                    ((BaseEntity)entry.Entity).DeletedAt = DateTime.UtcNow;
                 }
             }
         }
+
 
     }
 }

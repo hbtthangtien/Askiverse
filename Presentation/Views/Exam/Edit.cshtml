@@ -45,10 +45,14 @@
 
     <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
 
-    <div class="mb-3 form-check">
-        <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
-        <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
-    </div>
+        <div class="mb-3 form-check">
+            <select id="IsPublic" class="form-select">
+
+                <option value="true">Công khai</option>
+                <option value="false">Riêng tư</option>
+            </select>
+
+        </div>
 
     <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
 
