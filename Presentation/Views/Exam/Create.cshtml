@@ -122,9 +122,10 @@
             </select>
             <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
         </div>
-
         <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
-
+        <div class="mb-3">
+        <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
+       </div>
         <!-- Khung lớn chứa danh sách câu hỏi bên trái + phần lọc bên phải -->
         <div class="border rounded p-3">
             <h4 class="mb-3">Quản lý câu hỏi</h4>
@@ -179,12 +180,33 @@
                 </div>
             </div>
         </div>
-
+		
         <!-- Nút lưu sẽ mở modal -->
         <div class="mt-4">
             <button type="button" class="btn btn-success" onclick="showExamInfoModal()">Lưu & Nhập thông tin đề</button>
         </div>
     </form>
+    <!-- Nút mở modal -->
+
+   
+
+    <!-- Modal -->
+    <div class="modal fade" id="selectedQuestionsModal" tabindex="-1" aria-labelledby="selectedQuestionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectedQuestionsModalLabel">Danh sách câu hỏi đã chọn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="selectedQuestionsList">
+                    <!-- JS sẽ gắn danh sách câu hỏi ở đây -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal nhập thông tin đề -->
     <div class="modal fade" id="examInfoModal" tabindex="-1" aria-labelledby="examInfoModalLabel" aria-hidden="true">
@@ -260,7 +282,80 @@
 
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
+        let selectedQuestionIds = [];
+        let currentPage = 1;
+                let allSelectedQuestions = [];
+        let currentModalPage = 1;
+        const pageSize = 5;
+        let selectedQuestionsData = [];
+
+    </script>
+    <script>
+                              function renderSelectedQuestionsPage(page) {
+            currentModalPage = page;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const items = selectedQuestionIds.slice(start, end);
+
+            if (items.length === 0) {
+                $('#selectedQuestionsList').html('<p>Không có câu hỏi nào được chọn.</p>');
+                return;
+            }
+
+            let html = '<ul class="list-group">';
+                   for (let i = 0; i < items.length; i++) {
+            const id = items[i];
+            const q = selectedQuestionsData.find(q => q.id === id);
+            if (q) {
+                const displayIndex = (page - 1) * pageSize + i + 1;
+                html += `<li class="list-group-item">
+                            <strong>Câu hỏi ${displayIndex}</strong><br/>
+                            <strong>Nội dung:</strong> ${q.content}
+                         </li>`;
+            } else {
+                html += `<li class="list-group-item">Câu hỏi ID: ${id} (không tìm thấy)</li>`;
+            }
+        }
+
+            html += '</ul>';
+
+            // Thêm phân trang
+            const totalPages = Math.ceil(selectedQuestionIds.length / pageSize);
+            html += `<nav class="mt-3"><ul class="pagination justify-content-center">`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<li class="page-item ${i === page ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="renderSelectedQuestionsPage(${i})">${i}</a>
+                         </li>`;
+            }
+            html += `</ul></nav>`;
+
+            $('#selectedQuestionsList').html(html);
+        }
+
+
+               function showSelectedQuestionsModal() {
+            $.ajax({
+                type: 'POST',
+                url: '/Exam/GetSelectedQuestions',
+                contentType: 'application/json',
+                data: JSON.stringify(selectedQuestionIds),
+                success: function (questions) {
+                    selectedQuestionsData = questions;
+                    renderSelectedQuestionsPage(1);
+                    const modal = new bootstrap.Modal(document.getElementById('selectedQuestionsModal'));
+                    modal.show();
+                },
+                error: function () {
+                    alert("Không thể tải nội dung câu hỏi.");
+                }
+            });
+        }
+
+
                function showExamInfoModal() {
     // Xóa dữ liệu modal trước khi hiển thị
     $('#modalTitle').val('');
@@ -322,13 +417,7 @@
             $('#createExamForm')[0].submit();
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-        let selectedQuestionIds = [];
-        let currentPage = 1;
-    </script>
+   
 
     <script>
          

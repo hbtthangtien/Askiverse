@@ -473,14 +473,21 @@ namespace Presentation.Controllers
             {
                 await _examService.UpdateExamAsync(dto);
                 TempData["Success"] = "Cập nhật đề thành công.";
-                return RedirectToAction("AllExams");
+                TempData["RedirectOnSuccess"] = true;
+                return RedirectToAction("Edit", new { examId = dto.Id }); // trở lại Edit để hiển thị Swal
             }
             catch (Exception ex)
             {
                 TempData["Error"] = ex.Message;
-                return RedirectToAction("AllExams"); // hoặc trang bạn hiển thị danh sách đề
+                return RedirectToAction("Edit", new { examId = dto.Id });
             }
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> GetSelectedQuestions([FromBody] List<int> questionIds)
+        {
+            var questions = await _examService.GetQuestionsByIdsAsync(questionIds);
+            return Json(questions);
         }
 
 

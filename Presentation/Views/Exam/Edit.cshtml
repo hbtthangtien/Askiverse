@@ -73,7 +73,9 @@
         </select>
         <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
     </div>
-
+        <div class="mb-3">
+            <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
+        </div>
     <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
         <input type="hidden" asp-for="TotalTime" id="totalTimeHidden" />
         <input type="hidden" asp-for="TotalQuestion" id="totalQuestionHidden" />
@@ -158,13 +160,103 @@
     </div>
     <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
 </form>
+    <div class="modal fade" id="selectedQuestionsModal" tabindex="-1" aria-labelledby="selectedQuestionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectedQuestionsModalLabel">Danh sách câu hỏi đã chọn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="selectedQuestionsList">
+                    <!-- JS sẽ gắn danh sách câu hỏi ở đây -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
     <script>
         let selectedQuestionIds = @Html.Raw(Json.Serialize(Model.SelectedQuestionIds ?? new List<int>()));
         let currentPage = 1;
+         let allSelectedQuestions = [];
+        let currentModalPage = 1;
+        const pageSize = 5;
+        let selectedQuestionsData = [];
     </script>
+    <script>
+             function renderSelectedQuestionsPage(page) {
+            currentModalPage = page;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const items = selectedQuestionIds.slice(start, end);
 
+            if (items.length === 0) {
+                $('#selectedQuestionsList').html('<p>Không có câu hỏi nào được chọn.</p>');
+                return;
+            }
+
+            let html = '<ul class="list-group">';
+                   for (let i = 0; i < items.length; i++) {
+            const id = items[i];
+            const q = selectedQuestionsData.find(q => q.id === id);
+            if (q) {
+                const displayIndex = (page - 1) * pageSize + i + 1;
+                html += `<li class="list-group-item">
+                            <strong>Câu hỏi ${displayIndex}</strong><br/>
+                            <strong>Nội dung:</strong> ${q.content}
+                         </li>`;
+            } else {
+                html += `<li class="list-group-item">Câu hỏi ID: ${id} (không tìm thấy)</li>`;
+            }
+        }
+
+            html += '</ul>';
+
+            // Thêm phân trang
+            const totalPages = Math.ceil(selectedQuestionIds.length / pageSize);
+            html += `<nav class="mt-3"><ul class="pagination justify-content-center">`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<li class="page-item ${i === page ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="renderSelectedQuestionsPage(${i})">${i}</a>
+                         </li>`;
+            }
+            html += `</ul></nav>`;
+
+            $('#selectedQuestionsList').html(html);
+        }
+
+
+               function showSelectedQuestionsModal() {
+            $.ajax({
+                type: 'POST',
+                url: '/Exam/GetSelectedQuestions',
+                contentType: 'application/json',
+                data: JSON.stringify(selectedQuestionIds),
+                success: function (questions) {
+                    selectedQuestionsData = questions;
+                    renderSelectedQuestionsPage(1);
+                    const modal = new bootstrap.Modal(document.getElementById('selectedQuestionsModal'));
+                    modal.show();
+                },
+                error: function () {
+                    alert("Không thể tải nội dung câu hỏi.");
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('#sourceTextSelect').change(function () {
+                const selectedValue = $(this).val();
+                if (selectedValue === 'Khác') {
+                    $('#customSourceText').val('').show();
+                } else {
+                    $('#customSourceText').val(selectedValue).hide();
+                }
+            });
+        });
+    </script>
         <script>
 
 
@@ -367,7 +459,7 @@
         });
 
 
-                $(document).ready(function () {
+                       $(document).ready(function () {
             let errors = [];
 
         @if (TempData["Error"] != null)
@@ -382,7 +474,25 @@
                     html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
                 });
             }
+
+        @if (TempData["Success"] != null && TempData["RedirectOnSuccess"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '✅ @TempData["Success"]',
+                        text: 'Bạn sẽ được chuyển về trang danh sách đề sau khi đóng.',
+                        confirmButtonText: 'Xem danh sách đề',
+                        backdrop: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/Exam/AllExams'; // ✅ Đổi thành trang bạn muốn
+                        }
+                    });
+            </text>
+        }
         });
+
 
                              $(document).ready(function () {
             const totalQuestion = @Model.TotalQuestion;

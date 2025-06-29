@@ -495,6 +495,16 @@ namespace Application.Services
             return true;
         }
 
+        public async Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds)
+        {
+            var questions = await _unitOfWork.BankQuestions.FindAsync(q => questionIds.Contains(q.Id));
+
+            return questions.Select(q => new SimpleQuestionDto
+            {
+                Id = q.Id,
+                Content = q.Content
+            }).ToList();
+        }
 
 
     }
