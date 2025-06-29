@@ -402,10 +402,14 @@ namespace Application.Services
                 PremiumUserId = dto.PremiumUserId,
                 IsPublic = dto.IsPublic,
                 CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                DeletedAt = DateTime.MinValue,
                 Answers = dto.Answers.Select(a => new Answer
                 {
                     AnswerText = a.AnswerText!,
                     IsCorrected = a.IsCorrected,
+                    UpdatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue,
                     MatchingPairKey = a.MatchingPairKey
                 }).ToList()
             };
