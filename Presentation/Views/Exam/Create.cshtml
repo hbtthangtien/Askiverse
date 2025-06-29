@@ -172,6 +172,15 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="isPublicFilter" class="form-label">Chế độ</label>
+                        <select id="isPublicFilter" name="isPublic" class="form-control">
+                            <option value="">Cả hai</option>
+                            <option value="true">Công khai</option>
+                            <option value="false">Riêng tư</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
                     </div>
                     <div class="mb-3">
@@ -439,32 +448,34 @@
         }
 
 
-      
 
 
-         function loadQuestions(page = 1) {
-             var questionTypeId = $('#questionTypeFilter').val() || null;
-             var levelId = $('#levelFilter').val() || null;
-             var keyword = $('#keywordFilter').val().trim() || null;
 
-             $.ajax({
-                 url: '@Url.Action("SearchQuestions", "Exam")',
-                 data: {
-                     questionTypeId: questionTypeId,
-                     levelId: levelId,
-                     keyword: keyword,
-                     page: page
-                 },
-                 success: function (result) {
-                     $('#searchResults').html(result);
+                function loadQuestions(page = 1) {
+            var questionTypeId = $('#questionTypeFilter').val() || null;
+            var levelId = $('#levelFilter').val() || null;
+            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
 
-                     // Đánh dấu lại checkbox cho các câu đã chọn
-                     selectedQuestionIds.forEach(function (id) {
-                         $('.question-checkbox[value="' + id + '"]').prop('checked', true);
-                     });
-                 }
-             });
-         }
+            $.ajax({
+                url: '@Url.Action("SearchQuestions", "Exam")',
+                data: {
+                    questionTypeId: questionTypeId,
+                    levelId: levelId,
+                    keyword: keyword,
+                    isPublic: isPublic,
+                    page: page
+                },
+                success: function (result) {
+                    $('#searchResults').html(result);
+
+                    selectedQuestionIds.forEach(function (id) {
+                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                    });
+                }
+            });
+        }
+
 
          $(document).on('change', '.question-checkbox', function () {
              var questionId = parseInt($(this).val());
@@ -492,40 +503,11 @@
          });
 
         // Tìm kiếm câu hỏi
-        $('#btnSearch').click(function () {
+              $('#btnSearch').click(function () {
             var questionTypeId = $('#questionTypeFilter').val() || null;
             var levelId = $('#levelFilter').val() || null;
             var keyword = $('#keywordFilter').val().trim() || null;
-
-            $.ajax({
-                url: '@Url.Action("SearchQuestions", "Exam")',
-                data: {
-                    questionTypeId: questionTypeId,
-                    levelId: levelId,
-                    keyword: keyword
-                },
-                success: function (result) {
-                    $('#searchResults').html(result);
-
-                    // Đánh dấu lại checkbox cho các câu đã chọn
-                    selectedQuestionIds.forEach(function (id) {
-                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
-                    });
-                   
-
-                    if (typeof showPage === "function") {
-                        showPage(1);
-                    }
-                }
-            });
-        });
-     
-
-        // Hàm load dữ liệu theo trang
-        function loadPage(page) {
-            var questionTypeId = $('#questionTypeFilter').val() || null;
-            var levelId = $('#levelFilter').val() || null;
-            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
 
             $.ajax({
                 url: '@Url.Action("SearchQuestions", "Exam")',
@@ -533,19 +515,51 @@
                     questionTypeId: questionTypeId,
                     levelId: levelId,
                     keyword: keyword,
-                    page: page,
-                    pageSize: 10 // hoặc lấy từ ViewBag.PageSize nếu động
+                    isPublic: isPublic // <-- truyền thêm
                 },
                 success: function (result) {
                     $('#searchResults').html(result);
 
-                    // Đánh dấu lại checkbox cho các câu đã chọn
+                    selectedQuestionIds.forEach(function (id) {
+                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                    });
+
+                    if (typeof showPage === "function") {
+                        showPage(1);
+                    }
+                }
+            });
+        });
+
+     
+
+        // Hàm load dữ liệu theo trang
+               function loadPage(page) {
+            var questionTypeId = $('#questionTypeFilter').val() || null;
+            var levelId = $('#levelFilter').val() || null;
+            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
+
+            $.ajax({
+                url: '@Url.Action("SearchQuestions", "Exam")',
+                data: {
+                    questionTypeId: questionTypeId,
+                    levelId: levelId,
+                    keyword: keyword,
+                    isPublic: isPublic,
+                    page: page,
+                    pageSize: 10
+                },
+                success: function (result) {
+                    $('#searchResults').html(result);
+
                     selectedQuestionIds.forEach(function (id) {
                         $('.question-checkbox[value="' + id + '"]').prop('checked', true);
                     });
                 }
             });
         }
+
 
         // Gán sự kiện click cho các nút phân trang (sau mỗi lần load lại kết quả)
         $(document).on('click', '.pagination-link', function (e) {

@@ -147,15 +147,13 @@ namespace Presentation.Controllers
         public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, bool? isPublic, string? keyword, int page = 1, int pageSize = 10)
         {
             var userId = GetCurrentUserId();
-            if (string.IsNullOrWhiteSpace(keyword))
-                keyword = null;
 
             var filter = new SearchBankQuestionFilter
             {
                 QuestionTypeId = questionTypeId,
                 LevelId = levelId,
-                IsPublic = isPublic,
-                Keyword = keyword
+                IsPublic = isPublic, // ✅ vẫn giữ nullable
+                Keyword = string.IsNullOrWhiteSpace(keyword) ? null : keyword
             };
 
             var allResults = await _examService.SearchBankQuestionsAsync(filter, userId);
@@ -172,6 +170,7 @@ namespace Presentation.Controllers
 
             return PartialView("_SearchQuestionResults", paginated);
         }
+
 
 
 

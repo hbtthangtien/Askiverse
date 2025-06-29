@@ -272,13 +272,13 @@
 
 
 <script>
-       
-        function loadPage(page) {
+
+          function loadPage(page) {
         currentPage = page;
 
         const questionTypeId = $('#QuestionTypeId').val();
         const levelId = $('#LevelId').val();
-        const isPublic = $('#IsPublic').val();
+        const isPublic = $('#IsPublic').val(); 
         const keyword = $('#Keyword').val();
 
         $.ajax({
@@ -292,13 +292,14 @@
             },
             success: function (data) {
                 $('#questionListContainer').html(data);
-                markSelectedCheckboxes(); // ✅ Đảm bảo chạy lại
+                markSelectedCheckboxes();
             },
             error: function () {
                 alert("Không thể tải dữ liệu.");
             }
         });
     }
+
 
               function markSelectedCheckboxes() {
         $('.question-checkbox').each(function () {

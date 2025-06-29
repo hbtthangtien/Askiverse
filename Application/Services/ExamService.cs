@@ -76,12 +76,11 @@ namespace Application.Services
         public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId)
         {
             IQueryable<BankQuestion> query = _unitOfWork.BankQuestions
-      .Query()
-      .Include(q => q.QuestionType)
-      .Include(q => q.Level)
-      .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
-      .OrderByDescending(q => q.CreatedAt); // vẫn OK
-
+     .Query()
+     .Include(q => q.QuestionType)
+     .Include(q => q.Level)
+     .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
+     .OrderByDescending(q => q.CreatedAt);
 
             if (filter.QuestionTypeId.HasValue)
                 query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId.Value);
@@ -89,6 +88,7 @@ namespace Application.Services
             if (filter.LevelId.HasValue)
                 query = query.Where(q => q.LevelId == filter.LevelId.Value);
 
+            // ✅ Lọc công khai / riêng tư / cả hai
             if (filter.IsPublic.HasValue)
                 query = query.Where(q => q.IsPublic == filter.IsPublic.Value);
 
@@ -97,6 +97,7 @@ namespace Application.Services
                 var keywordLower = filter.Keyword.ToLower();
                 query = query.Where(q => q.Content != null && q.Content.ToLower().Contains(keywordLower));
             }
+
 
             return await query.ToListAsync();
         }
