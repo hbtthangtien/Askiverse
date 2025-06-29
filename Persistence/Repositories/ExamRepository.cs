@@ -34,6 +34,9 @@ namespace Persistence.Repositories
                 StartTime = now,
                 SubmitedTime = null,
                 Score = 0,
+                CreatedAt = now,
+                UpdatedAt = now,
+                DeletedAt = DateTime.MinValue, 
                 ExamId = examId
             };
 
