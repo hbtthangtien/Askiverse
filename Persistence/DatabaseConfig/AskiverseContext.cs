@@ -237,7 +237,7 @@ namespace Persistence.DatabaseConfig
 
 			//seeding data
 			CategoryQuestionSeedingData.Seed(builder);
-			//SeedingTrietExamData.Seeding(builder);
+			SeedingTrietExamData.Seeding(builder);
 			SubjectSeedingData.Seeding(builder);
 			SubscriptionSeedingData.Seeding(builder);
 

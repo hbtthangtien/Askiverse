@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.BasicUser;
+using Application.DTOs.EmailResendConfirm;
 using Application.DTOs.ForgotPassword;
 using Application.Interface.IServices;
 using Domain.Enums;
@@ -238,5 +239,20 @@ namespace Presentation.Controllers
             return View();
         }
 
-    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResendConfirmationEmail([FromBody] EmailResendConfirmDTO dto)
+        {
+            try
+            {
+                await _basicUserService.ReSendEmailConfirmAsync(dto);
+                return Ok("Email xác nhận đã được gửi lại!");
+            }
+            catch(Exception ex)
+            {
+				return BadRequest(ex.Message);
+			}
+        }
+
+	}
 }

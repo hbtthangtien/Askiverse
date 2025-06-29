@@ -1,4 +1,6 @@
 ﻿using Application.DTOs.BasicUser;
+using Application.DTOs.Commons;
+using Application.DTOs.EmailResendConfirm;
 using Application.Interface.IExternalService;
 using Application.Interface.IServices;
 using Application.UnitOfWork;
@@ -22,6 +24,9 @@ namespace Application.Services
         {
 			var User = await _unitOfWork.BasicUsers.UserManager.FindByIdAsync(UserId)
 				?? throw new Exception("Người dùng không tồn tại!");
+
+			if (User.EmailConfirmed == true) throw new Exception("Bạn đã xác nhận tài khoản!");
+
 			var confirmEmail = await _unitOfWork.BasicUsers.UserManager.ConfirmEmailAsync(User, token);
 			if (!confirmEmail.Succeeded)
 			{
@@ -64,7 +69,8 @@ namespace Application.Services
 
 			var profile = new Domain.Entities.Profile
 			{
-				UserId = entityUser.Id
+				UserId = entityUser.Id,
+				AvatarUrl = "https://as2.ftcdn.net/v2/jpg/03/31/69/91/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg"
 			};
 
 
@@ -86,8 +92,15 @@ namespace Application.Services
 			var body = EmailBody.CONFIRM_EMAIL(basicUser.Email!, link);
 			await _email.SendMailAsync(EmailSubject.CONFIRM_EMAIL, body, basicUser.Email!);
 		}
-	
 
+		public async Task ReSendEmailConfirmAsync(EmailResendConfirmDTO dto)
+		{
+			var account = (dto.EmailOrUsername!.Contains('@'))
+				? await _unitOfWork.BasicUsers.UserManager.FindByEmailAsync(dto.EmailOrUsername)
+				: await _unitOfWork.BasicUsers.UserManager.FindByNameAsync(dto.EmailOrUsername);
+
+			await SendEmailConfirmAsync(account!);
+		}
 
 		public async Task SendEmailResetPasswordAsync(string email)
 		{
