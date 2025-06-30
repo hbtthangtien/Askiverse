@@ -25,8 +25,9 @@
                             <label class="form-label fw-semibold" style="color:@titleColor">2. Loại câu hỏi</label>
                             <select asp-for="QuestionTypeId" class="form-select rounded-3 border-2" style="border-color:#C4F0E0; background:#F0F8F6;">
                                 <option value="">-- Chọn loại câu hỏi --</option>
-                                <option value="1">Trắc nghiệm</option>
-                                <option value="2">Tự luận</option>
+                                <option value="1">Multiple Choice</option>
+                                <option value="2">Fill in the Blank</option>
+                                <option value="3">Matching</option>
                             </select>
                             @Html.ValidationMessageFor(m => m.QuestionTypeId, "", new { @class = "text-danger small" })
                         </div>
