@@ -1,9 +1,11 @@
 ﻿@using Application.DTOs.Question.GenerateAI
 @model RequestGenerateAI
+
 @{
     ViewData["Title"] = "Tạo câu hỏi AI từ tài liệu";
     var titleColor = "#D13D76";
 }
+
 <div class="container py-5" style="min-height:70vh;">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
@@ -12,47 +14,40 @@
                     <h2 class="mb-4 fw-bold text-center" style="color:@titleColor">
                         Tạo câu hỏi AI từ tài liệu
                     </h2>
-                    @using (Html.BeginForm("Index", "GenerateExam", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
+                    <form id="ai-form" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label fw-semibold" style="color:@titleColor">1. Chọn file tài liệu (.pdf, .docx, .png, .jpg)</label>
-                            <input asp-for="File" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                            <input name="File" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
                                    class="form-control rounded-3 border-2"
                                    style="border-color:#FE9FC3; background:#FAD3E7;" />
-                            @Html.ValidationMessageFor(m => m.File, "", new { @class = "text-danger small" })
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-semibold" style="color:@titleColor">2. Loại câu hỏi</label>
-                            <select asp-for="QuestionTypeId" class="form-select rounded-3 border-2" style="border-color:#C4F0E0; background:#F0F8F6;">
+                            <select name="QuestionTypeId" class="form-select rounded-3 border-2" style="border-color:#C4F0E0; background:#F0F8F6;">
                                 <option value="">-- Chọn loại câu hỏi --</option>
                                 <option value="1">Multiple Choice</option>
                                 <option value="2">Fill in the Blank</option>
                                 <option value="3">Matching</option>
                             </select>
-                            @Html.ValidationMessageFor(m => m.QuestionTypeId, "", new { @class = "text-danger small" })
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-semibold" style="color:@titleColor">3. Số lượng câu hỏi</label>
                             <div class="d-flex gap-3 mb-2">
                                 <button type="button" class="btn btn-sm fw-bold px-4 py-2 rounded-pill border-2 total-btn"
-                                        style="background:#D13D76;color:#fff;border-color:#D8F8F2;"
-                                        data-value="10">
+                                        style="background:#D13D76;color:#fff;border-color:#D8F8F2;" data-value="10">
                                     10
                                 </button>
                                 <button type="button" class="btn btn-sm fw-bold px-4 py-2 rounded-pill border-2 total-btn"
-                                        style="background:#fff;color:#000;border-color:#D8F8F2;"
-                                        data-value="25">
+                                        style="background:#fff;color:#000;border-color:#D8F8F2;" data-value="25">
                                     25
                                 </button>
-                               @*  <button type="button" class="btn btn-sm fw-bold px-4 py-2 rounded-pill border-2 total-btn"
-                                        style="background:#fff;color:#000;border-color:#D8F8F2;"
-                                        data-value="50">
-                                    50
-                                </button> *@
                                 <input type="hidden" name="TotalQuestions" id="TotalQuestions" value="10" />
                             </div>
                             <div class="form-text" style="color:#121117">Tổng số câu hỏi phải chia đủ vào 3 mức dưới.</div>
                         </div>
+
                         <div class="row g-2 mb-1">
                             <div class="col-4">
                                 <label class="fw-semibold" style="color:@titleColor">Dễ</label>
@@ -70,20 +65,16 @@
                                        class="form-control rounded-3 border-2 text-center auto-calc" style="border-color:#C4F0E0" />
                             </div>
                         </div>
+
                         <div class="form-text small mb-3" style="color:#121117">
-                            Tổng: <span id="CurrentTotal" class="fw-bold">0</span> /
-                            <span id="MaxTotal">10</span>
+                            Tổng: <span id="CurrentTotal" class="fw-bold">0</span> / <span id="MaxTotal">10</span>
                         </div>
+
                         <div id="ErrorMsg" class="alert alert-danger rounded-3 text-center py-2" style="display:none;"></div>
-                        @if (ViewBag.Error != null)
-                        {
-                            <div class="alert alert-danger rounded-3 text-center py-2">@ViewBag.Error</div>
-                        }
-                        @if (ViewBag.Success != null)
-                        {
-                            <div class="alert alert-success rounded-3 text-center py-2">@ViewBag.Success</div>
-                        }
-                        <div id="loading-overlay" style="display:none; position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);align-items:center;justify-content:center;">
+
+                        <div id="loading-overlay"
+                             style="display:none; position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;
+                                    background:rgba(255,255,255,0.7);align-items:center;justify-content:center;flex-direction:column;">
                             <div class="spinner-border text-pink" role="status" style="width:3rem;height:3rem;color:#D13D76;">
                                 <span class="visually-hidden">Đang xử lý...</span>
                             </div>
@@ -94,85 +85,177 @@
                                 style="background:#D13D76; border-radius:2rem; font-size:1.1rem;">
                             Tạo câu hỏi AI
                         </button>
-                    }
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="questionPreviewModal" tabindex="-1" aria-labelledby="previewLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="previewLabel">Xem trước đề được tạo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body" id="questionPreviewContainer">
+                <!-- Nội dung câu hỏi sẽ được render tại đây -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="saveExamBtn">Lưu đề</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
-        document.querySelector("form").addEventListener("submit", function (e) {
-            // Kiểm tra validate phía client, nếu cần
-            var error = document.getElementById('ErrorMsg');
-            if (error && error.style.display === 'block') {
-                e.preventDefault(); // Không submit nếu lỗi tổng số câu
-                return false;
-            }
-            document.getElementById("loading-overlay").style.display = "flex";
-        });
-        // Chọn số lượng client-side (không reload)
-        document.querySelectorAll('.total-btn').forEach(btn => {
-            btn.onclick = function () {
-                // Đổi màu active
-                document.querySelectorAll('.total-btn').forEach(b => {
-                    b.style.background = "#fff";
-                    b.style.color = "#000";
-                });
-                btn.style.background = "#D13D76";
-                btn.style.color = "#fff";
+        function updateTotal() {
+            const easy = parseInt(document.getElementById('EasyInput').value) || 0;
+            const medium = parseInt(document.getElementById('MediumInput').value) || 0;
+            const hard = parseInt(document.getElementById('HardInput').value) || 0;
+            const total = easy + medium + hard;
 
-                // Set lại tổng
-                let total = btn.dataset.value;
-                document.getElementById('TotalQuestions').value = total;
-                document.getElementById('MaxTotal').innerText = total;
-                // Reset các input
-                document.getElementById('EasyInput').value = 0;
-                document.getElementById('MediumInput').value = 0;
-                document.getElementById('HardInput').value = 0;
-                document.getElementById('CurrentTotal').innerText = 0;
-                document.getElementById('ErrorMsg').style.display = 'none';
-            };
-        });
+            const max = parseInt(document.getElementById('TotalQuestions').value);
 
-        // Auto-calc: nhập 2 ô tự động tính ô còn lại
-        function autoCalc(e) {
-            let total = parseInt(document.getElementById('TotalQuestions').value) || 0;
-            let easy = parseInt(document.getElementById('EasyInput').value) || 0;
-            let medium = parseInt(document.getElementById('MediumInput').value) || 0;
-            let hard = parseInt(document.getElementById('HardInput').value) || 0;
+            document.getElementById('CurrentTotal').innerText = total;
 
-            let fields = [
-                { el: document.getElementById('EasyInput'), val: easy },
-                { el: document.getElementById('MediumInput'), val: medium },
-                { el: document.getElementById('HardInput'), val: hard }
-            ];
-
-            // Đếm số ô có giá trị (có nhập, khác 0)
-            
-            easy = parseInt(document.getElementById('EasyInput').value) || 0;
-            medium = parseInt(document.getElementById('MediumInput').value) || 0;
-            hard = parseInt(document.getElementById('HardInput').value) || 0;
-            let sum = easy + medium + hard;
-            document.getElementById('CurrentTotal').innerText = sum;
-
-            // Validate
-            if (sum > total) {
-                document.getElementById('ErrorMsg').innerText = "Tổng số câu vượt quá tổng đã chọn!";
+            if (total !== max) {
                 document.getElementById('ErrorMsg').style.display = 'block';
-            } else if (sum < total && filled === 3) {
-                document.getElementById('ErrorMsg').innerText = "Tổng số câu chưa đủ!";
-                document.getElementById('ErrorMsg').style.display = 'block';
+                document.getElementById('ErrorMsg').innerText = `Tổng số câu hỏi phải đúng bằng ${max}`;
             } else {
                 document.getElementById('ErrorMsg').style.display = 'none';
             }
         }
-        document.getElementById('EasyInput').addEventListener('input', autoCalc);
-        document.getElementById('MediumInput').addEventListener('input', autoCalc);
-        document.getElementById('HardInput').addEventListener('input', autoCalc);
 
-        // Load lại tổng khi render
-        document.addEventListener('DOMContentLoaded', autoCalc);
+        document.querySelectorAll('.auto-calc').forEach(input => {
+            input.addEventListener('input', updateTotal);
+        });
+
+        document.querySelectorAll('.total-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const val = this.getAttribute('data-value');
+                document.getElementById('TotalQuestions').value = val;
+                document.getElementById('MaxTotal').innerText = val;
+                updateTotal();
+            });
+        });
+
+        document.getElementById('ai-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Kiểm tra tổng câu hỏi hợp lệ
+            const total = parseInt(document.getElementById('CurrentTotal').innerText);
+            const max = parseInt(document.getElementById('TotalQuestions').value);
+            if (total !== max) {
+                document.getElementById('ErrorMsg').style.display = 'block';
+                document.getElementById('ErrorMsg').innerText = `Tổng số câu hỏi phải đúng bằng ${max}`;
+                return;
+            }
+
+            document.getElementById('loading-overlay').style.display = 'flex';
+
+            const formData = new FormData(this);
+
+            fetch('@Url.Action("Index", "GenerateExam")', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(resp => {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                    if (resp.success) {
+                        console.log(resp.data);
+                        renderQuestionPreview(resp.data);
+                        const modalElement = document.getElementById('questionPreviewModal');
+                        const modal = new bootstrap.Modal(modalElement, {
+                            backdrop: 'static', // Không cho đóng khi click ra ngoài
+                            keyboard: false     // Không cho đóng bằng phím Esc
+                        });
+                        modal.show();
+                    } else {
+                        document.getElementById('ErrorMsg').style.display = 'block';
+                        document.getElementById('ErrorMsg').innerText = data.message;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                    alert("Lỗi khi gửi yêu cầu: " + error.message);
+                });
+        });
+        function renderQuestionPreview(questions) {
+            const container = document.getElementById("questionPreviewContainer");
+            container.innerHTML = ""; // clear
+
+            questions.forEach((q, index) => {
+                const qDiv = document.createElement("div");
+                qDiv.classList.add("mb-4", "border-bottom", "pb-3");
+
+                qDiv.innerHTML = `
+                    <div class="mb-2">
+                        <label class="form-label fw-bold">Câu ${index + 1}</label>
+                        <textarea class="form-control question-content" data-index="${index}" rows="2">${q.content || ''}</textarea>
+                    </div>
+                    <div>
+                        ${q.answers.map((a, aIdx) => `
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">Đáp án ${String.fromCharCode(65 + aIdx)}</span>
+                                <input type="text" class="form-control answer-text" data-qindex="${index}" data-ansindex="${aIdx}" value="${a.answerText || ''}" />
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0 answer-correct" type="checkbox" ${a.isCorrected ? "checked" : ""}
+                                        data-qindex="${index}" data-ansindex="${aIdx}" />
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>
+                `;
+                container.appendChild(qDiv);
+            });
+
+            // Gắn lại data vào biến toàn cục nếu cần
+            window.generatedQuestions = questions;
+        }
+        document.getElementById("saveExamBtn").addEventListener("click", function () {
+            // Đọc lại các nội dung người dùng đã chỉnh sửa
+            const questions = window.generatedQuestions;
+            
+            document.querySelectorAll(".question-content").forEach(el => {
+                const idx = el.dataset.index;
+                questions[idx].content = el.value;
+            });
+
+            document.querySelectorAll(".answer-text").forEach(el => {
+                const qidx = el.dataset.qindex;
+                const aidx = el.dataset.ansindex;
+                questions[qidx].answers[aidx].answerText = el.value;
+            });
+
+            document.querySelectorAll(".answer-correct").forEach(el => {
+                const qidx = el.dataset.qindex;
+                const aidx = el.dataset.ansindex;
+                questions[qidx].answers[aidx].isCorrected = el.checked;
+            });
+            console.log(questions);
+            // Gửi câu hỏi đã chỉnh sửa đến server để lưu
+            fetch('/Exam/SaveGeneratedExam', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ questions })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('questionPreviewModal'))?.hide();
+                        location.href = '/Exam/AllExams';
+                    } else {
+                        alert("Lỗi khi lưu đề: " + data.message);
+                    }
+                })
+                .catch(err => alert("Lỗi kết nối: " + err.message));
+        });
+
     </script>
-    <partial name="_ValidationScriptsPartial" />
 }

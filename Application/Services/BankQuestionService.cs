@@ -29,7 +29,7 @@ namespace Application.Services
             {
                 Content = e.Content,
                 CreatedAt = DateTime.Now,
-                IsPublic = true,
+                IsPublic = false,
                 LevelId = e.LevelId,
                 QuestionTypeId = e.QuestionTypeId,
                 PremiumUserId = null,
