@@ -21,10 +21,21 @@
         <textarea asp-for="Description" class="form-control" rows="3"></textarea>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="SourceText" class="form-label">Source Text</label>
-        <input asp-for="SourceText" class="form-control" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="SourceText" class="form-label">Nguồn đề (Source Text)</label>
+
+            <select id="sourceTextSelect" class="form-select">
+                <option value="" disabled>-- Chọn nguồn đề --</option>
+                <option value="Sách giáo khoa">Sách giáo khoa</option>
+                <option value="Đề kiểm tra">Đề kiểm tra</option>
+                <option value="Tài liệu tham khảo">Tài liệu tham khảo</option>
+                <option value="Tự biên soạn">Tự biên soạn</option>
+                <option value="Khác">Khác...</option>
+            </select>
+
+            <input asp-for="SourceText" class="form-control mt-2" id="customSourceText" placeholder="Nhập nguồn đề khác..." style="display: none;" />
+        </div>
+
 
     <div class="mb-3">
         <label asp-for="SubjectId" class="form-label">Môn học</label>
@@ -32,6 +43,26 @@
             <option value="">-- Chọn môn học --</option>
         </select>
     </div>
+        <div class="mb-3">
+            <label asp-for="TotalTime" class="form-label">Thời gian làm bài (phút)</label>
+            <select asp-for="TotalTime" class="form-select">
+                <option value="">-- Chọn thời gian --</option>
+                <option value="15">15 phút</option>
+                <option value="30">30 phút</option>
+                <option value="45">45 phút</option>
+                <option value="50">50 phút</option>
+                <option value="60">60 phút</option>
+                <option value="90">90 phút</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsPublic" class="form-label">Trạng thái</label>
+            <select asp-for="IsPublic" class="form-select">
+                <option value="true">Công khai</option>
+                <option value="false">Riêng tư</option>
+            </select>
+        </div>
 
     <div style="margin-bottom: 10px;">
         <label for="randomCount">Chọn số lượng câu hỏi: </label>
@@ -42,13 +73,14 @@
         </select>
         <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
     </div>
-
+        <div class="mb-3">
+            <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
+        </div>
     <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
+        <input type="hidden" asp-for="TotalTime" id="totalTimeHidden" />
+        <input type="hidden" asp-for="TotalQuestion" id="totalQuestionHidden" />
 
-    <div class="mb-3 form-check">
-        <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
-        <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
-    </div>
+       
 
     <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
 
@@ -128,13 +160,103 @@
     </div>
     <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
 </form>
+    <div class="modal fade" id="selectedQuestionsModal" tabindex="-1" aria-labelledby="selectedQuestionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectedQuestionsModalLabel">Danh sách câu hỏi đã chọn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="selectedQuestionsList">
+                    <!-- JS sẽ gắn danh sách câu hỏi ở đây -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
     <script>
         let selectedQuestionIds = @Html.Raw(Json.Serialize(Model.SelectedQuestionIds ?? new List<int>()));
         let currentPage = 1;
+         let allSelectedQuestions = [];
+        let currentModalPage = 1;
+        const pageSize = 5;
+        let selectedQuestionsData = [];
     </script>
+    <script>
+             function renderSelectedQuestionsPage(page) {
+            currentModalPage = page;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const items = selectedQuestionIds.slice(start, end);
 
+            if (items.length === 0) {
+                $('#selectedQuestionsList').html('<p>Không có câu hỏi nào được chọn.</p>');
+                return;
+            }
+
+            let html = '<ul class="list-group">';
+                   for (let i = 0; i < items.length; i++) {
+            const id = items[i];
+            const q = selectedQuestionsData.find(q => q.id === id);
+            if (q) {
+                const displayIndex = (page - 1) * pageSize + i + 1;
+                html += `<li class="list-group-item">
+                            <strong>Câu hỏi ${displayIndex}</strong><br/>
+                            <strong>Nội dung:</strong> ${q.content}
+                         </li>`;
+            } else {
+                html += `<li class="list-group-item">Câu hỏi ID: ${id} (không tìm thấy)</li>`;
+            }
+        }
+
+            html += '</ul>';
+
+            // Thêm phân trang
+            const totalPages = Math.ceil(selectedQuestionIds.length / pageSize);
+            html += `<nav class="mt-3"><ul class="pagination justify-content-center">`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<li class="page-item ${i === page ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="renderSelectedQuestionsPage(${i})">${i}</a>
+                         </li>`;
+            }
+            html += `</ul></nav>`;
+
+            $('#selectedQuestionsList').html(html);
+        }
+
+
+               function showSelectedQuestionsModal() {
+            $.ajax({
+                type: 'POST',
+                url: '/Exam/GetSelectedQuestions',
+                contentType: 'application/json',
+                data: JSON.stringify(selectedQuestionIds),
+                success: function (questions) {
+                    selectedQuestionsData = questions;
+                    renderSelectedQuestionsPage(1);
+                    const modal = new bootstrap.Modal(document.getElementById('selectedQuestionsModal'));
+                    modal.show();
+                },
+                error: function () {
+                    alert("Không thể tải nội dung câu hỏi.");
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('#sourceTextSelect').change(function () {
+                const selectedValue = $(this).val();
+                if (selectedValue === 'Khác') {
+                    $('#customSourceText').val('').show();
+                } else {
+                    $('#customSourceText').val(selectedValue).hide();
+                }
+            });
+        });
+    </script>
         <script>
 
 
@@ -271,57 +393,148 @@
             });
 
             // Validate form trước khi submit
-                                 $('#editExamForm').submit(function (e) {
-            e.preventDefault();
+                              $('#editExamForm').submit(function (e) {
+            e.preventDefault(); // Ngăn submit mặc định
 
-            const title = $('input[name="Title"]').val().trim();
-            const description = $('textarea[name="Description"]').val().trim();
-            const sourceText = $('input[name="SourceText"]').val().trim();
-            const subjectId = $('select[name="SubjectId"]').val();
-            const totalQuestion = parseInt($('#randomCount').val());
-            const selectedCount = selectedQuestionIds.length;
+            const errors = [];
 
+                   const title = $('input[name="Title"]').val().trim();
+        const description = $('textarea[name="Description"]').val().trim();
+
+        const selectedSource = $('#sourceTextSelect').val();
+        let sourceText;
+        if (selectedSource === "Khác") {
+            sourceText = $('#customSourceText').val().trim();
+        } else {
+            sourceText = selectedSource;
+        }
+        $('input[name="SourceText"]').val(sourceText);  // gán lại vào input ẩn
+
+        const subjectId = $('select[name="SubjectId"]').val();
+        const totalQuestion = parseInt($('#randomCount').val());
+        const totalTime = parseInt($('select[name="TotalTime"]').val());
+        const selectedCount = selectedQuestionIds.length;
+
+
+            // Gán giá trị vào input ẩn
+            $('#totalTimeHidden').val(totalTime);
             $('#totalQuestionHidden').val(selectedCount);
 
-            if (!title || !description || !sourceText || !subjectId) {
-                alert('Vui lòng điền đầy đủ thông tin.');
-                return false;
+            // Kiểm tra thông tin bắt buộc
+            if (!title || !description || !sourceText || !subjectId || isNaN(totalTime)) {
+                errors.push("Vui lòng điền đầy đủ các trường bắt buộc và chọn thời gian.");
             }
 
+            // Kiểm tra số câu hỏi
             if (selectedCount !== totalQuestion) {
                 const diff = totalQuestion - selectedCount;
-                const message = diff > 0
+                errors.push(diff > 0
                     ? `Bạn còn thiếu ${diff} câu hỏi.`
-                    : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`;
-                $('#questionCountWarning').text(message).show();
-                $('html, body').animate({ scrollTop: $("#questionCountWarning").offset().top - 50 }, 400);
-                return false;
+                    : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`);
             }
 
-            $('#questionCountWarning').hide();
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể lưu đề',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+                return;
+            }
 
-            // Xóa input cũ
+            // Gỡ các input ẩn cũ (nếu có)
             $('input[name="SelectedQuestionIds"]').remove();
 
-            // ✅ Tạo input mới trước khi submit
-            for (const id of selectedQuestionIds) {
+            // Gắn lại SelectedQuestionIds
+            selectedQuestionIds.forEach(function (id) {
                 $('<input>', {
                     type: 'hidden',
                     name: 'SelectedQuestionIds',
                     value: id
                 }).appendTo('#editExamForm');
-            }
+            });
 
-            // ✅ Đảm bảo submit sau khi tạo xong
-            setTimeout(() => {
-                $('#editExamForm')[0].submit();
-            }, 50); // nhỏ nhưng đảm bảo render xong
+            // Submit form thật
+            this.submit();
         });
 
 
+                       $(document).ready(function () {
+            let errors = [];
+
+        @if (TempData["Error"] != null)
+        {
+            <text>errors.push("@TempData["Error"]");</text>
+        }
+
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi khi cập nhật!',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+            }
+
+        @if (TempData["Success"] != null && TempData["RedirectOnSuccess"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '✅ @TempData["Success"]',
+                        text: 'Bạn sẽ được chuyển về trang danh sách đề sau khi đóng.',
+                        confirmButtonText: 'Xem danh sách đề',
+                        backdrop: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/Exam/AllExams'; // ✅ Đổi thành trang bạn muốn
+                        }
+                    });
+            </text>
+        }
+        });
+
+
+                             $(document).ready(function () {
+            const totalQuestion = @Model.TotalQuestion;
+            const totalTime = @Model.TotalTime; // 👈 thêm dòng này
+
+            // ✅ Chuyển Razor Model thành JS string an toàn
+            const sourceText = @Html.Raw(Json.Serialize(Model.SourceText));
+            const trimmedSourceText = sourceText.trim();
+
+            const predefined = [
+                "Sách giáo khoa",
+                "Đề kiểm tra",
+                "Tài liệu tham khảo",
+                "Tự biên soạn"
+            ];
+
+            $('#randomCount').val(totalQuestion);
+            $('#TotalTime').val(totalTime); // 👈 Gán đúng dropdown thời gian
+
+            if (predefined.includes(trimmedSourceText)) {
+                $('#sourceTextSelect').val(trimmedSourceText);
+                $('#customSourceText').hide();
+            } else {
+                $('#sourceTextSelect').val("Khác");
+                $('#customSourceText').val(trimmedSourceText).show();
+            }
+
+            // ✅ Gán lại SourceText chính xác trước khi submit
+            $('#editExamForm').on('submit', function () {
+                const selectedValue = $('#sourceTextSelect').val();
+                if (selectedValue === "Khác") {
+                    $('#customSourceText').val($('#customSourceText').val().trim());
+                } else {
+                    $('#customSourceText').val(selectedValue);
+                }
+            });
+        });
 
         </script>
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 }
 

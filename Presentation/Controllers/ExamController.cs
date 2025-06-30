@@ -84,6 +84,7 @@ namespace Presentation.Controllers
             {
                 return RedirectToAction("Login", "BasicUser");
             }
+
             Console.WriteLine("✅ Số câu được gửi: " + dto.SelectedQuestionIds?.Count);
 
             // Validate số lượng câu hỏi
@@ -91,27 +92,41 @@ namespace Presentation.Controllers
             {
                 ModelState.AddModelError("", $"Bạn phải chọn đúng {dto.TotalQuestion} câu hỏi.");
             }
+
             dto.PremiumUserId = userId;
+
             if (!ModelState.IsValid)
             {
-                // Nạp lại dữ liệu cho ViewBag để không lỗi View khi load lại
                 await PrepareViewBagDataForCreatePage();
+                Console.WriteLine("IsValid: " + ModelState.IsValid);
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine("❌ ModelState error: " + error.ErrorMessage);
+                }
 
-                return View(dto);
+                return View(dto); // ❌ Trường hợp tạo thất bại: quay lại View kèm ModelState
             }
 
             try
             {
-                await _examService.CreateExamAsync(dto);
-                return RedirectToAction("Create");
+                var examId = await _examService.CreateExamAsync(dto);
+                TempData["Success"] = "Đề thi đã được tạo thành công!";
+                TempData["RedirectToPreview"] = examId;
+
+                return RedirectToAction("Create"); 
+
+
+
             }
+
             catch (Exception ex)
             {
                 await PrepareViewBagDataForCreatePage();
-                ModelState.AddModelError("", ex.Message);
+                TempData["Error"] = ex.InnerException?.Message ?? ex.Message;
                 return View(dto);
             }
         }
+
 
         // Gợi ý tạo hàm riêng để không lặp code
         private async Task PrepareViewBagDataForCreatePage()
@@ -132,15 +147,13 @@ namespace Presentation.Controllers
         public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, bool? isPublic, string? keyword, int page = 1, int pageSize = 10)
         {
             var userId = GetCurrentUserId();
-            if (string.IsNullOrWhiteSpace(keyword))
-                keyword = null;
 
             var filter = new SearchBankQuestionFilter
             {
                 QuestionTypeId = questionTypeId,
                 LevelId = levelId,
-                IsPublic = isPublic,
-                Keyword = keyword
+                IsPublic = isPublic, // ✅ vẫn giữ nullable
+                Keyword = string.IsNullOrWhiteSpace(keyword) ? null : keyword
             };
 
             var allResults = await _examService.SearchBankQuestionsAsync(filter, userId);
@@ -157,6 +170,7 @@ namespace Presentation.Controllers
 
             return PartialView("_SearchQuestionResults", paginated);
         }
+
 
 
 
@@ -233,7 +247,7 @@ namespace Presentation.Controllers
         {
             var question = await _examService.GetBankQuestionByIdAsync(id);
             if (question == null) return NotFound();
-
+            
             var questionTypes = await _examService.GetAllQuestionTypesAsync();
             var levels = await _examService.GetAllLevelsAsync();
 
@@ -246,7 +260,7 @@ namespace Presentation.Controllers
                 Content = question.Content,
                 QuestionTypeId = question.QuestionTypeId,
                 LevelId = question.LevelId,
-                IsPublic = question.IsPublic,
+                IsPublic = question.IsPublic,              
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
                 {
                     Id = a.Id,
@@ -299,20 +313,21 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRandomQuestionIds(int count, int? questionTypeId, int? levelId, bool? isPublic, string? keyword)
+        public async Task<IActionResult> GetRandomQuestionIds(int count, int? questionTypeId, int? levelId, string? keyword)
         {
             var filter = new SearchBankQuestionFilter
             {
                 QuestionTypeId = questionTypeId,
                 LevelId = levelId,
-                IsPublic = isPublic,
                 Keyword = string.IsNullOrWhiteSpace(keyword) ? null : keyword
             };
+
             var userId = GetCurrentUserId();
             var ids = await _examService.GetRandomQuestionIdsAsync(count, filter, userId);
 
             return Json(ids);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetExamsByPremiumUserId()
         {
@@ -457,14 +472,21 @@ namespace Presentation.Controllers
             {
                 await _examService.UpdateExamAsync(dto);
                 TempData["Success"] = "Cập nhật đề thành công.";
-                return RedirectToAction("AllExams");
+                TempData["RedirectOnSuccess"] = true;
+                return RedirectToAction("Edit", new { examId = dto.Id }); // trở lại Edit để hiển thị Swal
             }
             catch (Exception ex)
             {
                 TempData["Error"] = ex.Message;
-                return RedirectToAction("AllExams"); // hoặc trang bạn hiển thị danh sách đề
+                return RedirectToAction("Edit", new { examId = dto.Id });
             }
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> GetSelectedQuestions([FromBody] List<int> questionIds)
+        {
+            var questions = await _examService.GetQuestionsByIdsAsync(questionIds);
+            return Json(questions);
         }
 
 

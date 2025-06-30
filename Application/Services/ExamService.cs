@@ -16,7 +16,7 @@ namespace Application.Services
         public ExamService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
         }
-        public async Task<bool> CreateExamAsync(CreateExamDTO dto)
+        public async Task<int> CreateExamAsync(CreateExamDTO dto)
         {
             if (dto.SelectedQuestionIds.Count != dto.TotalQuestion)
                 throw new ArgumentException("Số câu hỏi đã chọn không khớp với tổng số câu hỏi.");
@@ -31,7 +31,9 @@ namespace Application.Services
                 IsPublic = dto.IsPublic,
                 TotalQuestion = dto.TotalQuestion,
                 CreatedAt = DateTime.UtcNow,
-                TotalTime = TimeSpan.FromMinutes(50)
+                TotalTime = TimeSpan.FromMinutes(dto.TotalTime),
+                UpdatedAt = DateTime.UtcNow,
+                DeletedAt = DateTime.MinValue
             };
 
             await _unitOfWork.Exams.AddAsync(exam);
@@ -51,25 +53,34 @@ namespace Application.Services
                     QuestionTypeId = question.QuestionTypeId,
                     LevelId = question.LevelId,
                     CreatedAt = DateTime.UtcNow,
-                    IsPublic = true
+                    IsPublic = true,
+                    UpdatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue
                 };
                 await _unitOfWork.QuestionExams.AddAsync(questionExam);
             }
 
-            await _unitOfWork.CommitAsync();
-
-            return true;
+            try
+            {
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Lỗi khi CommitAsync (thêm QuestionExams): " + ex.ToString());
+                throw;
+            }
+            return exam.Id;
         }
        
 
         public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId)
         {
-            var query = _unitOfWork.BankQuestions
-                .Query()
-                .Include(q => q.QuestionType)
-                .Include(q => q.Level)
-                .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
-                .AsQueryable();
+            IQueryable<BankQuestion> query = _unitOfWork.BankQuestions
+     .Query()
+     .Include(q => q.QuestionType)
+     .Include(q => q.Level)
+     .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
+     .OrderByDescending(q => q.CreatedAt);
 
             if (filter.QuestionTypeId.HasValue)
                 query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId.Value);
@@ -77,6 +88,7 @@ namespace Application.Services
             if (filter.LevelId.HasValue)
                 query = query.Where(q => q.LevelId == filter.LevelId.Value);
 
+            // ✅ Lọc công khai / riêng tư / cả hai
             if (filter.IsPublic.HasValue)
                 query = query.Where(q => q.IsPublic == filter.IsPublic.Value);
 
@@ -85,6 +97,7 @@ namespace Application.Services
                 var keywordLower = filter.Keyword.ToLower();
                 query = query.Where(q => q.Content != null && q.Content.ToLower().Contains(keywordLower));
             }
+
 
             return await query.ToListAsync();
         }
@@ -294,10 +307,11 @@ namespace Application.Services
             };
         }
 
-        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId)
+        public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? premiumUserId)
         {
-            return await _unitOfWork.BankQuestions.GetRandomQuestionIdsAsync(count, filter, PremiumUserId);
+            return await _unitOfWork.BankQuestions.GetRandomQuestionIdsAsync(count, filter, premiumUserId);
         }
+
         public async Task<List<ExamDTO>> GetExamsByPremiumUserIdAsync(string premiumUserId)
         {
             // Kiểm tra xem user có phải premium hay không
@@ -389,10 +403,14 @@ namespace Application.Services
                 PremiumUserId = dto.PremiumUserId,
                 IsPublic = dto.IsPublic,
                 CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                DeletedAt = DateTime.MinValue,
                 Answers = dto.Answers.Select(a => new Answer
                 {
                     AnswerText = a.AnswerText!,
                     IsCorrected = a.IsCorrected,
+                    UpdatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue,
                     MatchingPairKey = a.MatchingPairKey
                 }).ToList()
             };
@@ -416,7 +434,9 @@ namespace Application.Services
                 SubjectId = exam.SubjectId ?? 0,
                 IsPublic = exam.IsPublic,
                 TotalQuestion = exam.TotalQuestion,
+                TotalTime = (int)exam.TotalTime.TotalMinutes,
                 SelectedQuestionIds = selectedQuestionIds
+
             };
         }
         public async Task<bool> UpdateExamAsync(EditExamDTO dto)
@@ -425,18 +445,14 @@ namespace Application.Services
             if (exam == null)
                 throw new Exception("Không tìm thấy đề thi.");
 
-            // ❌ Không cho sửa nếu đề đã được làm
+           
             if (exam.ExamScoreds.Any())
                 throw new InvalidOperationException("Không thể chỉnh sửa vì đề đã được làm.");
 
-            // ✅ Kiểm tra số lượng câu hỏi hợp lệ
             if (dto.SelectedQuestionIds.Count != dto.TotalQuestion)
                 throw new ArgumentException("Số câu hỏi đã chọn không khớp với tổng số câu hỏi.");
 
-            // ❌ Không cần xóa luôn exam nếu chỉ đang update
-            // _unitOfWork.Exams.Remove(exam); → ⚠️ bỏ dòng này, tránh xóa luôn đề
-
-            // Xóa access và questionExam cũ
+           
             _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
             _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
 
@@ -448,7 +464,7 @@ namespace Application.Services
             exam.IsPublic = dto.IsPublic;
             exam.TotalQuestion = dto.TotalQuestion;
             exam.UpdatedAt = DateTime.UtcNow;
-
+            exam.TotalTime = TimeSpan.FromMinutes(dto.TotalTime);
             // Thêm mới các câu hỏi
             foreach (var questionId in dto.SelectedQuestionIds)
             {
@@ -462,17 +478,38 @@ namespace Application.Services
                     BankQuestionId = questionId,
                     QuestionTypeId = question.QuestionTypeId,
                     LevelId = question.LevelId,
+                    UpdatedAt = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue,
                     IsPublic = true
                 };
 
                 await _unitOfWork.QuestionExams.AddAsync(questionExam);
             }
 
-            await _unitOfWork.CompleteAsync();
+            try
+            {
+                await _unitOfWork.CompleteAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                var innerMessage = ex.InnerException?.Message ?? ex.Message;
+                throw new Exception("Lỗi khi lưu thay đổi: " + innerMessage, ex);
+            }
+
             return true;
         }
 
+        public async Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds)
+        {
+            var questions = await _unitOfWork.BankQuestions.FindAsync(q => questionIds.Contains(q.Id));
+
+            return questions.Select(q => new SimpleQuestionDto
+            {
+                Id = q.Id,
+                Content = q.Content
+            }).ToList();
+        }
 
 
     }

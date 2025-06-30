@@ -12,7 +12,7 @@ namespace Application.Interface.IServices
 {
     public interface IExamService
     {
-        Task<bool> CreateExamAsync(CreateExamDTO dto);
+        Task<int> CreateExamAsync(CreateExamDTO dto);
         Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId);
         Task<List<Subject>> GetAllSubjectsAsync();
         Task<List<QuestionType>> GetAllQuestionTypesAsync();
@@ -31,6 +31,8 @@ namespace Application.Interface.IServices
         Task<EditExamDTO> GetExamForEditAsync(int examId);
         Task<bool> UpdateExamAsync(EditExamDTO dto);
         public Task<int> CreateExamScoredAsync(int examId, string userId);
+        Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
 
-	}
+
+    }
 }

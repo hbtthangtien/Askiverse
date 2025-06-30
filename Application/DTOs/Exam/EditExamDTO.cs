@@ -23,7 +23,7 @@ namespace Application.DTOs.Exam
         public int SubjectId { get; set; }
 
         public bool IsPublic { get; set; }
-
+        public int TotalTime { get; set; }
         public int TotalQuestion { get; set; }
 
         public List<int> SelectedQuestionIds { get; set; } = new();

@@ -95,7 +95,6 @@
             color: #D13D76;
         }
 </style>
-
 <div class="container mt-5 mb-4">
     <h1 class="mb-4">Tạo đề thi mới</h1>
     <a class="btn btn-success mb-3" asp-controller="Exam" asp-action="CreateExamQuestion">
@@ -104,41 +103,18 @@
 
     <!-- Form tạo đề ở trên -->
     <form asp-action="Create" method="post" id="createExamForm">
-
-
-        <div class="mb-3">
-           
-            <label asp-for="Title" class="form-label">Tiêu đề</label>
-            <input asp-for="Title" class="form-control" />
-
-        </div>
-
-        <div class="mb-3">
-          
-
-            <label asp-for="Description" class="form-label">Mô tả</label>
-            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-        </div>
-
-        <div class="mb-3">
-           
-
-            <label asp-for="SourceText" class="form-label">Source Text</label>
-            <input asp-for="SourceText" class="form-control" />
-        </div>
-
-        <div class="mb-3">
-         
-
-            <label asp-for="SubjectId" class="form-label">Môn học</label>
-            <select asp-for="SubjectId" asp-items="@(new SelectList(ViewBag.Subjects, "Id", "Name"))" class="form-select">
-                <option value="">-- Chọn môn học --</option>
-            </select>
-        </div>
-
+        <!-- Các trường ẩn để submit sau khi nhập thông tin -->
+        <input type="hidden" name="Title" />
+        <input type="hidden" name="Description" />
+        <input type="hidden" name="SourceText" />
+        <input type="hidden" name="SubjectId" />
+        <input type="hidden" name="IsPublic" />
+        <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
+        <input type="hidden" name="SelectedQuestionIds" id="SelectedQuestionIds" />
+        <input type="hidden" name="TotalTime" id="totalTimeHidden" />
         <!-- Dropdown chọn số lượng -->
-        <div style="margin-bottom: 10px;">
-            <label for="randomCount">Chọn số lượng câu hỏi: </label>
+        <div class="mb-3">
+            <label for="randomCount">Chọn số lượng câu hỏi:</label>
             <select id="randomCount" class="form-select" style="width: 200px; display: inline-block;">
                 <option value="10">10 câu</option>
                 <option value="25">25 câu</option>
@@ -146,58 +122,35 @@
             </select>
             <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
         </div>
-
-        <!-- Input ẩn để lưu danh sách câu hỏi đã chọn -->
-        <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
-
-
-
-
-        <div class="mb-3 form-check">
-            <input asp-for="IsPublic" class="form-check-input" type="checkbox" id="IsPublic" />
-            <label class="form-check-label" for="IsPublic">Đề thi công khai</label>
-        </div>
-
         <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
-
+        <div class="mb-3">
+        <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
+       </div>
         <!-- Khung lớn chứa danh sách câu hỏi bên trái + phần lọc bên phải -->
         <div class="border rounded p-3">
             <h4 class="mb-3">Quản lý câu hỏi</h4>
-
             <div class="row">
-                <!-- Danh sách câu hỏi (bên trái, rộng 8 cột) -->
                 <div class="col-md-8" style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
                     <div id="searchResults">
-
                         <div id="questionListContainer">
                             @{
                                 var questions = ViewBag.InitialQuestions as List<BankQuestion>;
-
                                 var partialViewData = new ViewDataDictionary<List<BankQuestion>>(
-                                metadataProvider: ViewContext.HttpContext.RequestServices
-                                .GetService(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider))
-                                as Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,
-                                modelState: new Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary()
-                                )
+                                metadataProvider: ViewContext.HttpContext.RequestServices.GetService(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider)) as Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,
+                                modelState: new Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary())
             {
                 Model = questions
             };
-
                                 partialViewData["SelectedIds"] = Model.SelectedQuestionIds;
                                 partialViewData["TotalPages"] = ViewBag.TotalPages ?? 1;
                                 partialViewData["CurrentPage"] = ViewBag.CurrentPage ?? 1;
                             }
-
                             @Html.Partial("_SearchQuestionResults", partialViewData.Model, partialViewData)
-
                         </div>
                     </div>
                 </div>
-
-                <!-- Phần lọc câu hỏi (bên phải, rộng 4 cột) -->
                 <div class="col-md-4">
                     <h5>Lọc câu hỏi</h5>
-
                     <div class="mb-3">
                         <label for="questionTypeFilter" class="form-label">Loại câu hỏi</label>
                         <select id="questionTypeFilter" class="form-select">
@@ -208,7 +161,6 @@
                             }
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="levelFilter" class="form-label">Độ khó</label>
                         <select id="levelFilter" class="form-select">
@@ -219,37 +171,262 @@
                             }
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="isPublicFilter" class="form-label">Chế độ</label>
+                        <select id="isPublicFilter" name="isPublic" class="form-control">
+                            <option value="">Cả hai</option>
+                            <option value="true">Công khai</option>
+                            <option value="false">Riêng tư</option>
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <input type="text" id="keywordFilter" placeholder="Nhập từ khóa..." class="form-control" />
                     </div>
-
                     <div class="mb-3">
                         <button type="button" id="btnSearch" class="btn btn-primary w-100">Tìm câu hỏi</button>
                     </div>
                 </div>
             </div>
         </div>
-
+		
+        <!-- Nút lưu sẽ mở modal -->
         <div class="mt-4">
-            <input type="submit" value="Tạo đề" class="btn btn-success" />
+            <button type="button" class="btn btn-success" onclick="showExamInfoModal()">Lưu & Nhập thông tin đề</button>
         </div>
-        <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
-
-
     </form>
-    
+    <!-- Nút mở modal -->
 
+   
 
+    <!-- Modal -->
+    <div class="modal fade" id="selectedQuestionsModal" tabindex="-1" aria-labelledby="selectedQuestionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="selectedQuestionsModalLabel">Danh sách câu hỏi đã chọn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="selectedQuestionsList">
+                    <!-- JS sẽ gắn danh sách câu hỏi ở đây -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal nhập thông tin đề -->
+    <div class="modal fade" id="examInfoModal" tabindex="-1" aria-labelledby="examInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="examInfoModalLabel">Nhập thông tin đề thi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="modalTitle" class="form-label">Tiêu đề</label>
+                        <input type="text" id="modalTitle" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="modalDescription" class="form-label">Mô tả</label>
+                        <textarea id="modalDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="SourceText" class="form-label">Nguồn đề (Source Text)</label>
+
+                        <select id="sourceTextSelect" class="form-select">
+                            <option value="" selected disabled>-- Chọn nguồn đề --</option>
+                            <option value="Sách giáo khoa">Sách giáo khoa</option>
+                            <option value="Đề kiểm tra">Đề kiểm tra</option>
+                            <option value="Tài liệu tham khảo">Tài liệu tham khảo</option>
+                            <option value="Tự biên soạn">Tự biên soạn</option>
+                            <option value="Khác">Khác...</option>
+                        </select>
+
+                        <input asp-for="SourceText" class="form-control mt-2" id="customSourceText" placeholder="Nhập nguồn đề khác..." style="display: none;" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="modalSubjectId" class="form-label">Môn học</label>
+                        <select id="modalSubjectId" class="form-select">
+                            <option value="">-- Chọn môn học --</option>
+                            @foreach (var subject in ViewBag.Subjects as List<Subject>)
+                            {
+                                <option value="@subject.Id">@subject.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="totalTimeSelect" class="form-label">Thời gian làm bài (phút)</label>
+                        <select id="totalTimeSelect" class="form-select">
+                            <option value="" selected disabled>-- Chọn thời gian --</option>
+                            <option value="15">15 phút</option>
+                            <option value="30">30 phút</option>
+                            <option value="45">45 phút</option>
+                            <option value="50">50 phút</option>
+                            <option value="60">60 phút</option>
+                            <option value="90">90 phút</option>
+                        </select>
+				
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="modalIsPublic" class="form-label">Chế độ</label>
+                        <select id="modalIsPublic" class="form-select">
+                            <option value="true">Công khai</option>
+                            <option value="false">Riêng tư</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="submitFinalForm()">Tạo đề</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         let selectedQuestionIds = [];
         let currentPage = 1;
+                let allSelectedQuestions = [];
+        let currentModalPage = 1;
+        const pageSize = 5;
+        let selectedQuestionsData = [];
+
     </script>
+    <script>
+                              function renderSelectedQuestionsPage(page) {
+            currentModalPage = page;
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const items = selectedQuestionIds.slice(start, end);
+
+            if (items.length === 0) {
+                $('#selectedQuestionsList').html('<p>Không có câu hỏi nào được chọn.</p>');
+                return;
+            }
+
+            let html = '<ul class="list-group">';
+                   for (let i = 0; i < items.length; i++) {
+            const id = items[i];
+            const q = selectedQuestionsData.find(q => q.id === id);
+            if (q) {
+                const displayIndex = (page - 1) * pageSize + i + 1;
+                html += `<li class="list-group-item">
+                            <strong>Câu hỏi ${displayIndex}</strong><br/>
+                            <strong>Nội dung:</strong> ${q.content}
+                         </li>`;
+            } else {
+                html += `<li class="list-group-item">Câu hỏi ID: ${id} (không tìm thấy)</li>`;
+            }
+        }
+
+            html += '</ul>';
+
+            // Thêm phân trang
+            const totalPages = Math.ceil(selectedQuestionIds.length / pageSize);
+            html += `<nav class="mt-3"><ul class="pagination justify-content-center">`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<li class="page-item ${i === page ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="renderSelectedQuestionsPage(${i})">${i}</a>
+                         </li>`;
+            }
+            html += `</ul></nav>`;
+
+            $('#selectedQuestionsList').html(html);
+        }
+
+
+               function showSelectedQuestionsModal() {
+            $.ajax({
+                type: 'POST',
+                url: '/Exam/GetSelectedQuestions',
+                contentType: 'application/json',
+                data: JSON.stringify(selectedQuestionIds),
+                success: function (questions) {
+                    selectedQuestionsData = questions;
+                    renderSelectedQuestionsPage(1);
+                    const modal = new bootstrap.Modal(document.getElementById('selectedQuestionsModal'));
+                    modal.show();
+                },
+                error: function () {
+                    alert("Không thể tải nội dung câu hỏi.");
+                }
+            });
+        }
+
+
+               function showExamInfoModal() {
+    // Xóa dữ liệu modal trước khi hiển thị
+    $('#modalTitle').val('');
+    $('#modalDescription').val('');
+    $('#modalSourceText').val('');
+    $('#modalSubjectId').val('');
+    $('#modalIsPublic').val('true');
+    $('#totalTimeSelect').val('');
+    $('#totalTimeHidden').val('');
+
+    $('#examInfoModal').modal('show');
+}
+
+        function submitFinalForm() {
+            const title = $('#modalTitle').val().trim();
+            const description = $('#modalDescription').val().trim();
+                    let sourceText = $('#sourceTextSelect').val();
+        if (sourceText === 'Khác') {
+            const customInput = $('#customSourceText').val();
+            sourceText = customInput ? customInput.trim() : '';
+        }
+
+            const subjectId = $('#modalSubjectId').val();
+            const isPublic = $('#modalIsPublic').val();
+
+            const totalQuestion = parseInt($('#randomCount').val());
+            const selectedCount = selectedQuestionIds.length;
+                    const totalTime = parseInt($('#totalTimeSelect').val());
+        $('#totalTimeHidden').val(totalTime);
+
+                    if (!title || !description || !sourceText || !subjectId || !totalTime) {
+                Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin.', 'error');
+                return;
+            }
+
+            if (selectedCount !== totalQuestion) {
+                const diff = totalQuestion - selectedCount;
+                Swal.fire('Lỗi', diff > 0 ? `Bạn còn thiếu ${diff} câu hỏi.` : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`, 'error');
+                return;
+            }
+
+            $('input[name="Title"]').val(title);
+            $('input[name="Description"]').val(description);
+            $('input[name="SourceText"]').val(sourceText);
+            $('input[name="SubjectId"]').val(subjectId);
+            $('input[name="IsPublic"]').val(isPublic);
+                    $('input[name="TotalTime"]').val(totalTime);
+            $('#totalQuestionHidden').val(selectedCount);
+
+            $('input[name="SelectedQuestionIds"]').remove();
+            selectedQuestionIds.forEach(function (id) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'SelectedQuestionIds',
+                    value: id
+                }).appendTo('#createExamForm');
+            });
+
+            $('#createExamForm')[0].submit();
+        }
+    </script>
+   
 
     <script>
          
@@ -271,32 +448,34 @@
         }
 
 
-      
 
 
-         function loadQuestions(page = 1) {
-             var questionTypeId = $('#questionTypeFilter').val() || null;
-             var levelId = $('#levelFilter').val() || null;
-             var keyword = $('#keywordFilter').val().trim() || null;
 
-             $.ajax({
-                 url: '@Url.Action("SearchQuestions", "Exam")',
-                 data: {
-                     questionTypeId: questionTypeId,
-                     levelId: levelId,
-                     keyword: keyword,
-                     page: page
-                 },
-                 success: function (result) {
-                     $('#searchResults').html(result);
+                function loadQuestions(page = 1) {
+            var questionTypeId = $('#questionTypeFilter').val() || null;
+            var levelId = $('#levelFilter').val() || null;
+            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
 
-                     // Đánh dấu lại checkbox cho các câu đã chọn
-                     selectedQuestionIds.forEach(function (id) {
-                         $('.question-checkbox[value="' + id + '"]').prop('checked', true);
-                     });
-                 }
-             });
-         }
+            $.ajax({
+                url: '@Url.Action("SearchQuestions", "Exam")',
+                data: {
+                    questionTypeId: questionTypeId,
+                    levelId: levelId,
+                    keyword: keyword,
+                    isPublic: isPublic,
+                    page: page
+                },
+                success: function (result) {
+                    $('#searchResults').html(result);
+
+                    selectedQuestionIds.forEach(function (id) {
+                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                    });
+                }
+            });
+        }
+
 
          $(document).on('change', '.question-checkbox', function () {
              var questionId = parseInt($(this).val());
@@ -324,40 +503,11 @@
          });
 
         // Tìm kiếm câu hỏi
-        $('#btnSearch').click(function () {
+              $('#btnSearch').click(function () {
             var questionTypeId = $('#questionTypeFilter').val() || null;
             var levelId = $('#levelFilter').val() || null;
             var keyword = $('#keywordFilter').val().trim() || null;
-
-            $.ajax({
-                url: '@Url.Action("SearchQuestions", "Exam")',
-                data: {
-                    questionTypeId: questionTypeId,
-                    levelId: levelId,
-                    keyword: keyword
-                },
-                success: function (result) {
-                    $('#searchResults').html(result);
-
-                    // Đánh dấu lại checkbox cho các câu đã chọn
-                    selectedQuestionIds.forEach(function (id) {
-                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
-                    });
-                   
-
-                    if (typeof showPage === "function") {
-                        showPage(1);
-                    }
-                }
-            });
-        });
-     
-
-        // Hàm load dữ liệu theo trang
-        function loadPage(page) {
-            var questionTypeId = $('#questionTypeFilter').val() || null;
-            var levelId = $('#levelFilter').val() || null;
-            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
 
             $.ajax({
                 url: '@Url.Action("SearchQuestions", "Exam")',
@@ -365,13 +515,44 @@
                     questionTypeId: questionTypeId,
                     levelId: levelId,
                     keyword: keyword,
-                    page: page,
-                    pageSize: 10 // hoặc lấy từ ViewBag.PageSize nếu động
+                    isPublic: isPublic // <-- truyền thêm
                 },
                 success: function (result) {
                     $('#searchResults').html(result);
 
-                    // Đánh dấu lại checkbox cho các câu đã chọn
+                    selectedQuestionIds.forEach(function (id) {
+                        $('.question-checkbox[value="' + id + '"]').prop('checked', true);
+                    });
+
+                    if (typeof showPage === "function") {
+                        showPage(1);
+                    }
+                }
+            });
+        });
+
+     
+
+        // Hàm load dữ liệu theo trang
+               function loadPage(page) {
+            var questionTypeId = $('#questionTypeFilter').val() || null;
+            var levelId = $('#levelFilter').val() || null;
+            var keyword = $('#keywordFilter').val().trim() || null;
+            var isPublic = $('#isPublicFilter').val(); // <-- mới thêm
+
+            $.ajax({
+                url: '@Url.Action("SearchQuestions", "Exam")',
+                data: {
+                    questionTypeId: questionTypeId,
+                    levelId: levelId,
+                    keyword: keyword,
+                    isPublic: isPublic,
+                    page: page,
+                    pageSize: 10
+                },
+                success: function (result) {
+                    $('#searchResults').html(result);
+
                     selectedQuestionIds.forEach(function (id) {
                         $('.question-checkbox[value="' + id + '"]').prop('checked', true);
                     });
@@ -379,17 +560,20 @@
             });
         }
 
+
         // Gán sự kiện click cho các nút phân trang (sau mỗi lần load lại kết quả)
         $(document).on('click', '.pagination-link', function (e) {
             e.preventDefault();
             var page = $(this).data('page');
             loadPage(page);
         });
-              
-        // Validate form trước khi submit
-                $('#createExamForm').submit(function (e) {
+
+
+                // ✅ Validate form trước khi submit
+        $('#createExamForm').submit(function (e) {
             e.preventDefault(); // Ngăn submit mặc định
-            console.log("📝 SelectedQuestionIds:", selectedQuestionIds);
+
+            const errors = [];
 
             const title = $('input[name="Title"]').val().trim();
             const description = $('textarea[name="Description"]').val().trim();
@@ -397,29 +581,39 @@
             const subjectId = $('select[name="SubjectId"]').val();
             const totalQuestion = parseInt($('#randomCount').val());
             const selectedCount = selectedQuestionIds.length;
-            $('#totalQuestionHidden').val(selectedQuestionIds.length);
+            const totalTime = parseInt($('#totalTimeSelect').val());
+                 console.log("TotalTime selected:", totalTime);
+        $('#totalTimeHidden').val(totalTime);
 
+            $('#totalQuestionHidden').val(selectedCount);
+
+            // ❌ Kiểm tra thiếu thông tin
             if (!title || !description || !sourceText || !subjectId) {
-                alert('Vui lòng điền đầy đủ thông tin.');
-                return false;
+                errors.push("Vui lòng điền đầy đủ các trường bắt buộc.");
             }
 
+            // ❌ Kiểm tra số lượng câu hỏi
             if (selectedCount !== totalQuestion) {
                 const diff = totalQuestion - selectedCount;
                 const message = diff > 0
                     ? `Bạn còn thiếu ${diff} câu hỏi.`
                     : `Bạn đã chọn thừa ${Math.abs(diff)} câu hỏi.`;
-                $('#questionCountWarning').text(message).show();
-                $('html, body').animate({ scrollTop: $("#questionCountWarning").offset().top - 50 }, 400);
-                return false;
+                errors.push(message);
             }
 
-            $('#questionCountWarning').hide();
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể tạo đề',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+                return;
+            }
 
-            // Xóa input cũ (nếu có)
+            // ✅ Gỡ input cũ nếu có
             $('input[name="SelectedQuestionIds"]').remove();
 
-            // Thêm input hidden mới
+            // ✅ Thêm input ẩn cho từng ID đã chọn
             selectedQuestionIds.forEach(function (id) {
                 $('<input>').attr({
                     type: 'hidden',
@@ -428,12 +622,96 @@
                 }).appendTo('#createExamForm');
             });
 
-            // ✅ Gọi submit thật mà không dùng this
-            $('#createExamForm')[0].submit();
+            // ✅ Submit thật
+            this.submit();
         });
 
+        // ✅ Hiển thị thông báo từ server sau khi redirect
+                    $(document).ready(function () {
+            let errors = [];
+
+            // ❌ Lỗi từ server
+        @if (TempData["Error"] != null)
+        {
+            <text>errors.push("@TempData["Error"]");</text>
+        }
+
+            if (errors.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    html: '<ul style="text-align:left;">' + errors.map(e => `<li>${e}</li>`).join('') + '</ul>'
+                });
+            }
+
+            // ✅ Thông báo thành công rồi chuyển sang trang PreviewExam
+        @if (TempData["Success"] != null && TempData["RedirectToPreview"] != null)
+        {
+            <text>
+                let seconds = 5;
+                const redirectUrl = '/Exam/PreviewExam?examId=@TempData["RedirectToPreview"]';
+                let cancelled = false;
+
+                Swal.fire({
+                    icon: 'success',
+                    title: '🎉 Tạo đề thành công!',
+                    html: `
+                        <div style="font-size: 1.1rem; margin-top: 10px;">
+                            Bạn sẽ được chuyển đến <b>trang xem trước đề thi</b> sau <span id="countdown" style="color:#d33; font-weight:bold;">${seconds}</span> giây.
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2906/2906276.png" alt="Success Icon" width="80"/>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    cancelButtonText: '⛔ Hủy chuyển hướng',
+                    showConfirmButton: false,
+                    timer: seconds * 1000,
+                    timerProgressBar: true,
+                    background: '#fffefa',
+                    backdrop: `rgba(0, 0, 0, 0.4) center center no-repeat`,
+                    didOpen: () => {
+                        const countdownSpan = document.getElementById('countdown');
+                        const interval = setInterval(() => {
+                            if (cancelled) {
+                                clearInterval(interval);
+                                return;
+                            }
+                            seconds--;
+                            countdownSpan.textContent = seconds;
+                            if (seconds <= 0) clearInterval(interval);
+                        }, 1000);
+                    }
+                }).then((result) => {
+                    if (!result.dismiss || result.dismiss !== Swal.DismissReason.cancel) {
+                        if (!cancelled) {
+                            window.location.href = redirectUrl;
+                        }
+                                 } else {
+                        cancelled = true;
+                        
+                    }
+                });
+            </text>
+
+
+        }
+
+        });
 
     </script>
-  
+    <script>
+        $(document).ready(function () {
+            $('#sourceTextSelect').change(function () {
+                const selectedValue = $(this).val();
+                if (selectedValue === 'Khác') {
+                    $('#customSourceText').val('').show();
+                } else {
+                    $('#customSourceText').val(selectedValue).hide();
+                }
+            });
+        });
+    </script>
+
 
 }

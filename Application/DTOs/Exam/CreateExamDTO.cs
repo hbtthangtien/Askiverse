@@ -23,7 +23,7 @@ namespace Application.DTOs.Exam
         public string? PremiumUserId { get; set; }
 
         public bool IsPublic { get; set; }
-
+        public int TotalTime { get; set; }
         public int TotalQuestion { get; set; } // số lượng câu hỏi (10, 25, 50)
 
         [Required(ErrorMessage = "Bạn phải chọn số lượng câu hỏi phù hợp.")]
