@@ -290,7 +290,12 @@ namespace Presentation.Controllers
             catch (Exception ex)
             {
                 ViewData["Error"] = ex.Message;
-                return PartialView("_ExamListPartial");
+
+				if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+				{
+					return PartialView("_ExamListPartial");
+				}
+                return View();
             }
         }
 

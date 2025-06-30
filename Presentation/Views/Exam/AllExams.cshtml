@@ -87,15 +87,18 @@
 		</div>
 	</div>
 
-	<div class="btn mb-3" style="left:20px">
-		<select id="subject-select" class="form-select w-auto d-inline-block ms-2">
-			<option value="">Tất cả</option>
-			@foreach (var subject in Model.Subjects)
-			{
-				<option value="@subject.Id">@subject.Name</option>
-			}
-		</select>
-	</div>
+	@if (Model != null && Model.Subjects != null && Model.Subjects.Count != 0)
+	{
+		<div class="btn mb-3" style="left:20px">
+			<select id="subject-select" class="form-select w-auto d-inline-block ms-2">
+				<option value="">Tất cả</option>
+				@foreach (var subject in Model.Subjects)
+				{
+					<option value="@subject.Id">@subject.Name</option>
+				}
+			</select>
+		</div>
+	}
 
 	<div id="exam-list">
 		@await Html.PartialAsync("_ExamListPartial", Model)
@@ -111,7 +114,7 @@
 		document.getElementById("btn-dechung").addEventListener("click", () => setTab("dechung"));
 		document.getElementById("btn-detutao").addEventListener("click", () => setTab("detutao"));
 		document.getElementById("btn-deyeuthich").addEventListener("click", () => setTab("deyeuthich"));
-		document.getElementById("subject-select").addEventListener("change", () => reload());
+		document.getElementById("subject-select")?.addEventListener("change", () => reload());
 
 		function setTab(tab) {
 			currentTab = tab;
@@ -121,7 +124,7 @@
 		}
 
 		function reload() {
-			const subjectId = document.getElementById("subject-select").value;
+			const subjectId = document.getElementById("subject-select")?.value;
 			let url = `/Exam/AllExams?subjectId=${subjectId}`;
 
 			if (currentTab === "dechung") url += `&isPublic=true`;

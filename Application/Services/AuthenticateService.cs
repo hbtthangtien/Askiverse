@@ -42,7 +42,10 @@ namespace Application.Services
 			{
 				var checkEmail = await _unitOfWork.BasicUsers.UserManager.IsEmailConfirmedAsync(account!);
 				if (!checkEmail)
+                {
+                    //await _basicUserService.SendEmailConfirmAsync(account!);
 					throw new Exception("Bạn chưa xác nhận tài khoản!");
+				}
 				else
 					await _unitOfWork.BasicUsers.SignInManager
 						.PasswordSignInAsync(account!, request.Password!, false, lockoutOnFailure: false);
@@ -83,10 +86,18 @@ namespace Application.Services
 			var profile = new Domain.Entities.Profile
 			{
 				UserId = newUser.Id,
+				AvatarUrl = "https://as2.ftcdn.net/v2/jpg/03/31/69/91/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg"
 			};
 			profile.Gender = Domain.Enums.Gender.Other;
 
+            var premiumUser = new PremiumUser
+            {
+                UserId = newUser.Id,
+                IsActive = true
+            };
+
 			await _unitOfWork.Profiles.AddAsync(profile);
+            await _unitOfWork.PremiumUsers.AddAsync(premiumUser);
             await _unitOfWork.CommitAsync();
             await _unitOfWork.BasicUsers.SignInManager.SignInAsync(newUser, isPersistent: false);
         }
