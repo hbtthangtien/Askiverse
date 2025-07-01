@@ -49,7 +49,7 @@
 				{
 					var question = Model.Questions[i];
 					<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
-						<p><strong>@("Câu " + (i + 1) + ": ")</strong>@question.Content</p>
+						<p><strong>@("Câu " + (i + 1) + ": ")</strong>@Html.Raw(question.Content)</p>
 
 						@foreach (var answer in question.Answers)
 						{

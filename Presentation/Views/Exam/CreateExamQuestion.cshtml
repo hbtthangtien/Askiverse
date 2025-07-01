@@ -105,7 +105,8 @@
     <form asp-action="CreateExamQuestion" method="post">
         <div class="mb-3">
             <label class="form-label">Content</label>
-            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "3" })
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @id = "editor" })
+
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
         </div>
 
@@ -132,19 +133,157 @@
         </div>
 
         <h6>Answers</h6>
-        <div id="answer-list"></div>
+        <div id="answer-list-wrapper">
+            <div id="answer-list"></div>
+        </div>
 
         <button type="button" class="btn btn-outline-primary mt-2" id="btn-add-answer">+ Add Answer</button>
 
+
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">Create</button>
-            <a href="/Exam/Create" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a href="/Exam/Create" class="btn btn-secondary">Hủy</a>
         </div>
     </form>
 </div>
 
 @section Scripts {
+    <!-- CKEditor 5 Classic Build -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
+        let ckeditorInstance;
+
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', '|',
+                    'link', 'bulletedList', 'numberedList', '|',
+                    'blockQuote', 'insertTable', 'undo', 'redo'
+                ],
+                language: 'vi'
+            })
+            .then(editor => {
+                ckeditorInstance = editor;
+            })
+            .catch(error => {
+                console.error('Lỗi khi khởi tạo CKEditor:', error);
+            });
+
+        // Đồng bộ nội dung khi submit
+        $('form').submit(function () {
+            if (ckeditorInstance) {
+                $('#editor').val(ckeditorInstance.getData());
+            }
+        });
+    </script>
+
+    <script>
+        let questionType = $('#QuestionTypeId').val();
+                     function updateAnswerListByQuestionType() {
+            const type = $('#QuestionTypeId').val();
+
+            const $addBtn = $('#btn-add-answer');
+            $('#answer-list').empty();
+
+            if (type === "2") { // Fill in the Blank => chỉ 1 đáp án
+                const html = getAnswerHtml(0, type);
+                $('#answer-list').append(html);
+                $addBtn.hide(); // ẩn nút Add Answer
+            } else {
+                $addBtn.show();
+            }
+
+            reindexAnswers();
+        }
+
+
+                function getAnswerHtml(index, type) {
+            if (type === "1") { // Multiple Choice
+                return `
+                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
+                    <input type="hidden" name="Answers[${index}].Id" value="0" />
+                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Answer text" required />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <input type="checkbox" name="Answers[${index}].IsCorrected" value="true" />
+                            <label class="ms-1">Correct</label>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center">
+                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            if (type === "2") { // Fill in the Blank – không có nút remove
+                return `
+                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
+                    <input type="hidden" name="Answers[${index}].Id" value="0" />
+                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Correct word or phrase" required />
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+           if (type === "3") { // Matching – có nút remove ở từng cặp
+    const pairKey = String.fromCharCode(65 + Math.floor(index / 2)); // A, B, C...
+    const leftIndex = index;
+    const rightIndex = index + 1;
+
+    return `
+    <div class="matching-pair-group" data-pair="${pairKey}">
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <label class="form-label">Cặp ${pairKey} – Bên trái (Từ hoặc Câu hỏi)</label>
+                <div class="answer-item border p-2 rounded" data-index="${leftIndex}">
+                    <input type="hidden" name="Answers[${leftIndex}].Id" value="0" />
+                    <input type="hidden" name="Answers[${leftIndex}].IsDeleted" value="false" />
+                    <input type="hidden" name="Answers[${leftIndex}].MatchingPairKey" value="${pairKey}" />
+                    <input type="text" name="Answers[${leftIndex}].AnswerText" class="form-control" placeholder="Đáp án bên trái" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cặp ${pairKey} – Bên phải (Nghĩa hoặc Câu trả lời)</label>
+                <div class="answer-item border p-2 rounded" data-index="${rightIndex}">
+                    <input type="hidden" name="Answers[${rightIndex}].Id" value="0" />
+                    <input type="hidden" name="Answers[${rightIndex}].IsDeleted" value="false" />
+                    <input type="hidden" name="Answers[${rightIndex}].MatchingPairKey" value="${pairKey}" />
+                    <input type="text" name="Answers[${rightIndex}].AnswerText" class="form-control" placeholder="Đáp án bên phải" required />
+                </div>
+            </div>
+        </div>
+        <div class="text-end mb-2">
+            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-pair">Xóa cặp ${pairKey}</button>
+        </div>
+    </div>`;
+}
+
+
+            return "";
+        }
+                $(document).on('click', '.btn-remove-pair', function () {
+            const pairGroup = $(this).closest('.matching-pair-group');
+            pairGroup.find('input[name$=".IsDeleted"]').val('true');
+            pairGroup.hide();
+            reindexAnswers();
+        });
+
+                      $('#QuestionTypeId').change(function () {
+            updateAnswerListByQuestionType();
+        });
+
+                       $(document).ready(function () {
+            updateAnswerListByQuestionType();
+        });
+
+
         function reindexAnswers() {
             $('#answer-list .answer-item:visible').each(function (i) {
                 $(this).attr('data-index', i);
@@ -158,30 +297,14 @@
             });
         }
 
-        $(document).on('click', '#btn-add-answer', function () {
-            const index = $('#answer-list .answer-item').length;
-
-            const html = `
-                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
-                    <input type="hidden" name="Answers[${index}].Id" value="0" />
-                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Answer text" required />
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                           <input type="checkbox" name="Answers[${index}].IsCorrected" value="true" />
-
-                            <label class="ms-1">Correct</label>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
-                        </div>
-                    </div>
-                </div>`;
+              $(document).on('click', '#btn-add-answer', function () {
+            const type = $('#QuestionTypeId').val();
+            const count = $('#answer-list .answer-item').length;
+            const html = getAnswerHtml(count, type);
             $('#answer-list').append(html);
-            reindexAnswers();
+            reindexAnswers(); // vẫn cần để làm lại name cho đúng chỉ số
         });
+
 
         $(document).on('click', '.btn-remove-answer', function () {
             const container = $(this).closest('.answer-item');
@@ -194,6 +317,8 @@
             }
             reindexAnswers();
         });
+
+      
     </script>
 }
 

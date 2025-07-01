@@ -10,6 +10,8 @@ namespace Application.DTOs.Exam
     {
         public int Id { get; set; }
         public string? Content { get; set; }
+        public int QuestionTypeId { get; set; }         
+        public string? QuestionTypeName { get; set; }
         public List<AnswerDTO> Answers { get; set; } = new();
     }
 
@@ -18,6 +20,7 @@ namespace Application.DTOs.Exam
         public int Id { get; set; }
         public string? AnswerText { get; set; }
         public bool IsCorrected { get; set; }
+        public string? MatchingPairKey { get; set; }
     }
 
 }

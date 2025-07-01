@@ -80,103 +80,142 @@
         font-weight: 500;
     }
 </style>
-
 <div class="container mt-4">
     <h2>Edit Question</h2>
     <form asp-action="EditExamQuestion" method="post">
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.QuestionTypeId)
 
         <div class="mb-3">
             <label class="form-label">Content</label>
-            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", rows = "3" })
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @id = "editor" })
             @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label">Loại câu hỏi</label>
-                <select asp-for="QuestionTypeId" class="form-select" asp-items="ViewBag.QuestionTypes">
-                    <option value="">-- Chọn loại câu hỏi --</option>
-                </select>
+                <input type="text" class="form-control" value="@Model.QuestionTypeName" readonly />
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label">Độ khó</label>
                 <select asp-for="LevelId" class="form-select" asp-items="ViewBag.Levels">
                     <option value="">-- Chọn độ khó --</option>
                 </select>
+                @Html.ValidationMessageFor(m => m.LevelId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-check form-switch mb-3">
             @Html.CheckBoxFor(m => m.IsPublic, new { @class = "form-check-input", role = "switch" })
-            <label class="form-check-label">Public</label>
+            <label class="form-check-label">Công khai</label>
         </div>
 
         <h6>Answers</h6>
-        <div id="answer-list">
-            @for (int i = 0; i < Model.Answers.Count; i++)
-            {
-                <div class="answer-item mb-2 border p-2 rounded" data-index="@i">
-                    @Html.HiddenFor(m => m.Answers[i].Id)
-                    @Html.HiddenFor(m => m.Answers[i].IsDeleted)
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(m => m.Answers[i].AnswerText, new { @class = "form-control", placeholder = "Answer text" })
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            @Html.CheckBoxFor(m => m.Answers[i].IsCorrected)
-                            <label class="ms-1">Correct</label>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
+        <div id="answer-list">
+            @if (Model.QuestionTypeId == 1) // Multiple Choice
+            {
+                for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <div class="answer-item mb-2 border p-2 rounded">
+                        @Html.HiddenFor(m => m.Answers[i].Id)
+                        @Html.HiddenFor(m => m.Answers[i].IsDeleted)
+                        @Html.HiddenFor(m => m.Answers[i].MatchingPairKey)
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.TextBoxFor(m => m.Answers[i].AnswerText, new { @class = "form-control", placeholder = "Answer text" })
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                @Html.CheckBoxFor(m => m.Answers[i].IsCorrected)
+                                <label class="ms-1">Correct</label>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+            }
+            else if (Model.QuestionTypeId == 2) // Fill in the Blank
+            {
+                for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <div class="answer-item mb-2 border p-2 rounded">
+                        @Html.HiddenFor(m => m.Answers[i].Id)
+                        @Html.HiddenFor(m => m.Answers[i].IsDeleted)
+                        @Html.HiddenFor(m => m.Answers[i].MatchingPairKey)
+
+                        @Html.TextBoxFor(m => m.Answers[i].AnswerText, new { @class = "form-control", placeholder = "Correct word or phrase" })
+                    </div>
+                }
+            }
+            else if (Model.QuestionTypeId == 3) // Matching
+            {
+                var grouped = Model.Answers
+                .Select((a, index) => new { Answer = a, Index = index })
+                .GroupBy(x => x.Answer.MatchingPairKey)
+                .ToList();
+
+                foreach (var pair in grouped)
+                {
+                    if (pair.Count() == 2)
+                    {
+                        var left = pair.ElementAt(0);
+                        var right = pair.ElementAt(1);
+
+                        <div class="matching-pair-group border rounded p-2 mb-2">
+                            @Html.HiddenFor(m => m.Answers[left.Index].Id)
+                            @Html.HiddenFor(m => m.Answers[left.Index].IsDeleted)
+                            @Html.HiddenFor(m => m.Answers[left.Index].MatchingPairKey)
+
+                            @Html.HiddenFor(m => m.Answers[right.Index].Id)
+                            @Html.HiddenFor(m => m.Answers[right.Index].IsDeleted)
+                            @Html.HiddenFor(m => m.Answers[right.Index].MatchingPairKey)
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Đáp án bên trái (cặp @pair.Key)</label>
+                                    @Html.TextBoxFor(m => m.Answers[left.Index].AnswerText, new { @class = "form-control" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Đáp án bên phải (cặp @pair.Key)</label>
+                                    @Html.TextBoxFor(m => m.Answers[right.Index].AnswerText, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
             }
         </div>
 
-        <button type="button" class="btn btn-outline-primary mt-2" id="btn-add-answer">+ Add Answer</button>
-
         <div class="mt-4">
-            <button type="submit" class="btn btn-success">Save</button>
-            <a href="/Exam/Create" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success">Lưu</button>
+            <a href="/Exam/Create" class="btn btn-secondary">Hủy</a>
         </div>
     </form>
 </div>
-@section Scripts {
-    <script>
-        $(document).on('click', '#btn-add-answer', function () {
-            const index = $('#answer-list .answer-item').length;
 
-            const html = `
-                <div class="answer-item mb-2 border p-2 rounded" data-index="${index}">
-                    <input type="hidden" name="Answers[${index}].Id" />
-                    <input type="hidden" name="Answers[${index}].IsDeleted" value="false" />
-                    <div class="row">
-                        <div class="col-md-8">
-                            <input type="text" name="Answers[${index}].AnswerText" class="form-control" placeholder="Answer text" />
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            <input type="checkbox" name="Answers[${index}].IsCorrected" />
-                            <label class="ms-1">Correct</label>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            <button type="button" class="btn btn-outline-danger btn-sm btn-remove-answer">Remove</button>
-                        </div>
-                    </div>
-                </div>`;
-            $('#answer-list').append(html);
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        let ckeditorInstance;
+
+        ClassicEditor.create(document.querySelector('#editor'), {
+            toolbar: [
+                'heading', '|',
+                'bold', 'italic', 'underline', 'strikethrough', '|',
+                'link', 'bulletedList', 'numberedList', '|',
+                'blockQuote', 'insertTable', 'undo', 'redo'
+            ],
+            language: 'vi'
+        }).then(editor => {
+            ckeditorInstance = editor;
+        }).catch(error => {
+            console.error('CKEditor lỗi:', error);
         });
 
-        $(document).on('click', '.btn-remove-answer', function () {
-            const container = $(this).closest('.answer-item');
-            const inputDeleted = container.find('input[name$=".IsDeleted"]');
-            if (inputDeleted.length) {
-                inputDeleted.val('true');
-                container.hide();
-            } else {
-                container.remove();
+        $('form').submit(function () {
+            if (ckeditorInstance) {
+                $('#editor').val(ckeditorInstance.getData());
             }
         });
     </script>

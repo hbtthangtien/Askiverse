@@ -55,10 +55,14 @@
 		<div class="timeline-box">
 			<div class="timeline-dot"></div>
 			<div class="card-question">
-				<div class="d-flex justify-content-between align-items-center mb-3">
-					<h5 class="fw-bold mb-0">Câu @index: @question.Content</h5>
+				<div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+					<div class="d-flex">
+						<h5 class="fw-bold mb-0 me-2">Câu @index:</h5>
+						<div class="mb-0">@Html.Raw(question.Content)</div>
+					</div>
 					<span class="badge bg-secondary">⏳ Xem trước</span>
 				</div>
+
 				<div class="ps-2">
 					@foreach (var answer in question.Answers)
 					{
