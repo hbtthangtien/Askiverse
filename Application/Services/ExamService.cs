@@ -142,7 +142,7 @@ namespace Application.Services
 				}).ToList()
 			};
 		}
-		public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, bool isFavourite = false)
+		public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false)
 		{
 			var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
 			if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
@@ -151,6 +151,12 @@ namespace Application.Services
 			if (!string.IsNullOrEmpty(subjectId) && int.TryParse(subjectId, out int parsedInt))
 			{
 				subjectIdInt = parsedInt;
+			}
+
+			int? questionCountInt = null;
+			if(!string.IsNullOrEmpty(questionCount) && int.TryParse(questionCount, out int parsedQuestionCount))
+			{
+				questionCountInt = parsedQuestionCount;
 			}
 
 			var examQuery = _unitOfWork.Exams
@@ -178,15 +184,33 @@ namespace Application.Services
 				examQuery = examQuery.Where(e => e.SubjectId == subjectIdInt);
 			}
 
+			if(questionCountInt.HasValue)
+			{
+				examQuery = examQuery.Where(e => e.TotalQuestion == questionCountInt);
+			}
+
+			if (!string.IsNullOrEmpty(keyword))
+			{
+				examQuery = examQuery.Where(e => e.Title.Contains(keyword));
+			}
+
+			if (!string.IsNullOrEmpty(sortOrder))
+			{
+				if (sortOrder == "newest")
+					examQuery = examQuery.OrderByDescending(e => e.CreatedAt);
+				else
+					examQuery = examQuery.OrderBy(e => e.CreatedAt);
+			}
+
 			var exams = await examQuery.ToListAsync();
 			if (exams.Count == 0)
 			{
 				if (isFavourite)
-					throw new Exception("Hiện tại không có đề chung phù hợp với bộ lọc!");
+					throw new Exception("Bạn chưa thêm đề nào vào yêu thích!");
 				else if (isPublic)
-					throw new Exception("Hiện tại không có đề chung!");
+					throw new Exception("Không có dữ liệu!");
 				else
-					throw new Exception("Bạn chưa tạo đề nào phù hợp với bộ lọc!");
+					throw new Exception("Không có đề nào phù hợp!");
 			}
 
 			return new ExamSubjectViewModel

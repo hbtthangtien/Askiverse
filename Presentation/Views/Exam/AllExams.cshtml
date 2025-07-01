@@ -15,7 +15,7 @@
 <style>
 	#btn-dechung.active,
 	#btn-detutao.active,
-	#btn-deyeuthich.active{
+	#btn-deyeuthich.active {
 		background-color: #007bff; /* Màu xanh dương */
 		color: white;
 		font-weight: bold;
@@ -25,7 +25,7 @@
 
 	#btn-dechung:hover,
 	#btn-detutao:hover,
-	#btn-deyeuthich:hover{
+	#btn-deyeuthich:hover {
 		background-color: #f0f0f0;
 	}
 </style>
@@ -89,14 +89,49 @@
 
 	@if (Model != null && Model.Subjects != null && Model.Subjects.Count != 0)
 	{
-		<div class="btn mb-3" style="left:20px">
-			<select id="subject-select" class="form-select w-auto d-inline-block ms-2">
-				<option value="">Tất cả</option>
-				@foreach (var subject in Model.Subjects)
-				{
-					<option value="@subject.Id">@subject.Name</option>
-				}
-			</select>
+		<div class="d-flex align-items-center container">
+			<span class="mb-3">Môn học</span>
+			<div class="btn mb-3">
+				<select id="subject-select" class="form-select w-auto ms-1">
+					<option value="">Tất cả</option>
+					@foreach (var subject in Model.Subjects)
+					{
+						<option value="@subject.Id">@subject.Name</option>
+					}
+				</select>
+			</div>
+
+			<span class="mb-3 ms-2">Số lượng câu</span>
+			<div class="btn mb-3">
+				<select id="question-count" class="form-select w-auto  ms-1">
+					<option value="">
+						Tất cả
+					</option>
+					<option value="10">
+						10 câu
+					</option>
+					<option value="25">
+						25 câu
+					</option>
+					<option value="50">
+						50 câu
+					</option>
+				</select>
+			</div>
+
+			<span class="mb-3 ms-2">Sắp xếp</span>
+			<div class="btn mb-3">
+				<select id="sort-order" class="form-select w-auto ms-1">
+					<option value="newest">
+						Đề thi mới nhất
+					</option>
+					<option value="oldest">
+						Đề thi cũ nhất
+					</option>
+				</select>
+			</div>
+
+			<input type="text" id="search-input" class="form-control w-auto mb-3 ms-auto" placeholder="Tìm kiếm theo tiêu đề" />
 		</div>
 	}
 
@@ -115,6 +150,14 @@
 		document.getElementById("btn-detutao").addEventListener("click", () => setTab("detutao"));
 		document.getElementById("btn-deyeuthich").addEventListener("click", () => setTab("deyeuthich"));
 		document.getElementById("subject-select")?.addEventListener("change", () => reload());
+		document.getElementById("question-count")?.addEventListener("change", () => reload());
+		document.getElementById("sort-order")?.addEventListener("change", () => reload());
+		document.getElementById("search-input")?.addEventListener("keydown", (event) => {
+			if (event.key === "Enter") {
+				event.preventDefault();
+				reload();
+			}
+		});
 
 		function setTab(tab) {
 			currentTab = tab;
@@ -124,12 +167,20 @@
 		}
 
 		function reload() {
-			const subjectId = document.getElementById("subject-select")?.value;
+			const subjectId = document.getElementById("subject-select")?.value ?? "";
+			const questionCount = document.getElementById("question-count")?.value ?? "";
+			const sortOrder = document.getElementById("sort-order")?.value ?? "";
+			const keyword = document.getElementById("search-input")?.value ?? "";
+
 			let url = `/Exam/AllExams?subjectId=${subjectId}`;
 
 			if (currentTab === "dechung") url += `&isPublic=true`;
 			else if (currentTab === "detutao") url += `&isPublic=false`;
 			else if (currentTab === "deyeuthich") url += `&isFavourite=true`;
+
+			if (questionCount) url += `&questionCount=${questionCount}`;
+			if (sortOrder) url += `&sortOrder=${sortOrder}`;
+			if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
 
 			fetch(url, {
 				headers: { "X-Requested-With": "XMLHttpRequest" }
@@ -161,7 +212,7 @@
 			});
 		}
 
-		
+
 
 		// ------------------------------------------------
 		// them xoa yeu thich
@@ -191,50 +242,50 @@
 		updateExamButtons();
 	</script>
 	<script>
-				$(document).ready(function () {
-					// Load exams when modal opens
-					$('#grantExamAccessModal').on('show.bs.modal', function () {
-						$.get('/Exam/GetExamsByPremiumUserId', function (data) {
-							const $select = $('#examSelect');
-							$select.empty().append('<option value="">-- Chọn đề --</option>');
-							data.forEach(exam => {
-								$select.append(`<option value="${exam.id}">${exam.title}</option>`);
-							});
-						});
-					});
-
-					// Handle grant access
-					$('#grantAccessBtn').click(function () {
-						const email = $('#userEmail').val();
-						const examId = $('#examSelect').val();
-				const permission = $('#permissionSelect').val() === "true";
-						const $error = $('#accessError');
-
-						if (!email || !examId) {
-							$error.text("Vui lòng nhập email và chọn đề.").removeClass('d-none');
-							return;
-
-
-						}
-
-								$.ajax({
-			url: '/Exam/GrantExamAccessByEmail',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({ email, examId, permission }),
-			success: function (message) {
-				$error.addClass('d-none');
-				alert(message);
-				$('#grantExamAccessModal').modal('hide');
-			},
-			error: function (xhr) {
-				$error.text(xhr.responseText).removeClass('d-none');
-			}
-		});
-
-
+		$(document).ready(function () {
+			// Load exams when modal opens
+			$('#grantExamAccessModal').on('show.bs.modal', function () {
+				$.get('/Exam/GetExamsByPremiumUserId', function (data) {
+					const $select = $('#examSelect');
+					$select.empty().append('<option value="">-- Chọn đề --</option>');
+					data.forEach(exam => {
+						$select.append(`<option value="${exam.id}">${exam.title}</option>`);
 					});
 				});
+			});
+
+			// Handle grant access
+			$('#grantAccessBtn').click(function () {
+				const email = $('#userEmail').val();
+				const examId = $('#examSelect').val();
+				const permission = $('#permissionSelect').val() === "true";
+				const $error = $('#accessError');
+
+				if (!email || !examId) {
+					$error.text("Vui lòng nhập email và chọn đề.").removeClass('d-none');
+					return;
+
+
+				}
+
+				$.ajax({
+					url: '/Exam/GrantExamAccessByEmail',
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify({ email, examId, permission }),
+					success: function (message) {
+						$error.addClass('d-none');
+						alert(message);
+						$('#grantExamAccessModal').modal('hide');
+					},
+					error: function (xhr) {
+						$error.text(xhr.responseText).removeClass('d-none');
+					}
+				});
+
+
+			});
+		});
 
 
 

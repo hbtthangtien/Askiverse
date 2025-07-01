@@ -273,12 +273,12 @@ namespace Presentation.Controllers
             return View("EditExamQuestion", dto);
         }
         [Authorize]
-        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", bool isFavourite = false)
+        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", string? questionCount = "", string? sortOrder = "newest", string keyword = "", bool isFavourite = false)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, isFavourite);
+                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, questionCount, sortOrder, keyword, isFavourite);
 
                 if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
