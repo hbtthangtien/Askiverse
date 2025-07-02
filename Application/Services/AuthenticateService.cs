@@ -82,12 +82,17 @@ namespace Application.Services
                 throw new Exception(result.Errors.FirstOrDefault()?.Description ?? "Tạo tài khoản thất bại!");
 
             await _unitOfWork.BasicUsers.UserManager.AddToRoleAsync(newUser, UserRole.BASIC_USER);
+            var fullName = principal.Claims.FirstOrDefault(c =>
+    c.Type == ClaimTypes.Name || c.Type == "name")?.Value ?? username;
 
-			var profile = new Domain.Entities.Profile
+            var profile = new Domain.Entities.Profile
 			{
 				UserId = newUser.Id,
-				AvatarUrl = "https://as2.ftcdn.net/v2/jpg/03/31/69/91/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg"
-			};
+                Fullname = fullName,
+                DateOfBirth = null,
+                Bio = null,
+                AvatarUrl = "https://as2.ftcdn.net/v2/jpg/03/31/69/91/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg"
+            };
 			profile.Gender = Domain.Enums.Gender.Other;
 
             var premiumUser = new PremiumUser
