@@ -12,4 +12,13 @@ namespace Application.DTOs.Answer
         public string? AnswerText { get; set; } = default!;
         public bool IsCorrected { get; set; }
     }
+    public class AnswerDetailDTO
+    {
+        public int Id { get; set; }
+       
+        public string? AnswerText { get; set; }
+        public bool IsCorrected { get; set; }
+        public string? MatchingPairKey { get; set; }
+    }
+
 }

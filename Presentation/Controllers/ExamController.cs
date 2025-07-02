@@ -368,7 +368,7 @@ namespace Presentation.Controllers
             var userId = GetCurrentUserId();
             if (userId == null) return Unauthorized();
 
-            var exam = await _examService.GetExamTakeById(examId, userId);
+            var exam = await _examService.GetExamForPreview(examId, userId);
             if (exam == null) return NotFound();
 
             return View("PreviewExam", exam); // View mới
@@ -497,6 +497,39 @@ namespace Presentation.Controllers
             var questions = await _examService.GetQuestionsByIdsAsync(questionIds);
             return Json(questions);
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> FlashcardView(int examId, bool shuffle = false)
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return Unauthorized();
+
+            var exam = await _examService.GetExamForFlashcard(examId, userId);
+            if (exam == null) return NotFound();
+
+            // ✅ Nếu cần trộn lại tại đây (không dùng extension)
+            if (shuffle)
+            {
+                ShuffleList(exam.Questions);
+            }
+
+            return View("FlashcardView", exam);
+
+            // ✅ Local shuffle method
+            void ShuffleList<T>(IList<T> list)
+            {
+                Random rng = new Random();
+                int n = list.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = rng.Next(n + 1);
+                    (list[k], list[n]) = (list[n], list[k]);
+                }
+            }
+        }
+
+
 
 
     }

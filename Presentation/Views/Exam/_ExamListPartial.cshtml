@@ -68,36 +68,11 @@ else
 						   class="btn btn-outline-secondary w-100">
 							👁️ Xem trước
 						</a>
-						@if (exam.CanEdit)
-						{
-							<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
-								@Html.AntiForgeryToken()
-								<input type="hidden" name="examId" value="@exam.Id" />
-
-								<button type="submit" class="btn btn-danger w-100 mt-2">🗑️ Xóa đề</button>
-								@if (!exam.HasBeenScored)
-								{
-									<a asp-controller="Exam" asp-action="Edit" asp-route-examId="@exam.Id"
-									   class="btn btn-outline-warning w-100 mt-2">
-										✏️ Sửa đề
-									</a>
-								}
-								
-								else
-								{
-									<span class="badge bg-secondary w-100 mt-2">🔒 Đề đã được làm</span>
-								}
-							</form>
-						}
-						else
-						{
-							<span class="badge bg-secondary w-100 mt-2">🔒 Chỉ được xem</span>
-						}
-
-
-					
-
-
+						<a asp-controller="Exam" asp-action="FlashcardView" asp-route-examId="@exam.Id"
+						   class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-2 shadow-sm"
+						   title="Học nhanh bằng flashcard">
+							🧠 <strong>Học bằng Flashcard</strong>
+						</a>
 						@{
 							var isFavourite = exam.FavouritedByUsers.Any(f => f.UserId == userId);
 						}
@@ -111,6 +86,38 @@ else
 						{
 							<p>@ViewData["ErrorFavourite"]</p>
 						}
+						@if (exam.CanEdit)
+						{
+							<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
+								@Html.AntiForgeryToken()
+								<input type="hidden" name="examId" value="@exam.Id" />
+
+							
+								@if (!exam.HasBeenScored)
+								{
+									<a asp-controller="Exam" asp-action="Edit" asp-route-examId="@exam.Id"
+									   class="btn btn-outline-warning w-100 mt-2">
+										✏️ Sửa đề
+									</a>
+								}
+								
+								else
+								{
+									<span class="badge bg-secondary w-100 mt-2">🔒 Đề đã được làm</span>
+								}
+								<button type="submit" class="btn btn-danger w-100 mt-2">🗑️ Xóa đề</button>
+							</form>
+						}
+						else
+						{
+							<span class="badge bg-secondary w-100 mt-2">🔒 Chỉ được xem</span>
+						}
+
+
+					
+
+
+					
 					</td>
 				</tr>
 				stt++;

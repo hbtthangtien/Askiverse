@@ -13,4 +13,11 @@ namespace Application.DTOs.Question
         public string? Content { get; set; } = default!;
         public List<AnswerDTO> Answers { get; set; } = new();
     }
+    public class QuestionFlashcardDTO
+    {
+        public int Id { get; set; }
+        public string? Content { get; set; } = default!;
+        public int QuestionTypeId { get; set; }
+        public List<AnswerDetailDTO> Answers { get; set; } = new();
+    }
 }

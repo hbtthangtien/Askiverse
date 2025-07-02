@@ -226,8 +226,17 @@ namespace Application.Services
 			var exam = await _unitOfWork.Exams.GetExamTakeById(examId, userId);
 			return exam;
 		}
-
-		public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
+        public async Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamForFlashcard(examId, userId);
+            return exam;
+        }
+        public async Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamForFlashcard(examId, userId);
+            return exam;
+        }
+        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
 		{
 			var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, ExamScoredId);
 			return examScoredId;

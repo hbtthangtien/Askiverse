@@ -18,6 +18,8 @@ namespace Application.Interface.IRepository
         Task<IEnumerable<Exam>> GetByPremiumUserIdAsync(string premiumUserId);
         Task<Exam?> GetExamWithRelationsAsync(int examId);
         public Task<int> CreateExamScored(int examId, string userId);
+        Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
+        Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
 
-	}
+    }
 }

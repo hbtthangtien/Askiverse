@@ -19,8 +19,8 @@ namespace Application.DTOs.BasicUser
 		[Compare("Password", ErrorMessage = "Mật khẩu xác nhận không khớp")]
 		public string ConfirmPassword { get; set; }
 
-		//[RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
-        [RegularExpression(@"^[^@\s]+@(gmail|yahoo|outlook|hotmail)\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|vn|com\.vn|info|io|co)$", ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
-	}
+
+    }
 }

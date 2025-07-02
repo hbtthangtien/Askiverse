@@ -32,7 +32,8 @@ namespace Application.Interface.IServices
         Task<bool> UpdateExamAsync(EditExamDTO dto);
         public Task<int> CreateExamScoredAsync(int examId, string userId);
         Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
-
+        Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
+        Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
 
     }
 }

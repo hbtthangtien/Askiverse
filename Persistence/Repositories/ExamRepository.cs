@@ -1,5 +1,7 @@
-﻿using Application.DTOs.Exam;
+﻿using Application.DTOs.Answer;
+using Application.DTOs.Exam;
 using Application.DTOs.ExamScored;
+using Application.DTOs.Question;
 using Application.Interface.IRepository;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -150,6 +152,84 @@ namespace Persistence.Repositories
                 .Include(e => e.QuestionExam)
                 .Include(e => e.ExamScoreds)
                 .FirstOrDefaultAsync(e => e.Id == examId);
+        }
+        public async Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId)
+        {
+            var exam = await _context.Examss
+                .Where(e => e.Id == examId)
+                .Include(e => e.QuestionExam)
+                    .ThenInclude(qe => qe.BankQuestion)
+                        .ThenInclude(bq => bq.Answers)
+                .FirstOrDefaultAsync();
+
+            if (exam == null) return null;
+
+            return new ExamFlashcardDTO
+            {
+                Id = exam.Id,
+                Title = exam.Title,
+                Questions = exam.QuestionExam.Select(q => new QuestionFlashcardDTO
+                {
+                    Id = q.Id,
+                    Content = q.Content ?? q.BankQuestion?.Content ?? "",
+                    QuestionTypeId = q.BankQuestion?.QuestionTypeId ?? 0,
+                    Answers = q.BankQuestion?.Answers.Select(a => new AnswerDetailDTO
+                    {
+                        Id = a.Id,
+                        AnswerText = a.AnswerText ?? "",
+                        IsCorrected = a.IsCorrected,
+                        MatchingPairKey = a.MatchingPairKey
+                    }).ToList() ?? new()
+                }).ToList()
+            };
+        }
+        public async Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId)
+        {
+            var exam = await _context.Examss
+                .Where(e => e.Id == examId)
+                .Include(e => e.QuestionExam)
+                    .ThenInclude(qe => qe.BankQuestion)
+                        .ThenInclude(bq => bq.Answers)
+                .FirstOrDefaultAsync();
+
+            if (exam == null) return null;
+
+            var questions = exam.QuestionExam.Select(q => new QuestionFlashcardDTO
+            {
+                Id = q.Id,
+                Content = q.Content ?? q.BankQuestion?.Content ?? "",
+                QuestionTypeId = q.BankQuestion?.QuestionTypeId ?? 0,
+                Answers = q.BankQuestion?.Answers.Select(a => new AnswerDetailDTO
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText ?? "",
+                    IsCorrected = a.IsCorrected,
+                    MatchingPairKey = a.MatchingPairKey
+                }).ToList() ?? new()
+            }).ToList();
+
+            // ✅ Shuffle tại chỗ — không dùng extension
+            ShuffleList(questions);
+
+            return new ExamFlashcardDTO
+            {
+                Id = exam.Id,
+                Title = exam.Title,
+                Questions = questions
+            };
+
+            // Hàm trộn tại chỗ (local method)
+            void ShuffleList<T>(IList<T> list)
+            {
+                Random rng = new Random();
+                int n = list.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = rng.Next(n + 1);
+                    (list[k], list[n]) = (list[n], list[k]);
+                }
+            }
         }
 
     }
