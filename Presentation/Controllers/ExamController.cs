@@ -247,20 +247,22 @@ namespace Presentation.Controllers
         {
             var question = await _examService.GetBankQuestionByIdAsync(id);
             if (question == null) return NotFound();
-            
-            var questionTypes = await _examService.GetAllQuestionTypesAsync();
-            var levels = await _examService.GetAllLevelsAsync();
 
-            ViewBag.QuestionTypes = new SelectList(questionTypes, "Id", "Name");
+            var levels = await _examService.GetAllLevelsAsync();
             ViewBag.Levels = new SelectList(levels, "Id", "DisplayName");
+
+            // Nếu question không có navigation property, bạn phải fetch tên loại câu hỏi riêng:
+            var allQuestionTypes = await _examService.GetAllQuestionTypesAsync();
+            var typeName = allQuestionTypes.FirstOrDefault(t => t.Id == question.QuestionTypeId)?.Name ?? "";
 
             var dto = new UpdateBankQuestionDTO
             {
                 Id = question.Id,
                 Content = question.Content,
                 QuestionTypeId = question.QuestionTypeId,
+                QuestionTypeName = typeName,
                 LevelId = question.LevelId,
-                IsPublic = question.IsPublic,              
+                IsPublic = question.IsPublic,
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
                 {
                     Id = a.Id,
@@ -272,6 +274,24 @@ namespace Presentation.Controllers
 
             return View("EditExamQuestion", dto);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditExamQuestion(UpdateBankQuestionDTO dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var levels = await _examService.GetAllLevelsAsync();
+                ViewBag.Levels = new SelectList(levels, "Id", "DisplayName");
+                return View("EditExamQuestion", dto);
+            }
+
+            var success = await _examService.UpdateBankQuestionAsync(dto);
+            if (!success) return NotFound();
+
+            return RedirectToAction("Create"); // hoặc chuyển hướng về danh sách câu hỏi đã sửa
+        }
+
         [Authorize]
         public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", string? questionCount = "", string? sortOrder = "newest", string keyword = "", bool isFavourite = false)
         {
@@ -299,23 +319,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditExamQuestion(UpdateBankQuestionDTO dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                var questionTypes = await _examService.GetAllQuestionTypesAsync();
-                var levels = await _examService.GetAllLevelsAsync();
-
-                ViewBag.QuestionTypes = new SelectList(questionTypes, "Id", "Name");
-                ViewBag.Levels = new SelectList(levels, "Id", "DisplayName");
-
-                return View("EditExamQuestion", dto);
-            }
-
-            await _examService.UpdateBankQuestionAsync(dto);
-            return RedirectToAction("Create");
-        }
+        
 
         [HttpGet]
         public async Task<IActionResult> GetRandomQuestionIds(int count, int? questionTypeId, int? levelId, string? keyword)
@@ -364,7 +368,7 @@ namespace Presentation.Controllers
             var userId = GetCurrentUserId();
             if (userId == null) return Unauthorized();
 
-            var exam = await _examService.GetExamTakeById(examId, userId);
+            var exam = await _examService.GetExamForPreview(examId, userId);
             if (exam == null) return NotFound();
 
             return View("PreviewExam", exam); // View mới
@@ -493,6 +497,39 @@ namespace Presentation.Controllers
             var questions = await _examService.GetQuestionsByIdsAsync(questionIds);
             return Json(questions);
         }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> FlashcardView(int examId, bool shuffle = false)
+        {
+            var userId = GetCurrentUserId();
+            if (userId == null) return Unauthorized();
+
+            var exam = await _examService.GetExamForFlashcard(examId, userId);
+            if (exam == null) return NotFound();
+
+            // ✅ Nếu cần trộn lại tại đây (không dùng extension)
+            if (shuffle)
+            {
+                ShuffleList(exam.Questions);
+            }
+
+            return View("FlashcardView", exam);
+
+            // ✅ Local shuffle method
+            void ShuffleList<T>(IList<T> list)
+            {
+                Random rng = new Random();
+                int n = list.Count;
+                while (n > 1)
+                {
+                    n--;
+                    int k = rng.Next(n + 1);
+                    (list[k], list[n]) = (list[n], list[k]);
+                }
+            }
+        }
+
+
 
 
     }

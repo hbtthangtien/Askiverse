@@ -1,75 +1,143 @@
-﻿@model Application.DTOs.Exam.ExamTakeDTO
-
+﻿@model Application.DTOs.Exam.ExamFlashcardDTO
 
 @{
-	ViewData["Title"] = "Xem trước đề thi";
-	int index = 1;
+    ViewData["Title"] = "Xem trước đề thi";
+    int index = 1;
+    const int MC = 1, FILL = 2, MATCHING = 3;
 }
 
 <div class="container py-5" style="min-height: 65vh;">
-	<h2 class="text-center mb-5 fw-bold" style="color: #D13D76; font-size: 2.5rem">
-		👁️ Xem trước đề thi
-	</h2>
+    <h2 class="text-center mb-5 fw-bold" style="color: #D13D76; font-size: 2.5rem">
+        👁️ Xem trước đề thi
+    </h2>
 
-	<style>
-		.timeline-box {
-			position: relative;
-			padding-left: 40px;
-			margin-bottom: 40px;
-			border-left: 3px solid #FAD3E7;
-		}
+    <style>
+        .timeline-box {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 40px;
+            border-left: 3px solid #FAD3E7;
+        }
 
-		.timeline-dot {
-			position: absolute;
-			left: -10px;
-			top: 0;
-			width: 20px;
-			height: 20px;
-			background-color: #FE9FC3;
-			border-radius: 50%;
-			border: 3px solid white;
-			box-shadow: 0 0 0 3px #FAD3E7;
-		}
+        .timeline-dot {
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: #FE9FC3;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #FAD3E7;
+        }
 
-		.card-question {
-			background: #FFFFFF;
-			border: 2px solid #D8F8F2;
-			border-radius: 16px;
-			padding: 20px;
-			box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-			transition: 0.3s ease;
-		}
+        .card-question {
+            background: #FFFFFF;
+            border: 2px solid #D8F8F2;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
 
-		.answer-option {
-			border-radius: 10px;
-			padding: 12px 16px;
-			margin-bottom: 10px;
-			background-color: #F9F9F9;
-			border: 1.5px solid #e0e0e0;
-			transition: 0.2s ease;
-		}
-	</style>
+        .answer-option {
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            background-color: #F9F9F9;
+            border: 1.5px solid #e0e0e0;
+        }
 
-	@foreach (var question in Model.Questions)
-	{
-		<div class="timeline-box">
-			<div class="timeline-dot"></div>
-			<div class="card-question">
-				<div class="d-flex justify-content-between align-items-center mb-3">
-					<h5 class="fw-bold mb-0">Câu @index: @question.Content</h5>
-					<span class="badge bg-secondary">⏳ Xem trước</span>
-				</div>
-				<div class="ps-2">
-					@foreach (var answer in question.Answers)
-					{
-						<div class="answer-option">
-							<input class="form-check-input me-2" type="radio" disabled name="question-@question.Id" />
-							<label class="form-check-label fw-semibold">@answer.AnswerText</label>
-						</div>
-					}
-				</div>
-			</div>
-		</div>
-		index++;
-	}
+        .matching-left {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .matching-right {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+
+    @foreach (var question in Model.Questions)
+    {
+        var typeName = question.QuestionTypeId switch
+        {
+            MC => "Trắc nghiệm",
+            FILL => "Điền khuyết",
+            MATCHING => "Nối cặp",
+            _ => "Không xác định"
+        };
+
+        <div class="timeline-box">
+            <div class="timeline-dot"></div>
+            <div class="card-question">
+                <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                    <div class="d-flex flex-wrap">
+                        <h5 class="fw-bold mb-0 me-2">Câu @index:</h5>
+                        <div class="mb-0">@Html.Raw(question.Content)</div>
+                    </div>
+                    <span class="badge bg-info text-dark">@typeName</span>
+                </div>
+
+                <div class="ps-2">
+                    @if (question.QuestionTypeId == MC)
+                    {
+                        var optionLabels = new[] { "A", "B", "C", "D", "E", "F" };
+                        int opt = 0;
+                        foreach (var a in question.Answers)
+                        {
+                            <div class="answer-option">
+                                <span class="fw-bold">@optionLabels[opt++]).</span>
+                                <span class="ms-2">@a.AnswerText</span>
+                            </div>
+                        }
+                    }
+                    else if (question.QuestionTypeId == FILL)
+                    {
+                        <p class="fst-italic">✍ Hãy điền vào chỗ trống thích hợp.</p>
+                    }
+                    else if (question.QuestionTypeId == MATCHING)
+                    {
+                        var leftItems = question.Answers
+                        .Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+                        .GroupBy(a => a.MatchingPairKey)
+                        .Select(g => g.ElementAtOrDefault(0)?.AnswerText ?? "")
+                        .ToList();
+
+                        var rightItems = question.Answers
+                        .Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+                        .GroupBy(a => a.MatchingPairKey)
+                        .Select(g => g.ElementAtOrDefault(1)?.AnswerText ?? "")
+                        .ToList();
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="fw-semibold text-primary">Danh sách bên trái:</p>
+                                <ul>
+                                    @foreach (var item in leftItems)
+                                    {
+                                        <li class="matching-left">@item</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="fw-semibold text-success">Danh sách bên phải:</p>
+                                <ul>
+                                    @foreach (var item in rightItems)
+                                    {
+                                        <li class="matching-right">@item</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-danger">❌ Không xác định loại câu hỏi</div>
+                    }
+                </div>
+            </div>
+        </div>
+        index++;
+    }
 </div>

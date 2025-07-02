@@ -1,0 +1,290 @@
+﻿@model Application.DTOs.Exam.ExamFlashcardDTO
+
+@{
+    ViewData["Title"] = "Flashcard";
+    var questions = Model.Questions;
+    const int MC = 1, FILL = 2, MATCHING = 3; // giả định mã loại câu hỏi
+}
+
+<h2 class="text-center">@Model.Title</h2>
+<div class="text-center mb-3">
+    <a href="@Url.Action("FlashcardView", new { examId = Model.Id, shuffle = true })" class="btn btn-warning">
+        🔀 Trộn thẻ
+    </a>
+</div>
+
+
+<div id="flashcard-container" class="d-flex justify-content-center mt-4">
+    @for (int i = 0; i < questions.Count; i++)
+    {
+        var q = questions[i];
+        
+    // Lấy danh sách các cặp Matching (giữ nguyên trái–phải trong từng cặp)
+        // Tách trái và phải từ các cặp Matching
+        var pairs = q.Answers
+        .Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+        .GroupBy(a => a.MatchingPairKey)
+        .Select(g => new
+        {
+            Left = g.ElementAtOrDefault(0)?.AnswerText ?? "",
+            Right = g.ElementAtOrDefault(1)?.AnswerText ?? ""
+        })
+        .ToList();
+
+        // Trộn trái và phải riêng biệt
+        var leftItems = pairs.Select(p => p.Left).OrderBy(_ => Guid.NewGuid()).ToList();
+        var rightItems = pairs.Select(p => p.Right).OrderBy(_ => Guid.NewGuid()).ToList();
+
+
+        <div class="flashcard-wrapper @(i == 0 ? "active" : "")" id="card-@i">
+            <div class="flashcard-inner">
+                <!-- Mặt trước -->
+                <div class="flashcard-front card p-4">
+                    <h5>Câu @(@i + 1)</h5>
+                    <p>@Html.Raw(q.Content)</p>
+
+                    @if (q.QuestionTypeId == MC)
+                    {
+                        <ul style="list-style-type: none;">
+                            @for (int j = 0; j < q.Answers.Count; j++)
+                            {
+                                var label = ((char)('A' + j)) + ".";
+                                <li><strong>@label</strong> @q.Answers[j].AnswerText</li>
+                            }
+
+                        </ul>
+                        <p class="text-muted">💡 Click vào thẻ để xem đáp án</p>
+                    }
+                    else if (q.QuestionTypeId == FILL)
+                    {
+                        <p><em>Hãy điền vào chỗ trống trước khi lật thẻ.</em></p>
+                    }
+                    else if (q.QuestionTypeId == MATCHING)
+                    {
+                        <p><strong>Nối cặp:</strong></p>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="text-primary">Danh sách Trái:</h6>
+                                <ul style="list-style-type: none;">
+                                    @for (int j = 0; j < leftItems.Count; j++)
+                                    {
+                                        <li><strong>@(j + 1).</strong> @leftItems[j]</li>
+                                    }
+
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="text-success">Danh sách Phải:</h6>
+                                <ul style="list-style-type: none;">
+                                    @for (int j = 0; j < rightItems.Count; j++)
+                                    {
+                                        <li><strong>@(j + 1).</strong> @rightItems[j]</li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <p class="text-muted">🧠 Hãy nối cặp trong đầu rồi lật thẻ để kiểm tra đáp án</p>
+
+
+                    }
+                </div>
+
+                <!-- Mặt sau -->
+                <div class="flashcard-back card p-4">
+                    <h5>Đáp án:</h5>
+
+                    @if (q.QuestionTypeId == MC)
+                    {
+                        <ul style="list-style-type: none;">
+                            @for (int j = 0; j < q.Answers.Count; j++)
+                            {
+                                if (q.Answers[j].IsCorrected)
+                                {
+                                    var label = ((char)('A' + j)) + ".";
+                                    <li class="text-success fw-bold"><strong>@label</strong> @q.Answers[j].AnswerText</li>
+                                }
+                            }
+
+                        </ul>
+                    }
+                    else if (q.QuestionTypeId == FILL)
+                    {
+                        <ul style="list-style-type: none;">
+                            @foreach (var a in q.Answers)
+                            {
+                                <li class="text-success">@a.AnswerText</li>
+                            }
+                        </ul>
+                    }
+                    else if (q.QuestionTypeId == MATCHING)
+                    {
+                        <ul style="list-style-type: none;">
+                            @foreach (var pair in q.Answers
+                           .Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+                           .GroupBy(a => a.MatchingPairKey))
+                            {
+                                var left = pair.FirstOrDefault()?.AnswerText;
+                                var right = pair.Skip(1).FirstOrDefault()?.AnswerText;
+                                <li>@left ↔ @right</li>
+                            }
+                        </ul>
+
+                    }
+
+                    <p class="text-muted">🔁 Click lại để xem câu hỏi</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Nút chuyển câu -->
+<div class="text-center mt-3">
+    <button id="prevBtn" class="btn btn-secondary me-2">⬅️ Câu trước</button>
+    <button id="nextBtn" class="btn btn-primary">Câu tiếp ➡️</button>
+</div>
+@section Scripts {
+    <script>
+        let currentIndex = 0;
+        const flashcards = [...document.querySelectorAll(".flashcard-wrapper")];
+
+        function showCard(index) {
+            flashcards.forEach((el, i) => {
+                el.classList.toggle("active", i === index);
+            });
+        }
+
+        document.getElementById("prevBtn").addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showCard(currentIndex);
+            }
+        });
+
+        document.getElementById("nextBtn").addEventListener("click", () => {
+            if (currentIndex < flashcards.length - 1) {
+                currentIndex++;
+                showCard(currentIndex);
+            }
+        });
+
+        document.querySelectorAll(".flashcard-wrapper").forEach(card => {
+            card.addEventListener("click", () => {
+                card.querySelector(".flashcard-inner").classList.toggle("flipped");
+            });
+        });
+
+        // Hiển thị flashcard đầu tiên khi trang load
+        showCard(currentIndex);
+    </script>
+}
+
+<style>
+  
+    h2 {
+        color: #D13D76;
+        font-weight: bold;
+    }
+
+    .flashcard-wrapper {
+        width: 100%;
+        max-width: 700px;
+        height: 380px;
+        perspective: 1000px;
+        display: none;
+    }
+
+        .flashcard-wrapper.active {
+            display: block;
+        }
+
+    .flashcard-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+    }
+
+        .flashcard-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+    .flashcard-front,
+    .flashcard-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        padding: 1.5rem;
+        padding-right: 10px;
+        color: #121117;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: background 0.6s ease, color 0.3s ease;
+    }
+
+        .flashcard-back li {
+            font-weight: 600;
+        }
+
+    .flashcard-front {
+        background: linear-gradient(135deg, #FAD3E7, #E2F5F1); /* pastel hồng + xanh nhạt */
+        border: 2px solid #FE9FC3;
+        color: #121117;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .flashcard-back {
+        background: linear-gradient(135deg, #FEF5FA, #C4F0E0); /* sáng hơn, nhẹ nhàng hơn */
+        transform: rotateY(180deg);
+        border: 2px solid #B2EDE3;
+        font-size: 1.2rem;
+        color: #121117;
+        font-weight: 600;
+        /* 🔽 Căn giữa nội dung mặt sau */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+
+
+    button, .btn {
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #D13D76;
+        border-color: #D13D76;
+        color: #FFFFFF;
+    }
+
+    .btn-secondary {
+        background-color: #FE9FC3;
+        border-color: #FE9FC3;
+        color: #121117;
+    }
+
+    .btn-warning {
+        background-color: #F99FCF;
+        border-color: #F99FCF;
+        color: #121117;
+    }
+
+    li strong {
+        margin-right: 6px;
+        color: #D13D76;
+    }
+
+</style>
