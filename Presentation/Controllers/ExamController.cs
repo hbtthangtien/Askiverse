@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.Question.GenerateAI;
 using Application.Interface.IServices;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -172,7 +173,13 @@ namespace Presentation.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> SaveGeneratedExam([FromBody]SaveExamDTO finalPayload)
+        {
+            var data = await _examService.SaveExamGeneratedByAi(finalPayload);
+            return Ok(data);
 
+        }
 
 
         [HttpGet]

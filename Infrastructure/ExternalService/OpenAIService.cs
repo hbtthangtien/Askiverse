@@ -98,10 +98,6 @@ namespace Infrastructure.ExternalService
                     throw ex;
                 }
             }
-            if(allQuestions.Count > 0)
-            {
-               await _bankQuestionService.CreateQuestionByAI(allQuestions);
-            }
             return allQuestions;
         }
             private void ValidFormatFile(IFormFile file)

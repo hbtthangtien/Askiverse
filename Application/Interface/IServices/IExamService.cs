@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.Commons;
 using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.Question.GenerateAI;
 using Application.DTOs.ViewModel;
 using Domain.Entities;
 
@@ -35,5 +37,6 @@ namespace Application.Interface.IServices
         Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
         Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
 
+        Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
 	}
 }
