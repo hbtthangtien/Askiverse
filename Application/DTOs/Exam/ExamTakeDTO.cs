@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Question;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Application.DTOs.Exam
         public TimeSpan TotalTime { get; set; }
         public List<QuestionTakeDTO> Questions { get; set; } = new();
         public int ExanScoredId { get; set; }
+        public List<QuestionType> QuestionTypes { get; set; } = new();
     }
 }

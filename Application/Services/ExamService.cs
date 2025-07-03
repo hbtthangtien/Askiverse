@@ -4,6 +4,7 @@ using Application.DTOs.Question;
 using Application.DTOs.Subject;
 using Application.DTOs.ViewModel;
 using Application.Interface.IServices;
+using Application.Paginated;
 using Application.UnitOfWork;
 using AutoMapper;
 using Domain.Entities;
@@ -142,7 +143,7 @@ namespace Application.Services
 				}).ToList()
 			};
 		}
-		public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false)
+		public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false, int pageIndex = 1, int pageSize = 5)
 		{
 			var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
 			if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
@@ -164,6 +165,8 @@ namespace Application.Services
 					 .Include(e => e.FavouritedByUsers)
 					 .Include(e => e.ExamAccesses)
 					 .Include(e => e.ExamScoreds)
+					 .Include(e => e.PremiumUser)
+						.ThenInclude(pu => pu.BasicUser)
 					 .Where(e => e.DeletedAt == DateTime.MinValue || e.DeletedAt == null)
 					 .AsQueryable();
 
@@ -202,8 +205,11 @@ namespace Application.Services
 					examQuery = examQuery.OrderBy(e => e.CreatedAt);
 			}
 
-			var exams = await examQuery.ToListAsync();
-			if (exams.Count == 0)
+			//var exams = await examQuery.ToListAsync();
+
+			var paginated = await PaginatedList<Exam>.CreateAsync(examQuery, pageIndex, pageSize);
+
+			if (!paginated.Any())
 			{
 				if (isFavourite)
 					throw new Exception("Bạn chưa thêm đề nào vào yêu thích!");
@@ -215,7 +221,7 @@ namespace Application.Services
 
 			return new ExamSubjectViewModel
 			{
-				Exams = exams.Select(e => new ExamDTO
+				Exams = paginated.Select(e => new ExamDTO
 				{
 					Id = e.Id,
 					Title = e.Title,
@@ -232,10 +238,18 @@ namespace Application.Services
 					// ⬇️ Thêm dòng này
 
 					CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission),
-					HasBeenScored = e.ExamScoreds.Any()
+					HasBeenScored = e.ExamScoreds.Any(),
+					PremiumUser = e.PremiumUser,
 				}).ToList(),
 
-				Subjects = _mapper.Map<List<SubjectDTO>>(subjects)
+				Subjects = _mapper.Map<List<SubjectDTO>>(subjects),
+				Pagination = new DTOs.Pagination.PaginationDTO
+				{
+					CurrentPage = paginated.PageIndex,
+					TotalPages = paginated.TotalPages,
+					PageSize = paginated.PageSize,
+					TotalCount = paginated.TotalCount,
+				}
 			};
 		}
 
