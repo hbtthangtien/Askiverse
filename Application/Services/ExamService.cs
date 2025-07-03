@@ -122,24 +122,29 @@ namespace Application.Services
 			return await _unitOfWork.Levels.Query().ToListAsync();
 		}
 
-		public async Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId)
-		{
-			var question = await _unitOfWork.BankQuestions.GetSingle(
-				q => q.Id == questionId,
-				include: q => q.Include(x => x.Answers)
-			);
+        public async Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId)
+        {
+            var question = await _unitOfWork.BankQuestions.GetSingle(
+                q => q.Id == questionId,
+                include: q => q
+                    .Include(x => x.Answers)
+                    .Include(x => x.QuestionType) 
+            );
 
-			if (question == null) return null;
+            if (question == null) return null;
 
 			return new QuestionDetailDTO
 			{
 				Id = question.Id,
 				Content = question.Content,
+				QuestionTypeId = question.QuestionTypeId,
+				QuestionTypeName = question.QuestionType?.Name,
 				Answers = question.Answers.Select(a => new AnswerDTO
 				{
 					Id = a.Id,
 					AnswerText = a.AnswerText,
-					IsCorrected = a.IsCorrected
+					IsCorrected = a.IsCorrected,
+					MatchingPairKey = a.MatchingPairKey
 				}).ToList()
 			};
 		}
@@ -258,8 +263,17 @@ namespace Application.Services
 			var exam = await _unitOfWork.Exams.GetExamTakeById(examId, userId);
 			return exam;
 		}
-
-		public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
+        public async Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamForFlashcard(examId, userId);
+            return exam;
+        }
+        public async Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamForFlashcard(examId, userId);
+            return exam;
+        }
+        public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
 		{
 			var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, ExamScoredId);
 			return examScoredId;
@@ -271,56 +285,51 @@ namespace Application.Services
 			return examScored;
 		}
 
-		public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
-		{
-			var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(dto.Id);
+        public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
+        {
+            var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(dto.Id);
+            if (question == null) return false;
 
+            // Chỉ cập nhật các trường cho phép
+            question.Content = dto.Content;
+            question.LevelId = dto.LevelId;
+            question.IsPublic = dto.IsPublic;
 
+            // Xử lý danh sách đáp án
+            foreach (var ans in dto.Answers)
+            {
+                if (ans.Id.HasValue && ans.IsDeleted)
+                {
+                    var toRemove = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
+                    if (toRemove != null)
+                        _unitOfWork.Answers.Remove(toRemove);
+                }
+                else if (ans.Id.HasValue)
+                {
+                    var toUpdate = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
+                    if (toUpdate != null)
+                    {
+                        toUpdate.AnswerText = ans.AnswerText;
+                        toUpdate.IsCorrected = ans.IsCorrected;
+                        toUpdate.MatchingPairKey = ans.MatchingPairKey;
+                    }
+                }
+                else if (!ans.IsDeleted)
+                {
+                    question.Answers.Add(new Answer
+                    {
+                        AnswerText = ans.AnswerText,
+                        IsCorrected = ans.IsCorrected,
+                        MatchingPairKey = ans.MatchingPairKey
+                    });
+                }
+            }
 
-			if (question == null) return false;
+            await _unitOfWork.CompleteAsync();
+            return true;
+        }
 
-			question.Content = dto.Content;
-			question.QuestionTypeId = dto.QuestionTypeId;
-			question.LevelId = dto.LevelId;
-			question.IsPublic = dto.IsPublic;
-
-			// Xử lý đáp án
-			foreach (var ans in dto.Answers)
-			{
-				if (ans.Id.HasValue && ans.IsDeleted)
-				{
-					var toRemove = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
-					if (toRemove != null)
-						_unitOfWork.Answers.Remove(toRemove);
-
-
-				}
-
-				else if (ans.Id.HasValue)
-				{
-					var toUpdate = question.Answers.FirstOrDefault(a => a.Id == ans.Id.Value);
-					if (toUpdate != null)
-					{
-						toUpdate.AnswerText = ans.AnswerText;
-						toUpdate.IsCorrected = ans.IsCorrected;
-						toUpdate.MatchingPairKey = ans.MatchingPairKey;
-					}
-				}
-				else if (!ans.IsDeleted)
-				{
-					question.Answers.Add(new Answer
-					{
-						AnswerText = ans.AnswerText,
-						IsCorrected = ans.IsCorrected,
-						MatchingPairKey = ans.MatchingPairKey
-					});
-				}
-			}
-
-			await _unitOfWork.CompleteAsync();
-			return true;
-		}
-		public async Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id)
+        public async Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id)
 		{
 			var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(id);
 			if (question == null) return null;

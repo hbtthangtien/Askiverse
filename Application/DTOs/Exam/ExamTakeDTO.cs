@@ -17,4 +17,11 @@ namespace Application.DTOs.Exam
         public int ExanScoredId { get; set; }
         public List<QuestionType> QuestionTypes { get; set; } = new();
     }
+    public class ExamFlashcardDTO
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+        public List<QuestionFlashcardDTO> Questions { get; set; } = new();
+       
+    }
 }

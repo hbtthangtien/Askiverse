@@ -121,7 +121,14 @@
                 <option value="50">50 câu</option>
             </select>
             <button type="button" class="btn btn-primary btn-sm ms-2" onclick="chonCauHoiNgauNhien()">Chọn ngẫu nhiên</button>
+			<p id="selectedQuestionCount"
+			   class="mt-2 fw-bold text-primary text-begin"
+			   style="font-size: 1rem;">
+			</p>
+
         </div>
+      
+
         <div id="questionCountWarning" class="text-danger mt-1 mb-3" style="display:none;"></div>
         <div class="mb-3">
         <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
@@ -304,8 +311,15 @@
 
     </script>
     <script>
+                function updateSelectedQuestionCount() {
+            const maxQuestionLimit = parseInt($('#randomCount').val()) || 0;
+            const selectedCount = selectedQuestionIds.length;
+            $('#selectedQuestionCount').text(`Đã chọn ${selectedCount}/${maxQuestionLimit} câu hỏi.`);
+        }
+
                               function renderSelectedQuestionsPage(page) {
             currentModalPage = page;
+                    updateSelectedQuestionCount();
             const start = (page - 1) * pageSize;
             const end = start + pageSize;
             const items = selectedQuestionIds.slice(start, end);
@@ -486,6 +500,7 @@
              } else {
                  selectedQuestionIds = selectedQuestionIds.filter(id => id !== questionId);
              }
+              updateSelectedQuestionCount();
          });
 
          $(document).on('click', '.pagination a', function (e) {

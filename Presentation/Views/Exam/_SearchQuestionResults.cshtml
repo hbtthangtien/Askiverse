@@ -167,7 +167,8 @@
                 <td>
                     <input type="checkbox" class="question-checkbox" value="@q.Id" @(selectedIds.Contains(q.Id) ? "checked" : "") />
                 </td>
-                <td>@q.Content</td>
+                <td>@Html.Raw(q.Content)</td>
+
                 <td>@q.QuestionType?.Name</td>
                 <td>@q.Level?.DisplayName</td>
                 <td>
@@ -191,7 +192,6 @@
 </table>
 
 
-
 <div class="modal fade" id="questionDetailModal" tabindex="-1" aria-labelledby="questionDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -199,16 +199,21 @@
                 <h5 class="modal-title" id="questionDetailModalLabel">Chi tiết câu hỏi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
             </div>
-            <div class="modal-body">
-                <h6 id="questionContent"></h6>
-                <ul id="answerList" class="list-group mt-3"></ul>
-            </div>
+           <div class="modal-body">
+    <p><strong>Nội dung:</strong>
+    <h6 id="questionContent"></h6></p>
+    
+    <p><strong>Loại:</strong> <span id="questionTypeName"></span></p>
+    <ul id="answerList" class="list-group mt-3"></ul>
+</div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <div class="mt-4 d-flex justify-content-center">
@@ -248,13 +253,47 @@
                   success: function(detail){
         console.log(detail);
         if(detail && detail.answers && Array.isArray(detail.answers)) {
-            $('#questionContent').text(detail.content);  // sửa thành content
-            var answersHtml = '';
-            detail.answers.forEach(function(a){
-                var correctMark = a.isCorrected ? '✔️' : '';  // lưu ý isCorrected hay iscorrected, đúng tên trường
-                answersHtml += '<li class="list-group-item">' + a.answerText + ' ' + correctMark + '</li>';
-            });
-            $('#answerList').html(answersHtml);
+
+          $('#questionContent').html(detail.content);  // ✅ hiển thị đúng HTML
+           $('#questionTypeName').text(detail.questionTypeName);
+
+                var answersHtml = '';
+
+    if (detail.questionTypeId === 1) {
+        // Multiple Choice
+        detail.answers.forEach(function(a) {
+            var correctMark = a.isCorrected ? ' <span class="text-success">✔ Đúng</span>' : '';
+            answersHtml += `<li class="list-group-item">${a.answerText}${correctMark}</li>`;
+        });
+    } else if (detail.questionTypeId === 2) {
+        // Fill in the Blank
+        detail.answers.forEach(function(a) {
+            answersHtml += `<li class="list-group-item">Đáp án đúng: <strong>${a.answerText}</strong></li>`;
+        });
+    } else if (detail.questionTypeId === 3) {
+        // Matching
+
+        // Nhóm theo MatchingPairKey
+        const pairs = {};
+        detail.answers.forEach(function(a) {
+            if (!pairs[a.matchingPairKey]) pairs[a.matchingPairKey] = [];
+            pairs[a.matchingPairKey].push(a.answerText);
+        });
+
+        for (const key in pairs) {
+            const pair = pairs[key];
+            const left = pair[0] || '';
+            const right = pair[1] || '';
+            answersHtml += `<li class="list-group-item">
+                <strong>Cặp ${key}:</strong> <span class="text-primary">${left}</span> ↔ <span class="text-warning">${right}</span>
+            </li>`;
+        }
+    } else {
+        answersHtml += '<li class="list-group-item text-danger">Không xác định loại câu hỏi</li>';
+    }
+
+    $('#answerList').html(answersHtml);
+
             var modal = new bootstrap.Modal(document.getElementById('questionDetailModal'));
             modal.show();
         } else {
@@ -268,6 +307,8 @@
             });
         });
     });
+   
+
 </script>
 
 
@@ -306,6 +347,7 @@
             const id = parseInt($(this).val());
             $(this).prop('checked', selectedQuestionIds.includes(id));
         });
+         updateSelectedQuestionCount();
     }
 
 
@@ -343,6 +385,8 @@
             success: function (ids) {
                 selectedQuestionIds = ids;
                 reloadQuestionTable();
+                 updateSelectedQuestionCount();
+
                 $('#questionCountWarning').hide();
             },
             error: function () {

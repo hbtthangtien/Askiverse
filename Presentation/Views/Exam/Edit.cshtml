@@ -75,6 +75,10 @@
     </div>
         <div class="mb-3">
             <button type="button" class="btn btn-info btn-sm mt-2" onclick="showSelectedQuestionsModal()">Xem câu hỏi đã chọn</button>
+            <p id="selectedQuestionCount"
+               class="mt-2 fw-bold text-primary text-begin"
+               style="font-size: 1rem;">
+            </p>
         </div>
     <input type="hidden" id="SelectedQuestionIds" name="SelectedQuestionIds" />
         <input type="hidden" asp-for="TotalTime" id="totalTimeHidden" />
@@ -157,6 +161,7 @@
 
     <div class="mt-4">
         <input type="submit" value="Lưu thay đổi" class="btn btn-success" />
+            <a href="/Exam/AllExams" class="btn btn-secondary">Hủy </a>
     </div>
     <input type="hidden" name="TotalQuestion" id="totalQuestionHidden" />
 </form>
@@ -187,8 +192,14 @@
         let selectedQuestionsData = [];
     </script>
     <script>
+          function updateSelectedQuestionCount() {
+            const maxQuestionLimit = parseInt($('#randomCount').val()) || 0;
+            const selectedCount = selectedQuestionIds.length;
+            $('#selectedQuestionCount').text(`Đã chọn ${selectedCount}/${maxQuestionLimit} câu hỏi.`);
+        }
              function renderSelectedQuestionsPage(page) {
             currentModalPage = page;
+             updateSelectedQuestionCount();
             const start = (page - 1) * pageSize;
             const end = start + pageSize;
             const items = selectedQuestionIds.slice(start, end);
@@ -255,6 +266,7 @@
                     $('#customSourceText').val(selectedValue).hide();
                 }
             });
+              updateSelectedQuestionCount();
         });
     </script>
         <script>
@@ -313,6 +325,7 @@
                  } else {
                      selectedQuestionIds = selectedQuestionIds.filter(id => id !== questionId);
                  }
+                   updateSelectedQuestionCount();
              });
 
              $(document).on('click', '.pagination a', function (e) {
@@ -350,13 +363,15 @@
                             $('.question-checkbox[value="' + id + '"]').prop('checked', true);
                         });
 
-
+                        updateSelectedQuestionCount();
                         if (typeof showPage === "function") {
                             showPage(1);
                         }
                     }
                 });
             });
+            
+
 
 
             // Hàm load dữ liệu theo trang
