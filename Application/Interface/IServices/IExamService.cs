@@ -20,7 +20,7 @@ namespace Application.Interface.IServices
         Task<List<QuestionType>> GetAllQuestionTypesAsync();
         Task<List<Level>> GetAllLevelsAsync();
         Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId);
-        public Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false);
+        public Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questiomCount, string? sortOrder, string? keyword, bool isFavourite, int pageIndex, int pageSize);
         public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
         public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
         Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto);
@@ -36,6 +36,7 @@ namespace Application.Interface.IServices
         Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
         Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
         Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
+
 
         Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
 

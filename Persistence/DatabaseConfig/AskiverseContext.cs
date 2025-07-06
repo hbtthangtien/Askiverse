@@ -104,7 +104,7 @@ namespace Persistence.DatabaseConfig
 
 				entity.HasMany(e => e.ForumComments)
 					  .WithOne(e => e.User)
-					  .HasForeignKey(e => e.CommentById);
+					  .HasForeignKey(e => e.Id);
 
 				entity.HasMany(e => e.ForumVoteds)
 					  .WithOne(e => e.VotedBy)
@@ -195,7 +195,7 @@ namespace Persistence.DatabaseConfig
 			{
 				entity.HasOne(e => e.Post)
 					  .WithMany(e => e.Comments)
-					  .HasForeignKey(e => e.CommentById)
+					  .HasForeignKey(e => e.Id)
 					  .OnDelete(DeleteBehavior.NoAction);
 
 				entity.HasOne(e => e.User)
