@@ -18,12 +18,15 @@ namespace Application.Services
     {
         private readonly IBankQuestionService _bankQuestionService;
         private readonly IUserContextService _userContext;
+        private readonly IExportFileDocxService _exportFileDocxService;
         public ExamService(IUnitOfWork unitOfWork, IMapper mapper,
             IBankQuestionService bankQuestionService,
-            IUserContextService userContext) : base(unitOfWork, mapper)
+            IUserContextService userContext,
+            IExportFileDocxService exportFileDocxService) : base(unitOfWork, mapper)
         {
             _bankQuestionService = bankQuestionService;
             _userContext = userContext;
+            _exportFileDocxService = exportFileDocxService;
         }
         public async Task<int> CreateExamAsync(CreateExamDTO dto)
         {
@@ -600,6 +603,15 @@ namespace Application.Services
                 throw;
             }
             return IdResponse.SuccessResponse(exam.Id, "Tạo thành công");
+        }
+
+        public async Task<byte[]> ExportExamToDocxFile(long examId)
+        {
+            var questions = await _unitOfWork.QuestionExams
+                .GetInstance()
+                .Where(e => e.ExamId == examId)
+                .ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }

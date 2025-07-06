@@ -243,12 +243,12 @@
                         modal.show();
                     } else {
                         document.getElementById('ErrorMsg').style.display = 'block';
-                        document.getElementById('ErrorMsg').innerText = data.message;
+                        document.getElementById('ErrorMsg').innerText = resp.message + "\n" + (resp.detail || "");
                     }
                 })
                 .catch(error => {
                     document.getElementById('loading-overlay').style.display = 'none';
-                    alert("Lỗi khi gửi yêu cầu: " + error.message);
+                    alert("Lỗi khi gửi yêu cầu: " + error);
                 });
         });
         function renderQuestionPreview(questions) {

@@ -81,22 +81,23 @@ namespace Infrastructure.ExternalService
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var responseJsonPrompt1 = await client.PostAsync("", content);
                 var responseBody1 = await responseJsonPrompt1.Content.ReadAsStringAsync();
+
                 var describeObject = JsonConvert.DeserializeObject<GptResponse>(responseBody1);
-                // Deserialize
-                try
+
+                if (describeObject?.Choices == null || !describeObject.Choices.Any() || describeObject.Choices[0]?.Message?.Content == null)
                 {
-                    var questionJson = describeObject.Choices[0].Message.Content;
-                    string cleanJson = Regex.Replace(questionJson, "^```json\\n|\\n```$", "", RegexOptions.Multiline);
-                    var questions = JsonConvert.DeserializeObject<List<QuestionCreate>>(cleanJson);
-                    if (questions != null) allQuestions.AddRange(questions);
-                    
+                    throw new Exception($"OpenAI trả về response lỗi: {responseBody1}");
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Lỗi parse JSON chunk {i}: {ex.Message}");
-                    // Có thể retry hoặc log lại prompt để kiểm tra
-                    throw ex;
-                }
+
+                var questionJson = describeObject.Choices[0].Message.Content;
+
+                string cleanJson = Regex.Replace(questionJson, "^```json\\n|\\n```$", "", RegexOptions.Multiline);
+                var questions = JsonConvert.DeserializeObject<List<QuestionCreate>>(cleanJson);
+                if (questions != null)
+                    allQuestions.AddRange(questions);
+                else
+                    throw new Exception("Parse JSON questions thất bại");
+
             }
             return allQuestions;
         }
