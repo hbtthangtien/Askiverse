@@ -53,24 +53,13 @@ namespace Persistence.Repositories
                 .Where(e => e.Id == examId)
                 .Include(e => e.QuestionExam)
                     .ThenInclude(qe => qe.BankQuestion)
-                        .ThenInclude(bq => bq.Answers)
+                        .ThenInclude(bq => bq.QuestionType)
+				.Include(e => e.QuestionExam)
+		            .ThenInclude(qe => qe.BankQuestion)
+			            .ThenInclude(bq => bq.Answers)
                 .FirstOrDefaultAsync();
 
             if (exam == null) return null;
-
-            //var now = DateTime.Now;
-
-            //var examScored = new ExamScored
-            //{
-            //    UserId = userId,
-            //    StartTime = now,
-            //    SubmitedTime = null,
-            //    Score = 0,
-            //    ExamId = examId
-            //};
-
-            //_context.ExamssScoreds.Add(examScored);
-            //await _context.SaveChangesAsync();
 
             return new ExamTakeDTO
             {
@@ -87,7 +76,11 @@ namespace Persistence.Repositories
                     }).ToList() ?? new()
                 }).ToList(),
                 TotalTime = exam.TotalTime,
-                //ExanScoredId = examScored.Id
+                QuestionTypes = exam.QuestionExam.Select(qe => qe.BankQuestion?.QuestionType)
+                .Where(qt => qt != null)
+                .DistinctBy(qt => qt!.Id)
+                .Select(qt => qt!)
+                .ToList()
             };
         }
         public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)

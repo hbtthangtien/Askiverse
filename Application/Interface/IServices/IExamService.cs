@@ -12,6 +12,7 @@ using Domain.Entities;
 
 namespace Application.Interface.IServices
 {
+<<<<<<< HEAD
     public interface IExamService
     {
         Task<int> CreateExamAsync(CreateExamDTO dto);
@@ -36,6 +37,30 @@ namespace Application.Interface.IServices
         Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
         Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
         Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
+=======
+	public interface IExamService
+	{
+		Task<int> CreateExamAsync(CreateExamDTO dto);
+		Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId);
+		Task<List<Subject>> GetAllSubjectsAsync();
+		Task<List<QuestionType>> GetAllQuestionTypesAsync();
+		Task<List<Level>> GetAllLevelsAsync();
+		Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId);
+		public Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questiomCount, string? sortOrder, string? keyword, bool isFavourite, int pageIndex, int pageSize);
+		public Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId);
+		public Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId);
+		Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto);
+		Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id);
+		Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId);
+		Task<List<ExamDTO>> GetExamsByPremiumUserIdAsync(string premiumUserId);
+		Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string grantedByPremiumUserId);
+		Task<bool> DeleteExamAsync(int examId, string userId);
+		Task CreateBankQuestionAsync(CreateBankQuestionDTO dto);
+		Task<EditExamDTO> GetExamForEditAsync(int examId);
+		Task<bool> UpdateExamAsync(EditExamDTO dto);
+		public Task<int> CreateExamScoredAsync(int examId, string userId);
+		Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
+>>>>>>> 0847aa4 (edit ui, display author name, add pagination)
 
         Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
 

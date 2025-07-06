@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Exam;
+using Application.DTOs.Pagination;
 using Application.DTOs.Subject;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Application.DTOs.ViewModel
     {
         public List<ExamDTO> Exams { get; set; }
         public List<SubjectDTO> Subjects { get; set; }
-    }
+		public PaginationDTO Pagination { get; set; }
+	}
 }
