@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Question.GenerateAI;
 using Application.Interface.IExternalService;
+using Application.Interface.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +10,21 @@ namespace Presentation.Controllers
     public class GenerateExamController : Controller
     {
         private readonly IOpenAIService _openAIService;
-        public GenerateExamController(IOpenAIService openAIService)
+        private readonly IExamService _examService;
+        public GenerateExamController(IOpenAIService openAIService,
+                IExamService examService)
         {
             _openAIService = openAIService;
+            _examService = examService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var subjects = await _examService.GetAllSubjectsAsync();
+            var questionTypes = await _examService.GetAllQuestionTypesAsync();
+            var levels = await _examService.GetAllLevelsAsync();
+            ViewBag.Subjects = subjects;
+            ViewBag.QuestionTypes = questionTypes;
+            ViewBag.Levels = levels;
             return View(new RequestGenerateAI { });
         }
 
@@ -41,9 +51,12 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception and return an error message
-                // Log exception here (using your logging framework)
-                return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
+                return Json(new
+                {
+                    success = false,
+                    message = $"An error occurred: {ex.Message}",
+                    detail = ex.ToString() // <-- thêm dòng này để xem full exception
+                });
             }
         }
     }

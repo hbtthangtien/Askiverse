@@ -1,8 +1,11 @@
+using Application.DTOs.Commons;
 using Application.DTOs.Exam;
 using Application.DTOs.Favourite;
 using Application.DTOs.Question;
+using Application.DTOs.Question.GenerateAI;
 using Application.DTOs.Subject;
 using Application.DTOs.ViewModel;
+using Application.Interface.IExternalService;
 using Application.Interface.IServices;
 using Application.Paginated;
 using Application.UnitOfWork;
@@ -14,8 +17,17 @@ namespace Application.Services
 {
     public class ExamService : Service, IExamService
     {
-        public ExamService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        private readonly IBankQuestionService _bankQuestionService;
+        private readonly IUserContextService _userContext;
+        private readonly IExportFileDocxService _exportFileDocxService;
+        public ExamService(IUnitOfWork unitOfWork, IMapper mapper,
+            IBankQuestionService bankQuestionService,
+            IUserContextService userContext,
+            IExportFileDocxService exportFileDocxService) : base(unitOfWork, mapper)
         {
+            _bankQuestionService = bankQuestionService;
+            _userContext = userContext;
+            _exportFileDocxService = exportFileDocxService;
         }
         public async Task<int> CreateExamAsync(CreateExamDTO dto)
         {
@@ -37,15 +49,15 @@ namespace Application.Services
                 DeletedAt = DateTime.MinValue
             };
 
-			await _unitOfWork.Exams.AddAsync(exam);
-			await _unitOfWork.CommitAsync();
+            await _unitOfWork.Exams.AddAsync(exam);
+            await _unitOfWork.CommitAsync();
 
-			foreach (var questionId in dto.SelectedQuestionIds)
-			{
-				var question = await _unitOfWork.BankQuestions.GetSingle(q => q.Id == questionId);
+            foreach (var questionId in dto.SelectedQuestionIds)
+            {
+                var question = await _unitOfWork.BankQuestions.GetSingle(q => q.Id == questionId);
 
-				if (question == null)
-					throw new ArgumentException($"Câu hỏi với ID {questionId} không tồn tại.");
+                if (question == null)
+                    throw new ArgumentException($"Câu hỏi với ID {questionId} không tồn tại.");
 
                 var questionExam = new QuestionExam
                 {
@@ -72,7 +84,7 @@ namespace Application.Services
             }
             return exam.Id;
         }
-       
+
 
         public async Task<List<BankQuestion>> SearchBankQuestionsAsync(SearchBankQuestionFilter filter, string? PremiumUserId)
         {
@@ -83,21 +95,21 @@ namespace Application.Services
      .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
      .OrderByDescending(q => q.CreatedAt);
 
-			if (filter.QuestionTypeId.HasValue)
-				query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId.Value);
+            if (filter.QuestionTypeId.HasValue)
+                query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId.Value);
 
-			if (filter.LevelId.HasValue)
-				query = query.Where(q => q.LevelId == filter.LevelId.Value);
+            if (filter.LevelId.HasValue)
+                query = query.Where(q => q.LevelId == filter.LevelId.Value);
 
             // ✅ Lọc công khai / riêng tư / cả hai
             if (filter.IsPublic.HasValue)
                 query = query.Where(q => q.IsPublic == filter.IsPublic.Value);
 
-			if (!string.IsNullOrWhiteSpace(filter.Keyword))
-			{
-				var keywordLower = filter.Keyword.ToLower();
-				query = query.Where(q => q.Content != null && q.Content.ToLower().Contains(keywordLower));
-			}
+            if (!string.IsNullOrWhiteSpace(filter.Keyword))
+            {
+                var keywordLower = filter.Keyword.ToLower();
+                query = query.Where(q => q.Content != null && q.Content.ToLower().Contains(keywordLower));
+            }
 
 
             return await query.ToListAsync();
@@ -107,20 +119,20 @@ namespace Application.Services
 
 
 
-		public async Task<List<Subject>> GetAllSubjectsAsync()
-		{
-			var subjects = await _unitOfWork.Subjects.GetAllAsync();
-			return subjects.ToList();
-		}
-		public async Task<List<QuestionType>> GetAllQuestionTypesAsync()
-		{
-			return await _unitOfWork.QuestionTypes.Query().ToListAsync();
-		}
+        public async Task<List<Subject>> GetAllSubjectsAsync()
+        {
+            var subjects = await _unitOfWork.Subjects.GetAllAsync();
+            return subjects.ToList();
+        }
+        public async Task<List<QuestionType>> GetAllQuestionTypesAsync()
+        {
+            return await _unitOfWork.QuestionTypes.Query().ToListAsync();
+        }
 
-		public async Task<List<Level>> GetAllLevelsAsync()
-		{
-			return await _unitOfWork.Levels.Query().ToListAsync();
-		}
+        public async Task<List<Level>> GetAllLevelsAsync()
+        {
+            return await _unitOfWork.Levels.Query().ToListAsync();
+        }
 
         public async Task<QuestionDetailDTO?> GetQuestionDetailAsync(int questionId)
         {
@@ -128,7 +140,7 @@ namespace Application.Services
                 q => q.Id == questionId,
                 include: q => q
                     .Include(x => x.Answers)
-                    .Include(x => x.QuestionType) 
+                    .Include(x => x.QuestionType)
             );
 
             if (question == null) return null;
@@ -153,17 +165,16 @@ namespace Application.Services
 			var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
 			if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
 
-			int? subjectIdInt = null;
-			if (!string.IsNullOrEmpty(subjectId) && int.TryParse(subjectId, out int parsedInt))
-			{
-				subjectIdInt = parsedInt;
-			}
-
-			int? questionCountInt = null;
-			if(!string.IsNullOrEmpty(questionCount) && int.TryParse(questionCount, out int parsedQuestionCount))
-			{
-				questionCountInt = parsedQuestionCount;
-			}
+            int? subjectIdInt = null;
+            if (!string.IsNullOrEmpty(subjectId) && int.TryParse(subjectId, out int parsedInt))
+            {
+                subjectIdInt = parsedInt;
+            }
+            int? questionCountInt = null;
+            if (!string.IsNullOrEmpty(questionCount) && int.TryParse(questionCount, out int parsedQuestionCount))
+            {
+                questionCountInt = parsedQuestionCount;
+            }
 
 			var examQuery = _unitOfWork.Exams
 					 .Query()
@@ -175,40 +186,40 @@ namespace Application.Services
 					 .Where(e => e.DeletedAt == DateTime.MinValue || e.DeletedAt == null)
 					 .AsQueryable();
 
-			if (isFavourite)
-			{
-				examQuery = examQuery.Where(e => e.FavouritedByUsers.Any(f => f.UserId == userId));
-			}
-			else
-			{
-				if (isPublic == true)
-					examQuery = examQuery.Where(e => e.IsPublic == true || e.ExamAccesses.Any(a => a.userId == userId)); 
-				else if (isPublic == false)
-					examQuery = examQuery.Where(e => e.PremiumUserId == userId);
-			}
+            if (isFavourite)
+            {
+                examQuery = examQuery.Where(e => e.FavouritedByUsers.Any(f => f.UserId == userId));
+            }
+            else
+            {
+                if (isPublic == true)
+                    examQuery = examQuery.Where(e => e.IsPublic == true || e.ExamAccesses.Any(a => a.userId == userId));
+                else if (isPublic == false)
+                    examQuery = examQuery.Where(e => e.PremiumUserId == userId);
+            }
 
-			if (subjectIdInt.HasValue)
-			{
-				examQuery = examQuery.Where(e => e.SubjectId == subjectIdInt);
-			}
+            if (subjectIdInt.HasValue)
+            {
+                examQuery = examQuery.Where(e => e.SubjectId == subjectIdInt);
+            }
 
-			if(questionCountInt.HasValue)
-			{
-				examQuery = examQuery.Where(e => e.TotalQuestion == questionCountInt);
-			}
+            if (questionCountInt.HasValue)
+            {
+                examQuery = examQuery.Where(e => e.TotalQuestion == questionCountInt);
+            }
 
-			if (!string.IsNullOrEmpty(keyword))
-			{
-				examQuery = examQuery.Where(e => e.Title.Contains(keyword));
-			}
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                examQuery = examQuery.Where(e => e.Title.Contains(keyword));
+            }
 
-			if (!string.IsNullOrEmpty(sortOrder))
-			{
-				if (sortOrder == "newest")
-					examQuery = examQuery.OrderByDescending(e => e.CreatedAt);
-				else
-					examQuery = examQuery.OrderBy(e => e.CreatedAt);
-			}
+            if (!string.IsNullOrEmpty(sortOrder))
+            {
+                if (sortOrder == "newest")
+                    examQuery = examQuery.OrderByDescending(e => e.CreatedAt);
+                else
+                    examQuery = examQuery.OrderBy(e => e.CreatedAt);
+            }
 
 			//var exams = await examQuery.ToListAsync();
 
@@ -258,11 +269,11 @@ namespace Application.Services
 			};
 		}
 
-		public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
-		{
-			var exam = await _unitOfWork.Exams.GetExamTakeById(examId, userId);
-			return exam;
-		}
+        public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamTakeById(examId, userId);
+            return exam;
+        }
         public async Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId)
         {
             var exam = await _unitOfWork.Exams.GetExamForFlashcard(examId, userId);
@@ -274,16 +285,16 @@ namespace Application.Services
             return exam;
         }
         public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
-		{
-			var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, ExamScoredId);
-			return examScoredId;
-		}
+        {
+            var examScoredId = await _unitOfWork.Exams.SubmitExamAsync(dto, ExamScoredId);
+            return examScoredId;
+        }
 
-		public async Task<int> CreateExamScoredAsync(int examId, string userId)
-		{
-			var examScored = await _unitOfWork.Exams.CreateExamScored(examId, userId);
-			return examScored;
-		}
+        public async Task<int> CreateExamScoredAsync(int examId, string userId)
+        {
+            var examScored = await _unitOfWork.Exams.CreateExamScored(examId, userId);
+            return examScored;
+        }
 
         public async Task<bool> UpdateBankQuestionAsync(UpdateBankQuestionDTO dto)
         {
@@ -330,29 +341,29 @@ namespace Application.Services
         }
 
         public async Task<UpdateBankQuestionDTO?> GetBankQuestionByIdAsync(int id)
-		{
-			var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(id);
-			if (question == null) return null;
+        {
+            var question = await _unitOfWork.BankQuestions.GetByIdWithAnswersAsync(id);
+            if (question == null) return null;
 
-			return new UpdateBankQuestionDTO
-			{
-				Id = question.Id,
-				Content = question.Content,
-				QuestionTypeId = question.QuestionTypeId,
-				LevelId = question.LevelId,
-				IsPublic = question.IsPublic,
-				Answers = question.Answers.Select(a => new UpdateAnswerDTO
-				{
-					Id = a.Id,
-					AnswerText = a.AnswerText,
-					IsCorrected = a.IsCorrected,
-					MatchingPairKey = a.MatchingPairKey
-				}).ToList(),
+            return new UpdateBankQuestionDTO
+            {
+                Id = question.Id,
+                Content = question.Content,
+                QuestionTypeId = question.QuestionTypeId,
+                LevelId = question.LevelId,
+                IsPublic = question.IsPublic,
+                Answers = question.Answers.Select(a => new UpdateAnswerDTO
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText,
+                    IsCorrected = a.IsCorrected,
+                    MatchingPairKey = a.MatchingPairKey
+                }).ToList(),
 
-				QuestionTypeName = question.QuestionType?.Name,
-				LevelName = question.Level?.DisplayName
-			};
-		}
+                QuestionTypeName = question.QuestionType?.Name,
+                LevelName = question.Level?.DisplayName
+            };
+        }
 
         public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? premiumUserId)
         {
@@ -365,78 +376,78 @@ namespace Application.Services
             var premiumUser = await _unitOfWork.PremiumUsers
                 .FindAsync(p => p.UserId == premiumUserId && p.IsActive);
 
-			if (premiumUser == null)
-				return new List<ExamDTO>(); // Không phải premium → không có đề
+            if (premiumUser == null)
+                return new List<ExamDTO>(); // Không phải premium → không có đề
 
-			var exams = await _unitOfWork.Exams.GetByPremiumUserIdAsync(premiumUserId);
+            var exams = await _unitOfWork.Exams.GetByPremiumUserIdAsync(premiumUserId);
 
-			return exams.Select(e => new ExamDTO
-			{
-				Id = e.Id,
-				Title = e.Title
-			}).ToList();
-		}
+            return exams.Select(e => new ExamDTO
+            {
+                Id = e.Id,
+                Title = e.Title
+            }).ToList();
+        }
 
 
-		public async Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string premiumUserId)
-		{
-			var user = await _unitOfWork.BasicUsers.GetByEmailAsync(dto.Email);
-			if (user == null)
-				return ResultDTO.Fail("Email không tồn tại.");
+        public async Task<ResultDTO> GrantExamAccessAsync(GrantExamAccessDTO dto, string premiumUserId)
+        {
+            var user = await _unitOfWork.BasicUsers.GetByEmailAsync(dto.Email);
+            if (user == null)
+                return ResultDTO.Fail("Email không tồn tại.");
 
-			var exam = await _unitOfWork.Exams.GetByIdAsync(dto.ExamId);
-			if (exam == null || exam.PremiumUserId != premiumUserId)
-				return ResultDTO.Fail("Không tìm thấy đề thi hoặc không có quyền.");
+            var exam = await _unitOfWork.Exams.GetByIdAsync(dto.ExamId);
+            if (exam == null || exam.PremiumUserId != premiumUserId)
+                return ResultDTO.Fail("Không tìm thấy đề thi hoặc không có quyền.");
 
-			var access = new ExamAccess
-			{
-				userId = user.Id,
-				ExamId = exam.Id,
-				AccessDate = DateTime.UtcNow,
-				Permission = dto.Permission
-			};
+            var access = new ExamAccess
+            {
+                userId = user.Id,
+                ExamId = exam.Id,
+                AccessDate = DateTime.UtcNow,
+                Permission = dto.Permission
+            };
 
-			await _unitOfWork.ExamAccess.AddAsync(access);
-			await _unitOfWork.CompleteAsync();
+            await _unitOfWork.ExamAccess.AddAsync(access);
+            await _unitOfWork.CompleteAsync();
 
-			return ResultDTO.Success("Cấp quyền thành công.");
-		}
-		public async Task<bool> DeleteExamAsync(int examId, string userId)
-		{
-			var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
-			if (exam == null) return false;
+            return ResultDTO.Success("Cấp quyền thành công.");
+        }
+        public async Task<bool> DeleteExamAsync(int examId, string userId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
+            if (exam == null) return false;
 
-			bool isOwner = exam.PremiumUserId == userId;
+            bool isOwner = exam.PremiumUserId == userId;
 
-			if (isOwner)
-			{
-				// 🛑 Không cho xóa nếu đã có kết quả làm bài
-				if (exam.ExamScoreds.Any())
-					throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
+            if (isOwner)
+            {
+                // 🛑 Không cho xóa nếu đã có kết quả làm bài
+                if (exam.ExamScoreds.Any())
+                    throw new InvalidOperationException("Không thể xóa vì đề đã được làm.");
 
-				// ✅ Soft delete: gán DeletedAt
-				exam.DeletedAt = DateTime.UtcNow;
+                // ✅ Soft delete: gán DeletedAt
+                exam.DeletedAt = DateTime.UtcNow;
 
-				foreach (var access in exam.ExamAccesses)
-					access.DeletedAt = DateTime.UtcNow;
+                foreach (var access in exam.ExamAccesses)
+                    access.DeletedAt = DateTime.UtcNow;
 
-				foreach (var q in exam.QuestionExam)
-					q.DeletedAt = DateTime.UtcNow;
-			}
-			else
-			{
-				// ✅ Là người được chia sẻ (và có quyền xóa)
-				var access = exam.ExamAccesses.FirstOrDefault(ea => ea.userId == userId && ea.Permission);
-				if (access == null)
-					throw new InvalidOperationException("Bạn không có quyền xóa đề này.");
+                foreach (var q in exam.QuestionExam)
+                    q.DeletedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                // ✅ Là người được chia sẻ (và có quyền xóa)
+                var access = exam.ExamAccesses.FirstOrDefault(ea => ea.userId == userId && ea.Permission);
+                if (access == null)
+                    throw new InvalidOperationException("Bạn không có quyền xóa đề này.");
 
-				// ❌ Xóa cứng access (chỉ với người được chia sẻ)
-				_unitOfWork.ExamAccess.Remove(access);
-			}
+                // ❌ Xóa cứng access (chỉ với người được chia sẻ)
+                _unitOfWork.ExamAccess.Remove(access);
+            }
 
-			await _unitOfWork.CompleteAsync();
-			return true;
-		}
+            await _unitOfWork.CompleteAsync();
+            return true;
+        }
 
 
 
@@ -462,15 +473,15 @@ namespace Application.Services
                 }).ToList()
             };
 
-			await _unitOfWork.BankQuestions.AddAsync(question);
-			await _unitOfWork.CompleteAsync();
-		}
-		public async Task<EditExamDTO> GetExamForEditAsync(int examId)
-		{
-			var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
-			if (exam == null) throw new Exception("Không tìm thấy đề thi.");
+            await _unitOfWork.BankQuestions.AddAsync(question);
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task<EditExamDTO> GetExamForEditAsync(int examId)
+        {
+            var exam = await _unitOfWork.Exams.GetExamWithRelationsAsync(examId);
+            if (exam == null) throw new Exception("Không tìm thấy đề thi.");
 
-			var selectedQuestionIds = exam.QuestionExam.Select(q => q.BankQuestionId).ToList();
+            var selectedQuestionIds = exam.QuestionExam.Select(q => q.BankQuestionId).ToList();
 
             return new EditExamDTO
             {
@@ -492,14 +503,14 @@ namespace Application.Services
             if (exam == null)
                 throw new Exception("Không tìm thấy đề thi.");
 
-           
+
             if (exam.ExamScoreds.Any())
                 throw new InvalidOperationException("Không thể chỉnh sửa vì đề đã được làm.");
 
             if (dto.SelectedQuestionIds.Count != dto.TotalQuestion)
                 throw new ArgumentException("Số câu hỏi đã chọn không khớp với tổng số câu hỏi.");
 
-           
+
             _unitOfWork.ExamAccess.RemoveRange(exam.ExamAccesses);
             _unitOfWork.QuestionExams.RemoveRange(exam.QuestionExam);
 
@@ -531,8 +542,8 @@ namespace Application.Services
                     IsPublic = true
                 };
 
-				await _unitOfWork.QuestionExams.AddAsync(questionExam);
-			}
+                await _unitOfWork.QuestionExams.AddAsync(questionExam);
+            }
 
             try
             {
@@ -558,7 +569,63 @@ namespace Application.Services
             }).ToList();
         }
 
+        public async Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto)
+        {
+            var userId = _userContext.GetUserId();
+            var questions = await _bankQuestionService.CreateQuestionByAI(dto.Questions);
+            var exam = new Exam
+            {
+                Title = dto.ExamData.Title,
+                SourceText = dto.ExamData.SourceText,
+                Description = dto.ExamData.Description,
+                SubjectId = dto.ExamData.SubjectId,
+                PremiumUserId = userId,
+                IsPublic = dto.ExamData.IsPublic,
+                TotalTime = TimeSpan.FromMinutes(dto.ExamData.TotalTime),
+                TotalQuestion = dto.ExamData.TotalQuestion,
+                CreatedAt = DateTime.Now
+            };
+            await _unitOfWork.Exams.AddAsync(exam);
+            await _unitOfWork.CommitAsync();
 
-	}
+            foreach (var question in questions)
+            {
 
+                var questionExam = new QuestionExam
+                {
+                    ExamId = exam.Id,
+                    BankQuestionId = question.Id,
+                    QuestionTypeId = question.QuestionTypeId,
+                    LevelId = question.LevelId,
+                    CreatedAt = DateTime.UtcNow,
+                    IsPublic = true,
+                    UpdatedAt = DateTime.UtcNow,
+                    DeletedAt = DateTime.MinValue
+                };
+                await _unitOfWork.QuestionExams.AddAsync(questionExam);
+            }
+
+            try
+            {
+                await _unitOfWork.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Lỗi khi CommitAsync (thêm QuestionExams): " + ex.ToString());
+                throw;
+            }
+            return IdResponse.SuccessResponse(exam.Id, "Tạo thành công");
+        }
+
+        public async Task<byte[]> ExportExamToDocxFile(long examId)
+        {
+            var questions = await _unitOfWork.QuestionExams
+                .GetInstance()
+                .Where(e => e.ExamId == examId)
+                .ToListAsync();
+            throw new NotImplementedException();
+        }
+    }
 }
+
+

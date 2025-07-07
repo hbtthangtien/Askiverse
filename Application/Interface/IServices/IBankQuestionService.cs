@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Question.GenerateAI;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.Interface.IServices
 {
     public interface IBankQuestionService
     {
-        public Task CreateQuestionByAI(List<QuestionCreate> list);
+        public Task<List<BankQuestion>> CreateQuestionByAI(List<QuestionCreate> list);
     }
 }

@@ -73,7 +73,6 @@
 		.favourite-btn:hover .star {
 			color: gold; /* Đổi ngôi sao thành vàng khi hover */
 		}
-
 </style>
 
 @if (ViewData["Error"] != null)
@@ -104,7 +103,7 @@ else
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">📝 Tiêu đề</th>
-				<th scope="col">📖 Miêu tả</th>
+				<th scope="col" >📖 Miêu tả</th>
 				<th scope="col">📄 Văn bản nguồn</th>
 				<th scope="col">❓ Tổng câu hỏi</th>
 				<th scope="col">📅 Ngày tạo</th>
@@ -208,11 +207,7 @@ else
 										</span>
 									</div>
 								}
-
-
-
-
-
+                
 								@{
 									var isFavourite = exam.FavouritedByUsers.Any(f => f.UserId == userId);
 								}

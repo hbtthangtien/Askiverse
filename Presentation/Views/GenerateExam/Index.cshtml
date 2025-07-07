@@ -1,4 +1,5 @@
 ﻿@using Application.DTOs.Question.GenerateAI
+@using Domain.Entities
 @model RequestGenerateAI
 
 @{
@@ -128,20 +129,38 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nguồn tài liệu</label>
-                        <input type="text" name="SourceText" class="form-control" required>
+                        <select name="SourceText" id="SourceTextSelect" class="form-select" required>
+                            <option value="">-- Chọn nguồn tài liệu --</option>
+                            <option value="SGK">SGK</option>
+                            <option value="Tài liệu nâng cao">Tài liệu nâng cao</option>
+                            <option value="Giáo án">Giáo án</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="customSourceWrapper" style="display: none;">
+                        <input type="text" name="SourceText" class="form-control" placeholder="Nhập nguồn tài liệu khác...">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Môn học</label>
-                        <select name="SubjectId" class="form-select" required>
-                            <option value="">-- Chọn môn --</option>
-                            <option value="1">Toán</option>
-                            <option value="2">Lý</option>
-                            <!-- Thêm các môn khác -->
+                        <select id="SubjectId" name="SubjectId" class="form-select">
+                            <option value="">-- Chọn môn học --</option>
+                            @foreach (var subject in ViewBag.Subjects as List<Subject>)
+                            {
+                                <option value="@subject.Id">@subject.Name</option>
+                            }
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Thời gian làm bài (phút)</label>
-                        <input type="number" name="TotalTime" class="form-control" value="45">
+                        <label for="totalTime" class="form-label">Thời gian làm bài (phút)</label>
+                        <select id="totalTime" name="TotalTime" class="form-select">
+                            <option value="" selected disabled>-- Chọn thời gian --</option>
+                            <option value="15">15 phút</option>
+                            <option value="30">30 phút</option>
+                            <option value="45">45 phút</option>
+                            <option value="50">50 phút</option>
+                            <option value="60">60 phút</option>
+                            <option value="90">90 phút</option>
+                        </select>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" name="IsPublic" class="form-check-input" id="isPublicCheck">
@@ -224,12 +243,12 @@
                         modal.show();
                     } else {
                         document.getElementById('ErrorMsg').style.display = 'block';
-                        document.getElementById('ErrorMsg').innerText = data.message;
+                        document.getElementById('ErrorMsg').innerText = resp.message + "\n" + (resp.detail || "");
                     }
                 })
                 .catch(error => {
                     document.getElementById('loading-overlay').style.display = 'none';
-                    alert("Lỗi khi gửi yêu cầu: " + error.message);
+                    alert("Lỗi khi gửi yêu cầu: " + error);
                 });
         });
         function renderQuestionPreview(questions) {
@@ -309,6 +328,21 @@
             });
             modal.show();
         })
+        document.getElementById("SourceTextSelect").addEventListener("change", function () {
+            const selected = this.value;
+            const customWrapper = document.getElementById("customSourceWrapper");
+            const customInput = customWrapper.querySelector("input");
+
+            if (selected === "Khác") {
+                customWrapper.style.display = "block";
+                customInput.required = true;
+            } else {
+                customWrapper.style.display = "none";
+                customInput.required = false;
+                customInput.value = selected; // gán luôn giá trị chọn vào input ẩn
+            }
+        });
+
         document.getElementById("examInfoForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
@@ -323,8 +357,8 @@
             examData.SelectedQuestionIds = []; // nếu có ID sẵn, hoặc có thể bỏ nếu chưa cần
 
             const finalPayload = {
-                exam: examData,
-                questions: window.generatedQuestions
+                ExamData: examData,
+                Questions: window.generatedQuestions
             };
             console.log(finalPayload);
             fetch('/Exam/SaveGeneratedExam', {
