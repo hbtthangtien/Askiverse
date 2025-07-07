@@ -21,12 +21,17 @@
 	.favourite-btn,
 	.button-style {
 		position: relative; /* Để có thể sử dụng vị trí tuyệt đối cho văn bản */
-		padding: 0; /* Loại bỏ khoảng cách padding mặc định */
-		font-size: 24px; /* Kích thước biểu tượng */
+		font-size: 20px; /* Kích thước biểu tượng */
 		width: auto; /* Căn chỉnh theo nội dung */
-		border: none; /* Bỏ viền mặc định của button */
 		background-color: transparent; /* Bỏ nền mặc định của button */
 		cursor: pointer;
+		background-color: #f9f9f9;
+		border-radius: 6px;
+		gap: 5px;
+		margin: 5px;
+		padding: 8px 12px;
+		border: 1px solid #ccc;
+		display: inline-flex;
 	}
 
 		/* .exam-start-btn .button-text, */
@@ -53,7 +58,6 @@
 		}
 
 		.favourite-btn .star {
-			font-size: 30px; /* Kích thước ngôi sao */
 			color: gray; /* Màu mặc định của ngôi sao là xám */
 			transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
 		}
@@ -94,7 +98,7 @@ else
 	}
 
 
-	<table class="table table-hover align-middle shadow-sm">
+	<table class="table table-hover border border-dark align-middle shadow-sm">
 		<thead class="text-center text-white" style="background-color: #D13D76">
 			<tr>
 				<th scope="col">#</th>
@@ -134,108 +138,95 @@ else
 							</button>
 						</form>
 						<a asp-controller="ExamScored" asp-action="AllExamScoredByUserIdByExamId" asp-route-userId="@userId" asp-route-examId="@exam.Id"
-						   class="text-decoration-none button-style ">
+						   class="text-decoration-none button-style">
 							📊
 							<span class="button-text button-container">Xem kết quả</span>
 						</a>
-						<!-- ✅ Thêm nút xem trước tại đây -->
-						<div>
-							<a asp-controller="Exam" asp-action="PreviewExam" asp-route-examId="@exam.Id"
-							   class="text-decoration-none button-style">
-								👁️
-								<span class="button-text button-container">Xem trước</span>
-							</a>
-						</div>
-						@if (exam.CanEdit)
-						{
-							<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
-								@Html.AntiForgeryToken()
-								<input type="hidden" name="examId" value="@exam.Id" />
 
-								<button type="submit" class="button-style ">
-									🗑️
-									<span class="button-text button-container">Xóa đề</span>
-								</button>
-								@if (!exam.HasBeenScored)
+						<div class="dropdown-container">
+							<button class="toggle-options button-style" onclick="toggleOptions(this)" style="min-width: 50px; justify-content: center;">
+								⋮
+								<span class="button-text button-container">Tùy chọn</span>
+							</button>
+
+							<div class="options-menu" style="display: none;">
+
+								<!-- ✅ Thêm nút xem trước tại đây -->
+								<div>
+									<a asp-controller="Exam" asp-action="PreviewExam" asp-route-examId="@exam.Id"
+									   class="text-decoration-none button-style">
+										👁️
+										<span class="button-text button-container">Xem trước</span>
+									</a>
+								</div>
+								<div>
+									<a asp-controller="Exam" asp-action="FlashcardView" asp-route-examId="@exam.Id"
+									   class="text-decoration-none button-style">
+										🧠
+										<span class="button-text button-container">Học bằng Flashcard</span>
+									</a>
+								</div>
+								@if (exam.CanEdit)
 								{
-									<div>
-										<a asp-controller="Exam" asp-action="Edit" asp-route-examId="@exam.Id"
-										   class="text-decoration-none button-style">
-											✏️
-											<span class="button-text button-container">Sửa đề</span>
-										</a>
-									</div>
-								}
+									<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
+										@Html.AntiForgeryToken()
+										<input type="hidden" name="examId" value="@exam.Id" />
 
+										@if (!exam.HasBeenScored)
+										{
+											<div>
+												<a asp-controller="Exam" asp-action="Edit" asp-route-examId="@exam.Id"
+												   class="text-decoration-none button-style">
+													✏️
+													<span class="button-text button-container">Sửa đề</span>
+												</a>
+											</div>
+										}
+
+										else
+										{
+											<div>
+												<span class="button-style ">
+													🔒
+													<span class="button-text button-container">Đề đã được làm</span>
+												</span>
+											</div>
+										}
+										<button type="submit" class="button-style">
+											🗑️
+											<span class="button-text button-container">Xóa đề</span>
+										</button>
+									</form>
+								}
 								else
 								{
 									<div>
-										<span class="button-style ">
+										<span class="button-style">
 											🔒
-											<span class="button-text button-container">Đề đã được làm</span>
+											<span class="button-text button-container">Chỉ được xem</span>
 										</span>
 									</div>
 								}
-							</form>
-						}
-						else
-						{
-							<div>
-								<span class="button-style">
-									🔒
-									<span class="button-text button-container">Chỉ được xem</span>
-								</span>
+                
+								@{
+									var isFavourite = exam.FavouritedByUsers.Any(f => f.UserId == userId);
+								}
+								<button class="favourite-btn"
+										data-exam-id="@exam.Id"
+										data-user-id="@userId"
+										data-is-fav="@isFavourite.ToString().ToLower()">
+									<span class="star">⭐</span>
+									<span class="button-text button-container">@(isFavourite ? "Bỏ yêu thích" : "Thêm vào yêu thích")</span>
+								</button>
+								@if (ViewData["ErrorFavourite"] != null)
+								{
+									<p>@ViewData["ErrorFavourite"]</p>
+								}
 							</div>
-						}
-
-						@{
-							var isFavourite = exam.FavouritedByUsers.Any(f => f.UserId == userId);
-						}
-						<button class="favourite-btn "
-								data-exam-id="@exam.Id"
-								data-user-id="@userId"
-								data-is-fav="@isFavourite.ToString().ToLower()">
-							<span class="star">⭐</span>
-							<span class="button-text button-container">@(isFavourite ? "Bỏ yêu thích" : "Thêm vào yêu thích")</span>
-						</button>
-						@if (ViewData["ErrorFavourite"] != null)
-						{
-							<p>@ViewData["ErrorFavourite"]</p>
-						}
-						@if (exam.CanEdit)
-						{
-							<form asp-controller="Exam" asp-action="DeleteExam" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa đề này?');">
-								@Html.AntiForgeryToken()
-								<input type="hidden" name="examId" value="@exam.Id" />
-
-							
-								@if (!exam.HasBeenScored)
-								{
-									<a asp-controller="Exam" asp-action="Edit" asp-route-examId="@exam.Id"
-									   class="btn btn-outline-warning w-100 mt-2">
-										✏️ Sửa đề
-									</a>
-								}
-								
-								else
-								{
-									<span class="badge bg-secondary w-100 mt-2">🔒 Đề đã được làm</span>
-								}
-								<button type="submit" class="btn btn-danger w-100 mt-2">🗑️ Xóa đề</button>
-							</form>
-						}
-						else
-						{
-							<span class="badge bg-secondary w-100 mt-2">🔒 Chỉ được xem</span>
-						}
-
-
-					
-
-
-					
+						</div>
 					</td>
 				</tr>
+
 				stt++;
 
 			}
@@ -271,3 +262,9 @@ else
 	}
 }
 
+<script>
+	function toggleOptions(button) {
+		const menu = button.nextElementSibling;
+		menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+	}
+</script>
