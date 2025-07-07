@@ -1,0 +1,313 @@
+﻿@model Application.Paginated.PaginatedList<Domain.Entities.ForumPost>
+@using Domain.Enums
+
+@{
+    ViewData["Title"] = "Bài viết của tôi";
+
+    var selectedSubjectId = Context.Request.Query["SubjectId"].ToString();
+    var selectedQuestionTypeId = Context.Request.Query["QuestionTypeId"].ToString();
+    var selectedSortOrder = Context.Request.Query["SortOrder"].ToString();
+    var keyword = Context.Request.Query["Keyword"].ToString();
+    var pageSize = Context.Request.Query["PageSize"].ToString();
+    var selectedForumStatus = Context.Request.Query["ForumStatus"].ToString();
+
+}
+
+<style>
+    .custom-modal .modal-content {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        border: none;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        animation: fadeInZoom 0.35s ease-in-out;
+    }
+
+   
+
+    .custom-modal .modal-icon {
+        font-size: 64px;
+        color: #28a745;
+        margin-bottom: 16px;
+    }
+
+    .custom-modal .modal-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 10px;
+    }
+
+    .custom-modal .modal-body-text {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 24px;
+    }
+
+    .custom-modal .btn-ok {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 8px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+        .custom-modal .btn-ok:hover {
+            background-color: #218838;
+        }
+
+    .modal-backdrop.show {
+        opacity: 0.7;
+    }
+    body {
+        background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+        color: #121117;
+    }
+
+    .forum-title {
+        color: #D13D76;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .forum-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .btn-primary-custom {
+        background-color: #FE9FC3;
+        color: #121117;
+        border: none;
+        border-radius: 10px;
+    }
+
+        .btn-primary-custom:hover {
+            background-color: #D13D76;
+            color: white;
+        }
+
+    .filter-box {
+        background-color: #ffffffcc;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+
+    .pagination-wrapper {
+        margin-top: 30px;
+        padding-top: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    .total-posts {
+        font-style: italic;
+        color: #6c757d;
+    }
+
+    .btn-warning {
+        background-color: #FAD3E7;
+        color: #121117;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #F99FCF;
+        color: #121117;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .btn-outline-secondary {
+        border-radius: 10px;
+    }
+
+    .modal-content {
+        background: linear-gradient(90deg, #FAD3E7, #F0F8F6, #C4F0E0);
+        border-radius: 12px;
+        color: #121117;
+    }
+
+    .modal-title {
+        font-weight: bold;
+        color: #D13D76;
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+    <div class="mb-4">
+        <h2 class="forum-title">📌 Bài viết của tôi</h2>
+        <div class="mt-2">
+            <a asp-action="Create" class="btn btn-primary-custom">✍️ Tạo bài viết</a>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+
+        <div class="modal fade custom-modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-icon">✅</div>
+                    <div class="modal-title" id="successModalLabel">Thành công!</div>
+                    <div class="modal-body-text">
+                        @TempData["SuccessMessage"]
+                    </div>
+                    <button type="button" class="btn btn-ok" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="filter-box">
+        <form method="get" class="row g-3 align-items-end">
+            <input type="hidden" name="PageIndex" value="1" />
+            <input type="hidden" name="PageSize" value="2" />
+
+            <div class="col-md-4">
+                <label class="form-label">Môn học</label>
+                <select name="SubjectId" class="form-select">
+                    <option value="">-- Tất cả môn học --</option>
+                    @foreach (var subject in (IEnumerable<SelectListItem>)ViewBag.Subjects)
+                    {
+                        <option value="@subject.Value" selected="@(subject.Value == selectedSubjectId)">
+                            @subject.Text
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Trạng thái</label>
+                <select name="ForumStatus" class="form-select">
+                    <option value="">-- Tất cả trạng thái --</option>
+                    @foreach (var status in Enum.GetValues(typeof(ForumStatus)).Cast<ForumStatus>())
+                    {
+                        var value = ((int)status).ToString();
+                        var text = status == ForumStatus.Approved ? "✅ Hiện" : "🚫 Ẩn";
+                        <option value="@value" selected="@(value == selectedForumStatus)">
+                            @text
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Sắp xếp</label>
+                <select name="SortOrder" class="form-select">
+                    <option value="newest" selected="@(selectedSortOrder == "newest")">Mới nhất</option>
+                    <option value="oldest" selected="@(selectedSortOrder == "oldest")">Cũ nhất</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" name="Keyword" class="form-control" placeholder="Tìm tiêu đề, mô tả hoặc nội dung" value="@keyword" />
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-primary-custom">Lọc</button>
+            </div>
+
+            <div class="col-md-2 d-grid">
+                <a href="@Url.Action("Index", "Forum")" class="btn btn-outline-secondary">🔄 Tạo lại</a>
+            </div>
+        </form>
+    </div>
+    <p class="total-posts">Tổng @Model.TotalCount bài viết</p>
+    @foreach (var post in Model)
+    {
+        <div class="card forum-card mb-3">
+            <div class="card-body">
+                <h5 class="mb-2">
+                    <a asp-action="Detail" asp-route-id="@post.Id" class="text-decoration-none text-dark">
+                        @post.Title
+                    </a>
+                </h5>
+
+                <p class="text-muted">@post.HeadLine</p>
+                <small class="text-secondary">
+                    🕓 @post.CreatedAt.ToString("dd/MM/yyyy") -
+                    🧠 @post.Subject?.Name
+                </small>
+                <small class="text-secondary">
+                    🕓 @post.CreatedAt.ToString("dd/MM/yyyy") -
+                    🧠 @post.Subject?.Name -
+                    @if (post.ForumStatus == ForumStatus.Approved)
+                    {
+                        <span class="text-success">✅ Hiện</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">🚫 Ẩn</span>
+                    }
+                </small>
+
+               
+                <div class="mt-2 text-muted">
+                    💬 @post.Comments.Count() bình luận |
+                    <i class="bi bi-hand-thumbs-up-fill text-primary"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Up) |
+                    <i class="bi bi-hand-thumbs-down-fill text-danger"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Down)
+                </div>
+                <div class="d-flex gap-2 mt-2">
+                    <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-warning">✏️ Sửa</a>
+
+                    <form asp-action="Delete" asp-route-id="@post.Id" method="post" onsubmit="return confirm('Bạn có chắc muốn xóa bài viết này không?')">
+                        <button type="submit" class="btn btn-sm btn-danger">🗑️ Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+    
+
+    <div class="pagination-wrapper d-flex justify-content-center align-items-center gap-3 mt-4">
+        @if (Model.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-PageIndex="@(Model.PageIndex - 1)"
+               asp-route-PageSize="@pageSize"
+               asp-route-SubjectId="@selectedSubjectId"
+               asp-route-QuestionTypeId="@selectedQuestionTypeId"
+               asp-route-SortOrder="@selectedSortOrder"
+               asp-route-Keyword="@keyword"
+               asp-route-ForumStatus="@selectedForumStatus"
+               class="btn btn-outline-secondary">← Trước</a>
+
+        }
+
+        <span class="text-dark fw-semibold">Trang @Model.PageIndex / @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-PageIndex="@(Model.PageIndex + 1)"
+               asp-route-PageSize="@pageSize"
+               asp-route-SubjectId="@selectedSubjectId"
+               asp-route-QuestionTypeId="@selectedQuestionTypeId"
+               asp-route-SortOrder="@selectedSortOrder"
+               asp-route-Keyword="@keyword"
+               asp-route-ForumStatus="@selectedForumStatus"
+               class="btn btn-outline-secondary">Tiếp →</a>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage && successMessage !== '') {
+                var modal = new bootstrap.Modal(document.getElementById('successModal'));
+                modal.show();
+            }
+        });
+    </script>
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">

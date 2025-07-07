@@ -1,0 +1,194 @@
+﻿@model Application.DTOs.Forum.UpdateForumPostDTO
+@using Domain.Enums
+
+@{
+    ViewData["Title"] = "Chỉnh sửa bài viết";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="modal fade custom-modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-icon">✅</div>
+                <div class="modal-title">Oh Yeah!</div>
+                <div class="modal-text">
+                    @TempData["SuccessMessage"] 
+                </div>
+                <button type="button" class="btn btn-ok" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    /* Nền modal */
+    .custom-modal .modal-content {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        border: none;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        animation: scaleFadeIn 0.4s ease;
+    }
+
+   
+
+    /* Icon thành công */
+    .custom-modal .modal-icon {
+        font-size: 64px;
+        color: #2e7d32;
+        margin-bottom: 10px;
+    }
+
+    .custom-modal .modal-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2e7d32;
+        margin-bottom: 10px;
+    }
+
+    .custom-modal .modal-text {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .custom-modal .btn-ok {
+        background-color: #2e7d32;
+        color: white;
+        padding: 8px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+        .custom-modal .btn-ok:hover {
+            background-color: #1b5e20;
+        }
+
+    .modal-backdrop.show {
+        opacity: 0.7;
+    }
+    body {
+        background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+        color: #121117;
+    }
+
+    .forum-title {
+        color: #D13D76;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #121117;
+    }
+
+    .form-control, .form-select {
+        border-radius: 12px;
+    }
+
+    .btn-save {
+        background-color: #FE9FC3;
+        color: #121117;
+        border: none;
+        border-radius: 10px;
+    }
+
+        .btn-save:hover {
+            background-color: #D13D76;
+            color: white;
+        }
+
+    .btn-back {
+        background-color: #B2EDE3;
+        color: #121117;
+        border-radius: 10px;
+        border: none;
+    }
+
+        .btn-back:hover {
+            background-color: #A2D9CF;
+        }
+</style>
+
+<div class="container mt-4 mb-5">
+    <h2 class="forum-title">✏️ Chỉnh sửa bài viết</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HeadLine" class="form-label"></label>
+            <input asp-for="HeadLine" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label"></label>
+            <textarea asp-for="Content" class="form-control" id="Content"></textarea>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.ImgUrl))
+        {
+            <div class="mb-3">
+                <label class="form-label">Ảnh hiện tại:</label><br />
+                <img src="@Model.ImgUrl" class="img-fluid rounded" style="max-height: 200px;" />
+            </div>
+        }
+
+        <div class="mb-3">
+            <label asp-for="ImgUrl" class="form-label">URL ảnh</label>
+            <input asp-for="ImgUrl" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SubjectId" class="form-label"></label>
+            <select asp-for="SubjectId" class="form-select" asp-items="@(ViewBag.Subjects ?? new List<SelectListItem>())"></select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ForumStatus" class="form-label">Trạng thái</label>
+            <select asp-for="ForumStatus" class="form-select">
+                <option value="1" selected="@(Model.ForumStatus == ForumStatus.Approved)">Hiển thị</option>
+                <option value="2" selected="@(Model.ForumStatus == ForumStatus.Hidden)">Ẩn bài viết</option>
+            </select>
+        </div>
+
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-save">💾 Lưu thay đổi</button>
+            <a asp-action="MyPosts" class="btn btn-back">⬅️ Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successModalElement = document.getElementById('successModal');
+            if (successModalElement) {
+                var modal = new bootstrap.Modal(successModalElement);
+                modal.show();
+
+                successModalElement.addEventListener('hidden.bs.modal', function () {
+                    window.location.href = '@Url.Action("MyPosts", "Forum")';
+                });
+            }
+        });
+    </script>
+}

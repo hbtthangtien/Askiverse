@@ -9,5 +9,6 @@ namespace Application.Interface.IRepository
 {
     public interface IForumVotedRepository : IRepository<ForumVoted>
     {
+        Task<ForumVoted?> GetByUserAndPostAsync(string userId, int postId);
     }
 }

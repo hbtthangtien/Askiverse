@@ -319,7 +319,6 @@
 
         const questionTypeId = $('#QuestionTypeId').val();
         const levelId = $('#LevelId').val();
-        const isPublic = $('#IsPublic').val(); 
         const keyword = $('#Keyword').val();
 
         $.ajax({
@@ -327,7 +326,7 @@
             data: {
                 questionTypeId,
                 levelId,
-                isPublic,
+               
                 keyword,
                 page
             },
