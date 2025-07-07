@@ -36,8 +36,8 @@ namespace Application.Interface.IServices
 		Task<List<SimpleQuestionDto>> GetQuestionsByIdsAsync(List<int> questionIds);
 		Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
 		Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
-    Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
+		Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
 
-    Task<byte[]> ExportExamToDocxFile(long examId);
+		Task<byte[]> ExportExamToDocxFile(long examId);
   }
 }
