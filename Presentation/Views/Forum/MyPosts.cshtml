@@ -10,7 +10,7 @@
     var keyword = Context.Request.Query["Keyword"].ToString();
     var pageSize = Context.Request.Query["PageSize"].ToString();
     var selectedForumStatus = Context.Request.Query["ForumStatus"].ToString();
-
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
 }
 
 <style>
@@ -248,12 +248,12 @@
                     }
                 </small>
 
-               
                 <div class="mt-2 text-muted">
-                    💬 @post.Comments.Count() bình luận |
+                    💬 @post.Comments.Count(c => c.DeletedAt == null) bình luận |
                     <i class="bi bi-hand-thumbs-up-fill text-primary"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Up) |
                     <i class="bi bi-hand-thumbs-down-fill text-danger"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Down)
                 </div>
+
                 <div class="d-flex gap-2 mt-2">
                     <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-warning">✏️ Sửa</a>
 
@@ -265,12 +265,12 @@
         </div>
     }
 
-    
+
 
     <div class="pagination-wrapper d-flex justify-content-center align-items-center gap-3 mt-4">
         @if (Model.HasPreviousPage)
         {
-            <a asp-action="Index"
+            <a asp-action="@currentAction"
                asp-route-PageIndex="@(Model.PageIndex - 1)"
                asp-route-PageSize="@pageSize"
                asp-route-SubjectId="@selectedSubjectId"
@@ -279,14 +279,13 @@
                asp-route-Keyword="@keyword"
                asp-route-ForumStatus="@selectedForumStatus"
                class="btn btn-outline-secondary">← Trước</a>
-
         }
 
         <span class="text-dark fw-semibold">Trang @Model.PageIndex / @Model.TotalPages</span>
 
         @if (Model.HasNextPage)
         {
-            <a asp-action="Index"
+            <a asp-action="@currentAction"
                asp-route-PageIndex="@(Model.PageIndex + 1)"
                asp-route-PageSize="@pageSize"
                asp-route-SubjectId="@selectedSubjectId"
@@ -297,6 +296,7 @@
                class="btn btn-outline-secondary">Tiếp →</a>
         }
     </div>
+
 </div>
 
 @section Scripts {

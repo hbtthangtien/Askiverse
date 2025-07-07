@@ -17,11 +17,13 @@ namespace Application.Services
     public class ForumPostService : Service, IForumPostService
     {
         private readonly IForumPostRepository _forumPostRepo;
+        private readonly IForumCommentRepository _forumCommentRepository;
 
         public ForumPostService(IUnitOfWork unitOfWork, IMapper mapper)
             : base(unitOfWork, mapper)
         {
             _forumPostRepo = unitOfWork.ForumPosts;
+            _forumCommentRepository = unitOfWork.ForumComments;
         }
 
         public Task<PaginatedList<ForumPost>> GetFilteredForumPostsAsync(ForumPostFilterDTO filter)
@@ -55,7 +57,7 @@ namespace Application.Services
             {
                 PostId = postId,
                 UserId = userId,
-                CommentById = int.Parse(userId),
+               
                 Content = content,
                 CommentedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
@@ -110,6 +112,35 @@ namespace Application.Services
         public async Task SoftDeletePostAsync(int id)
         {
             await _forumPostRepo.SoftDeleteAsync(id);
+        }
+        public async Task EditCommentAsync(int commentId, string userId, string newContent)
+        {
+            var comment = await _unitOfWork.ForumComments.GetByIdAsync(commentId);
+
+            if (comment == null || comment.DeletedAt != null)
+                throw new Exception("Bình luận không tồn tại hoặc đã bị xoá.");
+
+            if (comment.UserId != userId)
+                throw new Exception("Bạn không có quyền sửa bình luận này.");
+
+            comment.Content = newContent;
+            comment.UpdatedAt = DateTime.Now;
+
+            await _unitOfWork.CompleteAsync();
+        }
+        public async Task DeleteCommentAsync(int commentId, string userId)
+        {
+            var comment = await _unitOfWork.ForumComments.GetByIdAsync(commentId);
+
+            if (comment == null || comment.DeletedAt != null)
+                throw new Exception("Bình luận không tồn tại hoặc đã bị xoá.");
+
+            if (comment.UserId != userId)
+                throw new Exception("Bạn không có quyền xoá bình luận này.");
+
+           await _forumCommentRepository.SoftDeleteAsync(comment.Id); 
+
+            await _unitOfWork.CompleteAsync();
         }
 
     }

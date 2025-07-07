@@ -255,6 +255,25 @@ namespace Presentation.Controllers
             TempData["SuccessMessage"] = "🗑️ Bài viết đã được xóa!";
             return RedirectToAction("MyPosts");
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditComment(int commentId, string content, int postId)
+        {
+            var userId = GetCurrentUserId();
+            await _forumService.EditCommentAsync(commentId, userId, content);
+            return RedirectToAction("Detail", new { id = postId });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteComment(int commentId, int postId)
+        {
+            var userId = GetCurrentUserId();
+            await _forumService.DeleteCommentAsync(commentId, userId);
+            return RedirectToAction("Detail", new { id = postId });
+
+        }
+
 
     }
 

@@ -21,6 +21,8 @@ namespace Application.Interface.IServices
         Task<ForumPost?> GetPostByIdAsync(int id);
         Task UpdatePostAsync(ForumPost post);
         Task SoftDeletePostAsync(int id);
+        Task EditCommentAsync(int commentId, string userId, string newContent);
+        Task DeleteCommentAsync(int commentId, string userId);
     }
 
 }

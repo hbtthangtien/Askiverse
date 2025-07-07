@@ -153,10 +153,11 @@
                     🧠 @post.Subject?.Name
                 </small>
                 <div class="mt-2 text-muted">
-                    💬 @post.Comments.Count() bình luận |
+                    💬 @post.Comments.Count(c => c.DeletedAt == null) bình luận |
                     <i class="bi bi-hand-thumbs-up-fill text-primary"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Up) |
                     <i class="bi bi-hand-thumbs-down-fill text-danger"></i> @post.Voteds.Count(v => v.VotedType == VoteType.Down)
                 </div>
+
 
             </div>
         </div>
