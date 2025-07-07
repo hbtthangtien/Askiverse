@@ -59,7 +59,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("BankQuestionId");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("Domain.Entities.BankQuestion", b =>
@@ -106,7 +106,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("QuestionTypeId");
 
-                    b.ToTable("BankQuestions", (string)null);
+                    b.ToTable("BankQuestions");
                 });
 
             modelBuilder.Entity("Domain.Entities.BasicUser", b =>
@@ -232,7 +232,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Examss", (string)null);
+                    b.ToTable("Examss");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamAccess", b =>
@@ -274,7 +274,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("ExamAccessess", (string)null);
+                    b.ToTable("ExamAccessess");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamAnswered", b =>
@@ -317,7 +317,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("QuestionExamId");
 
-                    b.ToTable("ExamAnswereds", (string)null);
+                    b.ToTable("ExamAnswereds");
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamScored", b =>
@@ -362,7 +362,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ExamssScoreds", (string)null);
+                    b.ToTable("ExamssScoreds");
                 });
 
             modelBuilder.Entity("Domain.Entities.Favourite", b =>
@@ -380,7 +380,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("Favourites", (string)null);
+                    b.ToTable("Favourites");
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumComment", b =>
@@ -390,9 +390,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CommentById")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CommentedAt")
                         .HasColumnType("datetime2");
@@ -421,11 +418,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CommentById");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("ForumComments", (string)null);
+                    b.ToTable("ForumComments");
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumPost", b =>
@@ -491,7 +486,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("ForumPosts", (string)null);
+                    b.ToTable("ForumPosts");
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumVoted", b =>
@@ -533,7 +528,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("VotedById");
 
-                    b.ToTable("ForumVoteds", (string)null);
+                    b.ToTable("ForumVoteds");
                 });
 
             modelBuilder.Entity("Domain.Entities.HistoryPurchase", b =>
@@ -569,7 +564,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("HistoryPurchases", (string)null);
+                    b.ToTable("HistoryPurchases");
                 });
 
             modelBuilder.Entity("Domain.Entities.Level", b =>
@@ -598,25 +593,25 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels", (string)null);
+                    b.ToTable("Levels");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8419),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8216),
                             DisplayName = "Easy"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8422),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8218),
                             DisplayName = "Medium"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8424),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8220),
                             DisplayName = "Hard"
                         });
                 });
@@ -663,7 +658,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Domain.Entities.PackageOfUser", b =>
@@ -708,7 +703,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PackageOfUsers", (string)null);
+                    b.ToTable("PackageOfUsers");
                 });
 
             modelBuilder.Entity("Domain.Entities.PremiumUser", b =>
@@ -721,7 +716,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("PremiumUsers", (string)null);
+                    b.ToTable("PremiumUsers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -746,7 +741,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Profiles", (string)null);
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionExam", b =>
@@ -793,7 +788,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("QuestionExams", (string)null);
+                    b.ToTable("QuestionExams");
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -822,25 +817,25 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionTypes", (string)null);
+                    b.ToTable("QuestionTypes");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8453),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8261),
                             Name = "Multiple Choice"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8455),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8263),
                             Name = "Fill in the Blank"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8456),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8264),
                             Name = "Matching"
                         });
                 });
@@ -879,13 +874,13 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubcriptionPackages", (string)null);
+                    b.ToTable("SubcriptionPackages");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8571),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8381),
                             Description = "Truy cập nội dung cơ bản",
                             Duration = 14,
                             Name = "Gói cơ bản",
@@ -894,7 +889,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8575),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8385),
                             Description = "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên",
                             Duration = 30,
                             Name = "Gói nâng cao",
@@ -903,7 +898,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8576),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8386),
                             Description = "Truy cập không giới hạn trong 1 năm",
                             Duration = 365,
                             Name = "Gói hàng năm",
@@ -937,79 +932,79 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8495),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8308),
                             Name = "Toán học"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8506),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8310),
                             Name = "Ngữ văn"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8507),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8312),
                             Name = "Tiếng Anh"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8509),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8314),
                             Name = "Vật lý"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8511),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8315),
                             Name = "Hóa học"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8514),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8320),
                             Name = "Sinh học"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8515),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8321),
                             Name = "Lịch sử"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8517),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8323),
                             Name = "Địa lý"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8519),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8324),
                             Name = "Giáo dục công dân"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8521),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8327),
                             Name = "Tin học"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8523),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8329),
                             Name = "Công nghệ"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2025, 7, 3, 10, 28, 2, 601, DateTimeKind.Local).AddTicks(8524),
+                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8330),
                             Name = "Thể dục"
                         });
                 });
@@ -1050,7 +1045,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("UserAccessExams", (string)null);
+                    b.ToTable("UserAccessExams");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1345,7 +1340,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.ForumPost", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("CommentById")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

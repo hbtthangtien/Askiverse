@@ -193,6 +193,9 @@ namespace Persistence.DatabaseConfig
 			});
 			builder.Entity<ForumComment>(entity =>
 			{
+				entity.Property(e => e.Id)
+					.UseIdentityColumn(1);
+
 				entity.HasOne(e => e.Post)
 					  .WithMany(e => e.Comments)
 					  .HasForeignKey(e => e.Id)
