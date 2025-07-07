@@ -12,88 +12,156 @@
 	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
+<style>
+	.dropzone {
+		display: inline-block;
+		width: 250px;
+		height: 40px;
+		border: 2px dashed #aaa;
+		border-radius: 6px;
+		margin: 0 5px;
+		vertical-align: middle;
+		text-align: center;
+		line-height: 40px;
+		background-color: #f9f9f9;
+	}
+
+	.drag-item {
+		display: inline-block;
+		padding: 8px 12px;
+		background-color: #D13D76;
+		color: white;
+		border-radius: 6px;
+		margin: 5px;
+		cursor: grab;
+	}
+
+		.drag-item.dragging {
+			opacity: 0.5;
+		}
+
+	.dropzone.over {
+		border-color: #007bff;
+		background-color: #e8f0ff;
+	}
+</style>
+
 @section Styles {
 	<link rel="stylesheet" href="~/css/exam-take.css" />
 }
+<div style="min-height: 60vh;">
+	<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm" data-userid="@userId"
+		  data-totalseconds="@Model.TotalTime.TotalSeconds">
+		@Html.AntiForgeryToken()
+		<input type="hidden" name="ExamId" value="@Model.Id" />
+		<input type="hidden" name="ExamScoredId" value="@Model.ExanScoredId" />
 
-<form method="post" asp-controller="Exam" asp-action="SubmitExam" id="examForm" data-userid="@userId"
-	  data-totalseconds="@Model.TotalTime.TotalSeconds">
-	@Html.AntiForgeryToken()
-	<input type="hidden" name="ExamId" value="@Model.Id" />
-	<input type="hidden" name="ExamScoredId" value="@Model.ExanScoredId" />
+		<div class="container mt-4">
+			<h2 class="text-center mb-4">@Model.Title</h2>
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="col-md-3 py-3 rounded rounded-5" style="background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-	<div class="container mt-4">
-		<h2 class="text-center mb-4">@Model.Title</h2>
-		<div class="row">
-			<!-- Sidebar -->
-			<div class="col-md-3 py-3 rounded rounded-5" style="background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+					<div id="countdown" class="text-center">
+						⏳ Thời gian còn lại: <span id="time">--:--</span>
+					</div>
 
-				<div id="countdown" class="text-center">
-					⏳ Thời gian còn lại: <span id="time">--:--</span>
+					<div class="nav-grid">
+						@for (int i = 0; i < Model.Questions.Count; i++)
+						{
+							<button type="button" class="btn question-nav-btn"
+									data-question-index="@i">
+								@(@i + 1)
+							</button>
+						}
+					</div>
 				</div>
 
-				<div class="nav-grid">
+				<!-- Main content -->
+				<div class="col-md-9 rounded rounded-5" style="padding-left: 60px;  display: flex; justify-content: center; align-items: center;">
 					@for (int i = 0; i < Model.Questions.Count; i++)
 					{
-						<button type="button" class="btn question-nav-btn"
-								data-question-index="@i">
-							@(@i + 1)
-						</button>
-					}
-				</div>
-			</div>
-
-			<!-- Main content -->
-			<div class="col-md-9 rounded rounded-5" style="padding-left: 60px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center;">
-				@for (int i = 0; i < Model.Questions.Count; i++)
-				{
-					var question = Model.Questions[i];
-					<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
-						<p><strong>@("Câu " + (i + 1) + ": ")</strong>@Html.Raw(question.Content)</p>
-
-						@foreach (var answer in question.Answers)
-						{
-							<div class="form-check">
-								<label class="form-check-label d-block w-100" for="answer_@answer.Id" style="cursor: pointer">
-								<input class="form-check-input" type="radio"
-									   name="Answers[@i].AnswerId"
-									   id="answer_@answer.Id"
-									   value="@answer.Id" />
-									@answer.AnswerText
-								</label>
-							</div>
-						}
-						<div class="d-flex justify-content-between mt-4">
-							@if (i > 0)
+						var question = Model.Questions[i];
+						<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
+							<p><strong>@("Câu " + (i + 1) + ": ")</strong>@Html.Raw(question.Content)</p>
+							@if (question.QuestionTypeId == 1)
 							{
-								<button type="button" class="btn btn-outline-secondary px-4"
-										onclick="showQuestion(@(i - 1))">
-									⬅ Câu trước
-								</button>
+								@foreach (var answer in question.Answers)
+								{
+									<div class="form-check">
+										<label class="form-check-label d-block w-100" for="answer_@answer.Id" style="cursor: pointer">
+											<input class="form-check-input" type="radio"
+												   name="Answers[@i].AnswerId"
+												   id="answer_@answer.Id"
+												   value="@answer.Id" />
+											@answer.AnswerText
+										</label>
+									</div>
+								}
+							}
+							else if (question.QuestionTypeId == 2)
+							{
+								<input class="form-control" type="text" style="max-width: 400px"
+									   name="Answers[@i].TextAnswer"
+									   placeholder="Đáp án của bạn là" />
 							}
 							else
 							{
-								<span></span>
-							}
+								<div style="margin-bottom: 20px">
+									@for(int j = 0; j<question.Answers.Count / 2; j++)
+									{
+										<p>
+											<span class="dropzone" data-blank-id="left_@j"></span>
+											với
+											<span class="dropzone" data-blank-id="right_@j"></span>
+										</p>
+									}
+								</div>
 
-							@if (i < Model.Questions.Count - 1)
-							{
-								<button type="button" class="btn btn-outline-primary px-4"
-										onclick="showQuestion(@(i + 1))">
-									Câu tiếp ➡
-								</button>
+								<div class="draggables">
+									@foreach (var answer in question.Answers)
+									{
+										<div class="drag-item" draggable="true" data-answer-id="@answer.Id">
+											@answer.AnswerText
+										</div>
+									}
+								</div>
+
+								<input type="hidden" name="Answers[@i].MatchingAnswerJson" id="dragAnswers-@i" />
 							}
+							<div class="d-flex justify-content-between mt-4">
+								@if (i > 0)
+								{
+									<button type="button" class="btn btn-outline-secondary px-4"
+											onclick="showQuestion(@(i - 1))">
+										⬅ Câu trước
+									</button>
+								}
+								else
+								{
+									<span></span>
+								}
+
+								@if (i < Model.Questions.Count - 1)
+								{
+									<button type="button" class="btn btn-outline-primary px-4"
+											onclick="showQuestion(@(i + 1))">
+										Câu tiếp ➡
+									</button>
+								}
+							</div>
+							<input type="hidden" name="Answers[@i].QuestionId" value="@question.Id" />
 						</div>
-						<input type="hidden" name="Answers[@i].QuestionId" value="@question.Id" />
-					</div>
-				}
+					}
 
+				</div>
 			</div>
-		</div>
 
-		<button type="submit" id="submitBtn" class="btn btn-primary d-block mx-auto mt-4" style="width: max-content">Nộp bài</button>
-	</div>
-</form>
+			<button type="submit" id="submitBtn" class="btn btn-primary d-block mx-auto mt-4" style="width: max-content">Nộp bài</button>
+		</div>
+	</form>
+</div>
+
 
 <!-- Hết giờ Modal -->
 <div id="timeoutModal" class="modal-overlay" style="display: none;">
@@ -147,6 +215,46 @@
 					}
 				}
 			}
+
+			// ⏪ Khôi phục câu trả lời nhập tay
+			const textAnswers = localData[userId]?.[examId]?.textAnswers || {};
+			for (const name in textAnswers) {
+				const input = document.querySelector(`input[name="${name}"]`);
+				if (input) {
+					input.value = textAnswers[name];
+					const match = name.match(/Answers\[(\d+)\]/);
+					if (match) {
+						const index = parseInt(match[1]);
+						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+						if (btn) btn.classList.add("answered");
+					}
+				}
+			}
+
+			// ⏪ Khôi phục matching (drag & drop)
+			const matchingAnswers = localData[userId]?.[examId]?.matchingAnswers || {};
+			for (const qIndex in matchingAnswers) {
+				const pairings = matchingAnswers[qIndex];
+				for (const blankId in pairings) {
+					const answerId = pairings[blankId];
+					const questionBox = document.getElementById(`question-${qIndex}`);
+					if (!questionBox) continue;
+
+					const zone = questionBox.querySelector(`.dropzone[data-blank-id="${blankId}"]`);
+					const answerText = Array.from(questionBox.querySelectorAll('.drag-item'))
+						.find(item => item.getAttribute('data-answer-id') === answerId)?.textContent;
+
+					if (zone && answerText) {
+						zone.textContent = answerText;
+						zone.setAttribute('data-answer-id', answerId);
+					}
+				}
+
+				// ✅ đánh dấu là đã làm
+				const btn = document.querySelector(`.question-nav-btn[data-question-index="${qIndex}"]`);
+				if (btn) btn.classList.add("answered");
+			}
+
 
 			// ⏱️ Đếm ngược
 			const formEl = document.getElementById("examForm");
@@ -335,9 +443,37 @@
 			// 📝 Cảnh báo khi còn câu chưa làm
 			document.getElementById("examForm").addEventListener("submit", function (e) {
 				const unanswered = [];
+
 				document.querySelectorAll('.question-box').forEach((box, index) => {
-					const hasChecked = box.querySelector('input[type="radio"]:checked');
-					if (!hasChecked) unanswered.push(index + 1);
+					let answered = false;
+
+					// ✅ Trắc nghiệm (radio)
+					if (box.querySelector('input[type="radio"]')) {
+						if (box.querySelector('input[type="radio"]:checked')) {
+							answered = true;
+						}
+					}
+
+					// ✅ Fill in the blank (text)
+					if (!answered && box.querySelector('input[type="text"][name^="Answers"]')) {
+						const input = box.querySelector('input[type="text"][name^="Answers"]');
+						if (input && input.value.trim() !== "") {
+							answered = true;
+						}
+					}
+
+					// ✅ Matching (drag & drop)
+					if (!answered && box.querySelector('.dropzone')) {
+						const dropzones = box.querySelectorAll('.dropzone');
+						const allFilled = Array.from(dropzones).every(zone => zone.getAttribute('data-answer-id'));
+						if (allFilled && dropzones.length > 0) {
+							answered = true;
+						}
+					}
+
+					if (!answered) {
+						unanswered.push(index + 1);
+					}
 				});
 
 				if (unanswered.length > 0) {
@@ -354,7 +490,100 @@
 					saveLocalState();
 				}
 			});
+
 		});
+
+
+		let draggedItem = null;
+
+		document.querySelectorAll('.drag-item').forEach(item => {
+			item.addEventListener('dragstart', (e) => {
+				draggedItem = item;
+				item.classList.add('dragging');
+			});
+
+			item.addEventListener('dragend', () => {
+				draggedItem = null;
+				document.querySelectorAll('.dropzone').forEach(zone => zone.classList.remove('over'));
+				document.querySelectorAll('.drag-item').forEach(it => it.classList.remove('dragging'));
+			});
+		});
+
+		document.querySelectorAll('.dropzone').forEach(zone => {
+			zone.addEventListener('dragover', (e) => {
+				e.preventDefault();
+				zone.classList.add('over');
+			});
+
+			zone.addEventListener('dragleave', () => {
+				zone.classList.remove('over');
+			});
+
+			zone.addEventListener('drop', (e) => {
+				e.preventDefault();
+				if (draggedItem) {
+					zone.textContent = draggedItem.textContent;
+					zone.setAttribute('data-answer-id', draggedItem.getAttribute('data-answer-id'));
+					zone.classList.remove('over');
+					updateAnswers();
+				}
+			});
+		});
+
+		// Ghi nhận đáp án nhập tay (Fill in the Blank)
+		document.querySelectorAll('input[type="text"][name^="Answers"]').forEach(input => {
+			input.addEventListener('input', function () {
+				markQuestionAnswered(this.name);
+
+				const name = this.name;
+				if (!localData[userId]) localData[userId] = {};
+				if (!localData[userId][examId]) localData[userId][examId] = {};
+				if (!localData[userId][examId]["textAnswers"]) localData[userId][examId]["textAnswers"] = {};
+				localData[userId][examId]["textAnswers"][name] = this.value;
+				saveLocalState();
+			});
+		});
+
+		function markQuestionAnswered(name) {
+			const match = name.match(/Answers\[(\d+)\]/);
+			if (match) {
+				const index = parseInt(match[1]);
+				const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+				if (btn) btn.classList.add("answered");
+			}
+		}
+
+		function updateAnswers() {
+			const currentQuestion = document.querySelector('.question-box:not([style*="display: none"])');
+			if (!currentQuestion) return;
+
+			const zones = currentQuestion.querySelectorAll('.dropzone');
+
+			const result = {};
+			zones.forEach(zone => {
+				const blankId = zone.getAttribute('data-blank-id');
+				const answerId = zone.getAttribute('data-answer-id');
+				if (blankId && answerId) {
+					result[blankId] = answerId;
+				}
+			});
+			const currentIndex = document.querySelector('.question-box:not([style*="display: none"])')?.id?.split("-")[1];
+			if (currentIndex !== undefined) {
+				const dragInput = document.getElementById(`dragAnswers-${currentIndex}`);
+				if (dragInput) {
+					dragInput.value = JSON.stringify(result);
+				}
+
+				if (!localData[userId]) localData[userId] = {};
+				if (!localData[userId][examId]) localData[userId][examId] = {};
+				if (!localData[userId][examId]["matchingAnswers"]) localData[userId][examId]["matchingAnswers"] = {};
+				localData[userId][examId]["matchingAnswers"][currentIndex] = result;
+				saveLocalState();
+
+				const btn = document.querySelector(`.question-nav-btn[data-question-index="${currentIndex}"]`);
+				if (btn) btn.classList.add("answered");
+			}
+		}
 
 	</script>
 
