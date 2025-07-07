@@ -37,7 +37,6 @@ namespace Application.Interface.IServices
         Task<ExamFlashcardDTO?> GetExamForFlashcard(int examId, string userId);
         Task<ExamFlashcardDTO?> GetExamForPreview(int examId, string userId);
 
-
         Task<IdResponse> SaveExamGeneratedByAi(SaveExamDTO dto);
 
         Task<byte[]> ExportExamToDocxFile(long examId);

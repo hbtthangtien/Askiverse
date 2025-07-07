@@ -59,7 +59,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("BankQuestionId");
 
-                    b.ToTable("Answers");
+                    b.ToTable("Answers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.BankQuestion", b =>
@@ -106,7 +106,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("QuestionTypeId");
 
-                    b.ToTable("BankQuestions");
+                    b.ToTable("BankQuestions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.BasicUser", b =>
@@ -232,7 +232,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("Examss");
+                    b.ToTable("Examss", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamAccess", b =>
@@ -274,7 +274,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("ExamAccessess");
+                    b.ToTable("ExamAccessess", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamAnswered", b =>
@@ -317,7 +317,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("QuestionExamId");
 
-                    b.ToTable("ExamAnswereds");
+                    b.ToTable("ExamAnswereds", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ExamScored", b =>
@@ -362,7 +362,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ExamssScoreds");
+                    b.ToTable("ExamssScoreds", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Favourite", b =>
@@ -380,7 +380,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("Favourites");
+                    b.ToTable("Favourites", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumComment", b =>
@@ -425,7 +425,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ForumComments");
+                    b.ToTable("ForumComments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumPost", b =>
@@ -491,7 +491,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("ForumPosts");
+                    b.ToTable("ForumPosts", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ForumVoted", b =>
@@ -533,7 +533,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("VotedById");
 
-                    b.ToTable("ForumVoteds");
+                    b.ToTable("ForumVoteds", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.HistoryPurchase", b =>
@@ -569,7 +569,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("HistoryPurchases");
+                    b.ToTable("HistoryPurchases", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Level", b =>
@@ -598,7 +598,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Levels");
+                    b.ToTable("Levels", (string)null);
 
                     b.HasData(
                         new
@@ -663,7 +663,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PackageOfUser", b =>
@@ -708,7 +708,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PackageOfUsers");
+                    b.ToTable("PackageOfUsers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PremiumUser", b =>
@@ -721,7 +721,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("PremiumUsers");
+                    b.ToTable("PremiumUsers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -746,7 +746,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Profiles");
+                    b.ToTable("Profiles", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionExam", b =>
@@ -793,7 +793,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("QuestionExams");
+                    b.ToTable("QuestionExams", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.QuestionType", b =>
@@ -822,7 +822,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionTypes");
+                    b.ToTable("QuestionTypes", (string)null);
 
                     b.HasData(
                         new
@@ -879,7 +879,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubcriptionPackages");
+                    b.ToTable("SubcriptionPackages", (string)null);
 
                     b.HasData(
                         new
@@ -937,7 +937,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
 
                     b.HasData(
                         new
@@ -1050,7 +1050,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("UserAccessExams");
+                    b.ToTable("UserAccessExams", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
