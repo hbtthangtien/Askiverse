@@ -23,7 +23,7 @@ namespace Application.Services
             _userContext = userContextService;
         }
 
-        public async Task CreateQuestionByAI(List<QuestionCreate> list)
+        public async Task<List<BankQuestion>> CreateQuestionByAI(List<QuestionCreate> list)
         {
             var data = list.Select(e => new BankQuestion
             {
@@ -42,6 +42,7 @@ namespace Application.Services
             }).ToList() ;
             await _unitOfWork.BankQuestions.AddRange(data);
             await _unitOfWork.CommitAsync();
+            return data;
         }
     }
 }

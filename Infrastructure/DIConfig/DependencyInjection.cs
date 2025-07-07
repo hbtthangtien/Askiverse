@@ -65,7 +65,7 @@ namespace Infrastructure.DIConfig
             services.AddScoped<IExtractTextService, ExtractTextService>();
             services.AddScoped<IOpenAIService, OpenAIService>();
             services.AddScoped<IUserContextService, UserContextService>();
-            
+            services.AddScoped<IExportFileDocxService, ExportFileDocxService>();
             services.AddAuthentication().AddCookie().AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = configuration.GetSection("GoogleKeys:ClientId").Value!;

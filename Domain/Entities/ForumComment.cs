@@ -17,8 +17,6 @@ namespace Domain.Entities
 
         public DateTime CommentedAt { get; set; }
 
-        public int CommentById { get; set; }
-
         public DateTime UpdatedAt { get; set; }
 
         public virtual ForumPost? Post { get; set; }

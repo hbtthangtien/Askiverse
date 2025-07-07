@@ -26,6 +26,6 @@ namespace Application.Interface.IRepository
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
 
-
+        public IQueryable<T> GetInstance();
     }
 }

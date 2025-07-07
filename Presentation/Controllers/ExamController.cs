@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Exam;
 using Application.DTOs.Question;
+using Application.DTOs.Question.GenerateAI;
 using Application.Interface.IServices;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -171,7 +172,13 @@ namespace Presentation.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> SaveGeneratedExam([FromBody]SaveExamDTO finalPayload)
+        {
+            var data = await _examService.SaveExamGeneratedByAi(finalPayload);
+            return Ok(data);
 
+        }
 
 
         [HttpGet]
@@ -291,14 +298,16 @@ namespace Presentation.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", string? questionCount = "", string? sortOrder = "newest", string keyword = "", bool isFavourite = false)
+        public async Task<IActionResult> AllExams(bool isPublic = true, string subjectId = "", string? questionCount = "", string? sortOrder = "newest", string keyword = "", bool isFavourite = false, int pageIndex = 1, int pageSize = 5)
         {
             try
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, questionCount, sortOrder, keyword, isFavourite);
+                var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, questionCount, sortOrder, keyword, isFavourite, pageIndex, pageSize);
 
-                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+				ViewBag.CurrentTab = isFavourite ? "deyeuthich" : (isPublic ? "dechung" : "detutao");
+
+				if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
                     return PartialView("_ExamListPartial", exams);
                 }

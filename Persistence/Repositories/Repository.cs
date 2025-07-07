@@ -111,5 +111,10 @@ namespace Persistence.Repositories
         {
             _context.Set<T>().Remove(entities);
         }
+
+        public IQueryable<T> GetInstance()
+        {
+            return _dbSet.AsQueryable();
+        }
     }
 }
