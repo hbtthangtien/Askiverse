@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Exam;
+using Application.Paginated;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace Application.Interface.IRepository
         Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter, string? PremiumUserId);
 
         Task AddRange(List<BankQuestion> list);
+       
     }
 }

@@ -22,7 +22,7 @@ namespace Application.DTOs.Exam
         [Required(ErrorMessage = "Vui lòng chọn môn học.")]
         public int SubjectId { get; set; }
 
-        public bool IsPublic { get; set; }
+        public bool IsPublic { get; set; } = false;
         public int TotalTime { get; set; }
         public int TotalQuestion { get; set; }
 

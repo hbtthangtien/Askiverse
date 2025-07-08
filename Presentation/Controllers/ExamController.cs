@@ -150,7 +150,7 @@ namespace Presentation.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, bool? isPublic, string? keyword, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> SearchQuestions(int? questionTypeId, int? levelId, string? keyword, int page = 1, int pageSize = 10)
         {
             var userId = GetCurrentUserId();
 
@@ -158,7 +158,6 @@ namespace Presentation.Controllers
             {
                 QuestionTypeId = questionTypeId,
                 LevelId = levelId,
-                IsPublic = isPublic, // ✅ vẫn giữ nullable
                 Keyword = string.IsNullOrWhiteSpace(keyword) ? null : keyword
             };
 
@@ -274,7 +273,6 @@ namespace Presentation.Controllers
                 QuestionTypeId = question.QuestionTypeId,
                 QuestionTypeName = typeName,
                 LevelId = question.LevelId,
-                IsPublic = question.IsPublic,
                 Answers = question.Answers.Select(a => new UpdateAnswerDTO
                 {
                     Id = a.Id,

@@ -93,7 +93,8 @@ namespace Application.Services
      .Query()
      .Include(q => q.QuestionType)
      .Include(q => q.Level)
-     .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
+    .Where(q => q.PremiumUserId != null && q.PremiumUserId == PremiumUserId)
+
      .OrderByDescending(q => q.CreatedAt);
 
             if (filter.QuestionTypeId.HasValue)
@@ -102,9 +103,7 @@ namespace Application.Services
             if (filter.LevelId.HasValue)
                 query = query.Where(q => q.LevelId == filter.LevelId.Value);
 
-            // ✅ Lọc công khai / riêng tư / cả hai
-            if (filter.IsPublic.HasValue)
-                query = query.Where(q => q.IsPublic == filter.IsPublic.Value);
+          
 
             if (!string.IsNullOrWhiteSpace(filter.Keyword))
             {

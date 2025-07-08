@@ -19,7 +19,7 @@ namespace Application.DTOs.Question
         public int LevelId { get; set; }
         public string? LevelName { get; set; } // ✅
 
-        public bool IsPublic { get; set; }
+        public bool IsPublic { get; set; } = false;
 
         public List<CreateAnswerDTO> Answers { get; set; } = new();
     }

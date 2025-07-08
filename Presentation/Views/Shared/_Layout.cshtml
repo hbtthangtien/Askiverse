@@ -30,8 +30,8 @@
             <a asp-controller="Exam" asp-action="AllExams">
                 Ôn luyện kiểm tra
             </a>
-            <a href="#">Liên hệ</a>
             <a asp-controller="Exam" asp-action="Create">Tùy chỉnh đề</a>
+            <a asp-controller="Forum" asp-action="Index">Diễn đàn</a>
         </nav>
         <div class="auth" id="auth-area">
             @if (User.Identity?.IsAuthenticated ?? false)

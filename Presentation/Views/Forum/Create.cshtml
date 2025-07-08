@@ -1,0 +1,112 @@
+﻿@model Application.DTOs.Forum.CreateForumPostDTO
+@{
+    ViewData["Title"] = "Tạo bài viết mới";
+}
+
+<style>
+    body {
+        background: linear-gradient(120deg, #F99FCF, #B2EDE3);
+    }
+
+    .create-container {
+        max-width: 700px;
+        margin: auto;
+        padding: 30px;
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .create-title {
+        color: #D13D76;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
+    label {
+        font-weight: 500;
+        color: #121117;
+    }
+
+    .btn-submit {
+        background-color: #FE9FC3;
+        border: none;
+        color: #121117;
+        font-weight: bold;
+    }
+
+        .btn-submit:hover {
+            background-color: #D13D76;
+            color: #fff;
+        }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+    }
+
+    .btn-back {
+        background-color: #B2EDE3;
+        color: #121117;
+        border-radius: 10px;
+        border: none;
+    }
+
+        .btn-back:hover {
+            background-color: #A2D9CF;
+        }
+</style>
+
+<div class="create-container">
+    <h2 class="create-title">✍️ @ViewData["Title"]</h2>
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Tiêu đề</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HeadLine" class="form-label">Mô tả ngắn</label>
+            <input asp-for="HeadLine" class="form-control" />
+            <span asp-validation-for="HeadLine" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Content" class="form-label">Nội dung</label>
+            <textarea asp-for="Content" class="form-control" rows="6" id="Content"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="ImgUrl" class="form-label">Ảnh (URL)</label>
+            <input asp-for="ImgUrl" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SubjectId" class="form-label">Môn học</label>
+            <select asp-for="SubjectId" asp-items="ViewBag.Subjects" class="form-select"></select>
+        </div>
+
+      
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-submit px-5 py-2">Đăng bài</button>
+            <a asp-action="MyPosts" class="btn btn-back  px-5 py-2">⬅️ Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
