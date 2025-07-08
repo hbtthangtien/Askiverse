@@ -73,14 +73,15 @@ namespace Persistence.Repositories
                     {
                         Id = a.Id,
                         AnswerText = a.AnswerText ?? ""
-                    }).ToList() ?? new()
+                    }).ToList() ?? new(),
+                    QuestionTypeId = q.QuestionTypeId
                 }).ToList(),
                 TotalTime = exam.TotalTime,
-                QuestionTypes = exam.QuestionExam.Select(qe => qe.BankQuestion?.QuestionType)
-                .Where(qt => qt != null)
-                .DistinctBy(qt => qt!.Id)
-                .Select(qt => qt!)
-                .ToList()
+                //QuestionTypes = exam.QuestionExam.Select(qe => qe.BankQuestion?.QuestionType)
+                //.Where(qt => qt != null)
+                //.DistinctBy(qt => qt!.Id)
+                //.Select(qt => qt!)
+                //.ToList()
             };
         }
         public async Task<int> SubmitExamAsync(ExamSubmitDTO dto, int ExamScoredId)
