@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Exam;
 using Application.DTOs.Question;
 using Application.DTOs.Question.GenerateAI;
+using Application.Interface.IExternalService;
 using Application.Interface.IServices;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NPOI.HPSF;
 using System.Security.Claims;
 
 namespace Presentation.Controllers
@@ -16,11 +18,14 @@ namespace Presentation.Controllers
     {
         private readonly IExamService _examService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public ExamController(IExamService examService, IHttpContextAccessor httpContextAccessor)
+        private readonly IExportFileDocxService _export;
+        public ExamController(IExamService examService,
+            IHttpContextAccessor httpContextAccessor,
+            IExportFileDocxService exportFileDocxService)
         {
             _examService = examService;
             _httpContextAccessor = httpContextAccessor;
+            _export = exportFileDocxService;
         }
         private string? GetCurrentUserId()
         {
@@ -50,32 +55,32 @@ namespace Presentation.Controllers
         [HttpPost]
         public IActionResult GetExamTakeById(int examId)
         {
-			HttpContext.Session.SetInt32("CurrentExamId", examId);
-			return RedirectToAction("TakeExam");
+            HttpContext.Session.SetInt32("CurrentExamId", examId);
+            return RedirectToAction("TakeExam");
         }
 
         [HttpGet]
         public async Task<IActionResult> TakeExam()
         {
-			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			if (userId == null) return Unauthorized();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null) return Unauthorized();
 
-			var examId = HttpContext.Session.GetInt32("CurrentExamId");
-			if (examId == null) return RedirectToAction("AllExams");
+            var examId = HttpContext.Session.GetInt32("CurrentExamId");
+            if (examId == null) return RedirectToAction("AllExams");
 
             var examScored = HttpContext.Session.GetInt32("ExamScoredId");
-            if(examScored == null)
+            if (examScored == null)
             {
                 examScored = await _examService.CreateExamScoredAsync(examId.Value, userId);
                 HttpContext.Session.SetInt32("ExamScoredId", examScored.Value);
             }
 
-			var exam = await _examService.GetExamTakeById(examId.Value, userId);
-			if (exam == null) return NotFound();
+            var exam = await _examService.GetExamTakeById(examId.Value, userId);
+            if (exam == null) return NotFound();
             exam.ExanScoredId = examScored.Value;
 
-			return View("ExamTakeView", exam);
-		}
+            return View("ExamTakeView", exam);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateExamDTO dto)
@@ -114,7 +119,7 @@ namespace Presentation.Controllers
                 TempData["Success"] = "Đề thi đã được tạo thành công!";
                 TempData["RedirectToPreview"] = examId;
 
-                return RedirectToAction("Create"); 
+                return RedirectToAction("Create");
 
 
 
@@ -174,7 +179,7 @@ namespace Presentation.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveGeneratedExam([FromBody]SaveExamDTO finalPayload)
+        public async Task<IActionResult> SaveGeneratedExam([FromBody] SaveExamDTO finalPayload)
         {
             var data = await _examService.SaveExamGeneratedByAi(finalPayload);
             return Ok(data);
@@ -197,9 +202,9 @@ namespace Presentation.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitExam(ExamSubmitDTO dto, int ExamScoredId)
         {
-			HttpContext.Session.Remove("CurrentExamId");
-			HttpContext.Session.Remove("ExamScoredId");
-			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            HttpContext.Session.Remove("CurrentExamId");
+            HttpContext.Session.Remove("ExamScoredId");
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null) return Unauthorized();
 
             try
@@ -307,9 +312,9 @@ namespace Presentation.Controllers
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var exams = await _examService.GetAllExams(isPublic, userId!, subjectId, questionCount, sortOrder, keyword, isFavourite, pageIndex, pageSize);
 
-				ViewBag.CurrentTab = isFavourite ? "deyeuthich" : (isPublic ? "dechung" : "detutao");
+                ViewBag.CurrentTab = isFavourite ? "deyeuthich" : (isPublic ? "dechung" : "detutao");
 
-				if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
                     return PartialView("_ExamListPartial", exams);
                 }
@@ -320,15 +325,15 @@ namespace Presentation.Controllers
             {
                 ViewData["Error"] = ex.Message;
 
-				if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-				{
-					return PartialView("_ExamListPartial");
-				}
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return PartialView("_ExamListPartial");
+                }
                 return View();
             }
         }
 
-        
+
 
         [HttpGet]
         public async Task<IActionResult> GetRandomQuestionIds(int count, int? questionTypeId, int? levelId, string? keyword)
@@ -538,7 +543,12 @@ namespace Presentation.Controllers
             }
         }
 
-
+        [HttpPost("exports/docx")]
+        public async Task<IActionResult> ExportDocxFile(long examId = 4)
+        {
+            var data = await _examService.ExportExamToDocxFile(examId);
+            return File(data, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "export.docx");
+        }
 
 
     }
