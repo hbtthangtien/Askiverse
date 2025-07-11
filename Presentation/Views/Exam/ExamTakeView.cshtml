@@ -44,6 +44,44 @@
 		border-color: #007bff;
 		background-color: #e8f0ff;
 	}
+
+	.dropzone-wrapper {
+		display: inline-block;
+		position: relative;
+		min-width: 150px;
+		padding: 5px;
+	}
+
+	.fixed-answer {
+		display: inline-block;
+		min-width: 100px;
+		padding: 5px;
+		background-color: #f0f0f0;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+		text-align: center;
+		color: black;
+		padding: 8px 12px;
+	}
+
+	.remove-btn {
+		display: none;
+		position: absolute;
+		right: -15px;
+		top: 10px;
+		cursor: pointer;
+		color: red;
+		font-weight: bold;
+	}
+
+	.dropzone-wrapper.filled .remove-btn {
+		display: inline;
+	}
+
+	.drag-item.disabled {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 </style>
 
 @section Styles {
@@ -82,11 +120,13 @@
 					@for (int i = 0; i < Model.Questions.Count; i++)
 					{
 						var question = Model.Questions[i];
+
+
 						<div class="question-box card-question" id="question-@i" style="display: @(i == 0 ? "block" : "none"); padding-top: 20px;width:100%;">
 							<p><strong>@("Câu " + (i + 1) + ": ")</strong>@Html.Raw(question.Content)</p>
 							@if (question.QuestionTypeId == 1)
 							{
-								@foreach (var answer in question.Answers)
+								@foreach (var answer in question.ShuffledRightAnswers)
 								{
 									<div class="form-check">
 										<label class="form-check-label d-block w-100" for="answer_@answer.Id" style="cursor: pointer">
@@ -102,32 +142,51 @@
 							else if (question.QuestionTypeId == 2)
 							{
 								<input class="form-control" type="text" style="max-width: 400px"
-									   name="Answers[@i].TextAnswer"
+									   name="Answers[@i].UserInput"
 									   placeholder="Đáp án của bạn là" />
 							}
 							else
 							{
+								var groupedAnswers = question.Answers
+								.Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+								.GroupBy(a => a.MatchingPairKey!)
+								.OrderBy(g => g.Key)
+								.ToList();
+
 								<div style="margin-bottom: 20px">
-									@for(int j = 0; j<question.Answers.Count / 2; j++)
+									@for (int j = 0; j < groupedAnswers.Count; j++)
 									{
+										var group = groupedAnswers[j].ToList();
+										var left = group.First();
 										<p>
-											<span class="dropzone" data-blank-id="left_@j"></span>
+											<span class="fixed-answer">@left.AnswerText</span>
 											với
-											<span class="dropzone" data-blank-id="right_@j"></span>
+											<span class="dropzone-wrapper">
+												<span class="dropzone"
+													  data-blank-id="@left.MatchingPairKey"
+													  ondrop="drop(event)"
+													  ondragover="allowDrop(event)">
+												</span>
+												<span class="remove-btn" onclick="removeAnswer(this)">✕</span>
+											</span>
 										</p>
 									}
 								</div>
 
 								<div class="draggables">
-									@foreach (var answer in question.Answers)
+									@foreach (var answer in question.ShuffledRightAnswers)
 									{
-										<div class="drag-item" draggable="true" data-answer-id="@answer.Id">
+										<div class="drag-item"
+											 id="drag-@answer.Id"
+											 draggable="true"
+											 data-answer-id="@answer.Id"
+											 ondragstart="drag(event)">
 											@answer.AnswerText
 										</div>
 									}
 								</div>
 
-								<input type="hidden" name="Answers[@i].MatchingAnswerJson" id="dragAnswers-@i" />
+								<input type="hidden" name="Answers[@i].MatchingPairsJson" id="dragAnswers-@i" />
 							}
 							<div class="d-flex justify-content-between mt-4">
 								@if (i > 0)
@@ -222,11 +281,15 @@
 				const input = document.querySelector(`input[name="${name}"]`);
 				if (input) {
 					input.value = textAnswers[name];
-					const match = name.match(/Answers\[(\d+)\]/);
-					if (match) {
-						const index = parseInt(match[1]);
-						const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
-						if (btn) btn.classList.add("answered");
+
+					// 🛠 Chỉ đánh dấu nếu giá trị không rỗng
+					if (textAnswers[name].trim() !== "") {
+						const match = name.match(/Answers\[(\d+)\]/);
+						if (match) {
+							const index = parseInt(match[1]);
+							const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
+							if (btn) btn.classList.add("answered");
+						}
 					}
 				}
 			}
@@ -235,26 +298,38 @@
 			const matchingAnswers = localData[userId]?.[examId]?.matchingAnswers || {};
 			for (const qIndex in matchingAnswers) {
 				const pairings = matchingAnswers[qIndex];
-				for (const blankId in pairings) {
-					const answerId = pairings[blankId];
+				if (!Array.isArray(pairings)) continue;
+
+				pairings.forEach(pair => {
+					const blankId = pair.MatchingBlankKey;
+					const answerId = pair.AnswerId;
+
 					const questionBox = document.getElementById(`question-${qIndex}`);
-					if (!questionBox) continue;
+					if (!questionBox) return;
 
 					const zone = questionBox.querySelector(`.dropzone[data-blank-id="${blankId}"]`);
 					const answerText = Array.from(questionBox.querySelectorAll('.drag-item'))
-						.find(item => item.getAttribute('data-answer-id') === answerId)?.textContent;
+						.find(item => item.getAttribute('data-answer-id') == answerId)?.textContent;
 
 					if (zone && answerText) {
 						zone.textContent = answerText;
 						zone.setAttribute('data-answer-id', answerId);
+						zone.parentElement.classList.add("filled");
+
+						const dragElem = questionBox.querySelector(`#drag-${answerId}`);
+						if (dragElem) {
+							dragElem.classList.add("disabled");
+						}
 					}
-				}
+				});
 
-				// ✅ đánh dấu là đã làm
+				// ✅ Đánh dấu câu hỏi đã làm
 				const btn = document.querySelector(`.question-nav-btn[data-question-index="${qIndex}"]`);
-				if (btn) btn.classList.add("answered");
+				if (btn && pairings.length > 0) {
+					btn.classList.add("answered");
+				}
+				updateJson(qIndex);
 			}
-
 
 			// ⏱️ Đếm ngược
 			const formEl = document.getElementById("examForm");
@@ -525,7 +600,9 @@
 					zone.textContent = draggedItem.textContent;
 					zone.setAttribute('data-answer-id', draggedItem.getAttribute('data-answer-id'));
 					zone.classList.remove('over');
-					updateAnswers();
+					const questionBox = zone.closest('.question-box');
+					const qIndex = questionBox.id.split("-")[1];
+					updateJson(qIndex);
 				}
 			});
 		});
@@ -533,7 +610,7 @@
 		// Ghi nhận đáp án nhập tay (Fill in the Blank)
 		document.querySelectorAll('input[type="text"][name^="Answers"]').forEach(input => {
 			input.addEventListener('input', function () {
-				markQuestionAnswered(this.name);
+				// markQuestionAnswered(this.name);
 
 				const name = this.name;
 				if (!localData[userId]) localData[userId] = {};
@@ -541,50 +618,183 @@
 				if (!localData[userId][examId]["textAnswers"]) localData[userId][examId]["textAnswers"] = {};
 				localData[userId][examId]["textAnswers"][name] = this.value;
 				saveLocalState();
+
+				updateQuestionAnsweredStatus();
 			});
 		});
 
-		function markQuestionAnswered(name) {
-			const match = name.match(/Answers\[(\d+)\]/);
-			if (match) {
-				const index = parseInt(match[1]);
-				const btn = document.querySelector(`.question-nav-btn[data-question-index="${index}"]`);
-				if (btn) btn.classList.add("answered");
-			}
+		function allowDrop(ev) {
+			ev.preventDefault();
 		}
 
-		function updateAnswers() {
-			const currentQuestion = document.querySelector('.question-box:not([style*="display: none"])');
-			if (!currentQuestion) return;
+		function drag(ev) {
+			ev.dataTransfer.setData("text", ev.target.id);
+		}
 
-			const zones = currentQuestion.querySelectorAll('.dropzone');
+		function drop(ev) {
+			ev.preventDefault();
+			var dragId = ev.dataTransfer.getData("text");
+			var draggedElem = document.getElementById(dragId);
+			var dropzone = ev.target.closest(".dropzone");
 
-			const result = {};
-			zones.forEach(zone => {
-				const blankId = zone.getAttribute('data-blank-id');
-				const answerId = zone.getAttribute('data-answer-id');
+			// Không cho phép thả vào dropzone đã có nội dung
+			if (dropzone.innerText.trim() !== "") return;
+
+			var answerText = draggedElem.innerText;
+			var answerId = draggedElem.getAttribute("data-answer-id");
+			var matchingKey = dropzone.getAttribute("data-blank-id"); // Lấy key bên trái (A, B, C...)
+
+			// Gán nội dung hiển thị
+			dropzone.innerText = answerText;
+			dropzone.setAttribute("data-answer-id", answerId);
+			dropzone.setAttribute("data-matching-key", matchingKey);
+			dropzone.parentElement.classList.add("filled");
+			draggedElem.classList.add("disabled");
+
+			// 🔍 Tìm input ẩn tương ứng với câu hỏi này
+			var questionBox = dropzone.closest(".question-box");
+			var answerInput = questionBox.querySelector("input[name*='AnswerId']");
+			var keyInput = questionBox.querySelector("input[name*='MatchingBlankKey']");
+
+			// 📝 Gán value vào input để submit về backend
+			if (answerInput && keyInput) {
+				answerInput.value = answerId;
+				keyInput.value = matchingKey;
+			}
+			const qIndex = questionBox.id.split("-")[1];
+			updateJson(qIndex); // Cập nhật JSON ẩn
+		}
+
+		function removeAnswer(btn) {
+			const wrapper = btn.parentElement;
+			const dropzone = wrapper.querySelector('.dropzone');
+			const answerId = dropzone.getAttribute("data-answer-id");
+			const blankId = dropzone.getAttribute("data-blank-id");
+
+			if (!answerId || !blankId) return;
+
+			// Xóa nội dung dropzone
+			dropzone.innerText = "";
+			dropzone.removeAttribute("data-answer-id");
+			wrapper.classList.remove("filled");
+
+			// Enable lại drag-item
+			var dragElem = document.getElementById("drag-" + answerId);
+			if (dragElem) {
+				dragElem.classList.remove("disabled");
+			}
+
+			// ✅ Cập nhật localStorage đúng blankId
+			if (!localData[userId]) localData[userId] = {};
+			if (!localData[userId][examId]) localData[userId][examId] = {};
+			if (!localData[userId][examId]["matchingAnswers"]) localData[userId][examId]["matchingAnswers"] = {};
+
+			const currentIndex = wrapper.closest('.question-box').id.split("-")[1];
+
+			const answers = localData[userId][examId]["matchingAnswers"][currentIndex] || {};
+			delete answers[blankId];
+
+			// Nếu không còn cặp nào => xoá toàn bộ
+			if (Object.keys(answers).length === 0) {
+				delete localData[userId][examId]["matchingAnswers"][currentIndex];
+			} else {
+				localData[userId][examId]["matchingAnswers"][currentIndex] = answers;
+			}
+
+			saveLocalState();
+
+			// ✅ Cập nhật lại JSON ẩn
+			const qIndex = wrapper.closest('.question-box').id.split("-")[1];
+			updateJson(qIndex);
+
+			// ✅ Cập nhật trạng thái nút câu hỏi
+			updateQuestionAnsweredStatus();
+		}
+
+		function updateJson(qIndex = null) {
+			let questionBox;
+			if (qIndex !== null) {
+				questionBox = document.getElementById(`question-${qIndex}`);
+			} else {
+				questionBox = document.querySelector('.question-box:not([style*="display: none"])');
+			}
+			if (!questionBox) return;
+
+			const zones = questionBox.querySelectorAll('.dropzone');
+			const result = [];
+
+			zones.forEach((dz) => {
+				const blankId = dz.getAttribute('data-blank-id');
+				const answerId = dz.getAttribute('data-answer-id');
 				if (blankId && answerId) {
-					result[blankId] = answerId;
+					result.push({
+						AnswerId: parseInt(answerId),
+						MatchingBlankKey: blankId
+					});
 				}
 			});
-			const currentIndex = document.querySelector('.question-box:not([style*="display: none"])')?.id?.split("-")[1];
-			if (currentIndex !== undefined) {
-				const dragInput = document.getElementById(`dragAnswers-${currentIndex}`);
-				if (dragInput) {
-					dragInput.value = JSON.stringify(result);
-				}
 
-				if (!localData[userId]) localData[userId] = {};
-				if (!localData[userId][examId]) localData[userId][examId] = {};
-				if (!localData[userId][examId]["matchingAnswers"]) localData[userId][examId]["matchingAnswers"] = {};
-				localData[userId][examId]["matchingAnswers"][currentIndex] = result;
-				saveLocalState();
-
-				const btn = document.querySelector(`.question-nav-btn[data-question-index="${currentIndex}"]`);
-				if (btn) btn.classList.add("answered");
+			const currentIndex = qIndex ?? questionBox.id.split("-")[1];
+			const hiddenInput = document.getElementById(`dragAnswers-${currentIndex}`);
+			if (hiddenInput) {
+				hiddenInput.value = JSON.stringify(result);
 			}
+
+			// Lưu vào localData
+			if (!localData[userId]) localData[userId] = {};
+			if (!localData[userId][examId]) localData[userId][examId] = {};
+			if (!localData[userId][examId]["matchingAnswers"]) localData[userId][examId]["matchingAnswers"] = {};
+			localData[userId][examId]["matchingAnswers"][currentIndex] = result;
+			saveLocalState();
+
+			// Đánh dấu đã làm
+			const btn = document.querySelector(`.question-nav-btn[data-question-index="${currentIndex}"]`);
+			if (btn) {
+				btn.classList.add("answered");
+			}
+
+			// Cập nhật trạng thái câu hỏi đã trả lời
+			updateQuestionAnsweredStatus();
 		}
 
+		function updateQuestionAnsweredStatus() {
+			// Kiểm tra xem câu hỏi này có đáp án nào không
+			const questionBox = document.querySelector('.question-box:not([style*="display: none"])');
+			if (!questionBox) return;
+
+			const radioButtons = questionBox.querySelectorAll('input[type="radio"]');
+			const textInputs = questionBox.querySelectorAll('input[type="text"]');
+			const dropzones = questionBox.querySelectorAll('.dropzone');
+
+			let answered = false;
+
+			// Kiểm tra radio buttons (Trắc nghiệm)
+			if (Array.from(radioButtons).some(radio => radio.checked)) {
+				answered = true;
+			}
+
+			// Kiểm tra câu trả lời nhập tay (Text input)
+			if (!answered && Array.from(textInputs).some(input => input.value.trim() !== "")) {
+				answered = true;
+			}
+
+			// Kiểm tra matching (drag & drop) – nếu có ít nhất một dropzone có đáp án
+			if (!answered && Array.from(dropzones).some(zone => zone.getAttribute('data-answer-id'))) {
+				answered = true;
+			}
+
+			// Cập nhật lại trạng thái câu hỏi trên navigation button
+			const questionIndex = questionBox.id.split('-')[1]; // ID của câu hỏi: question-1, question-2, ...
+			const btn = document.querySelector(`.question-nav-btn[data-question-index="${questionIndex}"]`);
+
+			if (btn) {
+				if (answered) {
+					btn.classList.add("answered");
+				} else {
+					btn.classList.remove("answered");
+				}
+			}
+		}
 	</script>
 
 	@* <script src="~/js/exam-take.js"></script>	 *@

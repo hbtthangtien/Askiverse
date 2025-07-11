@@ -12,11 +12,13 @@ namespace Domain.Entities
 
         public int ExamScoredId { get; set; }
 
-        public int  AnswerId { get; set; }
+        public int? AnswerId { get; set; }
 
         public int QuestionExamId { get; set; }
 
         public bool IsCorrected { get; set; }
+        public string? UserInput { get; set; }
+        public string? MatchingBlankKey { get; set; }
 
         public virtual ExamScored? ExamScored { get; set; }
 

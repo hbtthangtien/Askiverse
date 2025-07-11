@@ -11,6 +11,8 @@ namespace Application.DTOs.Exam
     public class ExamViewDetailsDTO
     {
         public int Id { get; set; }
+        public int ExamScoredId { get; set; }
+        public int ExamAnswererId { get; set; }
         public List<QuestionViewDetailsDTO> Questions { get; set; } = new();
         public List<ExamAnsweredDTO> UserAnswered { get; set; } = new();
     }

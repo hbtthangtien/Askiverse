@@ -11,7 +11,8 @@ namespace Application.DTOs.Answer
         public int Id { get; set; }
         public string? AnswerText { get; set; } = default!;
         public bool IsCorrected { get; set; }
-    }
+		public string? MatchingPairKey { get; set; }
+	}
     public class AnswerDetailDTO
     {
         public int Id { get; set; }

@@ -68,7 +68,10 @@ namespace Persistence.DatabaseConfig.Config
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/BasicUser/Login";
-            });
+				options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+				options.SlidingExpiration = true;
+
+			});
         }
     }
 }

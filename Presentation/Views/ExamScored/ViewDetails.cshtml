@@ -1,5 +1,4 @@
-﻿
-@model Application.DTOs.Exam.ExamViewDetailsDTO
+﻿@model Application.DTOs.Exam.ExamViewDetailsDTO
 @{
 	ViewData["Title"] = "Chi tiết bài làm";
 	int index = 1;
@@ -109,37 +108,135 @@
 
 		<div class="timeline-box">
 			<div class="timeline-dot"></div>
-			<div class="card-question @statusClass">
+			<div class="card-question @(question.QuestionTypeId != 3 && question.QuestionTypeId != 2 ? statusClass : "")">
 				<div class="d-flex justify-content-between align-items-center mb-3">
 					<h5 class="fw-bold mb-0">Câu @index: @question.Content</h5>
-					<span class="status-badge status-@statusClass">@statusText</span>
+					@if (question.QuestionTypeId != 3 && question.QuestionTypeId != 2)
+					{
+						<span class="status-badge status-@statusClass">@statusText</span>
+					}
 				</div>
 				<div class="ps-2">
-					@foreach (var answer in question.Answers)
+
+					@switch (question.QuestionTypeId)
 					{
-						var isUserSelected = userAnswer?.AnswerId == answer.Id;
-						var isCorrectAnswer = answer.IsCorrected;
-
-						var classes = "";
-						if (isCorrectAnswer) classes += " correct";
-						if (isUserSelected && !isCorrectAnswer) classes += " incorrect";
-						if (isUserSelected) classes += " user-selected";
-
-						<div class="answer-option @classes">
-							<input class="form-check-input me-2" type="radio" disabled
-								   name="question-@question.Id"
-								   value="@answer.Id"
-							@(isUserSelected ? "checked" : "") />
-							<label class="form-check-label fw-semibold">@answer.AnswerText</label>
-							@if (isCorrectAnswer)
+						case 1: // Trắc nghiệm
+							@foreach (var answer in question.Answers)
 							{
-								<span class="ms-2 text-success">✔ Đáp án đúng</span>
+								var isUserSelected = userAnswer?.AnswerId == answer.Id;
+								var isCorrectAnswer = answer.IsCorrected;
+
+								var classes = "";
+								if (isCorrectAnswer) classes += " correct";
+								if (isUserSelected && !isCorrectAnswer) classes += " incorrect";
+								if (isUserSelected) classes += " user-selected";
+								<div class="answer-option @classes">
+									<input class="form-check-input me-2" type="radio" disabled
+										   name="question-@question.Id"
+										   value="@answer.Id"
+									@(isUserSelected ? "checked" : "") />
+									<label class="form-check-label fw-semibold">@answer.AnswerText</label>
+									@if (isCorrectAnswer)
+									{
+										<span class="ms-2 text-success">✔ Đáp án đúng</span>
+									}
+									else if (isUserSelected)
+									{
+										<span class="ms-2 text-danger">✘ Bạn đã chọn</span>
+									}
+								</div>
 							}
-							else if (isUserSelected)
+							break;
+
+						case 2: // Điền từ (TextAnswer)
+							<div class="mb-3">
+								<label class="fw-semibold">✏️ Câu trả lời của bạn:</label>
+								@{
+									var checkFill = correctAnswer.AnswerText?.Trim().ToLower() == userAnswer?.TextAnswer?.Trim().ToLower();
+								}
+								<input type="text"
+									   class="form-control @((checkFill ? "border-success" : "border-danger"))"
+									   disabled
+									   value="@(userAnswer?.TextAnswer ?? "Chưa trả lời")" />
+
+								@if (!string.IsNullOrEmpty(userAnswer.TextAnswer))
+								{
+									@if (checkFill)
+									{
+										<p class="mt-2 text-success fw-semibold">
+											✔ Chính xác! Đáp án đúng là: <span class="text-decoration-underline">@correctAnswer.AnswerText</span>
+										</p>
+									}
+									else
+									{
+										<p class="mt-2 text-danger fw-semibold">
+											✘ Sai rồi. Đáp án đúng là: <span class="text-decoration-underline">@correctAnswer.AnswerText</span>
+										</p>
+									}
+								}
+								else
+								{
+									<p class="mt-2 text-warning fw-semibold fst-italic">
+										⚠️ Bạn đã bỏ qua câu này.
+									</p>
+								}
+							</div>
+							break;
+
+						case 3: // Matching (ghép nối)
+							@if (question.QuestionTypeId == 3 && userAnswer?.MatchingPairs != null)
 							{
-								<span class="ms-2 text-danger">✘ Bạn đã chọn</span>
+								var groupedAnswers = question.Answers
+								.Where(a => !string.IsNullOrEmpty(a.MatchingPairKey))
+								.GroupBy(a => a.MatchingPairKey!)
+								.OrderBy(g => g.Key)
+								.ToList();
+
+								<div style="margin-bottom: 20px">
+									@for (int i = 0; i < groupedAnswers.Count; i++)
+									{
+										var left = groupedAnswers[i].First();
+
+										var userPair = userAnswer?.MatchingPairs?.ElementAtOrDefault(i);
+
+										var userMatchingKey = userPair?.MatchingBlankKey;
+										var userAnswerId = userPair?.AnswerId;
+
+										var answerRight = question.Answers.FirstOrDefault(a => a.Id == userAnswerId);
+										var check = answerRight != null && answerRight.MatchingPairKey == userMatchingKey;
+										<p>
+											<span class="fw-bold" style="background-color: #f0f0f0; padding: 6px; border-radius: 3px; border: 1px solid #ccc">@left.AnswerText</span>
+											->
+											<span class="ms-2 @(check ? "text-success" : "text-danger") fw-semibold"
+												  style="border: 2px dashed #aaa; border-radius: 6px; padding: 3px; background-color: #f9f9f9">
+												@(answerRight != null
+																			? answerRight.AnswerText
+																			: Html.Raw("<i class='text-muted'>chưa chọn</i>"))
+
+											</span>
+
+											@if (check && answerRight != null)
+											{
+												<span class="ms-2 text-success">✔</span>
+											}
+											else if (!check && answerRight != null)
+											{
+												<span class="ms-2 text-danger">✘</span>
+											}
+										</p>
+									}
+								</div>
 							}
-						</div>
+							else
+							{
+								<p class="text-muted fst-italic">Bạn chưa ghép nối câu nào.</p>
+							}
+
+							break;
+
+						default:
+							<p class="text-danger">❓ Loại câu hỏi không xác định</p>
+							break;
 					}
 				</div>
 			</div>

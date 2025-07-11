@@ -48,7 +48,7 @@ namespace Application.Services
 				}
 				else
 					await _unitOfWork.BasicUsers.SignInManager
-						.PasswordSignInAsync(account!, request.Password!, false, lockoutOnFailure: false);
+						.PasswordSignInAsync(account!, request.Password!, request.RememberMe, lockoutOnFailure: false);
 			}
 		}
 
