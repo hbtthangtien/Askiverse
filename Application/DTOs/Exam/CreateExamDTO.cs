@@ -34,10 +34,8 @@ namespace Application.DTOs.Exam
     {
         public int? QuestionTypeId { get; set; }
         public int? LevelId { get; set; }
-        public bool? IsPublic { get; set; }
         public string? Keyword { get; set; }
 
-        // Thêm thuộc tính phân trang
         public int Page { get; set; } = 1;
         public int PageSize { get; set; } = 10;
     }

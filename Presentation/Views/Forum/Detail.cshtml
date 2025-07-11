@@ -1,0 +1,303 @@
+﻿@model Application.DTOs.ViewModel.ForumPostDetailViewModel
+@{
+    var post = Model.ForumPost;
+    var pagedComments = Model.PaginatedComments;
+    var userVoteType = ViewBag.UserVoteType as VoteType?;
+    ViewData["Title"] = "Chi tiết bài viết";
+}
+
+@using Domain.Enums
+
+
+
+<style>
+    body {
+        background: linear-gradient(120deg, #fce4ec, #e0f7fa);
+        color: #212529;
+    }
+
+    .post-container {
+        background: #fff;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .post-meta {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .headline {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #6c757d;
+    }
+
+    .section-title {
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: #e91e63;
+        font-size: 1.4rem;
+    }
+
+    /* VOTE SECTION STYLE */
+    .vote-count p {
+        font-size: 1rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .vote-count i {
+        font-size: 1.2rem;
+    }
+
+    form.d-flex button {
+        transition: all 0.3s ease;
+    }
+
+    .btn-light {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        color: #495057;
+    }
+
+        .btn-light:hover {
+            background-color: #f0f0f0;
+        }
+
+    .btn-outline-primary.fw-bold {
+        background-color: #e6f4ff;
+        border: 2px solid #0d6efd;
+        color: #0d6efd;
+        font-weight: bold;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #d0e8ff;
+    }
+
+    .btn-outline-danger.fw-bold {
+        background-color: #ffe6e6;
+        border: 2px solid #dc3545;
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #ffcccc;
+    }
+
+    .rounded-pill {
+        border-radius: 50rem !important;
+    }
+
+    .comment-box {
+        background-color: #f9f9f9;
+        border-left: 5px solid #e91e63;
+        padding: 14px 18px;
+        border-radius: 12px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+        .comment-box p {
+            margin-bottom: 0;
+        }
+
+    .btn-pink {
+        background-color: #f06292;
+        color: #fff;
+        border-radius: 10px;
+        font-weight: 500;
+        padding: 8px 20px;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-pink:hover {
+            background-color: #ec407a;
+        }
+
+    .back-btn {
+        background-color: #b2dfdb;
+        color: #000;
+        border-radius: 10px;
+        font-weight: 500;
+        padding: 8px 20px;
+    }
+
+        .back-btn:hover {
+            background-color: #80cbc4;
+        }
+
+    img.img-fluid {
+        border-radius: 12px;
+        max-height: 400px;
+        object-fit: cover;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    textarea.form-control {
+        border-radius: 10px;
+        resize: vertical;
+        padding: 10px 14px;
+    }
+</style>
+
+<div class="container mt-4 mb-5">
+    <div class="post-container">
+        <!-- NỘI DUNG BÀI VIẾT -->
+        <h2 class="mb-2">@Model.ForumPost.Title</h2>
+        <p class="headline">@Model.ForumPost.HeadLine</p>
+
+        @if (!string.IsNullOrEmpty(Model.ForumPost.ImgUrl))
+        {
+            <div class="text-center my-3">
+                <img src="@Model.ForumPost.ImgUrl" alt="Ảnh bài viết" class="img-fluid" />
+            </div>
+        }
+
+        <div class="mb-3">@Html.Raw(Model.ForumPost.Content)</div>
+
+        <div class="post-meta">
+            🧠 Chủ đề: <strong>@Model.ForumPost.Subject?.Name</strong> &nbsp;|&nbsp;
+            🕓 Ngày đăng: <strong>@Model.ForumPost.CreatedAt</strong> &nbsp;|&nbsp;
+            @if (Model.ForumPost.CreatedBy?.Profile != null)
+            {
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    ✍️ Người đăng: <img src="@Model.ForumPost.CreatedBy.Profile.AvatarUrl" alt="Avatar"
+                         class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;" />
+                    <strong>@Model.ForumPost.CreatedBy.Profile.Fullname</strong>
+                </div>
+            }
+
+        </div>
+
+        <div class="section-title">🗳️ Đánh giá bài viết</div>
+        <form asp-action="Vote" method="post" class="d-flex gap-5 align-items-center">
+            <input type="hidden" name="PostId" value="@Model.ForumPost.Id" />
+
+            <button type="submit" name="voteType" value="Up" class="btn btn-link p-0 d-flex align-items-center gap-1
+        @(userVoteType == VoteType.Up ? "text-primary fw-bold" : "text-dark")" style="text-decoration: none;">
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+                <span>Thích: @Model.ForumPost.Voteds.Count(v => v.VotedType == VoteType.Up)</span>
+            </button>
+
+            <button type="submit" name="voteType" value="Down" class="btn btn-link p-0 d-flex align-items-center gap-1
+        @(userVoteType == VoteType.Down ? "text-danger fw-bold" : "text-dark")" style="text-decoration: none;">
+                <i class="bi bi-hand-thumbs-down-fill"></i>
+                <span>Không thích: @Model.ForumPost.Voteds.Count(v => v.VotedType == VoteType.Down)</span>
+            </button>
+        </form>
+
+    </div>
+
+    <!-- BÌNH LUẬN -->
+    <div class="post-container mt-4">
+        <div class="section-title">
+            💬 Bình luận (@Model.PaginatedComments.TotalCount)
+
+        </div>
+
+        @foreach (var c in pagedComments)
+        {
+            if (c.DeletedAt == null)
+            {
+                <div class="comment-box mb-3" id="comment-box-@c.Id">
+                    <strong>@c.User?.Profile?.Fullname</strong><br />
+                    <small class="text-muted">🕓 @c.CommentedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                    <p class="mt-1" id="comment-text-@c.Id">@c.Content</p>
+
+                    @if (User.Identity.IsAuthenticated && c.UserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                    {
+                        <div class="mt-2 d-flex gap-2 align-items-center">
+                            <!-- Nút sửa (biểu tượng) -->
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="showEditForm(@c.Id)" title="Sửa bình luận">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+
+                            <!-- Nút xoá (biểu tượng) -->
+                                       <form asp-action="DeleteComment" method="post" class="d-inline">
+                <input type="hidden" name="commentId" value="@c.Id" />
+                <input type="hidden" name="postId" value="@Model.ForumPost.Id" />
+                <button type="submit" class="btn btn-sm btn-outline-danger" title="Xoá bình luận">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </form>
+
+                        </div>
+
+                        <!-- Form sửa (ẩn ban đầu) -->
+                        <form asp-action="EditComment" method="post" class="edit-form mt-2" id="edit-form-@c.Id" style="display: none;">
+                            <input type="hidden" name="commentId" value="@c.Id" />
+                            <textarea name="content" class="form-control mb-2">@c.Content</textarea>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    <i class="bi bi-check-circle"></i> Lưu
+                                </button>
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="hideEditForm(@c.Id)">
+                                    <i class="bi bi-x-circle"></i> Huỷ
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            }
+        }
+
+
+
+        <!-- PHÂN TRANG -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @if (pagedComments.HasPreviousPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-route-id="@Model.ForumPost.Id" asp-route-page="@(@pagedComments.PageIndex - 1)">«</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= pagedComments.TotalPages; i++)
+                {
+                    <li class="page-item @(pagedComments.PageIndex == i ? "active" : "")">
+                        <a class="page-link" asp-route-id="@Model.ForumPost.Id" asp-route-page="@i">@i</a>
+                    </li>
+                }
+
+                @if (pagedComments.HasNextPage)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-route-id="@Model.ForumPost.Id" asp-route-page="@(@pagedComments.PageIndex + 1)">»</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+        <div class="section-title">✍️ Viết bình luận</div>
+        <form asp-action="AddComment" method="post" class="mb-4">
+            <input type="hidden" name="PostId" value="@Model.ForumPost.Id" />
+            <div class="mb-2">
+                <textarea name="Content" class="form-control" rows="3" placeholder="Nhập bình luận..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-pink">Gửi bình luận</button>
+        </form>
+    </div>
+
+
+    <a asp-action="Index" class="btn back-btn mt-4">← Quay lại danh sách</a>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<script>
+    function showEditForm(commentId) {
+        document.getElementById('edit-form-' + commentId).style.display = 'block';
+    }
+
+    function hideEditForm(commentId) {
+        document.getElementById('edit-form-' + commentId).style.display = 'none';
+    }
+</script>

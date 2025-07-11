@@ -1,5 +1,6 @@
 using Application.DTOs.Commons;
 using Application.DTOs.Exam;
+using Application.DTOs.ExportDocx;
 using Application.DTOs.Favourite;
 using Application.DTOs.Question;
 using Application.DTOs.Question.GenerateAI;
@@ -92,7 +93,8 @@ namespace Application.Services
      .Query()
      .Include(q => q.QuestionType)
      .Include(q => q.Level)
-     .Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true)
+    .Where(q => q.PremiumUserId != null && q.PremiumUserId == PremiumUserId)
+
      .OrderByDescending(q => q.CreatedAt);
 
             if (filter.QuestionTypeId.HasValue)
@@ -101,9 +103,7 @@ namespace Application.Services
             if (filter.LevelId.HasValue)
                 query = query.Where(q => q.LevelId == filter.LevelId.Value);
 
-            // ✅ Lọc công khai / riêng tư / cả hai
-            if (filter.IsPublic.HasValue)
-                query = query.Where(q => q.IsPublic == filter.IsPublic.Value);
+          
 
             if (!string.IsNullOrWhiteSpace(filter.Keyword))
             {
@@ -145,25 +145,25 @@ namespace Application.Services
 
             if (question == null) return null;
 
-			return new QuestionDetailDTO
-			{
-				Id = question.Id,
-				Content = question.Content,
-				QuestionTypeId = question.QuestionTypeId,
-				QuestionTypeName = question.QuestionType?.Name,
-				Answers = question.Answers.Select(a => new AnswerDTO
-				{
-					Id = a.Id,
-					AnswerText = a.AnswerText,
-					IsCorrected = a.IsCorrected,
-					MatchingPairKey = a.MatchingPairKey
-				}).ToList()
-			};
-		}
-		public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false, int pageIndex = 1, int pageSize = 5)
-		{
-			var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
-			if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
+            return new QuestionDetailDTO
+            {
+                Id = question.Id,
+                Content = question.Content,
+                QuestionTypeId = question.QuestionTypeId,
+                QuestionTypeName = question.QuestionType?.Name,
+                Answers = question.Answers.Select(a => new AnswerDTO
+                {
+                    Id = a.Id,
+                    AnswerText = a.AnswerText,
+                    IsCorrected = a.IsCorrected,
+                    MatchingPairKey = a.MatchingPairKey
+                }).ToList()
+            };
+        }
+        public async Task<ExamSubjectViewModel> GetAllExams(bool isPublic, string userId, string subjectId, string? questionCount, string? sortOrder, string? keyword, bool isFavourite = false, int pageIndex = 1, int pageSize = 5)
+        {
+            var subjects = await _unitOfWork.Subjects.Query().ToListAsync();
+            if (subjects.Count == 0) throw new Exception("Không có chủ đề nào!");
 
             int? subjectIdInt = null;
             if (!string.IsNullOrEmpty(subjectId) && int.TryParse(subjectId, out int parsedInt))
@@ -176,15 +176,15 @@ namespace Application.Services
                 questionCountInt = parsedQuestionCount;
             }
 
-			var examQuery = _unitOfWork.Exams
-					 .Query()
-					 .Include(e => e.FavouritedByUsers)
-					 .Include(e => e.ExamAccesses)
-					 .Include(e => e.ExamScoreds)
-					 .Include(e => e.PremiumUser)
-						.ThenInclude(pu => pu.BasicUser)
-					 .Where(e => e.DeletedAt == DateTime.MinValue || e.DeletedAt == null)
-					 .AsQueryable();
+            var examQuery = _unitOfWork.Exams
+                     .Query()
+                     .Include(e => e.FavouritedByUsers)
+                     .Include(e => e.ExamAccesses)
+                     .Include(e => e.ExamScoreds)
+                     .Include(e => e.PremiumUser)
+                        .ThenInclude(pu => pu.BasicUser)
+                     .Where(e => e.DeletedAt == DateTime.MinValue || e.DeletedAt == null)
+                     .AsQueryable();
 
             if (isFavourite)
             {
@@ -221,53 +221,53 @@ namespace Application.Services
                     examQuery = examQuery.OrderBy(e => e.CreatedAt);
             }
 
-			//var exams = await examQuery.ToListAsync();
+            //var exams = await examQuery.ToListAsync();
 
-			var paginated = await PaginatedList<Exam>.CreateAsync(examQuery, pageIndex, pageSize);
+            var paginated = await PaginatedList<Exam>.CreateAsync(examQuery, pageIndex, pageSize);
 
-			if (!paginated.Any())
-			{
-				if (isFavourite)
-					throw new Exception("Bạn chưa thêm đề nào vào yêu thích!");
-				else if (isPublic)
-					throw new Exception("Không có dữ liệu!");
-				else
-					throw new Exception("Không có đề nào phù hợp!");
-			}
+            if (!paginated.Any())
+            {
+                if (isFavourite)
+                    throw new Exception("Bạn chưa thêm đề nào vào yêu thích!");
+                else if (isPublic)
+                    throw new Exception("Không có dữ liệu!");
+                else
+                    throw new Exception("Không có đề nào phù hợp!");
+            }
 
-			return new ExamSubjectViewModel
-			{
-				Exams = paginated.Select(e => new ExamDTO
-				{
-					Id = e.Id,
-					Title = e.Title,
-					Description = e.Description,
-					SourceText = e.SourceText,
-					CreatedAt = e.CreatedAt,
-					TotalQuestion = e.TotalQuestion,
-					FavouritedByUsers = e.FavouritedByUsers
-						.Select(f => new FavouriteDTO
-						{
-							UserId = f.UserId,
-							ExamId = f.ExamId
-						}).ToList(),
-					// ⬇️ Thêm dòng này
+            return new ExamSubjectViewModel
+            {
+                Exams = paginated.Select(e => new ExamDTO
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    Description = e.Description,
+                    SourceText = e.SourceText,
+                    CreatedAt = e.CreatedAt,
+                    TotalQuestion = e.TotalQuestion,
+                    FavouritedByUsers = e.FavouritedByUsers
+                        .Select(f => new FavouriteDTO
+                        {
+                            UserId = f.UserId,
+                            ExamId = f.ExamId
+                        }).ToList(),
+                    // ⬇️ Thêm dòng này
 
-					CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission),
-					HasBeenScored = e.ExamScoreds.Any(),
-					PremiumUser = e.PremiumUser,
-				}).ToList(),
+                    CanEdit = e.PremiumUserId == userId || e.ExamAccesses.Any(a => a.userId == userId && a.Permission),
+                    HasBeenScored = e.ExamScoreds.Any(),
+                    PremiumUser = e.PremiumUser,
+                }).ToList(),
 
-				Subjects = _mapper.Map<List<SubjectDTO>>(subjects),
-				Pagination = new DTOs.Pagination.PaginationDTO
-				{
-					CurrentPage = paginated.PageIndex,
-					TotalPages = paginated.TotalPages,
-					PageSize = paginated.PageSize,
-					TotalCount = paginated.TotalCount,
-				}
-			};
-		}
+                Subjects = _mapper.Map<List<SubjectDTO>>(subjects),
+                Pagination = new DTOs.Pagination.PaginationDTO
+                {
+                    CurrentPage = paginated.PageIndex,
+                    TotalPages = paginated.TotalPages,
+                    PageSize = paginated.PageSize,
+                    TotalCount = paginated.TotalCount,
+                }
+            };
+        }
 
         public async Task<ExamTakeDTO?> GetExamTakeById(int examId, string userId)
         {
@@ -622,8 +622,19 @@ namespace Application.Services
             var questions = await _unitOfWork.QuestionExams
                 .GetInstance()
                 .Where(e => e.ExamId == examId)
+                .Select(e => new QuestionTemplateDto
+                {
+                    Content = e.BankQuestion.Content,
+                    Answers = e.BankQuestion!.Answers
+                                .Where(a => a.BankQuestionId == e.BankQuestionId)
+                                .Select(a => a.AnswerText)
+                                .ToList()
+                })
                 .ToListAsync();
-            throw new NotImplementedException();
+            var exam = new ExamTemplateDto { Questions = questions };
+
+            var data = _exportFileDocxService.Export(exam);
+            return data;
         }
     }
 }

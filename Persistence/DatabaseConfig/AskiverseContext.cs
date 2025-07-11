@@ -198,7 +198,7 @@ namespace Persistence.DatabaseConfig
 
 				entity.HasOne(e => e.Post)
 					  .WithMany(e => e.Comments)
-					  .HasForeignKey(e => e.Id)
+					  .HasForeignKey(e => e.PostId)
 					  .OnDelete(DeleteBehavior.NoAction);
 
 				entity.HasOne(e => e.User)
@@ -265,7 +265,7 @@ namespace Persistence.DatabaseConfig
                     e.Entity is BaseEntity baseEntity &&
                     !(e.State == EntityState.Added)))
             {
-                if (entry.Entity is Exam) // chỉ soft delete Exam
+                if (entry.Entity is Exam || entry.Entity is ForumPost || entry.Entity is ForumComment)
                 {
                     entry.State = EntityState.Modified;
                     ((BaseEntity)entry.Entity).DeletedAt = DateTime.UtcNow;

@@ -20,6 +20,8 @@ namespace Presentation
             builder.Services.AddOtherService(builder.Configuration);
             builder.Services.InitialValueConfig(builder.Configuration);
             builder.Services.ConfigureHttpClient(builder.Configuration);
+            builder.Services.AddSignalR();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -44,7 +46,6 @@ namespace Presentation
 			app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }

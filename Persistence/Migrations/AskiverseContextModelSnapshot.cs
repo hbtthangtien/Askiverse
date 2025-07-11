@@ -418,6 +418,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PostId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("ForumComments");
@@ -599,19 +601,19 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8216),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3177),
                             DisplayName = "Easy"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8218),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3184),
                             DisplayName = "Medium"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8220),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3185),
                             DisplayName = "Hard"
                         });
                 });
@@ -823,19 +825,19 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8261),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3210),
                             Name = "Multiple Choice"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8263),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3212),
                             Name = "Fill in the Blank"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8264),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3213),
                             Name = "Matching"
                         });
                 });
@@ -880,7 +882,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8381),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3356),
                             Description = "Truy cập nội dung cơ bản",
                             Duration = 14,
                             Name = "Gói cơ bản",
@@ -889,7 +891,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8385),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3359),
                             Description = "Truy cập toàn bộ nội dung và hỗ trợ ưu tiên",
                             Duration = 30,
                             Name = "Gói nâng cao",
@@ -898,7 +900,7 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8386),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3360),
                             Description = "Truy cập không giới hạn trong 1 năm",
                             Duration = 365,
                             Name = "Gói hàng năm",
@@ -938,73 +940,73 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8308),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3258),
                             Name = "Toán học"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8310),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3261),
                             Name = "Ngữ văn"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8312),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3262),
                             Name = "Tiếng Anh"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8314),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3264),
                             Name = "Vật lý"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8315),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3266),
                             Name = "Hóa học"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8320),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3269),
                             Name = "Sinh học"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8321),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3271),
                             Name = "Lịch sử"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8323),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3272),
                             Name = "Địa lý"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8324),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3274),
                             Name = "Giáo dục công dân"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8327),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3276),
                             Name = "Tin học"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8329),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3278),
                             Name = "Công nghệ"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2025, 7, 7, 13, 3, 45, 490, DateTimeKind.Local).AddTicks(8330),
+                            CreatedAt = new DateTime(2025, 7, 7, 20, 15, 4, 673, DateTimeKind.Local).AddTicks(3280),
                             Name = "Thể dục"
                         });
                 });
@@ -1340,7 +1342,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.ForumPost", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

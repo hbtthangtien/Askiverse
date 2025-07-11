@@ -25,6 +25,7 @@ namespace Application.Services
 
         public async Task<List<BankQuestion>> CreateQuestionByAI(List<QuestionCreate> list)
         {
+            var userId = _userContext.GetUserId();
             var data = list.Select(e => new BankQuestion
             {
                 Content = e.Content,
@@ -32,7 +33,7 @@ namespace Application.Services
                 IsPublic = false,
                 LevelId = e.LevelId,
                 QuestionTypeId = e.QuestionTypeId,
-                PremiumUserId = null,
+                PremiumUserId = userId,
                 Answers = e.Answers.Select(a => new Answer
                 {
                     AnswerText = a.AnswerText,

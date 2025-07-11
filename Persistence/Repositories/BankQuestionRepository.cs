@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Exam;
 using Application.Interface.IRepository;
+using Application.Paginated;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.DatabaseConfig;
@@ -20,7 +21,7 @@ namespace Persistence.Repositories
         {
             return _context.Set<BankQuestion>().AsQueryable();
         }
-       
+      
         public async Task<BankQuestion?> GetByIdWithAnswersAsync(int id)
         {
             return await _context.BankQuestions
@@ -32,7 +33,7 @@ namespace Persistence.Repositories
         public async Task<List<int>> GetRandomQuestionIdsAsync(int count, SearchBankQuestionFilter filter,string? PremiumUserId)
         {
             var query = _context.BankQuestions.AsQueryable();
-            query = query.Where(q => q.PremiumUserId == PremiumUserId || q.IsPublic == true);
+            query = query.Where(q => q.PremiumUserId == PremiumUserId );
 
             if (filter.QuestionTypeId.HasValue)
                 query = query.Where(q => q.QuestionTypeId == filter.QuestionTypeId);
@@ -40,8 +41,7 @@ namespace Persistence.Repositories
             if (filter.LevelId.HasValue)
                 query = query.Where(q => q.LevelId == filter.LevelId);
 
-            if (filter.IsPublic.HasValue)
-                query = query.Where(q => q.IsPublic == filter.IsPublic);
+            
 
             if (!string.IsNullOrEmpty(filter.Keyword))
                 query = query.Where(q => q.Content.Contains(filter.Keyword));
@@ -57,5 +57,7 @@ namespace Persistence.Repositories
         {
             await _context.BankQuestions.AddRangeAsync(list);
         }
+        
+
     }
 }

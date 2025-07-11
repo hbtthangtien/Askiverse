@@ -27,7 +27,9 @@ namespace Persistence.Extensions
                     new Subject { Id = 9, Name = "Giáo dục công dân", CreatedAt = DateTime.Now },
                     new Subject { Id = 10, Name = "Tin học", CreatedAt = DateTime.Now },
                     new Subject { Id = 11, Name = "Công nghệ", CreatedAt = DateTime.Now },
-                    new Subject { Id = 12, Name = "Thể dục", CreatedAt = DateTime.Now }
+                    new Subject { Id = 12, Name = "Thể dục", CreatedAt = DateTime.Now },
+                    new Subject { Id = 13, Name = "Khác", CreatedAt = DateTime.Now },
+
                 };
                 entity.HasData(subjects);
             });
